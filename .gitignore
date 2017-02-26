@@ -27,7 +27,9 @@
 *.exe
 *.out
 *.app
-/BlockEngine.VC.VC.opendb
 
-Debug/
-Release/
+# Other Compiled files
+*.exp
+*.ilk
+*.pdb
+/BlockEngine.VC.VC.opendb
