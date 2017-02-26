@@ -32,4 +32,8 @@
 *.exp
 *.ilk
 *.pdb
+*.tlog
+*.log
+*.lastbuildstate
+*.idb
 /BlockEngine.VC.VC.opendb
