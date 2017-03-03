@@ -36,4 +36,6 @@
 *.log
 *.lastbuildstate
 *.idb
+*.xcuserstate
+*.DS_Store
 /BlockEngine.VC.VC.opendb
