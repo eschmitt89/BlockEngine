@@ -16,6 +16,7 @@
 
 #include "ResourcePath.hpp"
 #include "ScreenManager.hpp"
+#include "HomeScreen.hpp"
 
 int main(int, char const**)
 {
@@ -31,11 +32,18 @@ int main(int, char const**)
     
     ScreenManager screenManager;
     
+    screenManager.AddScreen(new HomeScreen());
+    
+    sf::Clock clock;
+    sf::Time dt;
     
 
     // Start the game loop
     while (window.isOpen())
     {
+        // Calculate dt
+        dt = clock.restart();
+        
         // Process events
         sf::Event event;
         while (window.pollEvent(event))
@@ -53,6 +61,11 @@ int main(int, char const**)
 
         // Clear screen
         window.clear();
+        
+        // Handle input, update, and draw screens
+        screenManager.HandleInput(window);
+        screenManager.Update(dt.asSeconds());
+        screenManager.Draw(window);
 
         // Update the window
         window.display();

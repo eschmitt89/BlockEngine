@@ -1,63 +1,68 @@
 //
-//  AbstractScreen.cpp
+//  HomeScreen.cpp
 //  BlockEngine
 //
 //  Created by Eric Schmitt on 3/2/17.
 //  Copyright © 2017 Eric Schmitt. All rights reserved.
 //
 
-#include "AbstractScreen.hpp"
+#include "HomeScreen.hpp"
 
-AbstractScreen::AbstractScreen()
+HomeScreen::HomeScreen()
 {
     
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-AbstractScreen::~AbstractScreen()
+HomeScreen::~HomeScreen()
 {
     
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-bool AbstractScreen::DoesHandleInput()
+bool HomeScreen::DoesHandleInput()
 {
     return true;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void AbstractScreen::HandleInput(const sf::RenderWindow &window)
+void HomeScreen::HandleInput(const sf::RenderWindow &window)
 {
     
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-bool AbstractScreen::DoesUpdate()
+bool HomeScreen::DoesUpdate()
 {
     return true;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void AbstractScreen::Update(float dt)
+void HomeScreen::Update(float dt)
 {
     
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-bool AbstractScreen::DoesDraw()
+bool HomeScreen::DoesDraw()
 {
     return true;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void AbstractScreen::Draw(sf::RenderWindow &window)
+void HomeScreen::Draw(sf::RenderWindow &window)
 {
+    sf::CircleShape shape = sf::CircleShape();
+    
+    shape.setRadius(20);
+    
+    window.draw(shape);
     
 }

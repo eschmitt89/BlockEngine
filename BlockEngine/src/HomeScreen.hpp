@@ -1,31 +1,30 @@
 //
-//  ScreenManager.hpp
+//  HomeScreen.hpp
 //  BlockEngine
 //
 //  Created by Eric Schmitt on 3/2/17.
 //  Copyright © 2017 Eric Schmitt. All rights reserved.
 //
 
-#ifndef ScreenManager_hpp
-#define ScreenManager_hpp
+#ifndef HomeScreen_hpp
+#define HomeScreen_hpp
 
 #include "AbstractScreen.hpp"
-#include <vector>
 
-class ScreenManager
+class HomeScreen : public AbstractScreen
 {
 public:
-    ScreenManager();
-    ~ScreenManager();
+    HomeScreen();
+    ~HomeScreen();
+    bool DoesHandleInput();
     void HandleInput(const sf::RenderWindow& window);
+    bool DoesUpdate();
     void Update(float dt);
+    bool DoesDraw();
     void Draw(sf::RenderWindow& window);
     
-    void AddScreen(AbstractScreen* screen);
-    
 private:
-    vector<AbstractScreen*> screenStack;
     
 };
 
-#endif /* ScreenManager_hpp */
+#endif /* HomeScreen_hpp */

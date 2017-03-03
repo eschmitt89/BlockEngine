@@ -15,6 +15,7 @@
 		A5BCF5731E6919AC008FD912 /* nice_music.ogg in Resources */ = {isa = PBXBuildFile; fileRef = A5BCF5721E6919AC008FD912 /* nice_music.ogg */; };
 		A5BCF5771E691AF9008FD912 /* AbstractScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5BCF5751E691AF9008FD912 /* AbstractScreen.cpp */; };
 		A5BCF57A1E691CAE008FD912 /* ScreenManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5BCF5781E691CAE008FD912 /* ScreenManager.cpp */; };
+		A5BCF57D1E69208F008FD912 /* HomeScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5BCF57B1E69208F008FD912 /* HomeScreen.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,8 @@
 		A5BCF5761E691AF9008FD912 /* AbstractScreen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = AbstractScreen.hpp; path = src/AbstractScreen.hpp; sourceTree = "<group>"; };
 		A5BCF5781E691CAE008FD912 /* ScreenManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = ScreenManager.cpp; path = src/ScreenManager.cpp; sourceTree = "<group>"; };
 		A5BCF5791E691CAE008FD912 /* ScreenManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ScreenManager.hpp; path = src/ScreenManager.hpp; sourceTree = "<group>"; };
+		A5BCF57B1E69208F008FD912 /* HomeScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HomeScreen.cpp; path = src/HomeScreen.cpp; sourceTree = "<group>"; };
+		A5BCF57C1E69208F008FD912 /* HomeScreen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HomeScreen.hpp; path = src/HomeScreen.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,6 +126,8 @@
 				A5BCF5761E691AF9008FD912 /* AbstractScreen.hpp */,
 				A5BCF5781E691CAE008FD912 /* ScreenManager.cpp */,
 				A5BCF5791E691CAE008FD912 /* ScreenManager.hpp */,
+				A5BCF57B1E69208F008FD912 /* HomeScreen.cpp */,
+				A5BCF57C1E69208F008FD912 /* HomeScreen.hpp */,
 			);
 			name = Screens;
 			sourceTree = "<group>";
@@ -217,6 +222,7 @@
 			files = (
 				A5BCF5771E691AF9008FD912 /* AbstractScreen.cpp in Sources */,
 				A5BCF57A1E691CAE008FD912 /* ScreenManager.cpp in Sources */,
+				A5BCF57D1E69208F008FD912 /* HomeScreen.cpp in Sources */,
 				A5BCF5681E691963008FD912 /* ResourcePath.mm in Sources */,
 				A5BCF5651E691884008FD912 /* main.cpp in Sources */,
 			);

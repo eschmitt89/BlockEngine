@@ -17,13 +17,13 @@ class AbstractScreen
 {
 public:
     AbstractScreen();
-    virtual ~AbstractScreen();
+    ~AbstractScreen();
     virtual bool DoesHandleInput();
     virtual void HandleInput(const sf::RenderWindow& window);
     virtual bool DoesUpdate();
     virtual void Update(float dt);
     virtual bool DoesDraw();
-    virtual void Draw(const sf::RenderWindow& window);
+    virtual void Draw(sf::RenderWindow& window);
     
 private:
     

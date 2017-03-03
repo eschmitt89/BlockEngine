@@ -50,7 +50,7 @@ void ScreenManager::Update(float dt)
 
 ////////////////////////////////////////////////////////////////////////
 
-void ScreenManager::Draw(const sf::RenderWindow& window)
+void ScreenManager::Draw(sf::RenderWindow& window)
 {
     if (screenStack.size() && screenStack[screenStack.size() - 1]->DoesDraw())
     {
