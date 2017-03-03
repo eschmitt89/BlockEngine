@@ -36,7 +36,5 @@
 *.log
 *.lastbuildstate
 *.idb
-*.xcuserstate
 *.DS_Store
 /BlockEngine.VC.VC.opendb
-/BlockEngine/BlockEngine.xcodeproj/project.xcworkspace/xcuserdata/ericschmitt.xcuserdatad/*
