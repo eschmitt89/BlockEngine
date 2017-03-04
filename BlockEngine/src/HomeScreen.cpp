@@ -11,13 +11,15 @@
 HomeScreen::HomeScreen()
 {
 	this->grid = new Grid(10, 20, 20, 20);
+	this->camera = new Camera(sf::Vector2f(400,300), sf::Vector2f(800,600));
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 HomeScreen::~HomeScreen()
 {
-    
+	delete grid;
+	delete camera;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -39,6 +41,7 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	{
 		grid->SetBlockType(GetMousePosition(window), BlockType::Empty);
 	}
+	camera->HandleInput(window);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -66,5 +69,6 @@ bool HomeScreen::DoesDraw()
 
 void HomeScreen::Draw(sf::RenderWindow &window)
 {
+	window.setView(camera->GetView());
 	grid->Draw(window);
 }

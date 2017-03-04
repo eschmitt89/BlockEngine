@@ -161,6 +161,7 @@
     <ClInclude Include="ResourcePath.hpp" />
     <ClInclude Include="src\AbstractScreen.hpp" />
     <ClInclude Include="src\BlockType.hpp" />
+    <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
     <ClInclude Include="src\ScreenManager.hpp" />
@@ -168,6 +169,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AbstractScreen.cpp" />
+    <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\HomeScreen.cpp" />
     <ClCompile Include="src\main.cpp" />
