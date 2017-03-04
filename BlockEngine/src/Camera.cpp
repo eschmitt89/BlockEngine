@@ -11,7 +11,7 @@
 Camera::Camera(sf::Vector2f center, sf::Vector2f size)
 {
 	this->view = sf::View(center, size);
-	this->moveSpeed = 1;
+	this->moveSpeed = 100;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -25,22 +25,37 @@ Camera::~Camera()
 
 void Camera::HandleInput(const sf::RenderWindow & window)
 {
+	moveAxis = sf::Vector2i();
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left))
 	{
-		Move(-moveSpeed, 0);
+		moveAxis.x = -1;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
 	{
-		Move(moveSpeed, 0);
+		moveAxis.x = 1;
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) && sf::Keyboard::isKeyPressed(sf::Keyboard::Right))
+	{
+		moveAxis.x = 0;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
 	{
-		Move(0, -moveSpeed);
+		moveAxis.y = -1;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
 	{
-		Move(0, moveSpeed);
+		moveAxis.y = 1;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) && sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+	{
+		moveAxis.y = 0;
+	}
+}
+
+void Camera::Update(float dt)
+{
+	Move(moveAxis.x * moveSpeed * dt, moveAxis.y * moveSpeed * dt);
 }
 
 ////////////////////////////////////////////////////////////////////////

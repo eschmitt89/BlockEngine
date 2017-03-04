@@ -55,7 +55,7 @@ bool HomeScreen::DoesUpdate()
 
 void HomeScreen::Update(float dt)
 {
-    
+	camera->Update(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////

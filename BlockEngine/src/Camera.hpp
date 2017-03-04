@@ -18,6 +18,7 @@ public:
     ~Camera();
 
 	void HandleInput(const sf::RenderWindow& window);
+	void Update(float dt);
 
 	void Move(float offsetX, float offsetY);
 
@@ -26,6 +27,7 @@ public:
 private:
 	sf::View view;
 	float moveSpeed;
+	sf::Vector2i moveAxis;
 };
 
 #endif /* Camera_hpp */
