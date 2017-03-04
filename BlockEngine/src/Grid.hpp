@@ -10,8 +10,9 @@
 #define Grid_hpp
 
 #include <SFML/Graphics.hpp>
-#include <vector>
 #include "BlockType.hpp"
+#include "Utilities.hpp"
+#include <vector>
 
 using namespace std;
 
@@ -23,13 +24,19 @@ public:
     
     void Draw(sf::RenderWindow& window);
     
+	sf::Vector2f GetBlockPosition(int row, int column);
+	sf::Vector2i GetBlockIndex(sf::Vector2f position);
+
+	BlockType GetBlockType(sf::Vector2f position);
+	void SetBlockType(sf::Vector2f position, BlockType blockType);
+
 private:
     vector<vector<BlockType>> blocks;
 	sf::Vector2i gridDimensions;
 	sf::Vector2i blockSize;
 
-	sf::Vector2f GetBlockPosition(int row, int column);
-	sf::Vector2i GetBlockIndex(sf::Vector2f position);
+	bool IsValidBlockIndex(sf::Vector2i blockIndex);
+
 
 };
 

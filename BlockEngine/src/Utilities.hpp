@@ -9,9 +9,19 @@
 #ifndef Utilties_hpp
 #define Utilties_hpp
 
-void test()
+#include <SFML/Graphics.hpp>
+
+inline sf::Vector2f ConvertToVector2f(sf::Vector2i vector2i)
 {
+	return sf::Vector2f(vector2i.x, vector2i.y);
 
 }
+inline sf::Vector2f GetMousePosition(const sf::RenderWindow& window)
+{
+	return ConvertToVector2f(sf::Mouse::getPosition(window));
+}
+
+
+
 
 #endif /* Utilties_hpp */

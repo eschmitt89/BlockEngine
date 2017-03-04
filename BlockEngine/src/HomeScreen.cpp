@@ -8,10 +8,9 @@
 
 #include "HomeScreen.hpp"
 
-
 HomeScreen::HomeScreen()
 {
-	this->grid = new Grid(10, 10, 20, 20);
+	this->grid = new Grid(10, 20, 20, 20);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -32,7 +31,14 @@ bool HomeScreen::DoesHandleInput()
 
 void HomeScreen::HandleInput(const sf::RenderWindow &window)
 {
-    
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+	{
+		grid->SetBlockType(GetMousePosition(window), BlockType::Solid);
+	}
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
+	{
+		grid->SetBlockType(GetMousePosition(window), BlockType::Empty);
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////
