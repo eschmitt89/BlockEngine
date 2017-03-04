@@ -10,6 +10,7 @@
 #define HomeScreen_hpp
 
 #include "AbstractScreen.hpp"
+#include "Grid.hpp"
 
 class HomeScreen : public AbstractScreen
 {
@@ -24,7 +25,7 @@ public:
     void Draw(sf::RenderWindow& window);
     
 private:
-    
+	Grid* grid;
 };
 
 #endif /* HomeScreen_hpp */

@@ -8,9 +8,10 @@
 
 #include "HomeScreen.hpp"
 
+
 HomeScreen::HomeScreen()
 {
-    
+	this->grid = new Grid(10, 10, 20, 20);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -59,6 +60,5 @@ bool HomeScreen::DoesDraw()
 
 void HomeScreen::Draw(sf::RenderWindow &window)
 {
-
-    
+	grid->Draw(window);
 }

@@ -27,6 +27,12 @@
     <Filter Include="Resource Files\Fonts">
       <UniqueIdentifier>{edd44ebc-aebe-4153-9c01-980a1dd3dabd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Grid">
+      <UniqueIdentifier>{7ce8ae1c-6c67-4a56-93e8-1890dff117a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Utilities">
+      <UniqueIdentifier>{6b763fca-12c2-417e-b964-16e1a8871be2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -40,6 +46,15 @@
     </ClInclude>
     <ClInclude Include="ResourcePath.hpp">
       <Filter>Source Files\Resource Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Grid.hpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BlockType.hpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Utilities.hpp">
+      <Filter>Source Files\Utilities</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +72,9 @@
     </ClCompile>
     <ClCompile Include="src\ResourcePath.cpp">
       <Filter>Source Files\Resource Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Grid.cpp">
+      <Filter>Source Files\Grid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

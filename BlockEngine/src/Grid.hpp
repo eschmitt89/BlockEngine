@@ -25,7 +25,12 @@ public:
     
 private:
     vector<vector<BlockType>> blocks;
-    
+	sf::Vector2i gridDimensions;
+	sf::Vector2i blockSize;
+
+	sf::Vector2f GetBlockPosition(int row, int column);
+	sf::Vector2i GetBlockIndex(sf::Vector2f position);
+
 };
 
 #endif /* Grid_hpp */
