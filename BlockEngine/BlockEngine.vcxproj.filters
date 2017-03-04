@@ -5,26 +5,76 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
     <Filter Include="Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\Screen Manager">
+      <UniqueIdentifier>{bc874779-8e63-4850-9533-2ef6b378ac14}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Screens">
+      <UniqueIdentifier>{2f4c2314-e11d-42e3-b500-8af116028108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Resource Manager">
+      <UniqueIdentifier>{60c0de63-3cae-4436-afcf-c2481a6edb69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Sounds">
+      <UniqueIdentifier>{b7c1350e-4e7c-4c6e-8552-94aabcb3959c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Images">
+      <UniqueIdentifier>{df235986-46ef-47c6-8377-69a17463c01a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Fonts">
+      <UniqueIdentifier>{edd44ebc-aebe-4153-9c01-980a1dd3dabd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourcePath.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="ResourcePath.hpp">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="src\AbstractScreen.hpp">
+      <Filter>Source Files\Screen Manager</Filter>
     </ClInclude>
+    <ClInclude Include="src\ScreenManager.hpp">
+      <Filter>Source Files\Screen Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HomeScreen.hpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourcePath.hpp">
+      <Filter>Source Files\Resource Manager</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\AbstractScreen.cpp">
+      <Filter>Source Files\Screen Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScreenManager.cpp">
+      <Filter>Source Files\Screen Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\HomeScreen.cpp">
+      <Filter>Source Files\Screens</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ResourcePath.cpp">
+      <Filter>Source Files\Resource Manager</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\cute_image.jpg">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="resources\icon.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\nice_music.ogg">
+      <Filter>Resource Files\Sounds</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\sansation.ttf">
+      <Filter>Resource Files\Fonts</Filter>
+    </Font>
   </ItemGroup>
 </Project>

@@ -158,11 +158,27 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="ResourcePath.cpp" />
+    <ClInclude Include="ResourcePath.hpp" />
+    <ClInclude Include="src\AbstractScreen.hpp" />
+    <ClInclude Include="src\HomeScreen.hpp" />
+    <ClInclude Include="src\ScreenManager.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ResourcePath.hpp" />
+    <ClCompile Include="src\AbstractScreen.cpp" />
+    <ClCompile Include="src\HomeScreen.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\ResourcePath.cpp" />
+    <ClCompile Include="src\ScreenManager.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resources\cute_image.jpg" />
+    <Image Include="resources\icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="resources\nice_music.ogg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\sansation.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
