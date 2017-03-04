@@ -59,10 +59,6 @@ bool HomeScreen::DoesDraw()
 
 void HomeScreen::Draw(sf::RenderWindow &window)
 {
-    sf::CircleShape shape = sf::CircleShape();
-    
-    shape.setRadius(20);
-    
-    window.draw(shape);
+
     
 }

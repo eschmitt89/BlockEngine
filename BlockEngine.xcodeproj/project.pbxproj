@@ -16,6 +16,7 @@
 		A5BCF5771E691AF9008FD912 /* AbstractScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5BCF5751E691AF9008FD912 /* AbstractScreen.cpp */; };
 		A5BCF57A1E691CAE008FD912 /* ScreenManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5BCF5781E691CAE008FD912 /* ScreenManager.cpp */; };
 		A5BCF57D1E69208F008FD912 /* HomeScreen.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5BCF57B1E69208F008FD912 /* HomeScreen.cpp */; };
+		A5BCF5821E6934F4008FD912 /* Grid.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A5BCF5801E6934F4008FD912 /* Grid.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,9 @@
 		A5BCF5791E691CAE008FD912 /* ScreenManager.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = ScreenManager.hpp; path = src/ScreenManager.hpp; sourceTree = "<group>"; };
 		A5BCF57B1E69208F008FD912 /* HomeScreen.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = HomeScreen.cpp; path = src/HomeScreen.cpp; sourceTree = "<group>"; };
 		A5BCF57C1E69208F008FD912 /* HomeScreen.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = HomeScreen.hpp; path = src/HomeScreen.hpp; sourceTree = "<group>"; };
+		A5BCF57F1E693443008FD912 /* BlockType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; name = BlockType.hpp; path = src/BlockType.hpp; sourceTree = "<group>"; };
+		A5BCF5801E6934F4008FD912 /* Grid.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Grid.cpp; path = src/Grid.cpp; sourceTree = "<group>"; };
+		A5BCF5811E6934F4008FD912 /* Grid.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; name = Grid.hpp; path = src/Grid.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +70,7 @@
 		A55457DA1E636A1600D2BE1F /* BlockEngine */ = {
 			isa = PBXGroup;
 			children = (
+				A5BCF57E1E693408008FD912 /* Grid */,
 				A5BCF5741E691AD5008FD912 /* Screens */,
 				A5BCF5661E691963008FD912 /* ResourcePath.hpp */,
 				A5BCF5671E691963008FD912 /* ResourcePath.mm */,
@@ -130,6 +135,16 @@
 				A5BCF57C1E69208F008FD912 /* HomeScreen.hpp */,
 			);
 			name = Screens;
+			sourceTree = "<group>";
+		};
+		A5BCF57E1E693408008FD912 /* Grid */ = {
+			isa = PBXGroup;
+			children = (
+				A5BCF57F1E693443008FD912 /* BlockType.hpp */,
+				A5BCF5801E6934F4008FD912 /* Grid.cpp */,
+				A5BCF5811E6934F4008FD912 /* Grid.hpp */,
+			);
+			name = Grid;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -223,6 +238,7 @@
 				A5BCF5771E691AF9008FD912 /* AbstractScreen.cpp in Sources */,
 				A5BCF57A1E691CAE008FD912 /* ScreenManager.cpp in Sources */,
 				A5BCF57D1E69208F008FD912 /* HomeScreen.cpp in Sources */,
+				A5BCF5821E6934F4008FD912 /* Grid.cpp in Sources */,
 				A5BCF5681E691963008FD912 /* ResourcePath.mm in Sources */,
 				A5BCF5651E691884008FD912 /* main.cpp in Sources */,
 			);
