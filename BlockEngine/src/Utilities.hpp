@@ -10,6 +10,9 @@
 #define Utilties_hpp
 
 #include <SFML/Graphics.hpp>
+#include <Windows.h>
+
+using namespace std;
 
 inline sf::Vector2f ConvertToVector2f(sf::Vector2i vector2i)
 {
@@ -19,6 +22,14 @@ inline sf::Vector2f ConvertToVector2f(sf::Vector2i vector2i)
 inline sf::Vector2f GetMousePosition(const sf::RenderWindow& window)
 {
 	return ConvertToVector2f(sf::Mouse::getPosition(window));
+}
+
+inline void WriteLine(string line)
+{
+	line += "\r\n";
+	wstring stemp = wstring(line.begin(), line.end());
+	LPCWSTR sw = stemp.c_str();
+	OutputDebugString(sw);
 }
 
 

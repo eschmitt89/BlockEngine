@@ -98,5 +98,6 @@ void Grid::SetBlockType(sf::Vector2f position, BlockType blockType)
 
 bool Grid::IsValidBlockIndex(sf::Vector2i blockIndex)
 {
+	WriteLine("Hello");
 	return blockIndex.x >= 0 && blockIndex.y >= 0 && blockIndex.x < gridDimensions.x && blockIndex.y < gridDimensions.y;
 }
