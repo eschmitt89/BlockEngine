@@ -8,9 +8,9 @@
 
 #include "Object.hpp"
 
-Object::Object()
+Object::Object(sf::Vector2f position)
 {
-
+	sprite.setPosition(position);
 }
 
 ////////////////////////////////////////////////////////////////////////
