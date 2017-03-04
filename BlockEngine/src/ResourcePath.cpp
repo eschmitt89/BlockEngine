@@ -2,5 +2,5 @@
 
 std::string resourcePath(void)
 {
-	return "resources/images/";
+	return "resources/";
 }
