@@ -14,16 +14,14 @@
 // function `resourcePath()` from ResourcePath.hpp
 //
 
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-
-// Here is a small helper for you! Have a look.
 #include "ResourcePath.hpp"
+#include "ScreenManager.hpp"
+#include "HomeScreen.hpp"
 
 int main(int, char const**)
 {
     // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 800), "SFML window");
+    sf::RenderWindow window(sf::VideoMode(800, 600), "BlockEngine");
 
     // Set the Icon
     sf::Image icon;
@@ -31,34 +29,21 @@ int main(int, char const**)
         return EXIT_FAILURE;
     }
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
-
-    // Load a sprite to display
-    sf::Texture texture;
-    if (!texture.loadFromFile(resourcePath() + "cute_image.jpg")) {
-        return EXIT_FAILURE;
-    }
-    sf::Sprite sprite(texture);
-
-    // Create a graphical text to display
-    sf::Font font;
-    if (!font.loadFromFile(resourcePath() + "sansation.ttf")) {
-        return EXIT_FAILURE;
-    }
-    sf::Text text("Hello", font, 50);
-    text.setFillColor(sf::Color::Black);
-
-    // Load a music to play
-    sf::Music music;
-    if (!music.openFromFile(resourcePath() + "nice_music.ogg")) {
-        return EXIT_FAILURE;
-    }
-
-    // Play the music
-    music.play();
+    
+    ScreenManager screenManager;
+    
+    screenManager.AddScreen(new HomeScreen());
+    
+    sf::Clock clock;
+    sf::Time dt;
+    
 
     // Start the game loop
     while (window.isOpen())
     {
+        // Calculate dt
+        dt = clock.restart();
+        
         // Process events
         sf::Event event;
         while (window.pollEvent(event))
@@ -76,12 +61,11 @@ int main(int, char const**)
 
         // Clear screen
         window.clear();
-
-        // Draw the sprite
-        window.draw(sprite);
-
-        // Draw the string
-        window.draw(text);
+        
+        // Handle input, update, and draw screens
+        screenManager.HandleInput(window);
+        screenManager.Update(dt.asSeconds());
+        screenManager.Draw(window);
 
         // Update the window
         window.display();
