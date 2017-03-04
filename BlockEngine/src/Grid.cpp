@@ -42,9 +42,9 @@ void Grid::Draw(sf::RenderWindow &window)
     {
         for (int row = 0; row < blocks[column].size(); row++)
         {
-            blockColumn.push_back(BlockType::Solid);
+            //blockColumn.push_back(BlockType::Solid);
         }
         
-        blocks.push_back(blockColumn);
+        //blocks.push_back(blockColumn);
     }
 }
