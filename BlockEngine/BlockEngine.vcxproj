@@ -183,14 +183,17 @@
     <ClCompile Include="src\ScreenManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\cute_image.jpg" />
     <Image Include="resources\icon.png" />
+    <Image Include="resources\WhiteBlock.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="resources\nice_music.ogg" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="resources\sansation.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\ResourceFile.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -108,10 +108,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resources\cute_image.jpg">
+    <Image Include="resources\icon.png">
       <Filter>Resource Files\Images</Filter>
     </Image>
-    <Image Include="resources\icon.png">
+    <Image Include="resources\WhiteBlock.png">
       <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>
@@ -124,5 +124,10 @@
     <Font Include="resources\sansation.ttf">
       <Filter>Resource Files\Fonts</Filter>
     </Font>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="resources\ResourceFile.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>
