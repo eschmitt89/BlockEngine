@@ -138,7 +138,11 @@ void ResourceLoader::CountFiles()
 	fileStream.open(resourcePath() + resourceFilePath.c_str());
 
 	//Check if resource file is open
-	if (!fileStream.is_open())
+	if (fileStream.is_open())
+	{
+
+	}
+	else
 	{
 		return;
 	}

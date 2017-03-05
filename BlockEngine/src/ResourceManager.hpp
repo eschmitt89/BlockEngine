@@ -30,7 +30,7 @@ public:
 	const sf::Font* GetFont(string font);
 
 private:
-	ResourceManager();
+	ResourceManager() {}
 	ResourceManager(ResourceManager const &);
 	void operator = (ResourceManager const &);
 
