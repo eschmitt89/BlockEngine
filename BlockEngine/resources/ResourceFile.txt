@@ -1,7 +1,7 @@
 #####################################
 #                                   #
 #   Resource file for BlockEngine   #
-#   Created by Eric Schmitt  2017   #
+#   Created by: Eric Schmitt 2017   #
 #                                   #
 #   Tags:                           #
 #      # = comment                  #
@@ -9,7 +9,6 @@
 #            -TEXTURES              #
 #            -SOUNDS                #
 #            -FONTS                 #
-#            -WORLDS                #
 #                                   #
 #####################################
 
