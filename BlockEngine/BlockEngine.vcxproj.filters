@@ -50,9 +50,6 @@
     <ClInclude Include="src\HomeScreen.hpp">
       <Filter>Source Files\Screens</Filter>
     </ClInclude>
-    <ClInclude Include="ResourcePath.hpp">
-      <Filter>Source Files\Resource Manager</Filter>
-    </ClInclude>
     <ClInclude Include="src\Grid.hpp">
       <Filter>Source Files\Grid</Filter>
     </ClInclude>
@@ -72,6 +69,12 @@
       <Filter>Source Files\Resource Manager</Filter>
     </ClInclude>
     <ClInclude Include="src\ResourceManager.hpp">
+      <Filter>Source Files\Resource Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\OutputManager.hpp">
+      <Filter>Source Files\Utilities</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ResourcePath.hpp">
       <Filter>Source Files\Resource Manager</Filter>
     </ClInclude>
   </ItemGroup>

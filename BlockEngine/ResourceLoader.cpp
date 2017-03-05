@@ -1,5 +1,4 @@
 #include "ResourceLoader.hpp"
-#include "Res"
 
 #define FILETYPE_TEXTURE 0
 #define FILETYPE_SOUND 1

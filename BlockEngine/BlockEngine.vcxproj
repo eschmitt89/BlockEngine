@@ -158,15 +158,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="ResourcePath.hpp" />
     <ClInclude Include="src\AbstractScreen.hpp" />
     <ClInclude Include="src\BlockType.hpp" />
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
     <ClInclude Include="src\Object.hpp" />
+    <ClInclude Include="src\OutputManager.hpp" />
     <ClInclude Include="src\ResourceLoader.hpp" />
     <ClInclude Include="src\ResourceManager.hpp" />
+    <ClInclude Include="src\ResourcePath.hpp" />
     <ClInclude Include="src\ScreenManager.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
   </ItemGroup>

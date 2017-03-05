@@ -1,6 +1,6 @@
 #include "ResourceManager.hpp"
 #include "ResourceLoader.hpp"
-#include "Utilities.hpp"
+#include "OutputManager.hpp"
 
 ResourceManager::~ResourceManager()
 {

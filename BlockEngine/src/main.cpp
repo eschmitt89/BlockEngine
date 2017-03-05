@@ -15,6 +15,7 @@
 //
 
 #include "ResourcePath.hpp"
+#include "ResourceManager.hpp"
 #include "ScreenManager.hpp"
 #include "HomeScreen.hpp"
 
@@ -29,6 +30,8 @@ int main(int, char const**)
         return EXIT_FAILURE;
     }
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+
+	ResourceManager::GetInstance().LoadAll(resourcePath() + "ResourceFile.txt");
     
     ScreenManager screenManager;
     
@@ -36,7 +39,6 @@ int main(int, char const**)
     
     sf::Clock clock;
     sf::Time dt;
-    
 
     // Start the game loop
     while (window.isOpen())
