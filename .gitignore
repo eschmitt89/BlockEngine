@@ -38,3 +38,4 @@
 *.idb
 *.DS_Store
 /BlockEngine.VC.VC.opendb
+ /Debug

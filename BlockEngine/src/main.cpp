@@ -21,7 +21,7 @@ int main(int, char const**)
     
     screenManager.AddScreen(new HomeScreen());
     
-    sf::Clock clock;
+	sf::Clock clock;
     sf::Time dt;
 
     // Start the game loop
