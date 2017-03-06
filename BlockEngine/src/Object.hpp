@@ -14,11 +14,17 @@
 class Object
 {
 public:
-	Object(sf::Vector2f position);
+	Object(sf::Texture& texture, sf::Vector2f position, sf::Vector2f size);
     ~Object();
+
+	virtual void Update(float dt);
+	virtual void Draw(sf::RenderWindow& window);
+
+	void SetSize(sf::Vector2f size);
     
-private:
+protected:
 	sf::Sprite sprite;
+	sf::Vector2f size;
 };
 
 #endif /* Object_hpp */
