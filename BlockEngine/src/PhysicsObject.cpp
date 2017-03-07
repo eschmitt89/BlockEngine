@@ -8,10 +8,14 @@
 
 #include "PhysicsObject.hpp"
 
+#define GRAVITY 10
+
 PhysicsObject::PhysicsObject(sf::Texture& texture, sf::Vector2f position, sf::Vector2f size)
 	: Object(texture, position, size)
 {
-
+	velocity = sf::Vector2f();
+	acceleration = sf::Vector2f(0, GRAVITY);
+	friction = sf::Vector2f();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -19,4 +23,17 @@ PhysicsObject::PhysicsObject(sf::Texture& texture, sf::Vector2f position, sf::Ve
 PhysicsObject::~PhysicsObject()
 {
     
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsObject::Update(float dt)
+{
+	velocity.x += acceleration.x * dt;
+	velocity.y += acceleration.y * dt;
+
+	position.x += velocity.x * dt;
+	position.y += velocity.y * dt;
+
+	SetPosition(position);
 }

@@ -11,7 +11,7 @@
 Object::Object(sf::Texture& texture, sf::Vector2f position, sf::Vector2f size)
 {
 	sprite.setTexture(texture);
-	sprite.setPosition(position);
+	SetPosition(position);
 	SetSize(size);
 }
 
@@ -38,15 +38,30 @@ void Object::Draw(sf::RenderWindow & window)
 
 ////////////////////////////////////////////////////////////////////////
 
-void Object::SetSize(sf::Vector2f size)
+sf::Vector2f Object::GetPosition()
 {
-	this->size = size;
-
-	sf::Vector2u textureSize = sprite.getTexture()->getSize();
-
-	sf::Vector2f scale = sf::Vector2f(size.x / textureSize.x, size.y / textureSize.y);
-
-	sprite.setScale(scale);
+	return position;
 }
 
 ////////////////////////////////////////////////////////////////////////
+
+sf::Vector2f Object::GetSize()
+{
+	return size;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Object::SetPosition(sf::Vector2f position)
+{
+	this->position = position;
+	sprite.setPosition(position);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Object::SetSize(sf::Vector2f size)
+{
+	this->size = size;
+	sprite.setScale(sf::Vector2f(size.x / sprite.getTexture()->getSize().x, size.y / sprite.getTexture()->getSize().y));
+}

@@ -20,10 +20,15 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw(sf::RenderWindow& window);
 
+	sf::Vector2f GetPosition();
+	sf::Vector2f GetSize();
+
+	void SetPosition(sf::Vector2f position);
 	void SetSize(sf::Vector2f size);
     
 protected:
 	sf::Sprite sprite;
+	sf::Vector2f position;
 	sf::Vector2f size;
 };
 

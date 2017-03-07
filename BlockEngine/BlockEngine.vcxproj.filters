@@ -80,6 +80,9 @@
     <ClInclude Include="src\PhysicsObject.hpp">
       <Filter>Source Files\Physics Manager</Filter>
     </ClInclude>
+    <ClInclude Include="src\PhysicsManager.hpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -113,6 +116,9 @@
       <Filter>Source Files\Resource Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\PhysicsObject.cpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsManager.cpp">
       <Filter>Source Files\Physics Manager</Filter>
     </ClCompile>
   </ItemGroup>

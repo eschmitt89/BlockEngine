@@ -16,9 +16,13 @@ class PhysicsObject : public Object
 public:
 	PhysicsObject(sf::Texture& texture, sf::Vector2f position, sf::Vector2f size);
     ~PhysicsObject();
-    
-private:
 
+	virtual void Update(float dt);
+    
+protected:
+	sf::Vector2f velocity;
+	sf::Vector2f acceleration;
+	sf::Vector2f friction;
 };
 
 #endif /* PhysicsObject_hpp */
