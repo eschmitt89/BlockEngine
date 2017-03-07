@@ -28,6 +28,13 @@ inline sf::Vector2f GetMousePosition(const sf::RenderWindow& window)
 
 ////////////////////////////////////////////////////////////////////////
 
+inline bool Intersect(const sf::Vector2f& position1, const sf::Vector2f& size1, const sf::Vector2f& position2, const sf::Vector2f& size2)
+{
+	return (position1.x + size1.x > position2.x && position1.x < position2.x + size2.x && position1.y + size1.y > position2.y && position1.y < position2.y + size2.y);
+}
+
+////////////////////////////////////////////////////////////////////////
+
 struct Vector4i 
 {
 	int x1;
@@ -39,7 +46,7 @@ struct Vector4i
 	{
 		x1 = vector1.x;
 		y1 = vector1.y;
-		x2 = vector1.x;
+		x2 = vector2.x;
 		y2 = vector2.y;
 	}
 };

@@ -8,6 +8,9 @@
 
 #include "PhysicsManager.hpp"
 
+#define XAXIS 'x'
+#define YAXIS 'y'
+
 PhysicsManager::PhysicsManager(Grid* grid)
 {
 	this->grid = grid;
@@ -31,10 +34,10 @@ void PhysicsManager::Update(float dt)
 		physicsObjects[i]->Update(dt);
 
 		physicsObjects[i]->UpdateX(dt);
-		HandleGridCollisions(physicsObjects[i]);
+		HandleGridCollisions(physicsObjects[i], XAXIS);
 
 		physicsObjects[i]->UpdateY(dt);
-		HandleGridCollisions(physicsObjects[i]);
+		HandleGridCollisions(physicsObjects[i], YAXIS);
 
 		HandlePhysicsObjectCollisions(i, &collisionMap);
 	}
@@ -70,7 +73,7 @@ void PhysicsManager::ClearPhyiscsObjects()
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsManager::HandleGridCollisions(PhysicsObject * physicsObject)
+void PhysicsManager::HandleGridCollisions(PhysicsObject * physicsObject, char axis)
 {
 	Vector4i collidedBlocks = grid->GetBlockIndicies(physicsObject->GetPosition(), physicsObject->GetSize());
 
@@ -80,9 +83,18 @@ void PhysicsManager::HandleGridCollisions(PhysicsObject * physicsObject)
 		{
 			if (grid->IsValidNonEmptyBlockIndex(column, row))
 			{
-				if (physicsObject->GetGlobalBounds().intersects(grid->GetBlockGlobalBounds(column, row)))
+				Block block = grid->GetBlock(column, row);
+
+				if (Intersect(physicsObject->GetPosition(), physicsObject->GetSize(), block.GetPosition(), block.GetSize()))
 				{
-					// collision detected
+					if (axis == XAXIS)
+					{
+						physicsObject->ResolveBlockCollisionX(block);
+					}
+					else
+					{
+						physicsObject->ResolveBlockCollisionY(block);
+					}
 				}
 			}
 		}
@@ -119,8 +131,8 @@ void PhysicsManager::HandlePhysicsObjectCollisions(int physicsObjectIndex, Colli
 
 						if (physicsObject->GetGlobalBounds().intersects(otherPhysicsObject->GetGlobalBounds()))
 						{
-							physicsObject->HandleObjectCollision(otherPhysicsObject);
-							otherPhysicsObject->HandleObjectCollision(physicsObject);
+							physicsObject->ResolvePhysicsObjectCollision(otherPhysicsObject);
+							otherPhysicsObject->ResolvePhysicsObjectCollision(physicsObject);
 
 							ResolvePhysicsObjectsCollision(physicsObject, otherPhysicsObject);
 						}
@@ -139,6 +151,7 @@ void PhysicsManager::HandlePhysicsObjectCollisions(int physicsObjectIndex, Colli
 
 void PhysicsManager::ResolvePhysicsObjectsCollision(PhysicsObject * physicsObject1, PhysicsObject * physicsObject2)
 {
+
 }
 
 ////////////////////////////////////////////////////////////////////////

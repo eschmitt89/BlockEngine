@@ -23,8 +23,9 @@ public:
 	void UpdateX(float dt);
 	void UpdateY(float dt);
 
-	virtual void HandleBlockCollision(Block block);
-	virtual void HandleObjectCollision(PhysicsObject* physicsObject);
+	virtual void ResolveBlockCollisionX(Block block);
+	virtual void ResolveBlockCollisionY(Block block);
+	virtual void ResolvePhysicsObjectCollision(PhysicsObject* physicsObject);
     
 protected:
 	sf::Vector2f velocity;

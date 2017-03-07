@@ -34,8 +34,8 @@ private:
 	vector<PhysicsObject*> physicsObjects;
 
 	typedef map<int, vector<int>> CollisionMap;
-
-	void HandleGridCollisions(PhysicsObject* physicsObject);
+	
+	void HandleGridCollisions(PhysicsObject* physicsObject, char axis);
 	void HandlePhysicsObjectCollisions(int physicsObjectIndex, CollisionMap* collisionMap);
 	void ResolvePhysicsObjectsCollision(PhysicsObject* physicsObject1, PhysicsObject* physicsObject2);
 

@@ -11,7 +11,7 @@
 
 HomeScreen::HomeScreen()
 {
-	grid = new Grid(10, 20, 20, 20);
+	grid = new Grid(20, 10, 20, 20);
 	camera = new Camera(sf::Vector2f(400,300), sf::Vector2f(800,600));
 	physicsManager = new PhysicsManager(grid);
 }

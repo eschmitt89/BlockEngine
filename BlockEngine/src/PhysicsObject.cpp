@@ -51,12 +51,42 @@ void PhysicsObject::UpdateY(float dt)
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsObject::HandleBlockCollision(Block block)
+void PhysicsObject::ResolveBlockCollisionX(Block block)
 {
+	if (velocity.x < 0)
+	{
+		// Moving left
+		position.x = block.GetPosition().x + block.GetSize().x;
+	}
+	else
+	{
+		// Moving right
+		position.x = block.GetPosition().x - size.x;
+	}
+
+	velocity.x *= -1;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsObject::HandleObjectCollision(PhysicsObject * physicsObject)
+void PhysicsObject::ResolveBlockCollisionY(Block block)
+{
+	if (velocity.y < 0)
+	{
+		// Moving up
+		position.y = block.GetPosition().y + block.GetSize().y;
+	}
+	else
+	{
+		// Moving down
+		position.y = block.GetPosition().y - size.y;
+	}
+
+	velocity.y *= -1;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsObject::ResolvePhysicsObjectCollision(PhysicsObject * physicsObject)
 {
 }

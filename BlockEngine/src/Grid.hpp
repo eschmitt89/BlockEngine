@@ -10,7 +10,7 @@
 #define Grid_hpp
 
 #include <SFML/Graphics.hpp>
-#include "BlockType.hpp"
+#include "Block.hpp"
 #include "Utilities.hpp"
 #include <vector>
 
@@ -19,32 +19,27 @@ using namespace std;
 class Grid
 {
 public:
-    Grid(int rows, int columns, int blockWidth, int blockHeight);
+    Grid(int columns, int rows, int blockWidth, int blockHeight);
     ~Grid();
     
     void Draw(sf::RenderWindow& window);
     
+	Block GetBlock(int column, int row);
+	int GetBlockKey(int column, int row);
 	sf::Vector2f GetBlockPosition(int column, int row);
 	sf::Vector2i GetBlockIndex(sf::Vector2f position);
 	Vector4i GetBlockIndicies(sf::Vector2f position, sf::Vector2f size);
-	sf::FloatRect GetBlockGlobalBounds(int column, int row);
-	int GetBlockKey(int column, int row);
 
-	BlockType GetBlockType(sf::Vector2f position);
 	void SetBlockType(sf::Vector2f position, BlockType blockType);
 
-	bool IsValidBlockIndex(int x, int y);
+	bool IsValidBlockIndex(int column, int row);
 	bool IsValidBlockIndex(sf::Vector2i blockIndex);
-	bool IsValidNonEmptyBlockIndex(int x, int y);
-	
+	bool IsValidNonEmptyBlockIndex(int column, int row);
 
 private:
     vector<vector<BlockType>> blocks;
 	sf::Vector2i dimensions;
 	sf::Vector2f blockSize;
-
-	
-
 
 };
 

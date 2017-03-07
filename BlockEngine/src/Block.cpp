@@ -13,6 +13,7 @@ Block::Block(BlockType type, sf::Vector2f position, sf::Vector2f size)
 	this->type = type;
 	this->position = position;
 	this->size = size;
+	this->globalBounds = sf::FloatRect(position, size);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -41,4 +42,11 @@ sf::Vector2f Block::GetPosition()
 sf::Vector2f Block::GetSize()
 {
 	return size;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+sf::FloatRect Block::GetGlobalBounds()
+{
+	return globalBounds;
 }

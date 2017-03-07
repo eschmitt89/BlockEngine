@@ -9,7 +9,7 @@
 #include "Grid.hpp"
 
 
-Grid::Grid(int rows, int columns, int blockWidth, int blockHeight)
+Grid::Grid(int columns, int rows, int blockWidth, int blockHeight)
 {
 	this->dimensions = sf::Vector2i(columns, rows);
 	this->blockSize = sf::Vector2f(blockWidth, blockHeight);
@@ -58,6 +58,23 @@ void Grid::Draw(sf::RenderWindow &window)
 
 ////////////////////////////////////////////////////////////////////////
 
+Block Grid::GetBlock(int column, int row)
+{
+	if (IsValidBlockIndex(column, row))
+	{
+		return Block(blocks[column][row], GetBlockPosition(column, row), blockSize);
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+int Grid::GetBlockKey(int column, int row)
+{
+	return (column * dimensions.x) + row;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 sf::Vector2f Grid::GetBlockPosition(int column, int row)
 {
 	return sf::Vector2f(column * blockSize.x, row * blockSize.y);
@@ -79,32 +96,6 @@ Vector4i Grid::GetBlockIndicies(sf::Vector2f position, sf::Vector2f size)
 
 ////////////////////////////////////////////////////////////////////////
 
-sf::FloatRect Grid::GetBlockGlobalBounds(int column, int row)
-{
-	return sf::FloatRect(GetBlockPosition(column, row), blockSize);
-}
-
-////////////////////////////////////////////////////////////////////////
-
-int Grid::GetBlockKey(int column, int row)
-{
-	return (column * dimensions.x) + row;
-}
-
-////////////////////////////////////////////////////////////////////////
-
-BlockType Grid::GetBlockType(sf::Vector2f position)
-{
-	sf::Vector2i blockIndex = GetBlockIndex(position);
-
-	if (IsValidBlockIndex(blockIndex))
-	{
-		return blocks[blockIndex.x][blockIndex.y];
-	}
-}
-
-////////////////////////////////////////////////////////////////////////
-
 void Grid::SetBlockType(sf::Vector2f position, BlockType blockType)
 {
 	sf::Vector2i blockIndex = GetBlockIndex(position);
@@ -117,9 +108,9 @@ void Grid::SetBlockType(sf::Vector2f position, BlockType blockType)
 
 ////////////////////////////////////////////////////////////////////////
 
-bool Grid::IsValidBlockIndex(int x, int y)
+bool Grid::IsValidBlockIndex(int column, int row)
 {
-	return x >= 0 && y >= 0 && x < dimensions.x && y < dimensions.y;
+	return column >= 0 && row >= 0 && column < dimensions.x && row < dimensions.y;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -131,8 +122,9 @@ bool Grid::IsValidBlockIndex(sf::Vector2i blockIndex)
 
 ////////////////////////////////////////////////////////////////////////
 
-bool Grid::IsValidNonEmptyBlockIndex(int x, int y)
+bool Grid::IsValidNonEmptyBlockIndex(int column, int row)
 {
-	return IsValidBlockIndex(x, y) && blocks[x][y] != BlockType::Empty;
+	return IsValidBlockIndex(column, row) && blocks[column][row] != BlockType::Empty;
 }
+
 
