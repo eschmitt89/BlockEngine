@@ -10,6 +10,7 @@
 #define PhysicsManager_hpp
 
 #include "PhysicsObject.hpp"
+#include "Grid.hpp"
 #include <vector>
 
 using namespace std;
@@ -17,7 +18,7 @@ using namespace std;
 class PhysicsManager 
 {
 public:
-	PhysicsManager();
+	PhysicsManager(Grid* grid);
     ~PhysicsManager();
 
 	void Update(float dt);
@@ -27,7 +28,10 @@ public:
 	void ClearPhyiscsObjects();
     
 private:
+	Grid* grid;
 	vector<PhysicsObject*> physicsObjects;
+
+	void DetectAndResolveGridCollisions(PhysicsObject* physicsObject);
 	
 };
 

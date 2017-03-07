@@ -49,7 +49,7 @@ void Grid::Draw(sf::RenderWindow &window)
         {
 			if (blocks[column][row] != BlockType::Empty)
 			{
-				block.setPosition(GetBlockPosition(row, column));
+				block.setPosition(GetBlockPosition(column, row));
 				window.draw(block);
 			}
         }
@@ -58,7 +58,7 @@ void Grid::Draw(sf::RenderWindow &window)
 
 ////////////////////////////////////////////////////////////////////////
 
-sf::Vector2f Grid::GetBlockPosition(int row, int column)
+sf::Vector2f Grid::GetBlockPosition(int column, int row)
 {
 	return sf::Vector2f(column * blockSize.x, row * blockSize.y);
 }
@@ -68,6 +68,20 @@ sf::Vector2f Grid::GetBlockPosition(int row, int column)
 sf::Vector2i Grid::GetBlockIndex(sf::Vector2f position)
 {
 	return sf::Vector2i(position.x / blockSize.x, position.y / blockSize.y);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+Vector4i Grid::GetBlockIndicies(sf::Vector2f position, sf::Vector2f size)
+{
+	return Vector4i(GetBlockIndex(position), GetBlockIndex(position + size));
+}
+
+////////////////////////////////////////////////////////////////////////
+
+sf::FloatRect Grid::GetBlockGlobalBounds(int column, int row)
+{
+	return sf::FloatRect(GetBlockPosition(column, row), (sf::Vector2f)blockSize);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -96,7 +110,22 @@ void Grid::SetBlockType(sf::Vector2f position, BlockType blockType)
 
 ////////////////////////////////////////////////////////////////////////
 
+bool Grid::IsValidBlockIndex(int x, int y)
+{
+	return x >= 0 && y >= 0 && x < gridDimensions.x && y < gridDimensions.y;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 bool Grid::IsValidBlockIndex(sf::Vector2i blockIndex)
 {
-	return blockIndex.x >= 0 && blockIndex.y >= 0 && blockIndex.x < gridDimensions.x && blockIndex.y < gridDimensions.y;
+	return IsValidBlockIndex(blockIndex.x, blockIndex.y);
 }
+
+////////////////////////////////////////////////////////////////////////
+
+bool Grid::IsValidNonEmptyBlockIndex(int x, int y)
+{
+	return IsValidBlockIndex(x, y) && blocks[x][y] != BlockType::Empty;
+}
+

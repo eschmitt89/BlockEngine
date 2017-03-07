@@ -24,18 +24,25 @@ public:
     
     void Draw(sf::RenderWindow& window);
     
-	sf::Vector2f GetBlockPosition(int row, int column);
+	sf::Vector2f GetBlockPosition(int column, int row);
 	sf::Vector2i GetBlockIndex(sf::Vector2f position);
+	Vector4i GetBlockIndicies(sf::Vector2f position, sf::Vector2f size);
+	sf::FloatRect GetBlockGlobalBounds(int column, int row);
 
 	BlockType GetBlockType(sf::Vector2f position);
 	void SetBlockType(sf::Vector2f position, BlockType blockType);
+
+	bool IsValidBlockIndex(int x, int y);
+	bool IsValidBlockIndex(sf::Vector2i blockIndex);
+	bool IsValidNonEmptyBlockIndex(int x, int y);
+	
 
 private:
     vector<vector<BlockType>> blocks;
 	sf::Vector2i gridDimensions;
 	sf::Vector2i blockSize;
 
-	bool IsValidBlockIndex(sf::Vector2i blockIndex);
+	
 
 
 };

@@ -8,7 +8,7 @@
 
 #include "PhysicsObject.hpp"
 
-#define GRAVITY 10
+#define GRAVITY 1000
 
 PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
 	: Object(texture, position, size)
