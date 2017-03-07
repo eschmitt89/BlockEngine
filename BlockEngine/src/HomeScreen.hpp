@@ -12,6 +12,7 @@
 #include "AbstractScreen.hpp"
 #include "Grid.hpp"
 #include "Camera.hpp"
+#include "PhysicsManager.hpp"
 
 class HomeScreen : public AbstractScreen
 {
@@ -28,6 +29,7 @@ public:
 private:
 	Grid* grid;
 	Camera* camera;
+	PhysicsManager* physicsManager;
 };
 
 #endif /* HomeScreen_hpp */

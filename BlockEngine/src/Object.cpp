@@ -8,9 +8,9 @@
 
 #include "Object.hpp"
 
-Object::Object(sf::Texture& texture, sf::Vector2f position, sf::Vector2f size)
+Object::Object(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
 {
-	sprite.setTexture(texture);
+	sprite.setTexture(*texture);
 	SetPosition(position);
 	SetSize(size);
 }

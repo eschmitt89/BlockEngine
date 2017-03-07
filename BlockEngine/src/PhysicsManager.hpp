@@ -24,6 +24,7 @@ public:
 	void Draw(sf::RenderWindow& window);
 
 	void AddPhysicsObject(PhysicsObject* physicsObject);
+	void ClearPhyiscsObjects();
     
 private:
 	vector<PhysicsObject*> physicsObjects;

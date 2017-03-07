@@ -16,11 +16,7 @@ PhysicsManager::PhysicsManager()
 
 PhysicsManager::~PhysicsManager()
 {
-	for (int i = 0; i < physicsObjects.size(); i++)
-	{
-		delete physicsObjects[i];
-	}
-	physicsObjects.clear();
+	ClearPhyiscsObjects();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -48,4 +44,15 @@ void PhysicsManager::Draw(sf::RenderWindow & window)
 void PhysicsManager::AddPhysicsObject(PhysicsObject * physicsObject)
 {
 	physicsObjects.push_back(physicsObject);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsManager::ClearPhyiscsObjects()
+{
+	for (int i = 0; i < physicsObjects.size(); i++)
+	{
+		delete physicsObjects[i];
+	}
+	physicsObjects.clear();
 }

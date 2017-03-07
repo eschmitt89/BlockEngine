@@ -7,11 +7,13 @@
 //
 
 #include "HomeScreen.hpp"
+#include "ResourceManager.hpp"
 
 HomeScreen::HomeScreen()
 {
-	this->grid = new Grid(10, 20, 20, 20);
-	this->camera = new Camera(sf::Vector2f(400,300), sf::Vector2f(800,600));
+	grid = new Grid(10, 20, 20, 20);
+	camera = new Camera(sf::Vector2f(400,300), sf::Vector2f(800,600));
+	physicsManager = new PhysicsManager();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -20,6 +22,7 @@ HomeScreen::~HomeScreen()
 {
 	delete grid;
 	delete camera;
+	delete physicsManager;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -41,6 +44,16 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	{
 		grid->SetBlockType(GetMousePosition(window), BlockType::Empty);
 	}
+
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+	{
+		physicsManager->AddPhysicsObject(new PhysicsObject(ResourceManager::GetInstance().GetTexture("whiteBlock"), GetMousePosition(window), sf::Vector2f(10,10)));
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
+	{
+		physicsManager->ClearPhyiscsObjects();
+	}
+
 	camera->HandleInput(window);
 }
 
@@ -56,6 +69,7 @@ bool HomeScreen::DoesUpdate()
 void HomeScreen::Update(float dt)
 {
 	camera->Update(dt);
+	physicsManager->Update(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -71,4 +85,5 @@ void HomeScreen::Draw(sf::RenderWindow &window)
 {
 	window.setView(camera->GetView());
 	grid->Draw(window);
+	physicsManager->Draw(window);
 }

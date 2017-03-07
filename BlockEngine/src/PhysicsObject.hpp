@@ -14,7 +14,7 @@
 class PhysicsObject : public Object
 {
 public:
-	PhysicsObject(sf::Texture& texture, sf::Vector2f position, sf::Vector2f size);
+	PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size);
     ~PhysicsObject();
 
 	virtual void Update(float dt);

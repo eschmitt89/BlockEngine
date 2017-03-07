@@ -39,5 +39,6 @@ private:
 	map<string, sf::Font*>* fontMap;
 };
 
+
 #endif /* ResourceManager_hpp */
 

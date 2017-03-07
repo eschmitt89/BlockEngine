@@ -15,5 +15,5 @@ enum BlockType
     Solid = '1'
 };
 
-#endif /* BlockType_h */
+#endif /* BlockType_hpp */
 
