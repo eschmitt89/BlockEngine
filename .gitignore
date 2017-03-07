@@ -40,3 +40,5 @@
 *.suo
 /BlockEngine.VC.VC.opendb
 /Debug
+/Release
+/.vc
