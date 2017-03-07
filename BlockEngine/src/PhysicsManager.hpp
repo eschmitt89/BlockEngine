@@ -12,6 +12,8 @@
 #include "PhysicsObject.hpp"
 #include "Grid.hpp"
 #include <vector>
+#include <map>
+#include <set>
 
 using namespace std;
 
@@ -31,7 +33,13 @@ private:
 	Grid* grid;
 	vector<PhysicsObject*> physicsObjects;
 
-	void DetectAndResolveGridCollisions(PhysicsObject* physicsObject);
+	typedef map<int, vector<int>> CollisionMap;
+
+	void HandleGridCollisions(PhysicsObject* physicsObject);
+	void HandlePhysicsObjectCollisions(int physicsObjectIndex, CollisionMap* collisionMap);
+	void ResolvePhysicsObjectsCollision(PhysicsObject* physicsObject1, PhysicsObject* physicsObject2);
+
+	int GetCollisionPairKey(int physicsObjectIndex1, int physicsObjectIndex2);
 	
 };
 

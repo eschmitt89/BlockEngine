@@ -28,6 +28,7 @@ public:
 	sf::Vector2i GetBlockIndex(sf::Vector2f position);
 	Vector4i GetBlockIndicies(sf::Vector2f position, sf::Vector2f size);
 	sf::FloatRect GetBlockGlobalBounds(int column, int row);
+	int GetBlockKey(int column, int row);
 
 	BlockType GetBlockType(sf::Vector2f position);
 	void SetBlockType(sf::Vector2f position, BlockType blockType);
@@ -39,8 +40,8 @@ public:
 
 private:
     vector<vector<BlockType>> blocks;
-	sf::Vector2i gridDimensions;
-	sf::Vector2i blockSize;
+	sf::Vector2i dimensions;
+	sf::Vector2f blockSize;
 
 	
 

@@ -24,10 +24,19 @@ PhysicsManager::~PhysicsManager()
 
 void PhysicsManager::Update(float dt)
 {
+	CollisionMap collisionMap;
+
 	for (int i = 0; i < physicsObjects.size(); i++)
 	{
 		physicsObjects[i]->Update(dt);
-		DetectAndResolveGridCollisions(physicsObjects[i]);
+
+		physicsObjects[i]->UpdateX(dt);
+		HandleGridCollisions(physicsObjects[i]);
+
+		physicsObjects[i]->UpdateY(dt);
+		HandleGridCollisions(physicsObjects[i]);
+
+		HandlePhysicsObjectCollisions(i, &collisionMap);
 	}
 }
 
@@ -59,7 +68,9 @@ void PhysicsManager::ClearPhyiscsObjects()
 	physicsObjects.clear();
 }
 
-void PhysicsManager::DetectAndResolveGridCollisions(PhysicsObject * physicsObject)
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsManager::HandleGridCollisions(PhysicsObject * physicsObject)
 {
 	Vector4i collidedBlocks = grid->GetBlockIndicies(physicsObject->GetPosition(), physicsObject->GetSize());
 
@@ -76,4 +87,65 @@ void PhysicsManager::DetectAndResolveGridCollisions(PhysicsObject * physicsObjec
 			}
 		}
 	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsManager::HandlePhysicsObjectCollisions(int physicsObjectIndex, CollisionMap* collisionMap)
+{
+	set<int> checkedCollisionPairs;
+
+	PhysicsObject* physicsObject = physicsObjects[physicsObjectIndex];
+
+	Vector4i collidedBlocks = grid->GetBlockIndicies(physicsObject->GetPosition(), physicsObject->GetSize());
+
+	for (int column = collidedBlocks.x1; column <= collidedBlocks.x2; column++)
+	{
+		for (int row = collidedBlocks.y1; row <= collidedBlocks.y2; row++)
+		{
+			if (grid->IsValidBlockIndex(column, row))
+			{
+				int blockKey = grid->GetBlockKey(column, row);
+				
+				for (int i = 0; i < (*collisionMap)[blockKey].size(); i++)
+				{
+					int otherPhysicsObjectIndex = (*collisionMap)[blockKey][i];
+
+					int collisionPairKey = GetCollisionPairKey(physicsObjectIndex, otherPhysicsObjectIndex);
+
+					if (checkedCollisionPairs.find(collisionPairKey) == checkedCollisionPairs.end())
+					{
+						PhysicsObject* otherPhysicsObject = physicsObjects[(*collisionMap)[blockKey][i]];
+
+						if (physicsObject->GetGlobalBounds().intersects(otherPhysicsObject->GetGlobalBounds()))
+						{
+							physicsObject->HandleObjectCollision(otherPhysicsObject);
+							otherPhysicsObject->HandleObjectCollision(physicsObject);
+
+							ResolvePhysicsObjectsCollision(physicsObject, otherPhysicsObject);
+						}
+
+						checkedCollisionPairs.insert(collisionPairKey);
+					}
+				}
+
+				(*collisionMap)[blockKey].push_back(physicsObjectIndex);
+			}
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsManager::ResolvePhysicsObjectsCollision(PhysicsObject * physicsObject1, PhysicsObject * physicsObject2)
+{
+}
+
+////////////////////////////////////////////////////////////////////////
+
+int PhysicsManager::GetCollisionPairKey(int physicsObjectIndex1, int physicsObjectIndex2)
+{
+	return (physicsObjectIndex1 < physicsObjectIndex2) 
+		? physicsObjectIndex1 + (physicsObjectIndex2 * physicsObjects.size()) 
+		: physicsObjectIndex2 + (physicsObjectIndex1 * physicsObjects.size());
 }

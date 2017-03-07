@@ -20,6 +20,12 @@ $TEXTURES
 whiteBlock
 WhiteBlock.png
 
+ladderBlock
+LadderBlock.png
+
+waterBlock
+WaterBlock.png
+
 #####################################
 $SOUNDS
 #####################################

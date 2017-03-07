@@ -12,7 +12,9 @@
 enum BlockType
 {
     Empty = '0',
-    Solid = '1'
+    Solid = '1',
+	Liquid = '2',
+	Ladder = '3',
 };
 
 #endif /* BlockType_hpp */

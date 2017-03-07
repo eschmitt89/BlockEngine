@@ -10,6 +10,7 @@
 #define PhysicsObject_hpp
 
 #include "Object.hpp"
+#include "Block.hpp"
 
 class PhysicsObject : public Object
 {
@@ -18,6 +19,12 @@ public:
     ~PhysicsObject();
 
 	virtual void Update(float dt);
+
+	void UpdateX(float dt);
+	void UpdateY(float dt);
+
+	virtual void HandleBlockCollision(Block block);
+	virtual void HandleObjectCollision(PhysicsObject* physicsObject);
     
 protected:
 	sf::Vector2f velocity;

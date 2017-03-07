@@ -8,7 +8,7 @@
 
 #include "PhysicsObject.hpp"
 
-#define GRAVITY 1000
+#define GRAVITY 10
 
 PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
 	: Object(texture, position, size)
@@ -29,11 +29,34 @@ PhysicsObject::~PhysicsObject()
 
 void PhysicsObject::Update(float dt)
 {
-	velocity.x += acceleration.x * dt;
-	velocity.y += acceleration.y * dt;
-
-	position.x += velocity.x * dt;
-	position.y += velocity.y * dt;
-
 	SetPosition(position);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsObject::UpdateX(float dt)
+{
+	velocity.x += acceleration.x * dt;
+	position.x += velocity.x * dt;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsObject::UpdateY(float dt)
+{
+	velocity.y += acceleration.y * dt;
+	position.y += velocity.y * dt;
+	
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsObject::HandleBlockCollision(Block block)
+{
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsObject::HandleObjectCollision(PhysicsObject * physicsObject)
+{
 }

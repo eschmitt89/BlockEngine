@@ -83,6 +83,9 @@
     <ClInclude Include="src\PhysicsManager.hpp">
       <Filter>Source Files\Physics Manager</Filter>
     </ClInclude>
+    <ClInclude Include="src\Block.hpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -121,12 +124,21 @@
     <ClCompile Include="src\PhysicsManager.cpp">
       <Filter>Source Files\Physics Manager</Filter>
     </ClCompile>
+    <ClCompile Include="src\Block.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\icon.png">
       <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="resources\WhiteBlock.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="resources\LadderBlock.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="resources\WaterBlock.png">
       <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>
