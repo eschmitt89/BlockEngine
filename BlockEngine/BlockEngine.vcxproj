@@ -100,6 +100,9 @@
     <PostBuildEvent>
       <Command>xcopy $(ProjectDir)resources $(OutDir)resources\ /y</Command>
     </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>rd /s /q $(OutDir)resources</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

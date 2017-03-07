@@ -20,7 +20,7 @@ inline sf::Vector2f ConvertToVector2f(sf::Vector2i vector2i)
 }
 inline sf::Vector2f GetMousePosition(const sf::RenderWindow& window)
 {
-	return ConvertToVector2f(sf::Mouse::getPosition(window));
+	return window.mapPixelToCoords(sf::Mouse::getPosition(window));
 }
 
 #endif /* Utilties_hpp */
