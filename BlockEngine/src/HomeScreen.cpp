@@ -12,7 +12,7 @@
 
 HomeScreen::HomeScreen()
 {
-	grid = new Grid(20, 10, 20, 20);
+	grid = new Grid(200, 100, 20, 20);
 	camera = new Camera(sf::Vector2f(400,300), sf::Vector2f(800,600));
 	physicsManager = new PhysicsManager(grid);
 
@@ -91,9 +91,12 @@ void HomeScreen::Draw(sf::RenderWindow &window)
 {
 	window.setView(camera->GetView());
 
-	grid->Draw(window);
+	grid->Draw(window, camera);
 	physicsManager->Draw(window);
+
+	window.setView(window.getDefaultView());
 	window.draw(fpsText);
+	window.setView(camera->GetView());
 }
 
 ////////////////////////////////////////////////////////////////////////

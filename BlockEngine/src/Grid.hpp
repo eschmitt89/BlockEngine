@@ -11,6 +11,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Block.hpp"
+#include "Camera.hpp"
 #include "Utilities.hpp"
 #include <vector>
 
@@ -22,7 +23,7 @@ public:
     Grid(int columns, int rows, int blockWidth, int blockHeight);
     ~Grid();
     
-    void Draw(sf::RenderWindow& window);
+    void Draw(sf::RenderWindow& window, Camera* camera);
     
 	Block GetBlock(int column, int row);
 	int GetBlockKey(int column, int row);

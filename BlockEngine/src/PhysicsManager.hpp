@@ -37,10 +37,9 @@ private:
 	
 	void HandleGridCollisions(PhysicsObject* physicsObject, PhysicsObject::ResolveBlockCollision resolveBlockCollsion, float dt);
 	void HandlePhysicsObjectCollisions(int physicsObjectIndex, CollisionMap* collisionMap);
-	void ResolvePhysicsObjectsCollision(PhysicsObject* physicsObject1, PhysicsObject* physicsObject2);
+	void ResolvePhysicsObjectsCollision(PhysicsObject* physicsObjectA, PhysicsObject* physicsObjectB);
 
-	int GetCollisionPairKey(int physicsObjectIndex1, int physicsObjectIndex2);
-
+	int GetCollisionPairKey(int physicsObjectIndexA, int physicsObjectIndexB);
 };
 
 #endif /* PhysicsManager_hpp */

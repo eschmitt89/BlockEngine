@@ -33,10 +33,10 @@ public:
 	virtual void ResolveBlockCollisionY(Block block, float dt);
 	virtual void CollideWith(PhysicsObject* physicsObject);
 
-	typedef void(*ResolveBlockCollision)(PhysicsObject* physicsObject, Block block, float dt);
-
 	static void ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block, float dt);
 	static void ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block, float dt);
+
+	typedef void(*ResolveBlockCollision)(PhysicsObject* physicsObject, Block block, float dt);
 
 protected:
 	sf::Vector2f velocity;

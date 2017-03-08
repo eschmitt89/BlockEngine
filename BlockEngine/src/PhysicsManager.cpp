@@ -142,33 +142,33 @@ void PhysicsManager::HandlePhysicsObjectCollisions(int physicsObjectIndex, Colli
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsManager::ResolvePhysicsObjectsCollision(PhysicsObject * physicsObject1, PhysicsObject * physicsObject2)
+void PhysicsManager::ResolvePhysicsObjectsCollision(PhysicsObject * physicsObjectA, PhysicsObject * physicsObjectB)
 {
-	sf::Vector2f collisionNormal = NormalizeVector(physicsObject2->GetCenter() - physicsObject1->GetCenter());
+	sf::Vector2f collisionNormal = NormalizeVector(physicsObjectB->GetCenter() - physicsObjectA->GetCenter());
 
-	sf::Vector2f relativeVelocity = physicsObject2->GetVelocity() - physicsObject1->GetVelocity();
+	sf::Vector2f relativeVelocity = physicsObjectB->GetVelocity() - physicsObjectA->GetVelocity();
 
 	float velocityMagnitude = DotProduct(relativeVelocity, collisionNormal);
 
 	if (velocityMagnitude > 0) return;
 
-	float collisionElasticity = min(physicsObject1->GetElasticity(), physicsObject2->GetElasticity());
+	float collisionElasticity = min(physicsObjectA->GetElasticity(), physicsObjectB->GetElasticity());
 
 	float impulseScalar = -(1 + collisionElasticity) * velocityMagnitude;
-	impulseScalar /= (1 / physicsObject1->GetMass()) + (1 / physicsObject2->GetMass());
+	impulseScalar /= (1 / physicsObjectA->GetMass()) + (1 / physicsObjectB->GetMass());
 
 	sf::Vector2f impulse = impulseScalar * collisionNormal;
 
-	physicsObject1->Impulse(-(1 / physicsObject1->GetMass()) * impulse);
-	physicsObject2->Impulse((1 / physicsObject2->GetMass()) * impulse);
+	physicsObjectA->Impulse(-(1 / physicsObjectA->GetMass()) * impulse);
+	physicsObjectB->Impulse((1 / physicsObjectB->GetMass()) * impulse);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-int PhysicsManager::GetCollisionPairKey(int physicsObjectIndex1, int physicsObjectIndex2)
+int PhysicsManager::GetCollisionPairKey(int physicsObjectIndexA, int physicsObjectIndexB)
 {
-	return (physicsObjectIndex1 < physicsObjectIndex2) 
-		? physicsObjectIndex1 + (physicsObjectIndex2 * physicsObjects.size()) 
-		: physicsObjectIndex2 + (physicsObjectIndex1 * physicsObjects.size());
+	return (physicsObjectIndexA < physicsObjectIndexB) 
+		? physicsObjectIndexA + (physicsObjectIndexB * physicsObjects.size()) 
+		: physicsObjectIndexB + (physicsObjectIndexA * physicsObjects.size());
 }
 

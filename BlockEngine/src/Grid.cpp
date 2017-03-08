@@ -36,18 +36,20 @@ Grid::~Grid()
 
 ////////////////////////////////////////////////////////////////////////
 
-void Grid::Draw(sf::RenderWindow &window)
+void Grid::Draw(sf::RenderWindow &window, Camera* camera)
 {
     sf::RectangleShape block;
     block.setSize(blockSize);
 	block.setOutlineColor(sf::Color::Red);
 	block.setOutlineThickness(1);
+
+	Vector4i visibleBlocks = GetBlockIndicies(camera->GetView().getCenter() - (camera->GetView().getSize() * 0.5f), camera->GetView().getSize());
     
-    for (int column = 0; column < blocks.size(); column++)
+    for (int column = visibleBlocks.x1; column <= visibleBlocks.x2; column++)
     {
-        for (int row = 0; row < blocks[column].size(); row++)
+        for (int row = visibleBlocks.y1; row <= visibleBlocks.y2; row++)
         {
-			if (blocks[column][row] != BlockType::Empty)
+			if (IsValidNonEmptyBlockIndex(column, row))
 			{
 				block.setPosition(GetBlockPosition(column, row));
 				window.draw(block);
