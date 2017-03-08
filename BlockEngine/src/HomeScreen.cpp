@@ -8,12 +8,16 @@
 
 #include "HomeScreen.hpp"
 #include "ResourceManager.hpp"
+#include <sstream>
 
 HomeScreen::HomeScreen()
 {
 	grid = new Grid(20, 10, 20, 20);
 	camera = new Camera(sf::Vector2f(400,300), sf::Vector2f(800,600));
 	physicsManager = new PhysicsManager(grid);
+
+	fpsText = sf::Text("", *ResourceManager::GetInstance().GetFont("sansation"));
+	fpsText.setFillColor(sf::Color::Red);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -70,6 +74,8 @@ void HomeScreen::Update(float dt)
 {
 	camera->Update(dt);
 	physicsManager->Update(dt);
+
+	fpsText.setString(GetFpsString(dt));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -84,6 +90,17 @@ bool HomeScreen::DoesDraw()
 void HomeScreen::Draw(sf::RenderWindow &window)
 {
 	window.setView(camera->GetView());
+
 	grid->Draw(window);
 	physicsManager->Draw(window);
+	window.draw(fpsText);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+string HomeScreen::GetFpsString(float dt)
+{
+	stringstream ss;
+	ss << (int)(1 / dt);
+	return ss.str();
 }

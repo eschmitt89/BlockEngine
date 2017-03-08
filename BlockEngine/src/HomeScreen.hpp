@@ -30,6 +30,10 @@ private:
 	Grid* grid;
 	Camera* camera;
 	PhysicsManager* physicsManager;
+
+	sf::Text fpsText;
+
+	string GetFpsString(float dt);
 };
 
 #endif /* HomeScreen_hpp */
