@@ -8,14 +8,15 @@
 
 #include "PhysicsObject.hpp"
 
-#define GRAVITY 10
+#define GRAVITY 500
 
 PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
 	: Object(texture, position, size)
 {
 	velocity = sf::Vector2f(10, 20);
 	acceleration = sf::Vector2f(0, GRAVITY);
-	friction = sf::Vector2f();
+	elasticity = 0.5;
+	friction = 0.5;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -51,7 +52,7 @@ void PhysicsObject::UpdateY(float dt)
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsObject::ResolveBlockCollisionX(Block block)
+void PhysicsObject::ResolveBlockCollisionX(Block block, float dt)
 {
 	if (velocity.x < 0)
 	{
@@ -64,12 +65,13 @@ void PhysicsObject::ResolveBlockCollisionX(Block block)
 		position.x = block.GetPosition().x - size.x;
 	}
 
-	velocity.x *= -1;
+	velocity.x *= -elasticity;
+	velocity.y *= pow(1 - friction, dt);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsObject::ResolveBlockCollisionY(Block block)
+void PhysicsObject::ResolveBlockCollisionY(Block block, float dt)
 {
 	if (velocity.y < 0)
 	{
@@ -82,26 +84,27 @@ void PhysicsObject::ResolveBlockCollisionY(Block block)
 		position.y = block.GetPosition().y - size.y;
 	}
 
-	velocity.y *= -1;
+	velocity.x *= pow(1 - friction, dt);
+	velocity.y *= -elasticity;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsObject::ResolvePhysicsObjectCollision(PhysicsObject * physicsObject)
+void PhysicsObject::CollideWith(PhysicsObject * physicsObject)
 {
 
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsObject::ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block)
+void PhysicsObject::ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block, float dt)
 {
-	physicsObject->ResolveBlockCollisionX(block);
+	physicsObject->ResolveBlockCollisionX(block, dt);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsObject::ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block)
+void PhysicsObject::ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block, float dt)
 {
-	physicsObject->ResolveBlockCollisionY(block);
+	physicsObject->ResolveBlockCollisionY(block, dt);
 }

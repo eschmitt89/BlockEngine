@@ -34,10 +34,10 @@ void PhysicsManager::Update(float dt)
 		physicsObjects[i]->Update(dt);
 
 		physicsObjects[i]->UpdateX(dt);
-		HandleGridCollisions(physicsObjects[i], PhysicsObject::ResolveBlockCollisionXFunction);
+		HandleGridCollisions(physicsObjects[i], PhysicsObject::ResolveBlockCollisionXFunction, dt);
 
 		physicsObjects[i]->UpdateY(dt);
-		HandleGridCollisions(physicsObjects[i], PhysicsObject::ResolveBlockCollisionYFunction);
+		HandleGridCollisions(physicsObjects[i], PhysicsObject::ResolveBlockCollisionYFunction, dt);
 
 		HandlePhysicsObjectCollisions(i, &collisionMap);
 	}
@@ -73,7 +73,7 @@ void PhysicsManager::ClearPhyiscsObjects()
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsManager::HandleGridCollisions(PhysicsObject * physicsObject, PhysicsObject::ResolveBlockCollision resolveBlockCollsion)
+void PhysicsManager::HandleGridCollisions(PhysicsObject * physicsObject, PhysicsObject::ResolveBlockCollision resolveBlockCollsion, float dt)
 {
 	Vector4i collidedBlocks = grid->GetBlockIndicies(physicsObject->GetPosition(), physicsObject->GetSize());
 
@@ -87,7 +87,7 @@ void PhysicsManager::HandleGridCollisions(PhysicsObject * physicsObject, Physics
 
 				if (Intersect(physicsObject->GetPosition(), physicsObject->GetSize(), block.GetPosition(), block.GetSize()))
 				{
-					resolveBlockCollsion(physicsObject, block);
+					resolveBlockCollsion(physicsObject, block, dt);
 				}
 			}
 		}
@@ -124,8 +124,8 @@ void PhysicsManager::HandlePhysicsObjectCollisions(int physicsObjectIndex, Colli
 
 						if (physicsObject->GetGlobalBounds().intersects(otherPhysicsObject->GetGlobalBounds()))
 						{
-							physicsObject->ResolvePhysicsObjectCollision(otherPhysicsObject);
-							otherPhysicsObject->ResolvePhysicsObjectCollision(physicsObject);
+							physicsObject->CollideWith(otherPhysicsObject);
+							otherPhysicsObject->CollideWith(physicsObject);
 
 							ResolvePhysicsObjectsCollision(physicsObject, otherPhysicsObject);
 						}

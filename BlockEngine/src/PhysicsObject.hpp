@@ -23,19 +23,20 @@ public:
 	void UpdateX(float dt);
 	void UpdateY(float dt);
 
-	virtual void ResolveBlockCollisionX(Block block);
-	virtual void ResolveBlockCollisionY(Block block);
-	virtual void ResolvePhysicsObjectCollision(PhysicsObject* physicsObject);
+	virtual void ResolveBlockCollisionX(Block block, float dt);
+	virtual void ResolveBlockCollisionY(Block block, float dt);
+	virtual void CollideWith(PhysicsObject* physicsObject);
 
-	typedef void(*ResolveBlockCollision)(PhysicsObject* physicsObject, Block block);
+	typedef void(*ResolveBlockCollision)(PhysicsObject* physicsObject, Block block, float dt);
 
-	static void ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block);
-	static void ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block);
+	static void ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block, float dt);
+	static void ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block, float dt);
 
 protected:
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;
-	sf::Vector2f friction;
+	float elasticity;
+	float friction;
 
 };
 
