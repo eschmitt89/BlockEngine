@@ -27,12 +27,16 @@ public:
 	virtual void ResolveBlockCollisionY(Block block);
 	virtual void ResolvePhysicsObjectCollision(PhysicsObject* physicsObject);
 
-	void TestFunc(void * obj, Block b);
-    
+	typedef void(*ResolveBlockCollision)(PhysicsObject* physicsObject, Block block);
+
+	static void ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block);
+	static void ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block);
+
 protected:
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;
 	sf::Vector2f friction;
+
 };
 
 #endif /* PhysicsObject_hpp */

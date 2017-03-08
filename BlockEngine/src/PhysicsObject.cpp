@@ -89,9 +89,19 @@ void PhysicsObject::ResolveBlockCollisionY(Block block)
 
 void PhysicsObject::ResolvePhysicsObjectCollision(PhysicsObject * physicsObject)
 {
+
 }
 
-void PhysicsObject::TestFunc(void * obj, Block b)
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsObject::ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block)
 {
-	static_cast<PhysicsObject*>(obj)->ResolveBlockCollisionX(b);
+	physicsObject->ResolveBlockCollisionX(block);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsObject::ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block)
+{
+	physicsObject->ResolveBlockCollisionY(block);
 }
