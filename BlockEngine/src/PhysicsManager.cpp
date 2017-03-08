@@ -144,7 +144,23 @@ void PhysicsManager::HandlePhysicsObjectCollisions(int physicsObjectIndex, Colli
 
 void PhysicsManager::ResolvePhysicsObjectsCollision(PhysicsObject * physicsObject1, PhysicsObject * physicsObject2)
 {
+	sf::Vector2f collisionNormal = NormalizeVector(physicsObject2->GetCenter() - physicsObject1->GetCenter());
 
+	sf::Vector2f relativeVelocity = physicsObject2->GetVelocity() - physicsObject1->GetVelocity();
+
+	float velocityMagnitude = DotProduct(relativeVelocity, collisionNormal);
+
+	if (velocityMagnitude > 0) return;
+
+	float collisionElasticity = min(physicsObject1->GetElasticity(), physicsObject2->GetElasticity());
+
+	float impulseScalar = -(1 + collisionElasticity) * velocityMagnitude;
+	impulseScalar /= (1 / physicsObject1->GetMass()) + (1 / physicsObject2->GetMass());
+
+	sf::Vector2f impulse = impulseScalar * collisionNormal;
+
+	physicsObject1->Impulse(-(1 / physicsObject1->GetMass()) * impulse);
+	physicsObject2->Impulse((1 / physicsObject2->GetMass()) * impulse);
 }
 
 ////////////////////////////////////////////////////////////////////////

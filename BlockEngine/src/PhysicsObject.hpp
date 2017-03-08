@@ -23,6 +23,12 @@ public:
 	void UpdateX(float dt);
 	void UpdateY(float dt);
 
+	void Impulse(sf::Vector2f vector);
+
+	sf::Vector2f GetVelocity();
+	float GetElasticity();
+	float GetMass();
+
 	virtual void ResolveBlockCollisionX(Block block, float dt);
 	virtual void ResolveBlockCollisionY(Block block, float dt);
 	virtual void CollideWith(PhysicsObject* physicsObject);
@@ -37,7 +43,7 @@ protected:
 	sf::Vector2f acceleration;
 	float elasticity;
 	float friction;
-
+	float mass;
 };
 
 #endif /* PhysicsObject_hpp */

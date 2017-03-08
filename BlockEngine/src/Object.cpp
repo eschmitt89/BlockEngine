@@ -59,6 +59,13 @@ sf::Vector2f Object::GetSize()
 
 ////////////////////////////////////////////////////////////////////////
 
+sf::Vector2f Object::GetCenter()
+{
+	return  position + (size * 0.5f);
+}
+
+////////////////////////////////////////////////////////////////////////
+
 void Object::SetPosition(sf::Vector2f position)
 {
 	this->position = position;

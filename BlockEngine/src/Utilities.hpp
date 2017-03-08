@@ -27,6 +27,29 @@ inline bool Intersect(const sf::Vector2f& position1, const sf::Vector2f& size1, 
 
 ////////////////////////////////////////////////////////////////////////
 
+float inline VectorLength(const sf::Vector2f vector)
+{
+	return sqrt((vector.x * vector.x) + (vector.y * vector.y));
+}
+
+////////////////////////////////////////////////////////////////////////
+
+sf::Vector2f inline NormalizeVector(const sf::Vector2f& vector)
+{
+	float vectorLength = VectorLength(vector);
+	if (!vectorLength) return sf::Vector2f();
+	return vector / vectorLength;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+float inline DotProduct(sf::Vector2f vector1, sf::Vector2f vector2)
+{
+	return (vector1.x * vector2.x) + (vector1.y * vector2.y);
+}
+
+////////////////////////////////////////////////////////////////////////
+
 struct Vector4i 
 {
 	int x1;
