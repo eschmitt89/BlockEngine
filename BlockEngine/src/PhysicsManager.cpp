@@ -34,10 +34,10 @@ void PhysicsManager::Update(float dt)
 		physicsObjects[i]->Update(dt);
 
 		physicsObjects[i]->UpdateX(dt);
-		HandleGridCollisions(physicsObjects[i], XAXIS);
+		HandleGridCollisions(physicsObjects[i], ResolveBlockCollisionX);
 
 		physicsObjects[i]->UpdateY(dt);
-		HandleGridCollisions(physicsObjects[i], YAXIS);
+		HandleGridCollisions(physicsObjects[i], ResolveBlockCollisionY);
 
 		HandlePhysicsObjectCollisions(i, &collisionMap);
 	}
@@ -73,7 +73,7 @@ void PhysicsManager::ClearPhyiscsObjects()
 
 ////////////////////////////////////////////////////////////////////////
 
-void PhysicsManager::HandleGridCollisions(PhysicsObject * physicsObject, char axis)
+void PhysicsManager::HandleGridCollisions(PhysicsObject * physicsObject, ResolveBlockCollision resolveBlockCollision)
 {
 	Vector4i collidedBlocks = grid->GetBlockIndicies(physicsObject->GetPosition(), physicsObject->GetSize());
 
@@ -87,18 +87,25 @@ void PhysicsManager::HandleGridCollisions(PhysicsObject * physicsObject, char ax
 
 				if (Intersect(physicsObject->GetPosition(), physicsObject->GetSize(), block.GetPosition(), block.GetSize()))
 				{
-					if (axis == XAXIS)
-					{
-						physicsObject->ResolveBlockCollisionX(block);
-					}
-					else
-					{
-						physicsObject->ResolveBlockCollisionY(block);
-					}
+					resolveBlockCollision(physicsObject, block);
 				}
 			}
 		}
 	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsManager::ResolveBlockCollisionX(PhysicsObject * physicsObject, Block block)
+{
+	physicsObject->ResolveBlockCollisionX(block);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsManager::ResolveBlockCollisionY(PhysicsObject * physicsObject, Block block)
+{
+	physicsObject->ResolveBlockCollisionY(block);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -162,3 +169,4 @@ int PhysicsManager::GetCollisionPairKey(int physicsObjectIndex1, int physicsObje
 		? physicsObjectIndex1 + (physicsObjectIndex2 * physicsObjects.size()) 
 		: physicsObjectIndex2 + (physicsObjectIndex1 * physicsObjects.size());
 }
+

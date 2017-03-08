@@ -34,13 +34,17 @@ private:
 	vector<PhysicsObject*> physicsObjects;
 
 	typedef map<int, vector<int>> CollisionMap;
+	typedef void (*ResolveBlockCollision)(PhysicsObject* physicsObject, Block block);
 	
-	void HandleGridCollisions(PhysicsObject* physicsObject, char axis);
+	void HandleGridCollisions(PhysicsObject* physicsObject, ResolveBlockCollision resolveBlockCollision);
+	static void ResolveBlockCollisionX(PhysicsObject* physicsObject, Block block);
+	static void ResolveBlockCollisionY(PhysicsObject* physicsObject, Block block);
+
 	void HandlePhysicsObjectCollisions(int physicsObjectIndex, CollisionMap* collisionMap);
 	void ResolvePhysicsObjectsCollision(PhysicsObject* physicsObject1, PhysicsObject* physicsObject2);
 
 	int GetCollisionPairKey(int physicsObjectIndex1, int physicsObjectIndex2);
-	
+
 };
 
 #endif /* PhysicsManager_hpp */

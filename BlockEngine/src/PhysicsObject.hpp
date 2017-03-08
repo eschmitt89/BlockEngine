@@ -26,6 +26,8 @@ public:
 	virtual void ResolveBlockCollisionX(Block block);
 	virtual void ResolveBlockCollisionY(Block block);
 	virtual void ResolvePhysicsObjectCollision(PhysicsObject* physicsObject);
+
+	void TestFunc(void * obj, Block b);
     
 protected:
 	sf::Vector2f velocity;

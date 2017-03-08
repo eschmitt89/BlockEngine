@@ -90,3 +90,8 @@ void PhysicsObject::ResolveBlockCollisionY(Block block)
 void PhysicsObject::ResolvePhysicsObjectCollision(PhysicsObject * physicsObject)
 {
 }
+
+void PhysicsObject::TestFunc(void * obj, Block b)
+{
+	static_cast<PhysicsObject*>(obj)->ResolveBlockCollisionX(b);
+}
