@@ -13,7 +13,7 @@
 HomeScreen::HomeScreen()
 {
 	grid = new Grid(200, 100, 32, 32);
-	camera = new Camera(sf::Vector2f(400,300), sf::Vector2f(960,540));
+	camera = new Camera(sf::Vector2f(480,0), sf::Vector2f(960,540));
 	player = new Player(ResourceManager::GetInstance().GetTexture("player"), sf::Vector2f(100,-100), sf::Vector2f(32, 32));
 	physicsManager = new PhysicsManager(grid);
 	physicsManager->AddPhysicsObject(player);

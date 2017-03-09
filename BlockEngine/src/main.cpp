@@ -1,6 +1,7 @@
 #include "ResourcePath.hpp"
 #include "ResourceManager.hpp"
 #include "ScreenManager.hpp"
+#include "EventManager.hpp"
 #include "HomeScreen.hpp"
 
 int main(int, char const**)
@@ -15,12 +16,14 @@ int main(int, char const**)
     }
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
+	// Load resources
 	ResourceManager::GetInstance().LoadAll("ResourceFile.txt");
     
+	// Create screen manager
     ScreenManager screenManager;
-    
     screenManager.AddScreen(new HomeScreen());
     
+	// Create time keeping variables
 	sf::Clock clock;
     sf::Time dt;
 
@@ -29,6 +32,9 @@ int main(int, char const**)
     {
         // Calculate dt
         dt = clock.restart();
+
+		// Clear events
+		EventManager::GetInstance().ClearEvents();
         
         // Process events
         sf::Event event;
@@ -39,10 +45,7 @@ int main(int, char const**)
                 window.close();
             }
 
-            // Escape pressed: exit
-            if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape) {
-                window.close();
-            }
+			EventManager::GetInstance().HandleEvent(event);
         }
 
         // Clear screen

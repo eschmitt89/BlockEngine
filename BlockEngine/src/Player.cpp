@@ -8,6 +8,7 @@
 
 #include "Player.hpp"
 #include "ResourceManager.hpp"
+#include "EventManager.hpp"
 #include <sstream>
 
 Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
@@ -49,41 +50,73 @@ void Player::Update(float dt)
 
 void Player::HandleInput(const sf::RenderWindow & window)
 {
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::A))
 	{
-		movementAxis = MovementLeft;
+		if (playerState != OnLadder)
+		{
+			movementAxis = MovementLeft;
+		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::D))
 	{
-		movementAxis = MovementRight;
+		if (playerState != OnLadder)
+		{
+			movementAxis = MovementRight;
+		}
 	}
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D) && yAxisState == OnGround)
+	if (!EventManager::GetInstance().IsKeyPressed(sf::Keyboard::A) && !EventManager::GetInstance().IsKeyPressed(sf::Keyboard::D) && yAxisState == OnGround)
 	{
 		movementAxis = MovementNone;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
-	{
-		if (yAxisState == OnGround)
-		{
-			Impulse(sf::Vector2f(0, -jumpPower));
-		}
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::W))
 	{
 		if (yAxisState == InAir && playerState != OnLadder)
 		{
 			playerState = TryGrab;
 		}
+		if (playerState == OnLadder)
+		{
+			velocity.y = -movementSpeed;
+		}
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
-	{
-
-	}
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::W))
 	{
 		if (playerState == TryGrab)
 		{
 			playerState = Idle;
+		}
+		if (playerState == OnLadder)
+		{
+			velocity.y = 0;
+		}
+	}
+	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::S))
+	{
+		if (playerState == OnLadder)
+		{
+			velocity.y = movementSpeed;
+		}
+	}
+	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::S))
+	{
+		if (playerState == OnLadder)
+		{
+			velocity.y = 0;
+		}
+	}
+	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::Space))
+	{
+		if (yAxisState == OnGround)
+		{
+			Impulse(sf::Vector2f(0, -jumpPower));
+		}
+		if (playerState == OnLadder)
+		{
+			playerState = Idle;
+			velocity = sf::Vector2f();
+			acceleration = sf::Vector2f(0, gravity);
+			Impulse(sf::Vector2f(0, -jumpPower));
+			
 		}
 	}
 }
@@ -119,6 +152,13 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 		if (playerState == TryGrab)
 		{
 			playerState = OnLadder;
+			velocity = sf::Vector2f();
+			acceleration = sf::Vector2f();
+			movementAxis = MovementNone;
+		}
+		if (playerState == OnLadder)
+		{
+			position.x = block.GetPosition().x;
 		}
 	}
 }
