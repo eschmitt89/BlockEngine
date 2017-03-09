@@ -11,6 +11,8 @@
 
 #include "Object.hpp"
 #include "Block.hpp"
+#include "XAxisState.hpp"
+#include "YAxisState.hpp"
 
 class PhysicsObject : public Object
 {
@@ -41,9 +43,14 @@ public:
 protected:
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;
+	sf::Vector2f friction;
 	float elasticity;
-	float friction;
 	float mass;
+
+	float gravity;
+
+	XAxisState xAxisState;
+	YAxisState yAxisState;
 };
 
 #endif /* PhysicsObject_hpp */

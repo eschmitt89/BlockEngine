@@ -11,8 +11,8 @@
 
 enum BlockType
 {
-    Empty = '0',
-    Solid = '1',
+	Empty = '0',
+	Solid = '1',
 	Liquid = '2',
 	Ladder = '3',
 };

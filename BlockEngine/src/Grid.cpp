@@ -40,7 +40,6 @@ void Grid::Draw(sf::RenderWindow &window, Camera* camera)
 {
     sf::RectangleShape block;
     block.setSize(blockSize);
-	block.setOutlineColor(sf::Color::Red);
 	block.setOutlineThickness(1);
 
 	Vector4i visibleBlocks = GetBlockIndicies(camera->GetView().getCenter() - (camera->GetView().getSize() * 0.5f), camera->GetView().getSize());
@@ -52,6 +51,17 @@ void Grid::Draw(sf::RenderWindow &window, Camera* camera)
 			if (IsValidNonEmptyBlockIndex(column, row))
 			{
 				block.setPosition(GetBlockPosition(column, row));
+
+				switch (blocks[column][row])
+				{
+					case Solid:
+						block.setOutlineColor(sf::Color::Red);
+						break;
+					case Ladder:
+						block.setOutlineColor(sf::Color::Blue);
+						break;
+				}
+
 				window.draw(block);
 			}
         }

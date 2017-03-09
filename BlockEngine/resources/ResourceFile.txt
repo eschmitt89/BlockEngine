@@ -17,6 +17,9 @@
 $TEXTURES
 #####################################
 
+player
+Player.png
+
 whiteBlock
 WhiteBlock.png
 

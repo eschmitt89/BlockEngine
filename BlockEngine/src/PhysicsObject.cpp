@@ -8,16 +8,19 @@
 
 #include "PhysicsObject.hpp"
 
-#define GRAVITY 500
 
 PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
 	: Object(texture, position, size)
 {
+	gravity = 1200;
 	velocity = sf::Vector2f(10, 20);
-	acceleration = sf::Vector2f(0, GRAVITY);
+	acceleration = sf::Vector2f(0, gravity);
+	friction = sf::Vector2f(0.5, 0.5);
 	elasticity = 0.5;
-	friction = 0.5;
 	mass = 1;
+
+	xAxisState = XAxisState::NotOnWall;
+	yAxisState = YAxisState::InAir;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -38,6 +41,8 @@ void PhysicsObject::Update(float dt)
 
 void PhysicsObject::UpdateX(float dt)
 {
+	xAxisState = XAxisState::NotOnWall;
+
 	velocity.x += acceleration.x * dt;
 	position.x += velocity.x * dt;
 }
@@ -46,9 +51,10 @@ void PhysicsObject::UpdateX(float dt)
 
 void PhysicsObject::UpdateY(float dt)
 {
+	yAxisState = YAxisState::InAir;
+
 	velocity.y += acceleration.y * dt;
 	position.y += velocity.y * dt;
-	
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -87,15 +93,17 @@ void PhysicsObject::ResolveBlockCollisionX(Block block, float dt)
 	{
 		// Moving left
 		position.x = block.GetPosition().x + block.GetSize().x;
+		xAxisState = XAxisState::OnWallLeft;
 	}
 	else
 	{
 		// Moving right
 		position.x = block.GetPosition().x - size.x;
+		xAxisState = XAxisState::OnWallRight;
 	}
 
 	velocity.x *= -elasticity;
-	velocity.y *= pow(1 - friction, dt);
+	velocity.y *= pow(1 - friction.y, dt);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -106,14 +114,16 @@ void PhysicsObject::ResolveBlockCollisionY(Block block, float dt)
 	{
 		// Moving up
 		position.y = block.GetPosition().y + block.GetSize().y;
+		yAxisState = YAxisState::OnCeiling;
 	}
 	else
 	{
 		// Moving down
 		position.y = block.GetPosition().y - size.y;
+		yAxisState = YAxisState::OnGround;
 	}
 
-	velocity.x *= pow(1 - friction, dt);
+	velocity.x *= pow(1 - friction.x, dt);
 	velocity.y *= -elasticity;
 }
 

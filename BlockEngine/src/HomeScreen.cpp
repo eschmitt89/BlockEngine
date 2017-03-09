@@ -12,9 +12,11 @@
 
 HomeScreen::HomeScreen()
 {
-	grid = new Grid(200, 100, 20, 20);
+	grid = new Grid(200, 100, 32, 32);
 	camera = new Camera(sf::Vector2f(400,300), sf::Vector2f(800,600));
+	player = new Player(ResourceManager::GetInstance().GetTexture("player"), sf::Vector2f(100,-100), sf::Vector2f(32, 32));
 	physicsManager = new PhysicsManager(grid);
+	physicsManager->AddPhysicsObject(player);
 
 	fpsText = sf::Text("", *ResourceManager::GetInstance().GetFont("sansation"));
 	fpsText.setFillColor(sf::Color::Red);
@@ -26,6 +28,7 @@ HomeScreen::~HomeScreen()
 {
 	delete grid;
 	delete camera;
+	delete player;
 	delete physicsManager;
 }
 
@@ -48,6 +51,10 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	{
 		grid->SetBlockType(GetMousePosition(window), BlockType::Empty);
 	}
+	else if (sf::Mouse::isButtonPressed(sf::Mouse::Middle))
+	{
+		grid->SetBlockType(GetMousePosition(window), BlockType::Ladder);
+	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 	{
@@ -59,6 +66,8 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	}
 
 	camera->HandleInput(window);
+
+	player->HandleInput(window);
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -141,6 +141,12 @@
       <AdditionalLibraryDirectories>C:\Users\Eric\Programs\SFML-2.4.2\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-system-s.lib;sfml-window-s.lib;sfml-graphics-s.lib;sfml-network-s.lib;sfml-audio-s.lib;sfml-main.lib;opengl32.lib;freetype.lib;jpeg.lib;winmm.lib;gdi32.lib;openal32.lib;flac.lib;vorbisenc.lib;vorbisfile.lib;vorbis.lib;ogg.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy $(ProjectDir)resources $(OutDir)resources\ /y</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>rd /s /q $(OutDir)resources</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -170,15 +176,20 @@
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
+    <ClInclude Include="src\MovementAxis.hpp" />
     <ClInclude Include="src\Object.hpp" />
     <ClInclude Include="src\OutputManager.hpp" />
     <ClInclude Include="src\PhysicsManager.hpp" />
     <ClInclude Include="src\PhysicsObject.hpp" />
+    <ClInclude Include="src\Player.hpp" />
+    <ClInclude Include="src\PlayerState.hpp" />
     <ClInclude Include="src\ResourceLoader.hpp" />
     <ClInclude Include="src\ResourceManager.hpp" />
     <ClInclude Include="src\ResourcePath.hpp" />
     <ClInclude Include="src\ScreenManager.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
+    <ClInclude Include="src\XAxisState.hpp" />
+    <ClInclude Include="src\YAxisState.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AbstractScreen.cpp" />
@@ -190,6 +201,7 @@
     <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\PhysicsManager.cpp" />
     <ClCompile Include="src\PhysicsObject.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\ResourceLoader.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\ResourcePath.cpp" />
@@ -198,6 +210,7 @@
   <ItemGroup>
     <Image Include="resources\icon.png" />
     <Image Include="resources\LadderBlock.png" />
+    <Image Include="resources\Player.png" />
     <Image Include="resources\WaterBlock.png" />
     <Image Include="resources\WhiteBlock.png" />
   </ItemGroup>

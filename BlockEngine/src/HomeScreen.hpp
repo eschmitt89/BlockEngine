@@ -12,6 +12,7 @@
 #include "AbstractScreen.hpp"
 #include "Grid.hpp"
 #include "Camera.hpp"
+#include "Player.hpp"
 #include "PhysicsManager.hpp"
 
 class HomeScreen : public AbstractScreen
@@ -29,6 +30,7 @@ public:
 private:
 	Grid* grid;
 	Camera* camera;
+	Player* player;
 	PhysicsManager* physicsManager;
 
 	sf::Text fpsText;

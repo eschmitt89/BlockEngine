@@ -39,6 +39,9 @@
     <Filter Include="Source Files\Physics Manager">
       <UniqueIdentifier>{b1d57b47-65d7-4dfc-89fa-596c33080b22}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Player">
+      <UniqueIdentifier>{f73dd760-c664-485a-bb00-ce5c95dfe2da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -86,6 +89,21 @@
     <ClInclude Include="src\Block.hpp">
       <Filter>Source Files\Grid</Filter>
     </ClInclude>
+    <ClInclude Include="src\Player.hpp">
+      <Filter>Source Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MovementAxis.hpp">
+      <Filter>Source Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\XAxisState.hpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YAxisState.hpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PlayerState.hpp">
+      <Filter>Source Files\Player</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -127,6 +145,9 @@
     <ClCompile Include="src\Block.cpp">
       <Filter>Source Files\Grid</Filter>
     </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\icon.png">
@@ -139,6 +160,9 @@
       <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="resources\WaterBlock.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="resources\Player.png">
       <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>
