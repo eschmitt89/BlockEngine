@@ -11,7 +11,7 @@
 
 enum PlayerState
 {
-	Standing,
+	Idle,
 	TryGrab,
 	OnLadder,
 	OnLedge

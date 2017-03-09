@@ -7,6 +7,8 @@
 //
 
 #include "Player.hpp"
+#include "ResourceManager.hpp"
+#include <sstream>
 
 Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
 	:PhysicsObject(texture, position, size)
@@ -15,10 +17,14 @@ Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f s
 	elasticity = 0;
 
 	jumpPower = 450;
-	movementSpeed = 175;
+	movementSpeed = 150;
 	climbSpeed = 150;
 	movementAxis = MovementNone;
-	playerState = Standing;
+	playerState = Idle;
+
+	debugText = sf::Text("debug", *ResourceManager::GetInstance().GetFont("font"));
+	debugText.setFillColor(sf::Color::Red);
+	debugText.setOrigin(sf::Vector2f(-30, 30));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -36,14 +42,7 @@ void Player::Update(float dt)
 
 	velocity.x = movementAxis * movementSpeed;
 
-	if (playerState == OnLadder)
-	{
-		acceleration = sf::Vector2f();
-	}
-	else
-	{
-		acceleration = sf::Vector2f(0, gravity);
-	}
+	UpdateDebugText();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -58,39 +57,43 @@ void Player::HandleInput(const sf::RenderWindow & window)
 	{
 		movementAxis = MovementRight;
 	}
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::A) && !sf::Keyboard::isKeyPressed(sf::Keyboard::D) && yAxisState == OnGround)
 	{
 		movementAxis = MovementNone;
 	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
 	{
 		if (yAxisState == OnGround)
 		{
 			Impulse(sf::Vector2f(0, -jumpPower));
 		}
-	    if (yAxisState == InAir && velocity.y > 0)
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
+	{
+		if (yAxisState == InAir && playerState != OnLadder)
 		{
 			playerState = TryGrab;
-		}
-		if (playerState == OnLadder)
-		{
-			velocity.y = -climbSpeed;
 		}
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
 	{
-		if (playerState == OnLadder)
-		{
-			velocity.y = climbSpeed;
-		}
+
 	}
-	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::W) && !sf::Keyboard::isKeyPressed(sf::Keyboard::S))
+	if (!sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 	{
-		if (playerState == OnLadder)
+		if (playerState == TryGrab)
 		{
-			velocity.y = 0;
+			playerState = Idle;
 		}
 	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Player::Draw(sf::RenderWindow & window)
+{
+	Object::Draw(window);
+	window.draw(debugText);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -125,4 +128,56 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 void Player::CollideWith(PhysicsObject * physicsObject)
 {
 
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Player::UpdateDebugText()
+{
+	stringstream ss;
+
+	switch (xAxisState)
+	{
+	case OnWallLeft:
+		ss << "wall left \n";
+		break;
+	case NotOnWall:
+		ss << "no wall \n";
+		break;
+	case OnWallRight:
+		ss << "wall right \n";
+		break;
+	default:
+		break;
+	}
+
+	switch(yAxisState)
+	{
+		case OnCeiling:
+			ss << "on ceiling \n";
+			break;
+		case InAir:
+			ss << "in air \n";
+			break;
+		case OnGround:
+			ss << "on ground \n";
+			break;
+		default:
+			break;
+	}
+
+	switch (playerState)
+	{
+		case TryGrab:
+			ss << "grabbing \n";
+			break;
+		case OnLadder:
+			ss << "on ladder \n";
+			break;
+		default:
+			break;
+	}
+
+	debugText.setString(ss.str());
+	debugText.setPosition(position);
 }

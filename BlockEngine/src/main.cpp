@@ -6,7 +6,7 @@
 int main(int, char const**)
 {
     // Create the main window
-    sf::RenderWindow window(sf::VideoMode(800, 600), "BlockEngine");
+    sf::RenderWindow window(sf::VideoMode(960, 540), "BlockEngine");
 
     // Set the Icon
     sf::Image icon;

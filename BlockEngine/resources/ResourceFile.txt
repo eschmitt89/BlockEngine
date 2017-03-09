@@ -37,5 +37,5 @@ $SOUNDS
 $FONTS
 #####################################
 
-sansation
+font
 sansation.ttf

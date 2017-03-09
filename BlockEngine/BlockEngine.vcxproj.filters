@@ -42,6 +42,9 @@
     <Filter Include="Source Files\Player">
       <UniqueIdentifier>{f73dd760-c664-485a-bb00-ce5c95dfe2da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Event Manager">
+      <UniqueIdentifier>{55dd62e8-aaf8-4c6c-b555-800e5391c286}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -104,6 +107,9 @@
     <ClInclude Include="src\PlayerState.hpp">
       <Filter>Source Files\Player</Filter>
     </ClInclude>
+    <ClInclude Include="src\EventManager.hpp">
+      <Filter>Source Files\Event Manager</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -147,6 +153,9 @@
     </ClCompile>
     <ClCompile Include="src\Player.cpp">
       <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EventManager.cpp">
+      <Filter>Source Files\Event Manager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

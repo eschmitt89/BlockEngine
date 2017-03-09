@@ -23,6 +23,7 @@ public:
     
 	void Update(float dt);
 	void HandleInput(const sf::RenderWindow& window);
+	void Draw(sf::RenderWindow& window);
 
 	void ResolveBlockCollisionX(Block block, float dt);
 	void ResolveBlockCollisionY(Block block, float dt);
@@ -34,6 +35,9 @@ private:
 	float climbSpeed;
 	MovementAxis movementAxis;
 	PlayerState playerState;
+
+	sf::Text debugText;
+	void UpdateDebugText();
 };
 
 #endif /* Player_hpp */
