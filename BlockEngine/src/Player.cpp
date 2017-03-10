@@ -23,6 +23,8 @@ Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f s
 	climbSpeed = 150;
 	playerState = Idle;
 
+	jumpKeyHeld = false;
+
 	debugText = sf::Text("debug", *ResourceManager::GetInstance().GetFont("font"));
 	debugText.setFillColor(sf::Color::Red);
 	debugText.setOrigin(sf::Vector2f(-30, 30));
@@ -57,14 +59,14 @@ void Player::HandleInput(const sf::RenderWindow & window)
 {
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveLeft))
 	{
-		if (playerState == Idle)
+		if (playerState != OnLadder)
 		{
 			movementAxis.x = XAxisLeft;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
 	{
-		if (playerState == Idle)
+		if (playerState != OnLadder)
 		{
 			movementAxis.x = XAxisRight;
 		}
@@ -119,13 +121,18 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			Jump();
 		}
-		if (playerState == OnLadder)
+		if (playerState == OnLadder && !jumpKeyHeld)
 		{
 			playerState = Idle;
 			velocity.y = 0;
 			GravityOn();
 			Jump();
 		}
+		jumpKeyHeld = true;
+	}
+	if (EventManager::GetInstance().IsKeyReleased(KeyBindings::Jump))
+	{
+		jumpKeyHeld = false;
 	}
 }
 
@@ -157,7 +164,7 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 	}
 	else if (block.GetType() == BlockType::Ladder || block.GetType() == BlockType::LadderTop || block.GetType() == BlockType::LadderBottom)
 	{
-		if (playerState == TryGrab)
+		if (playerState == TryGrab  && velocity.y >= 0)
 		{
 			if (abs(GetCenter().x - block.GetCenter().x) < 16)
 			{
@@ -262,6 +269,11 @@ void Player::UpdateDebugText()
 			break;
 		default:
 			break;
+	}
+
+	if (jumpKeyHeld)
+	{
+		ss << "jump pressed \n";
 	}
 
 	debugText.setString(ss.str());

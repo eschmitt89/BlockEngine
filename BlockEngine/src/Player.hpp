@@ -37,6 +37,8 @@ private:
 	MovementAxis movementAxis;
 	PlayerState playerState;
 
+	bool jumpKeyHeld;
+
 	void Jump();
 	void GravityOn();
 	void GravityOff();
