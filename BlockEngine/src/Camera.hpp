@@ -21,6 +21,7 @@ public:
 	void Update(float dt);
 
 	void Move(float offsetX, float offsetY);
+	void SetCenter(sf::Vector2f center);
 
 	sf::View GetView();
     

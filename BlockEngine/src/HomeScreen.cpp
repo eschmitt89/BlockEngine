@@ -83,6 +83,7 @@ void HomeScreen::Update(float dt)
 {
 	camera->Update(dt);
 	physicsManager->Update(dt);
+	camera->SetCenter(player->GetCenter());
 
 	fpsText.setString(GetFpsString(dt));
 }

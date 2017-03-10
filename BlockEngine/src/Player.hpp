@@ -10,7 +10,8 @@
 #define Player_hpp
 
 #include "PhysicsObject.hpp"
-#include "MovementAxis.hpp"
+#include "XMovementAxis.hpp"
+#include "YMovementAxis.hpp"
 #include "PlayerState.hpp"
 
 using namespace std;
@@ -33,7 +34,8 @@ private:
 	float jumpPower;
 	float movementSpeed;
 	float climbSpeed;
-	MovementAxis movementAxis;
+	XMovementAxis xMovementAxis;
+	YMovementAxis yMovementAxis;
 	PlayerState playerState;
 
 	sf::Text debugText;

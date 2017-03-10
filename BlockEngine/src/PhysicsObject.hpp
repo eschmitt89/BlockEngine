@@ -40,6 +40,8 @@ public:
 
 	typedef void(*ResolveBlockCollision)(PhysicsObject* physicsObject, Block block, float dt);
 
+	ResolveBlockCollision res;
+
 protected:
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;

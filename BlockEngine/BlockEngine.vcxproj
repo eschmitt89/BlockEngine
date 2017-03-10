@@ -177,7 +177,7 @@
     <ClInclude Include="src\EventManager.hpp" />
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
-    <ClInclude Include="src\MovementAxis.hpp" />
+    <ClInclude Include="src\XMovementAxis.hpp" />
     <ClInclude Include="src\Object.hpp" />
     <ClInclude Include="src\OutputManager.hpp" />
     <ClInclude Include="src\PhysicsManager.hpp" />
@@ -191,6 +191,7 @@
     <ClInclude Include="src\Utilities.hpp" />
     <ClInclude Include="src\XAxisState.hpp" />
     <ClInclude Include="src\YAxisState.hpp" />
+    <ClInclude Include="src\YMovementAxis.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AbstractScreen.cpp" />

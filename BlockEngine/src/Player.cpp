@@ -20,7 +20,8 @@ Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f s
 	jumpPower = 450;
 	movementSpeed = 150;
 	climbSpeed = 150;
-	movementAxis = MovementNone;
+	xMovementAxis = XMovementNone;
+	yMovementAxis = YMovementNone;
 	playerState = Idle;
 
 	debugText = sf::Text("debug", *ResourceManager::GetInstance().GetFont("font"));
@@ -41,7 +42,12 @@ void Player::Update(float dt)
 {
 	PhysicsObject::Update(dt);
 
-	velocity.x = movementAxis * movementSpeed;
+	velocity.x = xMovementAxis * movementSpeed;
+
+	if (playerState == OnLadder)
+	{
+		velocity.y = yMovementAxis * movementSpeed;
+	}
 
 	UpdateDebugText();
 }
@@ -54,19 +60,26 @@ void Player::HandleInput(const sf::RenderWindow & window)
 	{
 		if (playerState != OnLadder)
 		{
-			movementAxis = MovementLeft;
+			xMovementAxis = XMovementLeft;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::D))
 	{
 		if (playerState != OnLadder)
 		{
-			movementAxis = MovementRight;
+			xMovementAxis = XMovementRight;
 		}
 	}
-	if (!EventManager::GetInstance().IsKeyPressed(sf::Keyboard::A) && !EventManager::GetInstance().IsKeyPressed(sf::Keyboard::D) && yAxisState == OnGround)
+	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::A) && EventManager::GetInstance().IsKeyPressed(sf::Keyboard::D))
 	{
-		movementAxis = MovementNone;
+		xMovementAxis = XMovementNone;
+	}
+	if (!EventManager::GetInstance().IsKeyPressed(sf::Keyboard::A) && !EventManager::GetInstance().IsKeyPressed(sf::Keyboard::D))
+	{
+		if (yAxisState == OnGround)
+		{
+			xMovementAxis = XMovementNone;
+		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::W))
 	{
@@ -76,7 +89,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		}
 		if (playerState == OnLadder)
 		{
-			velocity.y = -movementSpeed;
+			yMovementAxis = YMovementUp;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::W))
@@ -87,21 +100,21 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		}
 		if (playerState == OnLadder)
 		{
-			velocity.y = 0;
+			yMovementAxis = YMovementNone;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::S))
 	{
 		if (playerState == OnLadder)
 		{
-			velocity.y = movementSpeed;
+			yMovementAxis = YMovementDown;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::S))
 	{
 		if (playerState == OnLadder)
 		{
-			velocity.y = 0;
+			yMovementAxis = YMovementNone;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::Space))
@@ -116,7 +129,6 @@ void Player::HandleInput(const sf::RenderWindow & window)
 			velocity = sf::Vector2f();
 			acceleration = sf::Vector2f(0, gravity);
 			Impulse(sf::Vector2f(0, -jumpPower));
-			
 		}
 	}
 }
@@ -154,7 +166,7 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 			playerState = OnLadder;
 			velocity = sf::Vector2f();
 			acceleration = sf::Vector2f();
-			movementAxis = MovementNone;
+			xMovementAxis = XMovementNone;
 		}
 		if (playerState == OnLadder)
 		{
