@@ -8,7 +8,6 @@
 
 #include "PhysicsObject.hpp"
 
-
 PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
 	: Object(texture, position, size)
 {
@@ -19,8 +18,8 @@ PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, 
 	elasticity = 0.5;
 	mass = 1;
 
-	xAxisState = XAxisState::NotOnWall;
-	yAxisState = YAxisState::InAir;
+	horizontalState = NotOnWall;
+	verticalState = InAir;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -41,7 +40,7 @@ void PhysicsObject::Update(float dt)
 
 void PhysicsObject::UpdateX(float dt)
 {
-	xAxisState = XAxisState::NotOnWall;
+	horizontalState = NotOnWall;
 
 	velocity.x += acceleration.x * dt;
 	position.x += velocity.x * dt;
@@ -51,7 +50,7 @@ void PhysicsObject::UpdateX(float dt)
 
 void PhysicsObject::UpdateY(float dt)
 {
-	yAxisState = YAxisState::InAir;
+	verticalState = InAir;
 
 	velocity.y += acceleration.y * dt;
 	position.y += velocity.y * dt;
@@ -93,13 +92,13 @@ void PhysicsObject::ResolveBlockCollisionX(Block block, float dt)
 	{
 		// Moving left
 		position.x = block.GetPosition().x + block.GetSize().x;
-		xAxisState = XAxisState::OnWallLeft;
+		horizontalState = OnWallLeft;
 	}
 	else
 	{
 		// Moving right
 		position.x = block.GetPosition().x - size.x;
-		xAxisState = XAxisState::OnWallRight;
+		horizontalState = OnWallRight;
 	}
 
 	velocity.x *= -elasticity;
@@ -114,13 +113,13 @@ void PhysicsObject::ResolveBlockCollisionY(Block block, float dt)
 	{
 		// Moving up
 		position.y = block.GetPosition().y + block.GetSize().y;
-		yAxisState = YAxisState::OnCeiling;
+		verticalState = OnCeiling;
 	}
 	else
 	{
 		// Moving down
 		position.y = block.GetPosition().y - size.y;
-		yAxisState = YAxisState::OnGround;
+		verticalState = OnGround;
 	}
 
 	velocity.x *= pow(1 - friction.x, dt);

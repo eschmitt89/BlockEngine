@@ -51,10 +51,19 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	{
 		grid->SetBlockType(GetMousePosition(window), BlockType::Empty);
 	}
-	else if (sf::Mouse::isButtonPressed(sf::Mouse::Middle))
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad8))
+	{
+		grid->SetBlockType(GetMousePosition(window), BlockType::LadderTop);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad5))
 	{
 		grid->SetBlockType(GetMousePosition(window), BlockType::Ladder);
 	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2))
+	{
+		grid->SetBlockType(GetMousePosition(window), BlockType::LadderBottom);
+	}
+	
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 	{

@@ -50,6 +50,19 @@ float inline DotProduct(sf::Vector2f vector1, sf::Vector2f vector2)
 
 ////////////////////////////////////////////////////////////////////////
 
+float inline Distance(sf::Vector2f position1, sf::Vector2f position2)
+{
+	return sqrt(((position2.x - position1.x)*(position2.x - position1.x)) + ((position2.y - position1.y)*(position2.y - position1.y)));
+}
+
+////////////////////////////////////////////////////////////////////////
+
+float inline AbsoluteDistance(sf::Vector2f position1, sf::Vector2f position2)
+{
+	return abs(Distance(position1, position2));
+}
+
+////////////////////////////////////////////////////////////////////////
 struct Vector4i 
 {
 	int x1;

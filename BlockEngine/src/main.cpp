@@ -40,8 +40,8 @@ int main(int, char const**)
         sf::Event event;
         while (window.pollEvent(event))
         {
-            // Close window: exit
-            if (event.type == sf::Event::Closed) {
+            // Close window or escape pressed: exit
+            if (event.type == sf::Event::Closed || (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Escape)) {
                 window.close();
             }
 

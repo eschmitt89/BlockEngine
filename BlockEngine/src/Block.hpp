@@ -23,13 +23,12 @@ public:
 	BlockType GetType();
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetSize();
-	sf::FloatRect GetGlobalBounds();
+	sf::Vector2f GetCenter();
 
 private:
 	BlockType type;
 	sf::Vector2f position;
 	sf::Vector2f size;
-	sf::FloatRect globalBounds;
 };
 
 #endif /* Block_hpp */

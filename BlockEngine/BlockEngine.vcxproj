@@ -177,7 +177,8 @@
     <ClInclude Include="src\EventManager.hpp" />
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
-    <ClInclude Include="src\XMovementAxis.hpp" />
+    <ClInclude Include="src\KeyBindings.hpp" />
+    <ClInclude Include="src\MovementAxis.hpp" />
     <ClInclude Include="src\Object.hpp" />
     <ClInclude Include="src\OutputManager.hpp" />
     <ClInclude Include="src\PhysicsManager.hpp" />
@@ -189,9 +190,8 @@
     <ClInclude Include="src\ResourcePath.hpp" />
     <ClInclude Include="src\ScreenManager.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
-    <ClInclude Include="src\XAxisState.hpp" />
-    <ClInclude Include="src\YAxisState.hpp" />
-    <ClInclude Include="src\YMovementAxis.hpp" />
+    <ClInclude Include="src\HorizontalState.hpp" />
+    <ClInclude Include="src\VerticalState.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AbstractScreen.cpp" />
@@ -201,6 +201,7 @@
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\HomeScreen.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MovementAxis.cpp" />
     <ClCompile Include="src\Object.cpp" />
     <ClCompile Include="src\PhysicsManager.cpp" />
     <ClCompile Include="src\PhysicsObject.cpp" />

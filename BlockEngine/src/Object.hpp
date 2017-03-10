@@ -20,7 +20,6 @@ public:
 	virtual void Update(float dt);
 	virtual void Draw(sf::RenderWindow& window);
 
-	sf::FloatRect GetGlobalBounds();
 	sf::Vector2f GetPosition();
 	sf::Vector2f GetSize();
 	sf::Vector2f GetCenter();

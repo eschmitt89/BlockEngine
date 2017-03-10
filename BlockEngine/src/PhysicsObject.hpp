@@ -11,8 +11,8 @@
 
 #include "Object.hpp"
 #include "Block.hpp"
-#include "XAxisState.hpp"
-#include "YAxisState.hpp"
+#include "HorizontalState.hpp"
+#include "VerticalState.hpp"
 
 class PhysicsObject : public Object
 {
@@ -51,8 +51,8 @@ protected:
 
 	float gravity;
 
-	XAxisState xAxisState;
-	YAxisState yAxisState;
+	HorizontalState horizontalState;
+	VerticalState verticalState;
 };
 
 #endif /* PhysicsObject_hpp */

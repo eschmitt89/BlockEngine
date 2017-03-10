@@ -95,23 +95,23 @@
     <ClInclude Include="src\Player.hpp">
       <Filter>Source Files\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\XAxisState.hpp">
-      <Filter>Source Files\Physics Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="src\YAxisState.hpp">
-      <Filter>Source Files\Physics Manager</Filter>
-    </ClInclude>
     <ClInclude Include="src\PlayerState.hpp">
       <Filter>Source Files\Player</Filter>
     </ClInclude>
     <ClInclude Include="src\EventManager.hpp">
       <Filter>Source Files\Event Manager</Filter>
     </ClInclude>
-    <ClInclude Include="src\XMovementAxis.hpp">
+    <ClInclude Include="src\MovementAxis.hpp">
       <Filter>Source Files\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\YMovementAxis.hpp">
+    <ClInclude Include="src\KeyBindings.hpp">
       <Filter>Source Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HorizontalState.hpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\VerticalState.hpp">
+      <Filter>Source Files\Physics Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -159,6 +159,9 @@
     </ClCompile>
     <ClCompile Include="src\EventManager.cpp">
       <Filter>Source Files\Event Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MovementAxis.cpp">
+      <Filter>Source Files\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

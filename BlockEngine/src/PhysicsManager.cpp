@@ -122,7 +122,7 @@ void PhysicsManager::HandlePhysicsObjectCollisions(int physicsObjectIndex, Colli
 					{
 						PhysicsObject* otherPhysicsObject = physicsObjects[(*collisionMap)[blockKey][i]];
 
-						if (physicsObject->GetGlobalBounds().intersects(otherPhysicsObject->GetGlobalBounds()))
+						if (Intersect(physicsObject->GetPosition(), physicsObject->GetSize(), otherPhysicsObject->GetPosition(), otherPhysicsObject->GetSize()))
 						{
 							physicsObject->CollideWith(otherPhysicsObject);
 							otherPhysicsObject->CollideWith(physicsObject);

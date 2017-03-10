@@ -15,6 +15,8 @@ enum BlockType
 	Solid = '1',
 	Liquid = '2',
 	Ladder = '3',
+	LadderTop = '4',
+	LadderBottom = '5',
 };
 
 #endif /* BlockType_hpp */

@@ -38,13 +38,6 @@ void Object::Draw(sf::RenderWindow & window)
 
 ////////////////////////////////////////////////////////////////////////
 
-sf::FloatRect Object::GetGlobalBounds()
-{
-	return sprite.getGlobalBounds();
-}
-
-////////////////////////////////////////////////////////////////////////
-
 sf::Vector2f Object::GetPosition()
 {
 	return position;
