@@ -51,6 +51,7 @@ void Grid::Draw(sf::RenderWindow &window, Camera* camera)
 			if (IsValidNonEmptyBlockIndex(column, row))
 			{
 				block.setPosition(GetBlockPosition(column, row));
+				block.setFillColor(sf::Color::White);
 
 				switch (blocks[column][row])
 				{
@@ -68,6 +69,9 @@ void Grid::Draw(sf::RenderWindow &window, Camera* camera)
 						break;
 					case Corner:
 						block.setOutlineColor(sf::Color::Magenta);
+						break;
+					case Platform:
+						block.setFillColor(sf::Color::Magenta);
 						break;
 				}
 

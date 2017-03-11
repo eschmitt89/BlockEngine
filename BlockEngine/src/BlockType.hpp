@@ -18,6 +18,7 @@ enum BlockType
 	LadderTop = '4',
 	LadderBottom = '5',
 	Corner = '6',
+	Platform = '7'
 };
 
 #endif /* BlockType_hpp */

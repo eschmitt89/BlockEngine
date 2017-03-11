@@ -67,6 +67,10 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	{
 		grid->SetBlockType(GetMousePosition(window), BlockType::Corner);
 	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad7))
+	{
+		grid->SetBlockType(GetMousePosition(window), BlockType::Platform);
+	}
 	
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))

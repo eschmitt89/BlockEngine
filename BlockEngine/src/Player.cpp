@@ -50,6 +50,11 @@ void Player::Update(float dt)
 		velocity.y = movementAxis.y * movementSpeed;
 	}
 
+	if (playerState == TryGrabLedge && verticalState != InAir)
+	{
+		playerState = Idle;
+	}
+
 	UpdateDebugText();
 }
 
@@ -130,12 +135,23 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			movementAxis.y = YAxisNone;
 		}
+		if (playerState == TryDropThroughPlatform)
+		{
+			playerState = Idle;
+		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::Jump))
 	{
 		if (verticalState == OnGround)
 		{
-			Jump();
+			if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveDown))
+			{
+				playerState = TryDropThroughPlatform;
+			}
+			else
+			{
+				Jump();
+			}
 		}
 		else if (playerState == OnLedge)
 		{
@@ -156,6 +172,11 @@ void Player::HandleInput(const sf::RenderWindow & window)
 	if (EventManager::GetInstance().IsKeyReleased(KeyBindings::Jump))
 	{
 		jumpKeyHeld = false;
+
+		if (playerState == TryDropThroughPlatform)
+		{
+			playerState = Idle;
+		}
 	}
 }
 
@@ -226,6 +247,16 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 				{
 					position.y = block.GetPosition().y;
 				}
+			}
+		}
+	}
+	else if (block.GetType() == BlockType::Platform)
+	{
+		if (playerState != TryDropThroughPlatform)
+		{
+			if (velocity.y > 0 && (position.y + size.y) - block.GetPosition().y < 4 )
+			{
+				PhysicsObject::ResolveBlockCollisionY(block, dt);
 			}
 		}
 	}
@@ -308,6 +339,9 @@ void Player::UpdateDebugText()
 			break;
 		case OnLedge:
 			ss << "on ledge \n";
+			break;
+		case TryDropThroughPlatform:
+			ss << "dropping \n";
 			break;
 		default:
 			break;
