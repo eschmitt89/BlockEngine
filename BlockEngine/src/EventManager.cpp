@@ -19,6 +19,9 @@ void EventManager::HandleEvent(sf::Event event)
 {
 	switch (event.type)
 	{
+		case sf::Event::KeyPressed:
+			keysPressed.insert(event.key.code);
+			break;
 		case sf::Event::KeyReleased:
 			keysReleased.insert(event.key.code);
 			break;
@@ -34,11 +37,17 @@ void EventManager::HandleEvent(sf::Event event)
 
 void EventManager::ClearEvents()
 {
+	keysPressed.clear();
 	keysReleased.clear();
 	buttonsReleased.clear();
 }
 
 ////////////////////////////////////////////////////////////////////////
+
+bool EventManager::IsKeyJustPressed(sf::Keyboard::Key key)
+{
+	return false;
+}
 
 bool EventManager::IsKeyPressed(sf::Keyboard::Key key)
 {

@@ -27,6 +27,7 @@ public:
 	void HandleEvent(sf::Event event);
 	void ClearEvents();
 
+	bool IsKeyJustPressed(sf::Keyboard::Key key);
 	bool IsKeyPressed(sf::Keyboard::Key key);
 	bool IsKeyReleased(sf::Keyboard::Key key);
 
@@ -38,6 +39,7 @@ private:
 	EventManager(EventManager const &);
 	void operator = (EventManager const &);
 
+	set<sf::Keyboard::Key> keysPressed;
 	set<sf::Keyboard::Key> keysReleased;
 	set<sf::Mouse::Button> buttonsReleased;
 };

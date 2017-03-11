@@ -59,14 +59,14 @@ void Player::HandleInput(const sf::RenderWindow & window)
 {
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveLeft))
 	{
-		if (playerState != OnLadder)
+		if (playerState != OnLadder && playerState != OnLedge)
 		{
 			movementAxis.x = XAxisLeft;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
 	{
-		if (playerState != OnLadder)
+		if (playerState != OnLadder && playerState != OnLedge)
 		{
 			movementAxis.x = XAxisRight;
 		}
@@ -121,7 +121,14 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			Jump();
 		}
-		if (playerState == OnLadder && !jumpKeyHeld)
+		else if (playerState == OnLedge)
+		{
+			playerState = Idle;
+			velocity.y = 0;
+			GravityOn();
+			Jump();
+		}
+		else if (playerState == OnLadder && !jumpKeyHeld)
 		{
 			playerState = Idle;
 			velocity.y = 0;
@@ -148,9 +155,22 @@ void Player::Draw(sf::RenderWindow & window)
 
 void Player::ResolveBlockCollisionX(Block block, float dt)
 {
-	if (block.GetType() == BlockType::Solid)
+	if (block.GetType() == BlockType::Solid || block.GetType() == BlockType::Corner)
 	{
 		PhysicsObject::ResolveBlockCollisionX(block, dt);
+	}
+    if (block.GetType() == Corner)
+	{
+		if (playerState == TryGrab && velocity.y >= 0)
+		{
+			if (abs(position.y - block.GetPosition().y) < 8)
+			{
+				GravityOff();
+				playerState = OnLedge;
+				velocity = sf::Vector2f();
+				position.y = block.GetPosition().y;
+			}
+		}
 	}
 }
 
@@ -158,15 +178,15 @@ void Player::ResolveBlockCollisionX(Block block, float dt)
 
 void Player::ResolveBlockCollisionY(Block block, float dt)
 {
-	if (block.GetType() == BlockType::Solid)
+	if (block.GetType() == BlockType::Solid || block.GetType() == BlockType::Corner)
 	{
 		PhysicsObject::ResolveBlockCollisionY(block, dt);
 	}
 	else if (block.GetType() == BlockType::Ladder || block.GetType() == BlockType::LadderTop || block.GetType() == BlockType::LadderBottom)
 	{
-		if (playerState == TryGrab  && velocity.y >= 0)
+		if (playerState == TryGrab && velocity.y >= 0)
 		{
-			if (abs(GetCenter().x - block.GetCenter().x) < 16)
+			if (abs(GetCenter().x - block.GetCenter().x) < 8)
 			{
 				GravityOff();
 				playerState = OnLadder;
@@ -266,6 +286,9 @@ void Player::UpdateDebugText()
 			break;
 		case OnLadder:
 			ss << "on ladder \n";
+			break;
+		case OnLedge:
+			ss << "on ledge \n";
 			break;
 		default:
 			break;

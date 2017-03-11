@@ -66,6 +66,9 @@ void Grid::Draw(sf::RenderWindow &window, Camera* camera)
 					case LadderBottom:
 						block.setOutlineColor(sf::Color::Yellow);
 						break;
+					case Corner:
+						block.setOutlineColor(sf::Color::Magenta);
+						break;
 				}
 
 				window.draw(block);
