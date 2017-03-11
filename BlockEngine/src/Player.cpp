@@ -63,6 +63,10 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			movementAxis.x = XAxisLeft;
 		}
+		if (playerState == Idle && verticalState == InAir)
+		{
+			playerState = TryGrabLedge;
+		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
 	{
@@ -70,20 +74,32 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			movementAxis.x = XAxisRight;
 		}
+		if (playerState == Idle && verticalState == InAir)
+		{
+			playerState = TryGrabLedge;
+		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveLeft) && EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
 	{
 		movementAxis.x = XAxisNone;
+		if (playerState == TryGrabLedge)
+		{
+			playerState = Idle;
+		}
 	}
 	if (!EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveLeft) && !EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
 	{
 		movementAxis.x = XAxisNone;
+		if (playerState == TryGrabLedge)
+		{
+			playerState = Idle;
+		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveUp))
 	{
 		if (playerState == Idle)
 		{
-			playerState = TryGrab;
+			playerState = TryGrabLadder;
 		}
 		if (playerState == OnLadder)
 		{
@@ -92,7 +108,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 	}
 	if (EventManager::GetInstance().IsKeyReleased(KeyBindings::MoveUp))
 	{
-		if (playerState == TryGrab)
+		if (playerState == TryGrabLadder)
 		{
 			playerState = Idle;
 		}
@@ -161,7 +177,7 @@ void Player::ResolveBlockCollisionX(Block block, float dt)
 	}
     if (block.GetType() == Corner)
 	{
-		if (playerState == TryGrab && velocity.y >= 0)
+		if (playerState == TryGrabLedge && velocity.y >= 0)
 		{
 			if (abs(position.y - block.GetPosition().y) < 8)
 			{
@@ -184,7 +200,7 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 	}
 	else if (block.GetType() == BlockType::Ladder || block.GetType() == BlockType::LadderTop || block.GetType() == BlockType::LadderBottom)
 	{
-		if (playerState == TryGrab && velocity.y >= 0)
+		if (playerState == TryGrabLadder && velocity.y >= 0)
 		{
 			if (abs(GetCenter().x - block.GetCenter().x) < 8)
 			{
@@ -281,11 +297,14 @@ void Player::UpdateDebugText()
 
 	switch (playerState)
 	{
-		case TryGrab:
-			ss << "grabbing \n";
+		case TryGrabLadder:
+			ss << "grabbing ladder \n";
 			break;
 		case OnLadder:
 			ss << "on ladder \n";
+			break;
+		case TryGrabLedge:
+			ss << "grabbing ledge \n";
 			break;
 		case OnLedge:
 			ss << "on ledge \n";

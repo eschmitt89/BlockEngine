@@ -12,8 +12,9 @@
 enum PlayerState
 {
 	Idle,
-	TryGrab,
+	TryGrabLadder,
 	OnLadder,
+	TryGrabLedge,
 	OnLedge
 };
 
