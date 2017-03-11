@@ -135,7 +135,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			movementAxis.y = YAxisNone;
 		}
-		if (playerState == TryDropThroughPlatform)
+		if (playerState == TryDrop || playerState == Dropped)
 		{
 			playerState = Idle;
 		}
@@ -146,7 +146,10 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveDown))
 			{
-				playerState = TryDropThroughPlatform;
+				if (playerState != Dropped)
+				{
+					playerState = TryDrop;
+				}
 			}
 			else
 			{
@@ -173,7 +176,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 	{
 		jumpKeyHeld = false;
 
-		if (playerState == TryDropThroughPlatform)
+		if (playerState == TryDrop || playerState == Dropped)
 		{
 			playerState = Idle;
 		}
@@ -252,7 +255,14 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 	}
 	else if (block.GetType() == BlockType::Platform)
 	{
-		if (playerState != TryDropThroughPlatform)
+		if (playerState == TryDrop)
+		{
+			if (GetCenter().y > block.GetCenter().y)
+			{
+				playerState = Dropped;
+			}
+		}
+		else 
 		{
 			if (velocity.y > 0 && (position.y + size.y) - block.GetPosition().y < 4 )
 			{
@@ -340,8 +350,11 @@ void Player::UpdateDebugText()
 		case OnLedge:
 			ss << "on ledge \n";
 			break;
-		case TryDropThroughPlatform:
-			ss << "dropping \n";
+		case TryDrop:
+			ss << "try drop \n";
+			break;
+		case Dropped:
+			ss << "dropped \n";
 			break;
 		default:
 			break;

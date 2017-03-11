@@ -16,7 +16,8 @@ enum PlayerState
 	OnLadder,
 	TryGrabLedge,
 	OnLedge,
-	TryDropThroughPlatform,
+	TryDrop,
+	Dropped,
 };
 
 #endif /* PlayerState_hpp */
