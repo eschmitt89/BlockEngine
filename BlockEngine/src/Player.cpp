@@ -45,7 +45,7 @@ void Player::Update(float dt)
 
 	velocity.x = movementAxis.x * movementSpeed;
 
-	if (playerState == OnLadder)
+	if (playerState == OnLadder || playerState == InLiquid)
 	{
 		velocity.y = movementAxis.y * movementSpeed;
 	}
@@ -106,7 +106,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			playerState = TryGrabLadder;
 		}
-		if (playerState == OnLadder)
+		if (playerState == OnLadder || playerState == InLiquid)
 		{
 			movementAxis.y = YAxisUp;
 		}
@@ -117,21 +117,21 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			playerState = Idle;
 		}
-		if (playerState == OnLadder)
+		if (playerState == OnLadder || playerState == InLiquid)
 		{
 			movementAxis.y = YAxisNone;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveDown))
 	{
-		if (playerState == OnLadder)
+		if (playerState == OnLadder || playerState == InLiquid)
 		{
 			movementAxis.y = YAxisDown;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyReleased(KeyBindings::MoveDown))
 	{
-		if (playerState == OnLadder)
+		if (playerState == OnLadder || playerState == InLiquid)
 		{
 			movementAxis.y = YAxisNone;
 		}
@@ -164,6 +164,13 @@ void Player::HandleInput(const sf::RenderWindow & window)
 			Jump();
 		}
 		else if (playerState == OnLadder && !jumpKeyHeld)
+		{
+			playerState = Idle;
+			velocity.y = 0;
+			GravityOn();
+			Jump();
+		}
+		else if (playerState == InLiquid)
 		{
 			playerState = Idle;
 			velocity.y = 0;
@@ -270,6 +277,18 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 			}
 		}
 	}
+	else if (block.GetType() == BlockType::Liquid)
+	{
+		playerState = InLiquid;
+		GravityOff();
+	}
+	else if (block.GetType() == BlockType::LiquidTop)
+	{
+		if (position.y < block.GetPosition().y && velocity.y < 0 && acceleration.y == 0)
+		{
+			position.y = block.GetPosition().y;
+		}
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -355,6 +374,9 @@ void Player::UpdateDebugText()
 			break;
 		case Dropped:
 			ss << "dropped \n";
+			break;
+		case InLiquid:
+			ss << "in liquid \n";
 			break;
 		default:
 			break;

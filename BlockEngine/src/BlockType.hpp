@@ -14,11 +14,12 @@ enum BlockType
 	Empty = '0',
 	Solid = '1',
 	Liquid = '2',
-	Ladder = '3',
-	LadderTop = '4',
-	LadderBottom = '5',
-	Corner = '6',
-	Platform = '7'
+	LiquidTop = '3',
+	Ladder = '4',
+	LadderTop = '5',
+	LadderBottom = '6',
+	Corner = '7',
+	Platform = '8'
 };
 
 #endif /* BlockType_hpp */

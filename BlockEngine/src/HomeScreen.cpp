@@ -12,7 +12,7 @@
 
 HomeScreen::HomeScreen()
 {
-	grid = new Grid(200, 100, 32, 32);
+	grid = new Grid("gridSave.png", 32, 32);
 	camera = new Camera(sf::Vector2f(480,0), sf::Vector2f(960,540));
 	player = new Player(ResourceManager::GetInstance().GetTexture("player"), sf::Vector2f(100,-100), sf::Vector2f(32, 32));
 	physicsManager = new PhysicsManager(grid);
@@ -28,7 +28,6 @@ HomeScreen::~HomeScreen()
 {
 	delete grid;
 	delete camera;
-	delete player;
 	delete physicsManager;
 }
 
@@ -70,6 +69,14 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad7))
 	{
 		grid->SetBlockType(GetMousePosition(window), BlockType::Platform);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
+	{
+		grid->SetBlockType(GetMousePosition(window), BlockType::Liquid);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3))
+	{
+		grid->SetBlockType(GetMousePosition(window), BlockType::LiquidTop);
 	}
 	
 

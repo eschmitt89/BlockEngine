@@ -18,6 +18,7 @@ enum PlayerState
 	OnLedge,
 	TryDrop,
 	Dropped,
+	InLiquid,
 };
 
 #endif /* PlayerState_hpp */

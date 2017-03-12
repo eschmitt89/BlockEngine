@@ -15,7 +15,7 @@ class Object
 {
 public:
 	Object(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size);
-    ~Object();
+    virtual ~Object();
 
 	virtual void Update(float dt);
 	virtual void Draw(sf::RenderWindow& window);

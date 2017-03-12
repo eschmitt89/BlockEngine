@@ -17,7 +17,7 @@ class AbstractScreen
 {
 public:
     AbstractScreen();
-    ~AbstractScreen();
+    virtual ~AbstractScreen();
     virtual bool DoesHandleInput();
     virtual void HandleInput(const sf::RenderWindow& window);
     virtual bool DoesUpdate();

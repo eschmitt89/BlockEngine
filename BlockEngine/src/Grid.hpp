@@ -21,6 +21,7 @@ class Grid
 {
 public:
     Grid(int columns, int rows, int blockWidth, int blockHeight);
+	Grid(string fileName, int blockWidth, int blockHeight);
     ~Grid();
     
     void Draw(sf::RenderWindow& window, Camera* camera);
@@ -41,6 +42,11 @@ private:
     vector<vector<BlockType>> blocks;
 	sf::Vector2i dimensions;
 	sf::Vector2f blockSize;
+
+	void Save(string fileName);
+
+	sf::Color BlockTypeToColor(BlockType blockType);
+	BlockType ColorToBlockType(sf::Color color);
 
 };
 
