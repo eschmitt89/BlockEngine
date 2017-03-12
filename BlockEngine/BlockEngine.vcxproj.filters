@@ -113,6 +113,9 @@
     <ClInclude Include="src\MovementState.hpp">
       <Filter>Source Files\Player</Filter>
     </ClInclude>
+    <ClInclude Include="src\GridGenerator.hpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -162,6 +165,9 @@
     </ClCompile>
     <ClCompile Include="src\MovementAxis.cpp">
       <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GridGenerator.cpp">
+      <Filter>Source Files\Grid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

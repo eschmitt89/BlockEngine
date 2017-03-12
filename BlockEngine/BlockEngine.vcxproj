@@ -176,6 +176,7 @@
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\EventManager.hpp" />
     <ClInclude Include="src\Grid.hpp" />
+    <ClInclude Include="src\GridGenerator.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
     <ClInclude Include="src\KeyBindings.hpp" />
     <ClInclude Include="src\MovementAxis.hpp" />
@@ -199,6 +200,7 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\Grid.cpp" />
+    <ClCompile Include="src\GridGenerator.cpp" />
     <ClCompile Include="src\HomeScreen.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MovementAxis.cpp" />
