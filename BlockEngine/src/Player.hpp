@@ -10,9 +10,9 @@
 #define Player_hpp
 
 #include "PhysicsObject.hpp"
-#include "MovementAxis.hpp"
 #include "KeyBindings.hpp"
-#include "PlayerState.hpp"
+#include "MovementAxis.hpp"
+#include "MovementState.hpp"
 
 using namespace std;
 
@@ -35,7 +35,7 @@ private:
 	float movementSpeed;
 	float climbSpeed;
 	MovementAxis movementAxis;
-	PlayerState playerState;
+	MovementState movementState;
 
 	bool jumpKeyHeld;
 

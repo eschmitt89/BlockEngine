@@ -184,7 +184,7 @@
     <ClInclude Include="src\PhysicsManager.hpp" />
     <ClInclude Include="src\PhysicsObject.hpp" />
     <ClInclude Include="src\Player.hpp" />
-    <ClInclude Include="src\PlayerState.hpp" />
+    <ClInclude Include="src\MovementState.hpp" />
     <ClInclude Include="src\ResourceLoader.hpp" />
     <ClInclude Include="src\ResourceManager.hpp" />
     <ClInclude Include="src\ResourcePath.hpp" />

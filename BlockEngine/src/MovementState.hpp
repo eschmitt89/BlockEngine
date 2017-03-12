@@ -1,17 +1,17 @@
 //
-//  PlayerState.hpp
+//  MovementState.hpp
 //  BlockEngine
 //
 //  Created by Eric Schmitt on 3/2/17.
 //  Copyright © 2017 Eric Schmitt. All rights reserved.
 //
 
-#ifndef PlayerState_hpp
-#define PlayerState_hpp
+#ifndef MovementState_hpp
+#define MovementState_hpp
 
-enum PlayerState
+enum MovementState
 {
-	Idle,
+	MovementStateNone,
 	TryGrabLadder,
 	OnLadder,
 	TryGrabLedge,
@@ -21,4 +21,4 @@ enum PlayerState
 	InLiquid,
 };
 
-#endif /* PlayerState_hpp */
+#endif /* MovementState_hpp */
