@@ -116,6 +116,12 @@
     <ClInclude Include="src\GridGenerator.hpp">
       <Filter>Source Files\Grid</Filter>
     </ClInclude>
+    <ClInclude Include="src\Room.hpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="src\BlockNeighbors.hpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -167,6 +173,9 @@
       <Filter>Source Files\Player</Filter>
     </ClCompile>
     <ClCompile Include="src\GridGenerator.cpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Room.cpp">
       <Filter>Source Files\Grid</Filter>
     </ClCompile>
   </ItemGroup>

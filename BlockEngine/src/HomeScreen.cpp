@@ -7,12 +7,14 @@
 //
 
 #include "HomeScreen.hpp"
+#include "GridGenerator.hpp"
 #include "ResourceManager.hpp"
 #include <sstream>
 
 HomeScreen::HomeScreen()
 {
-	grid = new Grid("gridSave.png", 32, 32);
+	GridGenerator gridGenerator;
+	grid = new Grid(32, 32, 32, 32);//new Grid("gridSave.png", 32, 32); // gridGenerator.Generate(50, 50, 32, 32, 10);
 	camera = new Camera(sf::Vector2f(480,0), sf::Vector2f(960,540));
 	player = new Player(ResourceManager::GetInstance().GetTexture("player"), sf::Vector2f(100,-100), sf::Vector2f(32, 32));
 	physicsManager = new PhysicsManager(grid);
@@ -79,6 +81,7 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 		grid->SetBlockType(GetMousePosition(window), BlockType::LiquidTop);
 	}
 	
+	
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 	{
@@ -107,7 +110,7 @@ void HomeScreen::Update(float dt)
 {
 	camera->Update(dt);
 	physicsManager->Update(dt);
-	camera->SetCenter(player->GetCenter());
+	//camera->SetCenter(player->GetCenter());
 
 	fpsText.setString(GetFpsString(dt));
 }

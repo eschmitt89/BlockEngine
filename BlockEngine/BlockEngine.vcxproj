@@ -172,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp" />
     <ClInclude Include="src\Block.hpp" />
+    <ClInclude Include="src\BlockNeighbors.hpp" />
     <ClInclude Include="src\BlockType.hpp" />
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\EventManager.hpp" />
@@ -189,6 +190,7 @@
     <ClInclude Include="src\ResourceLoader.hpp" />
     <ClInclude Include="src\ResourceManager.hpp" />
     <ClInclude Include="src\ResourcePath.hpp" />
+    <ClInclude Include="src\Room.hpp" />
     <ClInclude Include="src\ScreenManager.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
     <ClInclude Include="src\HorizontalState.hpp" />
@@ -211,6 +213,7 @@
     <ClCompile Include="src\ResourceLoader.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\ResourcePath.cpp" />
+    <ClCompile Include="src\Room.cpp" />
     <ClCompile Include="src\ScreenManager.cpp" />
   </ItemGroup>
   <ItemGroup>

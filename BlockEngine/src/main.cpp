@@ -27,6 +27,19 @@ int main(int, char const**)
 	sf::Clock clock;
     sf::Time dt;
 
+	for (int i = 0; i < 1000; i++)
+	{
+		int x = Random(0, 100);
+		if (x == 0)
+		{
+			int y = 0;
+		}
+		else if (x == 100)
+		{
+			int y = 0;
+		}
+	}
+
     // Start the game loop
     while (window.isOpen())
     {

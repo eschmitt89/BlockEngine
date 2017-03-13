@@ -63,6 +63,15 @@ float inline AbsoluteDistance(sf::Vector2f position1, sf::Vector2f position2)
 }
 
 ////////////////////////////////////////////////////////////////////////
+
+int inline Random(int min, int max)
+{
+	int diff = max - min + 1;
+
+	return (rand() % diff) + min;
+}
+
+////////////////////////////////////////////////////////////////////////
 struct Vector4i 
 {
 	int x1;

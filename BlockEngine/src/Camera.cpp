@@ -11,7 +11,7 @@
 Camera::Camera(sf::Vector2f center, sf::Vector2f size)
 {
 	this->view = sf::View(center, size);
-	this->moveSpeed = 100;
+	this->moveSpeed = 200;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -51,6 +51,14 @@ void Camera::HandleInput(const sf::RenderWindow & window)
 	{
 		moveAxis.y = 0;
 	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Dash))
+	{
+		Zoom(1.001f);
+	}
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Equal))
+	{
+		Zoom(0.999f);
+	}
 }
 
 void Camera::Update(float dt)
@@ -70,6 +78,13 @@ void Camera::Move(float offsetX, float offsetY)
 void Camera::SetCenter(sf::Vector2f center)
 {
 	view.setCenter(center);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Camera::Zoom(float factor)
+{
+	view.zoom(factor);
 }
 
 ////////////////////////////////////////////////////////////////////////

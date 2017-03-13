@@ -10,6 +10,11 @@
 #define GridGenerator_hpp
 
 #include "Grid.hpp"
+#include "Room.hpp"
+#include <vector>
+
+#define RoomMinSize 4
+#define RoomMaxSize 16
 
 using namespace std;
 
@@ -19,10 +24,16 @@ public:
 	GridGenerator();
     ~GridGenerator();
     
-	Grid* Generate();
+	Grid* Generate(int columns, int rows, int blockWidth, int blockHeight, int numberOfRooms);
 
 private:
-    
+	vector<Room> rooms;
+
+	void SpawnRooms(Grid* grid, int numberOfRooms, int maxAttempts);
+	Room GenerateRoom(Grid* grid);
+	bool RoomCollision(Room room);
+
+	
 
 };
 

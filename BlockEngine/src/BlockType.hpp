@@ -11,6 +11,7 @@
 
 enum BlockType
 {
+	NoBlock = 'x',
 	Empty = '0',
 	Solid = '1',
 	Liquid = '2',

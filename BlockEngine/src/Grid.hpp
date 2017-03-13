@@ -11,6 +11,7 @@
 
 #include <SFML/Graphics.hpp>
 #include "Block.hpp"
+#include "BlockNeighbors.hpp"
 #include "Camera.hpp"
 #include "Utilities.hpp"
 #include <vector>
@@ -25,6 +26,8 @@ public:
     ~Grid();
     
     void Draw(sf::RenderWindow& window, Camera* camera);
+
+	sf::Vector2i GetDimensions();
     
 	Block GetBlock(int column, int row);
 	int GetBlockKey(int column, int row);
@@ -33,6 +36,7 @@ public:
 	Vector4i GetBlockIndicies(sf::Vector2f position, sf::Vector2f size);
 
 	void SetBlockType(sf::Vector2f position, BlockType blockType);
+	void SetBlockType(sf::Vector2f position, sf::Vector2f size, BlockType blockType);
 
 	bool IsValidBlockIndex(int column, int row);
 	bool IsValidBlockIndex(sf::Vector2i blockIndex);
@@ -47,6 +51,10 @@ private:
 
 	sf::Color BlockTypeToColor(BlockType blockType);
 	BlockType ColorToBlockType(sf::Color color);
+
+	void MazeFill();
+	BlockNeighbors GetNeighbors(int column, int row);
+
 
 };
 

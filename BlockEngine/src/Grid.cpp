@@ -25,6 +25,8 @@ Grid::Grid(int columns, int rows, int blockWidth, int blockHeight)
         
         blocks.push_back(blockColumn);
     }
+
+	MazeFill();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -114,6 +116,13 @@ void Grid::Draw(sf::RenderWindow &window, Camera* camera)
 
 ////////////////////////////////////////////////////////////////////////
 
+sf::Vector2i Grid::GetDimensions()
+{
+	return dimensions;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 Block Grid::GetBlock(int column, int row)
 {
 	if (IsValidBlockIndex(column, row))
@@ -159,6 +168,24 @@ void Grid::SetBlockType(sf::Vector2f position, BlockType blockType)
 	if (IsValidBlockIndex(blockIndex))
 	{
 		blocks[blockIndex.x][blockIndex.y] = blockType;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Grid::SetBlockType(sf::Vector2f position, sf::Vector2f size, BlockType blockType)
+{
+	Vector4i collidedBlocks = GetBlockIndicies(position, size);
+
+	for (int column = collidedBlocks.x1; column <= collidedBlocks.x2; column++)
+	{
+		for (int row = collidedBlocks.y1; row <= collidedBlocks.y2; row++)
+		{
+			if (IsValidBlockIndex(column, row))
+			{
+				blocks[column][row] = blockType;
+			}
+		}
 	}
 }
 
@@ -282,6 +309,123 @@ BlockType Grid::ColorToBlockType(sf::Color color)
 	}
 
 	return BlockType::Empty;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Grid::MazeFill()
+{
+	//int column = Random(1, dimensions.x - 1);
+	//int row = Random(1, dimensions.y - 1);
+
+	//blocks[column][row] = BlockType::Empty;
+
+	//BlockNeighbors neighbors = GetNeighbors(column, row);
+
+	//for (int i = 0; i < 5000; i++)
+	//{
+	//	int direction = Random(0, 3);
+
+	//	switch (direction)
+	//	{
+	//		case 0:
+	//			//Left
+	//			if (IsValidNonEmptyBlockIndex(column - 1, row) && column - 1 > 0)
+	//			{
+	//				neighbors = GetNeighbors(column - 1, row);
+
+	//				if (neighbors.Top != Empty && neighbors.TopLeft != Empty && neighbors.Left != Empty && neighbors.BottomLeft != Empty && neighbors.Bottom != Empty)
+	//				{
+	//					column -= 1;
+	//					blocks[column][row] = BlockType::Empty;
+	//				}
+	//			}
+	//			break;
+	//		case 1:
+	//			//Up
+	//			if (IsValidNonEmptyBlockIndex(column, row - 1) && row - 1 > 0)
+	//			{
+	//				neighbors = GetNeighbors(column, row - 1);
+
+	//				if (neighbors.Left != Empty && neighbors.TopLeft != Empty && neighbors.Top != Empty && neighbors.TopRight != Empty && neighbors.Right != Empty)
+	//				{
+	//					row -= 1;
+	//					blocks[column][row] = BlockType::Empty;
+	//				}
+	//			}
+	//			break;
+	//		case 2:
+	//			//Right
+	//			if (IsValidNonEmptyBlockIndex(column + 1, row) && column + 1 < dimensions.x - 1)
+	//			{
+	//				neighbors = GetNeighbors(column + 1, row);
+
+	//				if (neighbors.Top != Empty && neighbors.TopRight != Empty && neighbors.Right != Empty && neighbors.BottomRight != Empty && neighbors.Bottom != Empty)
+	//				{
+	//					column += 1;
+	//					blocks[column][row] = BlockType::Empty;
+	//				}
+	//			}
+	//			break;
+	//		case 3:
+	//			//Down
+	//			if (IsValidNonEmptyBlockIndex(column, row + 1) && row + 1 < dimensions.y - 1)
+	//			{
+	//				neighbors = GetNeighbors(column, row + 1);
+
+	//				if (neighbors.Left != Empty && neighbors.BottomLeft != Empty && neighbors.Bottom != Empty && neighbors.BottomRight != Empty && neighbors.Right != Empty)
+	//				{
+	//					row += 1;
+	//					blocks[column][row] = BlockType::Empty;
+	//				}
+	//			}
+	//			break;
+	//		default:
+	//			break;
+	//	}
+	//}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+BlockNeighbors Grid::GetNeighbors(int column, int row)
+{
+	BlockNeighbors neighbors;
+
+	if (IsValidBlockIndex(column - 1, row - 1))
+	{
+		neighbors.TopLeft = blocks[column - 1][row - 1];
+	}
+	if (IsValidBlockIndex(column, row - 1))
+	{
+		neighbors.Top = blocks[column][row - 1];
+	}
+	if (IsValidBlockIndex(column + 1, row - 1))
+	{
+		neighbors.TopRight = blocks[column + 1][row - 1];
+	}
+	if (IsValidBlockIndex(column - 1, row))
+	{
+		neighbors.Left = blocks[column - 1][row];
+	}
+	if (IsValidBlockIndex(column + 1, row))
+	{
+		neighbors.Right = blocks[column + 1][row];
+	}
+	if (IsValidBlockIndex(column + 1, row - 1))
+	{
+		neighbors.BottomLeft = blocks[column + 1][row - 1];
+	}
+	if (IsValidBlockIndex(column, row + 1))
+	{
+		neighbors.Bottom = blocks[column][row + 1];
+	}
+	if (IsValidBlockIndex(column + 1, row + 1))
+	{
+		neighbors.BottomRight = blocks[column + 1][row + 1];
+	}
+
+	return neighbors;
 }
 
 

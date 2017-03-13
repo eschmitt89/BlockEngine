@@ -22,6 +22,7 @@ public:
 
 	void Move(float offsetX, float offsetY);
 	void SetCenter(sf::Vector2f center);
+	void Zoom(float factor);
 
 	sf::View GetView();
     
