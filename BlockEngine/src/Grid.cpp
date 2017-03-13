@@ -54,6 +54,60 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 ////////////////////////////////////////////////////////////////////////
 
+Grid::Grid(vector<Vector4i> corridors)
+{
+	dimensions = sf::Vector2i(41, 41); 
+	blockSize = sf::Vector2f(32, 32);
+
+	for (int column = 0; column < dimensions.x; column++)
+	{
+		vector<BlockType> blockColumn;
+
+		for (int row = 0; row < dimensions.y; row++)
+		{
+			blockColumn.push_back(BlockType::Solid);
+		}
+
+		blocks.push_back(blockColumn);
+	}
+
+	for (int i = 0; i < corridors.size(); i++)
+	{
+		Vector4i corridor = corridors[i];
+
+		int column = (corridor.x1 * 2) + 1;
+		int row = (corridor.y1 * 2) + 1;
+
+		blocks[column][row] = BlockType::Empty;
+
+		if (corridor.x1 < corridor.x2) // moving right
+		{
+			blocks[column + 1][row] = BlockType::Empty;
+		}
+		else if (corridor.x1 > corridor.x2) // moving left
+		{
+			blocks[column - 1][row] = BlockType::Empty;
+		}
+		else
+		{
+			if (corridor.y1 < corridor.y2) // moving down
+			{
+				blocks[column][row + 1] = BlockType::Empty;
+			}
+			else if ((corridor.y1 > corridor.y2)) // moving up
+			{
+				blocks[column][row - 1] = BlockType::Empty;
+			}
+			else
+			{
+				int x = 0;
+			}
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
 Grid::~Grid()
 {
 	Save("gridSave.png");

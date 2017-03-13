@@ -23,6 +23,7 @@ class Grid
 public:
     Grid(int columns, int rows, int blockWidth, int blockHeight);
 	Grid(string fileName, int blockWidth, int blockHeight);
+	Grid(vector<Vector4i> corridors);
     ~Grid();
     
     void Draw(sf::RenderWindow& window, Camera* camera);

@@ -25,6 +25,7 @@ public:
     ~GridGenerator();
     
 	Grid* Generate(int columns, int rows, int blockWidth, int blockHeight, int numberOfRooms);
+	vector<Vector4i> Generate();
 
 private:
 	vector<Room> rooms;
@@ -32,6 +33,8 @@ private:
 	void SpawnRooms(Grid* grid, int numberOfRooms, int maxAttempts);
 	Room GenerateRoom(Grid* grid);
 	bool RoomCollision(Room room);
+
+	
 
 	
 

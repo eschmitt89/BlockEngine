@@ -79,4 +79,121 @@ bool GridGenerator::RoomCollision(Room room)
 	return false;
 }
 
+vector<Vector4i> GridGenerator::Generate()
+{
+	int width = 20;
+	int height = 20;
+
+	vector<Vector4i> corridors;
+	vector<vector<bool>> cells;
+	vector<sf::Vector2i> visitedCells;
+
+	for (int x = 0; x < width; x++)
+	{
+		vector<bool> column;
+		for (int y = 0; y < height; y++)
+		{
+			column.push_back(false);
+		}
+		cells.push_back(column);
+	}
+
+	sf::Vector2i currentCell = sf::Vector2i(Random(0, width - 1), Random(0, height - 1));
+
+	cells[currentCell.x][currentCell.y] = true;
+
+	visitedCells.push_back(currentCell);
+
+	while (visitedCells.size() < width * height)
+	{
+		bool leftInvalid = false;
+		bool rightInvalid = false;
+		bool upInvalid = false;
+		bool downInvalid = false;
+		bool moved = false;
+
+		while (!moved)
+		{
+			sf::Vector2i nextCell = currentCell;
+
+			int direction = Random(0, 3);
+
+			switch (direction)
+			{
+			case 0: // left
+				if (!leftInvalid)
+				{
+					nextCell.x -= 1;
+					if (nextCell.x >= 0 && !cells[nextCell.x][nextCell.y])
+					{
+						moved = true;
+					}
+					else
+					{
+						leftInvalid = true;
+					}
+				}
+				break;
+			case 1: // right
+				if (!rightInvalid)
+				{
+					nextCell.x += 1;
+					if (nextCell.x < width && !cells[nextCell.x][nextCell.y])
+					{
+						moved = true;
+					}
+					else
+					{
+						rightInvalid = true;
+					}
+				}
+				break;
+			case 2: // up
+				if (!upInvalid)
+				{
+					nextCell.y -= 1;
+					if (nextCell.y >= 0 && !cells[nextCell.x][nextCell.y])
+					{
+						moved = true;
+					}
+					else
+					{
+						upInvalid = true;
+					}
+				}
+				break;
+			case 3: // down
+				if (!downInvalid)
+				{
+					nextCell.y += 1;
+					if (nextCell.y < height && !cells[nextCell.x][nextCell.y])
+					{
+						moved = true;
+					}
+					else
+					{
+						downInvalid = true;
+					}
+				}
+				break;
+			}
+
+			if (moved)
+			{
+				corridors.push_back(Vector4i(currentCell, nextCell));
+				currentCell = nextCell;
+				cells[currentCell.x][currentCell.y] = true;
+				visitedCells.push_back(currentCell);
+			}
+			if (leftInvalid && rightInvalid && upInvalid && downInvalid)
+			{
+				currentCell = visitedCells[Random(0, visitedCells.size() - 1)];
+				moved = true;
+			}
+		}
+	}
+
+	return corridors;
+}
+
 
