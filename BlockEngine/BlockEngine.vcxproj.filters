@@ -45,6 +45,9 @@
     <Filter Include="Source Files\Event Manager">
       <UniqueIdentifier>{55dd62e8-aaf8-4c6c-b555-800e5391c286}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Map Generation">
+      <UniqueIdentifier>{52e1e13e-fc7b-4b49-bcc3-e44387c12cb8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -113,14 +116,17 @@
     <ClInclude Include="src\MovementState.hpp">
       <Filter>Source Files\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\GridGenerator.hpp">
-      <Filter>Source Files\Grid</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Room.hpp">
-      <Filter>Source Files\Grid</Filter>
-    </ClInclude>
     <ClInclude Include="src\BlockNeighbors.hpp">
       <Filter>Source Files\Grid</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GridGenerator.hpp">
+      <Filter>Source Files\Map Generation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Room.hpp">
+      <Filter>Source Files\Map Generation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Cell.hpp">
+      <Filter>Source Files\Map Generation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -173,10 +179,13 @@
       <Filter>Source Files\Player</Filter>
     </ClCompile>
     <ClCompile Include="src\GridGenerator.cpp">
-      <Filter>Source Files\Grid</Filter>
+      <Filter>Source Files\Map Generation</Filter>
     </ClCompile>
     <ClCompile Include="src\Room.cpp">
-      <Filter>Source Files\Grid</Filter>
+      <Filter>Source Files\Map Generation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Cell.cpp">
+      <Filter>Source Files\Map Generation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

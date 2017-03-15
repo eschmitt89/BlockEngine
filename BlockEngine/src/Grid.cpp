@@ -54,9 +54,9 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 ////////////////////////////////////////////////////////////////////////
 
-Grid::Grid(vector<Vector4i> corridors)
+Grid::Grid(vector<vector<Cell>> cells)
 {
-	dimensions = sf::Vector2i(41, 41); 
+	dimensions = sf::Vector2i((cells.size() * 2) + 1, (cells[0].size() * 2) + 1);
 	blockSize = sf::Vector2f(32, 32);
 
 	for (int column = 0; column < dimensions.x; column++)
@@ -71,39 +71,86 @@ Grid::Grid(vector<Vector4i> corridors)
 		blocks.push_back(blockColumn);
 	}
 
-	for (int i = 0; i < corridors.size(); i++)
+	for (int column = 0; column < cells.size(); column++)
 	{
-		Vector4i corridor = corridors[i];
-
-		int column = (corridor.x1 * 2) + 1;
-		int row = (corridor.y1 * 2) + 1;
-
-		blocks[column][row] = BlockType::Empty;
-
-		if (corridor.x1 < corridor.x2) // moving right
+		for (int row = 0; row < cells[column].size(); row++)
 		{
-			blocks[column + 1][row] = BlockType::Empty;
-		}
-		else if (corridor.x1 > corridor.x2) // moving left
-		{
-			blocks[column - 1][row] = BlockType::Empty;
-		}
-		else
-		{
-			if (corridor.y1 < corridor.y2) // moving down
+			Cell currentCell = cells[column][row];
+
+			int blockColumn = (column * 2) + 1;
+			int blockRow = (row * 2) + 1;
+
+			blocks[blockColumn][blockRow] = BlockType::Empty;
+
+			if (currentCell.CorridorLeft)
 			{
-				blocks[column][row + 1] = BlockType::Empty;
+				blocks[blockColumn - 1][blockRow] = BlockType::Empty;
 			}
-			else if ((corridor.y1 > corridor.y2)) // moving up
+			if (currentCell.CorridorRight)
 			{
-				blocks[column][row - 1] = BlockType::Empty;
+				blocks[blockColumn + 1][blockRow] = BlockType::Empty;
 			}
-			else
+			if (currentCell.CorridorUp)
 			{
-				int x = 0;
+				blocks[blockColumn][blockRow - 1] = BlockType::Empty;
+			}
+			if (currentCell.CorridorDown)
+			{
+				blocks[blockColumn][blockRow + 1] = BlockType::Empty;
 			}
 		}
 	}
+
+
+
+	//dimensions = sf::Vector2i(201, 201);
+	//blockSize = sf::Vector2f(32, 32);
+
+	//for (int column = 0; column < dimensions.x; column++)
+	//{
+	//	vector<BlockType> blockColumn;
+
+	//	for (int row = 0; row < dimensions.y; row++)
+	//	{
+	//		blockColumn.push_back(BlockType::Solid);
+	//	}
+
+	//	blocks.push_back(blockColumn);
+	//}
+
+	//for (int i = 0; i < corridors.size(); i++)
+	//{
+	//	Vector4i corridor = corridors[i];
+
+	//	int column = (corridor.x1 * 2) + 1;
+	//	int row = (corridor.y1 * 2) + 1;
+
+	//	blocks[column][row] = BlockType::Empty;
+
+	//	if (corridor.x1 < corridor.x2) // moving right
+	//	{
+	//		blocks[column + 1][row] = BlockType::Empty;
+	//	}
+	//	else if (corridor.x1 > corridor.x2) // moving left
+	//	{
+	//		blocks[column - 1][row] = BlockType::Empty;
+	//	}
+	//	else
+	//	{
+	//		if (corridor.y1 < corridor.y2) // moving down
+	//		{
+	//			blocks[column][row + 1] = BlockType::Empty;
+	//		}
+	//		else if ((corridor.y1 > corridor.y2)) // moving up
+	//		{
+	//			blocks[column][row - 1] = BlockType::Empty;
+	//		}
+	//		else
+	//		{
+	//			int x = 0;
+	//		}
+	//	}
+	//}
 }
 
 ////////////////////////////////////////////////////////////////////////

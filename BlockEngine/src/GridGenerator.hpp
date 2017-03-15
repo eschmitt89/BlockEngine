@@ -9,8 +9,7 @@
 #ifndef GridGenerator_hpp
 #define GridGenerator_hpp
 
-#include "Grid.hpp"
-#include "Room.hpp"
+#include "Cell.hpp"
 #include <vector>
 
 #define RoomMinSize 4
@@ -24,15 +23,18 @@ public:
 	GridGenerator();
     ~GridGenerator();
     
-	Grid* Generate(int columns, int rows, int blockWidth, int blockHeight, int numberOfRooms);
-	vector<Vector4i> Generate();
+	//Grid* Generate(int columns, int rows, int blockWidth, int blockHeight, int numberOfRooms);
+	//vector<Vector4i> Generate2();
+
+	vector<vector<Cell>> Generate();
+	vector<vector<Cell>> CreateCells(int columns, int rows);
 
 private:
-	vector<Room> rooms;
+	//vector<Room> rooms;
 
-	void SpawnRooms(Grid* grid, int numberOfRooms, int maxAttempts);
-	Room GenerateRoom(Grid* grid);
-	bool RoomCollision(Room room);
+	//void SpawnRooms(Grid* grid, int numberOfRooms, int maxAttempts);
+	//Room GenerateRoom(Grid* grid);
+	//bool RoomCollision(Room room);
 
 	
 

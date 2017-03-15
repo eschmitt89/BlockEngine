@@ -175,6 +175,7 @@
     <ClInclude Include="src\BlockNeighbors.hpp" />
     <ClInclude Include="src\BlockType.hpp" />
     <ClInclude Include="src\Camera.hpp" />
+    <ClInclude Include="src\Cell.hpp" />
     <ClInclude Include="src\EventManager.hpp" />
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\GridGenerator.hpp" />
@@ -200,6 +201,7 @@
     <ClCompile Include="src\AbstractScreen.cpp" />
     <ClCompile Include="src\Block.cpp" />
     <ClCompile Include="src\Camera.cpp" />
+    <ClCompile Include="src\Cell.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\GridGenerator.cpp" />
