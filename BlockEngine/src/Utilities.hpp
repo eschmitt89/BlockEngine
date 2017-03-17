@@ -27,6 +27,13 @@ inline bool Intersect(const sf::Vector2f& position1, const sf::Vector2f& size1, 
 
 ////////////////////////////////////////////////////////////////////////
 
+inline bool Intersect(const sf::Vector2i& position1, const sf::Vector2i& size1, const sf::Vector2i& position2, const sf::Vector2i& size2)
+{
+	return (position1.x + size1.x > position2.x && position1.x < position2.x + size2.x && position1.y + size1.y > position2.y && position1.y < position2.y + size2.y);
+}
+
+////////////////////////////////////////////////////////////////////////
+
 float inline VectorLength(const sf::Vector2f vector)
 {
 	return sqrt((vector.x * vector.x) + (vector.y * vector.y));

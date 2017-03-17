@@ -53,11 +53,11 @@ void Camera::HandleInput(const sf::RenderWindow & window)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Dash))
 	{
-		Zoom(1.001f);
+		Zoom(1.01f);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Equal))
 	{
-		Zoom(0.999f);
+		Zoom(0.99f);
 	}
 }
 

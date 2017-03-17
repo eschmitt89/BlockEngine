@@ -54,10 +54,12 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 ////////////////////////////////////////////////////////////////////////
 
-Grid::Grid(vector<vector<Cell>> cells)
+Grid::Grid(GridLayout gridLayout)
 {
-	dimensions = sf::Vector2i((cells.size() * 2) + 1, (cells[0].size() * 2) + 1);
+	dimensions = sf::Vector2i((gridLayout.Dimensions.x * 2) + 1, (gridLayout.Dimensions.y * 2) + 1);
 	blockSize = sf::Vector2f(32, 32);
+
+	int cellSize = 2;
 
 	for (int column = 0; column < dimensions.x; column++)
 	{
@@ -69,16 +71,32 @@ Grid::Grid(vector<vector<Cell>> cells)
 		}
 
 		blocks.push_back(blockColumn);
+	}                                                                                                      
+
+	for (int i = 0; i < gridLayout.Rooms.size(); i++)
+	{
+		sf::Vector2i roomPositionIndex = sf::Vector2i((gridLayout.Rooms[i].Position.x * (cellSize + 1)) + 1, (gridLayout.Rooms[i].Position.y * (cellSize + 1)) + 1);
+		sf::Vector2i roomSizeIndex = sf::Vector2i((gridLayout.Rooms[i].Size.x * (cellSize + 1)) - 1, (gridLayout.Rooms[i].Size.y * (cellSize + 1)) - 1);
+
+		sf::Vector2f roomPosition = sf::Vector2f(roomPositionIndex.x * blockSize.x, roomPositionIndex.y * blockSize.y);
+		sf::Vector2f roomSize = sf::Vector2f(roomSizeIndex.x * blockSize.x - 1, roomSizeIndex.y * blockSize.y - 1);
+
+		SetBlockType(roomPosition, roomSize, BlockType::Empty);
 	}
 
-	for (int column = 0; column < cells.size(); column++)
-	{
-		for (int row = 0; row < cells[column].size(); row++)
-		{
-			Cell currentCell = cells[column][row];
 
-			int blockColumn = (column * 2) + 1;
-			int blockRow = (row * 2) + 1;
+
+	//dimensions = sf::Vector2i((cells.size() * 2) + 1, (cells[0].size() * 2) + 1);
+	//blockSize = sf::Vector2f(32, 32);
+
+	for (int column = 0; column < gridLayout.Corridors.size(); column++)
+	{
+		for (int row = 0; row < gridLayout.Corridors[column].size(); row++)
+		{
+			LayoutCell currentCell = gridLayout.Corridors[column][row];
+
+			int blockColumn = (column * (cellSize + 1)) + 1;
+			int blockRow = (row * (cellSize + 1)) + 1;
 
 			blocks[blockColumn][blockRow] = BlockType::Empty;
 
@@ -100,6 +118,11 @@ Grid::Grid(vector<vector<Cell>> cells)
 			}
 		}
 	}
+
+
+
+
+
 
 
 

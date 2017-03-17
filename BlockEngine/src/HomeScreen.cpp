@@ -7,13 +7,13 @@
 //
 
 #include "HomeScreen.hpp"
-#include "GridGenerator.hpp"
+#include "GridLayoutGenerator.hpp"
 #include "ResourceManager.hpp"
 #include <sstream>
 
 HomeScreen::HomeScreen()
 {
-	GridGenerator gridGenerator;
+	GridLayoutGenerator gridGenerator;
 	//gridGenerator.Generate();
 	grid = new Grid(gridGenerator.Generate());//new Grid(50, 50, 32, 32);//new Grid("gridSave.png", 32, 32); // gridGenerator.Generate(50, 50, 32, 32, 10);
 	camera = new Camera(sf::Vector2f(480,0), sf::Vector2f(960,540));

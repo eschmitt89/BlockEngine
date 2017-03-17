@@ -45,7 +45,7 @@
     <Filter Include="Source Files\Event Manager">
       <UniqueIdentifier>{55dd62e8-aaf8-4c6c-b555-800e5391c286}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Map Generation">
+    <Filter Include="Source Files\Grid Generation">
       <UniqueIdentifier>{52e1e13e-fc7b-4b49-bcc3-e44387c12cb8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -119,14 +119,17 @@
     <ClInclude Include="src\BlockNeighbors.hpp">
       <Filter>Source Files\Grid</Filter>
     </ClInclude>
-    <ClInclude Include="src\GridGenerator.hpp">
-      <Filter>Source Files\Map Generation</Filter>
+    <ClInclude Include="src\GridLayoutGenerator.hpp">
+      <Filter>Source Files\Grid Generation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Room.hpp">
-      <Filter>Source Files\Map Generation</Filter>
+    <ClInclude Include="src\GridLayout.hpp">
+      <Filter>Source Files\Grid Generation</Filter>
     </ClInclude>
-    <ClInclude Include="src\Cell.hpp">
-      <Filter>Source Files\Map Generation</Filter>
+    <ClInclude Include="src\LayoutCell.hpp">
+      <Filter>Source Files\Grid Generation</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LayoutRoom.hpp">
+      <Filter>Source Files\Grid Generation</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -178,14 +181,17 @@
     <ClCompile Include="src\MovementAxis.cpp">
       <Filter>Source Files\Player</Filter>
     </ClCompile>
-    <ClCompile Include="src\GridGenerator.cpp">
-      <Filter>Source Files\Map Generation</Filter>
+    <ClCompile Include="src\GridLayoutGenerator.cpp">
+      <Filter>Source Files\Grid Generation</Filter>
     </ClCompile>
-    <ClCompile Include="src\Room.cpp">
-      <Filter>Source Files\Map Generation</Filter>
+    <ClCompile Include="src\GridLayout.cpp">
+      <Filter>Source Files\Grid Generation</Filter>
     </ClCompile>
-    <ClCompile Include="src\Cell.cpp">
-      <Filter>Source Files\Map Generation</Filter>
+    <ClCompile Include="src\LayoutCell.cpp">
+      <Filter>Source Files\Grid Generation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LayoutRoom.cpp">
+      <Filter>Source Files\Grid Generation</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

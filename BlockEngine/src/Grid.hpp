@@ -14,7 +14,7 @@
 #include "BlockNeighbors.hpp"
 #include "Camera.hpp"
 #include "Utilities.hpp"
-#include "GridGenerator.hpp"
+#include "GridLayoutGenerator.hpp"
 #include <vector>
 
 using namespace std;
@@ -24,7 +24,7 @@ class Grid
 public:
     Grid(int columns, int rows, int blockWidth, int blockHeight);
 	Grid(string fileName, int blockWidth, int blockHeight);
-	Grid(vector<vector<Cell>> cells);
+	Grid(GridLayout gridLayout);
     ~Grid();
     
     void Draw(sf::RenderWindow& window, Camera* camera);
