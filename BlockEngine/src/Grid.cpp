@@ -56,10 +56,10 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 Grid::Grid(GridLayout gridLayout)
 {
-	dimensions = sf::Vector2i((gridLayout.Dimensions.x * 2) + 1, (gridLayout.Dimensions.y * 2) + 1);
-	blockSize = sf::Vector2f(32, 32);
-
 	int cellSize = 2;
+
+	dimensions = sf::Vector2i((gridLayout.Dimensions.x * (cellSize + 1)) + 1, (gridLayout.Dimensions.y * (cellSize + 1)) + 1);
+	blockSize = sf::Vector2f(32, 32);
 
 	for (int column = 0; column < dimensions.x; column++)
 	{

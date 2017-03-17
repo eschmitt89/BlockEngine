@@ -204,8 +204,8 @@ GridLayout GridLayoutGenerator::Generate()
 	vector<vector<bool>> visitedCells;
 	vector<sf::Vector2i> visitedCellIndicies;
 
-	int columns = 20;
-	int rows = 20;
+	int columns = 3;
+	int rows = 3;
 	int numberOfRoomCells = 0;
 	int numberOfCells = columns * rows;
 
@@ -226,12 +226,12 @@ GridLayout GridLayoutGenerator::Generate()
 	}
 
 	// Generate rooms
-	int maxRooms = 20;
+	int maxRooms = 2;
 	int maxRoomPlacementAttemps = maxRooms * 10;
-	int minRoomWidth = 2;
-	int minRoomHeight = 2;
-	int maxRoomWidth = 6;
-	int maxRoomHeight = 6;
+	int minRoomWidth = 1;
+	int minRoomHeight = 1;
+	int maxRoomWidth = 2;
+	int maxRoomHeight = 2;
 
 	for (int i = 0; i < maxRoomPlacementAttemps; i++)
 	{
@@ -280,73 +280,76 @@ GridLayout GridLayoutGenerator::Generate()
 
 	while (visitedCellIndicies.size() < numberOfCells - numberOfRoomCells)
 	{
-		bool validDirectionFound = false;
-		vector<int> validDirections = { 0, 1, 2, 3 };
+		bool moved = false;
+		bool leftInvalid = false;
+		bool rightInvalid = false;
+		bool upInvalid = false;
+		bool downInvalid = false;
 
-		while (!validDirectionFound)
+		while (!moved)
 		{
 			sf::Vector2i nextCell = currentCell;
 
-			int direction = validDirections[Random(0, validDirections.size() - 1)];
+			int direction = Random(0, 3);
 
 			switch (direction)
 			{
 			case 0: // Left
-				nextCell.x -= 1;
-				validDirectionFound = (nextCell.x >= 0 && !visitedCells[nextCell.x][nextCell.y]);
-				if (validDirectionFound)
+				if (!leftInvalid)
 				{
-					cells[currentCell.x][currentCell.y].CorridorLeft = true;
-				}
-				else
-				{
-					validDirections.erase(remove(validDirections.begin(), validDirections.end(), 0));
+					nextCell.x -= 1;
+					leftInvalid = (nextCell.x < 0 || visitedCells[nextCell.x][nextCell.y]);
+					if (!leftInvalid)
+					{
+						moved = true;
+						cells[currentCell.x][currentCell.y].CorridorLeft = true;
+					}
 				}
 				break;
 			case 1: // Right
-				nextCell.x += 1;
-				validDirectionFound = (nextCell.x < columns && !visitedCells[nextCell.x][nextCell.y]);
-				if (validDirectionFound)
+				if (!rightInvalid)
 				{
-					cells[currentCell.x][currentCell.y].CorridorRight = true;
-				}
-				else
-				{
-					validDirections.erase(remove(validDirections.begin(), validDirections.end(), 1));
+					nextCell.x += 1;
+					rightInvalid = (nextCell.x >= columns || visitedCells[nextCell.x][nextCell.y]);
+					if (!rightInvalid)
+					{
+						moved = true;
+						cells[currentCell.x][currentCell.y].CorridorRight = true;
+					}
 				}
 				break;
 			case 2: // Up
-				nextCell.y -= 1;
-				validDirectionFound = (nextCell.y >= 0 && !visitedCells[nextCell.x][nextCell.y]);
-				if (validDirectionFound)
+				if (!upInvalid)
 				{
-					cells[currentCell.x][currentCell.y].CorridorUp = true;
-				}
-				else
-				{
-					validDirections.erase(remove(validDirections.begin(), validDirections.end(), 2));
+					nextCell.y -= 1;
+					upInvalid = (nextCell.y < 0 || visitedCells[nextCell.x][nextCell.y]);
+					if (!upInvalid)
+					{
+						moved = true;
+						cells[currentCell.x][currentCell.y].CorridorUp = true;
+					}
 				}
 				break;
 			case 3: // Down
-				nextCell.y += 1;
-				validDirectionFound = (nextCell.y < rows && !visitedCells[nextCell.x][nextCell.y]);
-				if (validDirectionFound)
+				if (!downInvalid)
 				{
-					cells[currentCell.x][currentCell.y].CorridorDown = true;
-				}
-				else
-				{
-					validDirections.erase(remove(validDirections.begin(), validDirections.end(), 3));
+					nextCell.y += 1;
+					downInvalid = (nextCell.y >= rows || visitedCells[nextCell.x][nextCell.y]);
+					if (!downInvalid)
+					{
+						moved = true;
+						cells[currentCell.x][currentCell.y].CorridorDown = true;
+					}
 				}
 			}
 
-			if (validDirectionFound)
+			if (moved)
 			{
 				currentCell = nextCell;
 				visitedCells[currentCell.x][currentCell.y] = true;
 				visitedCellIndicies.push_back(currentCell);
 			}
-			if (validDirections.size() == 0)
+			if (leftInvalid && rightInvalid && upInvalid && downInvalid)
 			{
 				currentCell = visitedCellIndicies[Random(0, visitedCellIndicies.size() - 1)];
 				break;
