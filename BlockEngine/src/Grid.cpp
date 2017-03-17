@@ -56,7 +56,7 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 Grid::Grid(GridLayout gridLayout)
 {
-	int cellSize = 2;
+	int cellSize = 4;
 
 	dimensions = sf::Vector2i((gridLayout.Dimensions.x * (cellSize + 1)) + 1, (gridLayout.Dimensions.y * (cellSize + 1)) + 1);
 	blockSize = sf::Vector2f(32, 32);
@@ -84,15 +84,17 @@ Grid::Grid(GridLayout gridLayout)
 		SetBlockType(roomPosition, roomSize, BlockType::Empty);
 	}
 
-
-
-	//dimensions = sf::Vector2i((cells.size() * 2) + 1, (cells[0].size() * 2) + 1);
-	//blockSize = sf::Vector2f(32, 32);
+	int realCellSize = cellSize;
 
 	for (int column = 0; column < gridLayout.Corridors.size(); column++)
 	{
 		for (int row = 0; row < gridLayout.Corridors[column].size(); row++)
 		{
+			cellSize = realCellSize;
+
+			int cellAdjustment1 = Random(0, 1);
+			int cellAdjustment2 = Random(0, 1);
+
 			LayoutCell currentCell = gridLayout.Corridors[column][row];
 
 			int blockColumn = (column * (cellSize + 1)) + 1;
@@ -100,21 +102,38 @@ Grid::Grid(GridLayout gridLayout)
 
 			blocks[blockColumn][blockRow] = BlockType::Empty;
 
-			if (currentCell.CorridorLeft)
+			for (int i = 1; i < cellSize - cellAdjustment1; i++)
 			{
-				blocks[blockColumn - 1][blockRow] = BlockType::Empty;
+				blocks[blockColumn + i][blockRow] = BlockType::Empty;
+				blocks[blockColumn][blockRow + i] = BlockType::Empty;
+
+				for (int j = 1; j < cellSize; j++)
+				{
+					blocks[blockColumn + i][blockRow + j] = BlockType::Empty;
+				}
 			}
-			if (currentCell.CorridorRight)
+
+			for (int i = 1; i <= cellSize; i++)
 			{
-				blocks[blockColumn + 1][blockRow] = BlockType::Empty;
-			}
-			if (currentCell.CorridorUp)
-			{
-				blocks[blockColumn][blockRow - 1] = BlockType::Empty;
-			}
-			if (currentCell.CorridorDown)
-			{
-				blocks[blockColumn][blockRow + 1] = BlockType::Empty;
+				for (int j = 0 + cellAdjustment2; j < cellSize; j++)
+				{
+					if (currentCell.CorridorLeft)
+					{
+						blocks[blockColumn - i][blockRow + j] = BlockType::Empty;
+					}
+					if (currentCell.CorridorRight)
+					{
+						blocks[blockColumn + i][blockRow + j] = BlockType::Empty;
+					}
+					if (currentCell.CorridorUp)
+					{
+						blocks[blockColumn + j][blockRow - i] = BlockType::Empty;
+					}
+					if (currentCell.CorridorDown)
+					{
+						blocks[blockColumn + j][blockRow + i] = BlockType::Empty;
+					}
+				}
 			}
 		}
 	}

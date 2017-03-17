@@ -204,8 +204,8 @@ GridLayout GridLayoutGenerator::Generate()
 	vector<vector<bool>> visitedCells;
 	vector<sf::Vector2i> visitedCellIndicies;
 
-	int columns = 3;
-	int rows = 3;
+	int columns = 20;
+	int rows = 20;
 	int numberOfRoomCells = 0;
 	int numberOfCells = columns * rows;
 
@@ -226,12 +226,12 @@ GridLayout GridLayoutGenerator::Generate()
 	}
 
 	// Generate rooms
-	int maxRooms = 2;
+	int maxRooms = 10;
 	int maxRoomPlacementAttemps = maxRooms * 10;
 	int minRoomWidth = 1;
 	int minRoomHeight = 1;
-	int maxRoomWidth = 2;
-	int maxRoomHeight = 2;
+	int maxRoomWidth = 5;
+	int maxRoomHeight = 5;
 
 	for (int i = 0; i < maxRoomPlacementAttemps; i++)
 	{
@@ -351,6 +351,7 @@ GridLayout GridLayoutGenerator::Generate()
 			}
 			if (leftInvalid && rightInvalid && upInvalid && downInvalid)
 			{
+				// TODO this can hang
 				currentCell = visitedCellIndicies[Random(0, visitedCellIndicies.size() - 1)];
 				break;
 			}
