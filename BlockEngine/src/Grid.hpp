@@ -24,8 +24,10 @@ class Grid
 public:
     Grid(int columns, int rows, int blockWidth, int blockHeight);
 	Grid(string fileName, int blockWidth, int blockHeight);
-	Grid(GridLayout gridLayout);
+	Grid(GridLayout gridLayout, int blockWidth, int blockHeight);
     ~Grid();
+
+	void InitializeBlocks(int columns, int rows, int blockWidth, int blockHeight, BlockType blockType);
     
     void Draw(sf::RenderWindow& window, Camera* camera);
 
@@ -54,7 +56,6 @@ private:
 	sf::Color BlockTypeToColor(BlockType blockType);
 	BlockType ColorToBlockType(sf::Color color);
 
-	void MazeFill();
 	BlockNeighbors GetNeighbors(int column, int row);
 
 

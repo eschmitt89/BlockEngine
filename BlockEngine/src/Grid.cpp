@@ -11,22 +11,7 @@
 
 Grid::Grid(int columns, int rows, int blockWidth, int blockHeight)
 {
-	this->dimensions = sf::Vector2i(columns, rows);
-	this->blockSize = sf::Vector2f(blockWidth, blockHeight);
-
-    for (int column = 0; column < columns; column++)
-    {
-        vector<BlockType> blockColumn;
-        
-        for (int row = 0; row < rows; row++)
-        {
-            blockColumn.push_back(BlockType::Solid);
-        }
-        
-        blocks.push_back(blockColumn);
-    }
-
-	MazeFill();
+	InitializeBlocks(columns, rows, blockWidth, blockHeight, BlockType::Solid);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -54,25 +39,17 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 ////////////////////////////////////////////////////////////////////////
 
-Grid::Grid(GridLayout gridLayout)
+Grid::Grid(GridLayout gridLayout, int blockWidth, int blockHeight)
 {
 	int cellSize = 2;
 
-	dimensions = sf::Vector2i((gridLayout.Dimensions.x * (cellSize + 1)) + 1, (gridLayout.Dimensions.y * (cellSize + 1)) + 1);
-	blockSize = sf::Vector2f(32, 32);
+	int columns = (gridLayout.Dimensions.x * (cellSize + 1)) + 1;
+	int rows = (gridLayout.Dimensions.y * (cellSize + 1)) + 1;
 
-	for (int column = 0; column < dimensions.x; column++)
-	{
-		vector<BlockType> blockColumn;
+	// Initialize Blocks
+	InitializeBlocks(columns, rows, blockWidth, blockHeight, BlockType::Solid);
 
-		for (int row = 0; row < dimensions.y; row++)
-		{
-			blockColumn.push_back(BlockType::Solid);
-		}
-
-		blocks.push_back(blockColumn);
-	}                                                                                                      
-
+	// Place rooms
 	for (int i = 0; i < gridLayout.Rooms.size(); i++)
 	{
 		sf::Vector2i roomPositionIndex = sf::Vector2i((gridLayout.Rooms[i].Position.x * (cellSize + 1)) + 1, (gridLayout.Rooms[i].Position.y * (cellSize + 1)) + 1);
@@ -84,14 +61,11 @@ Grid::Grid(GridLayout gridLayout)
 		SetBlockType(roomPosition, roomSize, BlockType::Empty);
 	}
 
-	int realCellSize = cellSize;
-
+	// Place corridors
 	for (int column = 0; column < gridLayout.Corridors.size(); column++)
 	{
 		for (int row = 0; row < gridLayout.Corridors[column].size(); row++)
 		{
-			cellSize = realCellSize;
-
 			int cellAdjustment1 = Random(0, 0);
 			int cellAdjustment2 = Random(0, 0);
 
@@ -132,62 +106,6 @@ Grid::Grid(GridLayout gridLayout)
 			}
 		}
 	}
-
-
-
-
-
-
-
-
-	//dimensions = sf::Vector2i(201, 201);
-	//blockSize = sf::Vector2f(32, 32);
-
-	//for (int column = 0; column < dimensions.x; column++)
-	//{
-	//	vector<BlockType> blockColumn;
-
-	//	for (int row = 0; row < dimensions.y; row++)
-	//	{
-	//		blockColumn.push_back(BlockType::Solid);
-	//	}
-
-	//	blocks.push_back(blockColumn);
-	//}
-
-	//for (int i = 0; i < corridors.size(); i++)
-	//{
-	//	Vector4i corridor = corridors[i];
-
-	//	int column = (corridor.x1 * 2) + 1;
-	//	int row = (corridor.y1 * 2) + 1;
-
-	//	blocks[column][row] = BlockType::Empty;
-
-	//	if (corridor.x1 < corridor.x2) // moving right
-	//	{
-	//		blocks[column + 1][row] = BlockType::Empty;
-	//	}
-	//	else if (corridor.x1 > corridor.x2) // moving left
-	//	{
-	//		blocks[column - 1][row] = BlockType::Empty;
-	//	}
-	//	else
-	//	{
-	//		if (corridor.y1 < corridor.y2) // moving down
-	//		{
-	//			blocks[column][row + 1] = BlockType::Empty;
-	//		}
-	//		else if ((corridor.y1 > corridor.y2)) // moving up
-	//		{
-	//			blocks[column][row - 1] = BlockType::Empty;
-	//		}
-	//		else
-	//		{
-	//			int x = 0;
-	//		}
-	//	}
-	//}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -195,6 +113,26 @@ Grid::Grid(GridLayout gridLayout)
 Grid::~Grid()
 {
 	Save("gridSave.png");
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Grid::InitializeBlocks(int columns, int rows, int blockWidth, int blockHeight, BlockType blockType)
+{
+	dimensions = sf::Vector2i(columns, rows);
+	blockSize = sf::Vector2f(blockWidth, blockHeight);
+
+	for (int column = 0; column < dimensions.x; column++)
+	{
+		vector<BlockType> blockColumn;
+
+		for (int row = 0; row < dimensions.y; row++)
+		{
+			blockColumn.push_back(blockType);
+		}
+
+		blocks.push_back(blockColumn);
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -447,81 +385,6 @@ BlockType Grid::ColorToBlockType(sf::Color color)
 	}
 
 	return BlockType::Empty;
-}
-
-////////////////////////////////////////////////////////////////////////
-
-void Grid::MazeFill()
-{
-	//int column = Random(1, dimensions.x - 1);
-	//int row = Random(1, dimensions.y - 1);
-
-	//blocks[column][row] = BlockType::Empty;
-
-	//BlockNeighbors neighbors = GetNeighbors(column, row);
-
-	//for (int i = 0; i < 5000; i++)
-	//{
-	//	int direction = Random(0, 3);
-
-	//	switch (direction)
-	//	{
-	//		case 0:
-	//			//Left
-	//			if (IsValidNonEmptyBlockIndex(column - 1, row) && column - 1 > 0)
-	//			{
-	//				neighbors = GetNeighbors(column - 1, row);
-
-	//				if (neighbors.Top != Empty && neighbors.TopLeft != Empty && neighbors.Left != Empty && neighbors.BottomLeft != Empty && neighbors.Bottom != Empty)
-	//				{
-	//					column -= 1;
-	//					blocks[column][row] = BlockType::Empty;
-	//				}
-	//			}
-	//			break;
-	//		case 1:
-	//			//Up
-	//			if (IsValidNonEmptyBlockIndex(column, row - 1) && row - 1 > 0)
-	//			{
-	//				neighbors = GetNeighbors(column, row - 1);
-
-	//				if (neighbors.Left != Empty && neighbors.TopLeft != Empty && neighbors.Top != Empty && neighbors.TopRight != Empty && neighbors.Right != Empty)
-	//				{
-	//					row -= 1;
-	//					blocks[column][row] = BlockType::Empty;
-	//				}
-	//			}
-	//			break;
-	//		case 2:
-	//			//Right
-	//			if (IsValidNonEmptyBlockIndex(column + 1, row) && column + 1 < dimensions.x - 1)
-	//			{
-	//				neighbors = GetNeighbors(column + 1, row);
-
-	//				if (neighbors.Top != Empty && neighbors.TopRight != Empty && neighbors.Right != Empty && neighbors.BottomRight != Empty && neighbors.Bottom != Empty)
-	//				{
-	//					column += 1;
-	//					blocks[column][row] = BlockType::Empty;
-	//				}
-	//			}
-	//			break;
-	//		case 3:
-	//			//Down
-	//			if (IsValidNonEmptyBlockIndex(column, row + 1) && row + 1 < dimensions.y - 1)
-	//			{
-	//				neighbors = GetNeighbors(column, row + 1);
-
-	//				if (neighbors.Left != Empty && neighbors.BottomLeft != Empty && neighbors.Bottom != Empty && neighbors.BottomRight != Empty && neighbors.Right != Empty)
-	//				{
-	//					row += 1;
-	//					blocks[column][row] = BlockType::Empty;
-	//				}
-	//			}
-	//			break;
-	//		default:
-	//			break;
-	//	}
-	//}
 }
 
 ////////////////////////////////////////////////////////////////////////

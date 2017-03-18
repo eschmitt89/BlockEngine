@@ -102,6 +102,8 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 	}
 }
 
+////////////////////////////////////////////////////////////////////////
+
 void GridLayoutGenerator::GenerateCorridors()
 {
 	sf::Vector2i currentCell = sf::Vector2i(Random(0, dimensions.x - 1), Random(0, dimensions.y - 1));
