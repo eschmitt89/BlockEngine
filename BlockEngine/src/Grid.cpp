@@ -56,7 +56,7 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 Grid::Grid(GridLayout gridLayout)
 {
-	int cellSize = 4;
+	int cellSize = 2;
 
 	dimensions = sf::Vector2i((gridLayout.Dimensions.x * (cellSize + 1)) + 1, (gridLayout.Dimensions.y * (cellSize + 1)) + 1);
 	blockSize = sf::Vector2f(32, 32);
@@ -92,22 +92,17 @@ Grid::Grid(GridLayout gridLayout)
 		{
 			cellSize = realCellSize;
 
-			int cellAdjustment1 = Random(0, 1);
-			int cellAdjustment2 = Random(0, 1);
+			int cellAdjustment1 = Random(0, 0);
+			int cellAdjustment2 = Random(0, 0);
 
 			LayoutCell currentCell = gridLayout.Corridors[column][row];
 
 			int blockColumn = (column * (cellSize + 1)) + 1;
 			int blockRow = (row * (cellSize + 1)) + 1;
 
-			blocks[blockColumn][blockRow] = BlockType::Empty;
-
-			for (int i = 1; i < cellSize - cellAdjustment1; i++)
+			for (int i = 0; i < cellSize - cellAdjustment1; i++)
 			{
-				blocks[blockColumn + i][blockRow] = BlockType::Empty;
-				blocks[blockColumn][blockRow + i] = BlockType::Empty;
-
-				for (int j = 1; j < cellSize; j++)
+				for (int j = 0; j < cellSize; j++)
 				{
 					blocks[blockColumn + i][blockRow + j] = BlockType::Empty;
 				}

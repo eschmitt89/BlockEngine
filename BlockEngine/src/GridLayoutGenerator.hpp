@@ -21,25 +21,22 @@ class GridLayoutGenerator
 public:
 	GridLayoutGenerator();
     ~GridLayoutGenerator();
-    
-	//Grid* Generate(int columns, int rows, int blockWidth, int blockHeight, int numberOfRooms);
-	//vector<Vector4i> Generate2();
 
-	GridLayout Generate();
-	//vector<vector<GridLayout>> CreateCells(int columns, int rows);
+	GridLayout Generate(int columns, int rows, int maxRooms, int minRoomSize, int maxRoomSize);
 
 private:
-	//vector<Room> rooms;
+	sf::Vector2i dimensions;
+	vector<LayoutRoom> rooms;
+	vector<vector<LayoutCell>> cells;
+	vector<vector<bool>> visitedCells;
+	vector<sf::Vector2i> visitedCellIndicies;
+	int numberOfRoomCells;
 
-	//void SpawnRooms(Grid* grid, int numberOfRooms, int maxAttempts);
-	//Room GenerateRoom(Grid* grid);
-	//bool RoomCollision(Room room);
+	void InitializeCells(int columns, int rows);
 
-	//void InitializeCorridors(int columns, int rows);
-	//void GenerateRooms(int maxNumberOfRooms, int minRoomSize, int maxRoomSize);
-	//void GenerateCorridors();
+	void GenerateRooms(int maxNumberOfRooms, int minRoomSize, int maxRoomSize);
 
-	//bool RoomOverlapsExistingRoom(int column, int row, int width, int height);
+	void GenerateCorridors();
 
 };
 

@@ -29,6 +29,7 @@ public:
 private:
 	sf::View view;
 	float moveSpeed;
+	float zoomSpeed;
 	sf::Vector2i moveAxis;
 };
 

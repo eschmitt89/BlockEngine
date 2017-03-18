@@ -11,7 +11,8 @@
 Camera::Camera(sf::Vector2f center, sf::Vector2f size)
 {
 	this->view = sf::View(center, size);
-	this->moveSpeed = 200;
+	this->moveSpeed = 600;
+	this->zoomSpeed = 0.01f;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -53,11 +54,11 @@ void Camera::HandleInput(const sf::RenderWindow & window)
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Dash))
 	{
-		Zoom(1.01f);
+		Zoom(1 + zoomSpeed);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Equal))
 	{
-		Zoom(0.99f);
+		Zoom(1 - zoomSpeed);
 	}
 }
 
