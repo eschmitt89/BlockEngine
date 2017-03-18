@@ -14,7 +14,7 @@
 HomeScreen::HomeScreen()
 {
 	GridLayoutGenerator gridGenerator;
-	grid = new Grid(gridGenerator.Generate(20,20,10,2,5));
+	grid = new Grid(gridGenerator.Generate(20,20,10,2,5), 32, 32);
 	camera = new Camera(sf::Vector2f(480,0), sf::Vector2f(960,540));
 	player = new Player(ResourceManager::GetInstance().GetTexture("player"), sf::Vector2f(100,-100), sf::Vector2f(32, 32));
 	physicsManager = new PhysicsManager(grid);
