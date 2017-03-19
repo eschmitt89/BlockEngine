@@ -27,7 +27,7 @@ GridLayout GridLayoutGenerator::Generate(int columns, int rows, int maxRooms, in
 {
 	dimensions = sf::Vector2i(columns, rows);
 
-	InitializeCells(columns, rows);
+	InitializeCells();
 
 	GenerateRooms(maxRooms, minRoomSize, maxRoomSize);
 	
@@ -38,14 +38,14 @@ GridLayout GridLayoutGenerator::Generate(int columns, int rows, int maxRooms, in
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridLayoutGenerator::InitializeCells(int columns, int rows)
+void GridLayoutGenerator::InitializeCells()
 {
-	for (int x = 0; x < columns; x++)
+	for (int x = 0; x < dimensions.x; x++)
 	{
 		vector<LayoutCell> cellColumn;
 		vector<bool> visitedCellColumn;
 
-		for (int y = 0; y < rows; y++)
+		for (int y = 0; y < dimensions.y; y++)
 		{
 			cellColumn.push_back(LayoutCell());
 			visitedCellColumn.push_back(false);
@@ -62,6 +62,8 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 {
 	numberOfRoomCells = 0;
 	int maxRoomPlacementAttemps = maxNumberOfRooms * 10;
+	int minDoors = 1;
+	int maxDoors = 4;
 
 	for (int i = 0; i < maxRoomPlacementAttemps; i++)
 	{
@@ -86,18 +88,30 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 			}
 		}
 
+		int doors = 0;
+		int numberOfDoors = Random(minDoors, maxDoors);
+
 		if (!roomOverlapsExistingRoom)
 		{
-			rooms.push_back(room);
-
 			for (int x = room.Position.x; x < room.Position.x + room.Size.x; x++)
 			{
 				for (int y = room.Position.y; y < room.Position.y + room.Size.y; y++)
 				{
+					if (doors < numberOfDoors && (x == room.Position.x || x == room.Position.x + room.Size.x - 1))
+					{
+						if (Random() < 0.3)
+						{
+							room.Doors.push_back(sf::Vector2i(x, y));
+							doors++;
+						}
+					}
+
 					visitedCells[x][y] = true;
 					numberOfRoomCells++;
 				}
 			}
+
+			rooms.push_back(room);
 		}
 	}
 }

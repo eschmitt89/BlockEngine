@@ -10,6 +10,7 @@
 #define LayoutRoom_hpp
 
 #include <SFML/System.hpp>
+#include <vector>
 
 using namespace std;
 
@@ -21,6 +22,7 @@ public:
 
 	sf::Vector2i Position;
 	sf::Vector2i Size;
+	vector<sf::Vector2i> Doors;
 };
 
 #endif /* LayoutRoom_hpp */

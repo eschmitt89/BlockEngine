@@ -58,7 +58,9 @@ private:
 
 	BlockNeighbors GetNeighbors(int column, int row);
 
-
+	int LayoutCellIndexToBlockIndex(int index, int cellSize);
+	sf::Vector2f LayoutCellPositionToBlockPosition(sf::Vector2i position, int cellSize);
+	sf::Vector2f LayoutCellSizeToGridSize(sf::Vector2i size, int cellSize);
 };
 
 #endif /* Grid_hpp */

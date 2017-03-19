@@ -41,7 +41,7 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 Grid::Grid(GridLayout gridLayout, int blockWidth, int blockHeight)
 {
-	int cellSize = 2;
+	int cellSize = 3;
 
 	int columns = (gridLayout.Dimensions.x * (cellSize + 1)) + 1;
 	int rows = (gridLayout.Dimensions.y * (cellSize + 1)) + 1;
@@ -52,11 +52,8 @@ Grid::Grid(GridLayout gridLayout, int blockWidth, int blockHeight)
 	// Place rooms
 	for (int i = 0; i < gridLayout.Rooms.size(); i++)
 	{
-		sf::Vector2i roomPositionIndex = sf::Vector2i((gridLayout.Rooms[i].Position.x * (cellSize + 1)) + 1, (gridLayout.Rooms[i].Position.y * (cellSize + 1)) + 1);
-		sf::Vector2i roomSizeIndex = sf::Vector2i((gridLayout.Rooms[i].Size.x * (cellSize + 1)) - 1, (gridLayout.Rooms[i].Size.y * (cellSize + 1)) - 1);
-
-		sf::Vector2f roomPosition = sf::Vector2f(roomPositionIndex.x * blockSize.x, roomPositionIndex.y * blockSize.y);
-		sf::Vector2f roomSize = sf::Vector2f(roomSizeIndex.x * blockSize.x - 1, roomSizeIndex.y * blockSize.y - 1);
+		sf::Vector2f roomPosition = LayoutCellPositionToBlockPosition(gridLayout.Rooms[i].Position, cellSize); 
+		sf::Vector2f roomSize = LayoutCellSizeToGridSize(gridLayout.Rooms[i].Size, cellSize);
 
 		SetBlockType(roomPosition, roomSize, BlockType::Empty);
 	}
@@ -66,15 +63,12 @@ Grid::Grid(GridLayout gridLayout, int blockWidth, int blockHeight)
 	{
 		for (int row = 0; row < gridLayout.Corridors[column].size(); row++)
 		{
-			int cellAdjustment1 = Random(0, 0);
-			int cellAdjustment2 = Random(0, 0);
-
 			LayoutCell currentCell = gridLayout.Corridors[column][row];
 
-			int blockColumn = (column * (cellSize + 1)) + 1;
-			int blockRow = (row * (cellSize + 1)) + 1;
+			int blockColumn = LayoutCellIndexToBlockIndex(column, cellSize);
+			int blockRow = LayoutCellIndexToBlockIndex(row, cellSize);;
 
-			for (int i = 0; i < cellSize - cellAdjustment1; i++)
+			for (int i = 0; i < cellSize; i++)
 			{
 				for (int j = 0; j < cellSize; j++)
 				{
@@ -84,7 +78,7 @@ Grid::Grid(GridLayout gridLayout, int blockWidth, int blockHeight)
 
 			for (int i = 1; i <= cellSize; i++)
 			{
-				for (int j = 0 + cellAdjustment2; j < cellSize; j++)
+				for (int j = 0; j < cellSize; j++)
 				{
 					if (currentCell.CorridorLeft)
 					{
@@ -427,6 +421,28 @@ BlockNeighbors Grid::GetNeighbors(int column, int row)
 	}
 
 	return neighbors;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+int Grid::LayoutCellIndexToBlockIndex(int index, int cellSize)
+{
+	return (index * (cellSize + 1)) + 1;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+sf::Vector2f Grid::LayoutCellPositionToBlockPosition(sf::Vector2i position, int cellSize)
+{
+	sf::Vector2i gridIndex = sf::Vector2i(LayoutCellIndexToBlockIndex(position.x, cellSize), LayoutCellIndexToBlockIndex(position.y, cellSize));
+	return GetBlockPosition(gridIndex.x, gridIndex.y);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+sf::Vector2f Grid::LayoutCellSizeToGridSize(sf::Vector2i size, int cellSize)
+{
+	return sf::Vector2f(((size.x * (cellSize + 1) - 1) * blockSize.x) - 1, ((size.y * (cellSize + 1) - 1) * blockSize.y) - 1);
 }
 
 

@@ -14,8 +14,6 @@
 #include "LayoutRoom.hpp"
 #include <vector>
 
-#define RoomMinSize 4
-#define RoomMaxSize 16
 
 using namespace std;
 

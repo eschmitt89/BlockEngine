@@ -11,9 +11,6 @@
 
 #include "GridLayout.hpp"
 
-#define RoomMinSize 4
-#define RoomMaxSize 16
-
 using namespace std;
 
 class GridLayoutGenerator
@@ -32,7 +29,7 @@ private:
 	vector<sf::Vector2i> visitedCellIndicies;
 	int numberOfRoomCells;
 
-	void InitializeCells(int columns, int rows);
+	void InitializeCells();
 
 	void GenerateRooms(int maxNumberOfRooms, int minRoomSize, int maxRoomSize);
 
