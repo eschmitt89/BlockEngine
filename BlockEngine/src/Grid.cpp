@@ -383,48 +383,6 @@ BlockType Grid::ColorToBlockType(sf::Color color)
 
 ////////////////////////////////////////////////////////////////////////
 
-BlockNeighbors Grid::GetNeighbors(int column, int row)
-{
-	BlockNeighbors neighbors;
-
-	if (IsValidBlockIndex(column - 1, row - 1))
-	{
-		neighbors.TopLeft = blocks[column - 1][row - 1];
-	}
-	if (IsValidBlockIndex(column, row - 1))
-	{
-		neighbors.Top = blocks[column][row - 1];
-	}
-	if (IsValidBlockIndex(column + 1, row - 1))
-	{
-		neighbors.TopRight = blocks[column + 1][row - 1];
-	}
-	if (IsValidBlockIndex(column - 1, row))
-	{
-		neighbors.Left = blocks[column - 1][row];
-	}
-	if (IsValidBlockIndex(column + 1, row))
-	{
-		neighbors.Right = blocks[column + 1][row];
-	}
-	if (IsValidBlockIndex(column + 1, row - 1))
-	{
-		neighbors.BottomLeft = blocks[column + 1][row - 1];
-	}
-	if (IsValidBlockIndex(column, row + 1))
-	{
-		neighbors.Bottom = blocks[column][row + 1];
-	}
-	if (IsValidBlockIndex(column + 1, row + 1))
-	{
-		neighbors.BottomRight = blocks[column + 1][row + 1];
-	}
-
-	return neighbors;
-}
-
-////////////////////////////////////////////////////////////////////////
-
 int Grid::LayoutNodeIndexToBlockIndex(int index, int nodeSize)
 {
 	return (index * (nodeSize + 1)) + 1;

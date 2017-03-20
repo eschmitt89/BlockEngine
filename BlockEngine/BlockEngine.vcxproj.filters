@@ -116,9 +116,6 @@
     <ClInclude Include="src\MovementState.hpp">
       <Filter>Source Files\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\BlockNeighbors.hpp">
-      <Filter>Source Files\Grid</Filter>
-    </ClInclude>
     <ClInclude Include="src\GridLayoutGenerator.hpp">
       <Filter>Source Files\Grid Generation</Filter>
     </ClInclude>

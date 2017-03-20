@@ -11,7 +11,6 @@
 
 #include <SFML/Graphics.hpp>
 #include "Block.hpp"
-#include "BlockNeighbors.hpp"
 #include "Camera.hpp"
 #include "Utilities.hpp"
 #include "GridLayoutGenerator.hpp"
@@ -55,8 +54,6 @@ private:
 
 	sf::Color BlockTypeToColor(BlockType blockType);
 	BlockType ColorToBlockType(sf::Color color);
-
-	BlockNeighbors GetNeighbors(int column, int row);
 
 	int LayoutNodeIndexToBlockIndex(int index, int nodeSize);
 	sf::Vector2f LayoutNodePositionToBlockPosition(sf::Vector2i position, int nodeSize);
