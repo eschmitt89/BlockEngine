@@ -23,6 +23,11 @@ public:
 	bool CorridorDown;
 	bool CorridorLeft;
 	bool CorridorRight;
+
+	bool UpInvalid;
+	bool DownInvalid;
+	bool LeftInvalid;
+	bool RightInvalid;
 };
 
 #endif /* LayoutNode_hpp */

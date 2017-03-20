@@ -15,6 +15,10 @@ LayoutNode::LayoutNode()
 	CorridorDown = false;
 	CorridorLeft = false;
 	CorridorRight = false;
+	UpInvalid = false;
+	DownInvalid = false;
+	LeftInvalid = false;
+	RightInvalid = false;
 }
 
 ////////////////////////////////////////////////////////////////////////

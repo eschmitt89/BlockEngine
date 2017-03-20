@@ -25,15 +25,15 @@ private:
 	sf::Vector2i dimensions;
 	vector<LayoutRoom> rooms;
 	vector<vector<LayoutNode>> nodes;
-	vector<vector<bool>> visitedNodes;
+	//vector<vector<bool>> visitedNodes;
 	vector<sf::Vector2i> visitedNodeIndicies;
 	int numberOfRoomNodes;
 
-	void InitializeNodes();
+	void InitializeNodes(int columns, int rows);
 
 	void GenerateRooms(int maxNumberOfRooms, int minRoomSize, int maxRoomSize);
 
-	void GenerateCorridors();
+	void GenerateCorridors(int columns, int rows);
 
 };
 

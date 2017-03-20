@@ -63,6 +63,8 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 		SetBlockType(roomPosition, roomSize, BlockType::Empty);
 	}
 
+	vector<sf::Vector2i> verticalNodes;
+
 	// Place corridors
 	for (int column = 0; column < gridLayout.Corridors.size(); column++)
 	{
@@ -90,13 +92,33 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 					if (currentNode.CorridorUp)
 					{
 						blocks[blockColumn + j][blockRow - (i + 1)] = BlockType::Empty;
+						verticalNodes.push_back(sf::Vector2i(column, row));
 					}
 					if (currentNode.CorridorDown)
 					{
 						blocks[blockColumn + j][blockRow + (i + 1)] = BlockType::Empty;
+						verticalNodes.push_back(sf::Vector2i(column, row));
 					}
 				}
 			}
+		}
+	}
+
+	// Place ladders
+	for (int i = 0; i < verticalNodes.size(); i++)
+	{
+		int column = LayoutNodeIndexToBlockIndex(verticalNodes[i].x, nodeSize);
+		int row = LayoutNodeIndexToBlockIndex(verticalNodes[i].y, nodeSize);
+
+		while (blocks[column][row - 1] == BlockType::Empty)
+		{
+			row--;
+		}
+
+		while (blocks[column][row] == BlockType::Empty)
+		{
+			blocks[column][row] = BlockType::Ladder;
+			row++;
 		}
 	}
 }
@@ -243,7 +265,7 @@ void Grid::LoadBlockSprites()
 {
 	blockSprites[BlockType::Solid] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("whiteBlock"));
 	blockSprites[BlockType::Corner] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("whiteBlock"));
-	blockSprites[BlockType::Platform] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("whiteBlock"));
+	blockSprites[BlockType::Platform] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("platformBlock"));
 	blockSprites[BlockType::Ladder] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("ladderBlock"));
 	blockSprites[BlockType::LadderBottom] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("ladderBlock"));
 	blockSprites[BlockType::LadderTop] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("ladderBlock"));
@@ -277,34 +299,24 @@ sf::Color Grid::BlockTypeToColor(BlockType blockType)
 	{
 	case Empty:
 		return sf::Color::Black;
-		break;
 	case Solid:
 		return sf::Color::White;
-		break;
 	case Liquid:
 		return sf::Color::Blue;
-		break;
 	case LiquidTop:
 		return sf::Color(123, 12, 67, 255);
-		break;
 	case Ladder:
 		return sf::Color(185, 122, 87, 255);
-		break;
 	case LadderTop:
 		return sf::Color(90, 56, 37, 255);
-		break;
 	case LadderBottom:
 		return sf::Color(213, 174, 153, 255);
-		break;
 	case Corner:
 		return sf::Color(128, 128, 128, 255);
-		break;
 	case Platform:
 		return sf::Color::Red;
-		break;
 	default:
 		return sf::Color::White;
-		break;
 	}
 }
 

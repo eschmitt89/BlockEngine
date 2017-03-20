@@ -27,32 +27,29 @@ GridLayout GridLayoutGenerator::Generate(int columns, int rows, int maxRooms, in
 {
 	dimensions = sf::Vector2i(columns, rows);
 
-	InitializeNodes();
+	InitializeNodes(columns, rows);
 
 	GenerateRooms(maxRooms, minRoomSize, maxRoomSize);
 	
-	GenerateCorridors();
+	GenerateCorridors(columns, rows);
 
 	return GridLayout(nodes, rooms, dimensions);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridLayoutGenerator::InitializeNodes()
+void GridLayoutGenerator::InitializeNodes(int columns, int rows)
 {
-	for (int x = 0; x < dimensions.x; x++)
+	for (int x = 0; x < columns; x++)
 	{
 		vector<LayoutNode> nodeColumn;
-		vector<bool> visitedNodeColumn;
 
-		for (int y = 0; y < dimensions.y; y++)
+		for (int y = 0; y < rows; y++)
 		{
 			nodeColumn.push_back(LayoutNode());
-			visitedNodeColumn.push_back(false);
 		}
 
 		nodes.push_back(nodeColumn);
-		visitedNodes.push_back(visitedNodeColumn);
 	}
 }
 
@@ -97,7 +94,7 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 			{
 				for (int y = room.Position.y; y < room.Position.y + room.Size.y; y++)
 				{
-					if (doors < numberOfDoors && (x == room.Position.x || x == room.Position.x + room.Size.x - 1))
+					if (doors < numberOfDoors && ((x == room.Position.x && x > 0) || (x == room.Position.x + room.Size.x && x < dimensions.x - 1)))
 					{
 						if (Random() < 0.3)
 						{
@@ -106,7 +103,7 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 						}
 					}
 
-					visitedNodes[x][y] = true;
+					nodes[x][y].Visited = true;
 					numberOfRoomNodes++;
 				}
 			}
@@ -118,94 +115,94 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridLayoutGenerator::GenerateCorridors()
+void GridLayoutGenerator::GenerateCorridors(int columns, int rows)
 {
-	sf::Vector2i currentNode = sf::Vector2i(Random(0, dimensions.x - 1), Random(0, dimensions.y - 1));
+	sf::Vector2i currentNodeIndex = sf::Vector2i(Random(0, columns - 1), Random(0, rows - 1));
 
-	while (visitedNodes[currentNode.x][currentNode.y])
+	while (nodes[currentNodeIndex.x][currentNodeIndex.y].Visited)
 	{
-		currentNode = sf::Vector2i(Random(0, dimensions.x - 1), Random(0, dimensions.y - 1));
+		currentNodeIndex = sf::Vector2i(Random(0, columns - 1), Random(0, rows - 1));
 	}
 
 	int visitedNodeCount = 0;
-	int numberOfNodes = dimensions.x * dimensions.y;
+	int numberOfNodes = columns * rows;
 
 	while (visitedNodeCount < numberOfNodes - numberOfRoomNodes)
 	{
+		LayoutNode currentNode = nodes[currentNodeIndex.x][currentNodeIndex.y];
+
 		bool moved = false;
-		bool leftInvalid = false;
-		bool rightInvalid = false;
-		bool upInvalid = false;
-		bool downInvalid = false;
 
 		while (!moved)
 		{
-			sf::Vector2i nextNode = currentNode;
+			sf::Vector2i nextNodeIndex = currentNodeIndex;
 
 			int direction = Random(0, 3);
 
 			switch (direction)
 			{
 			case 0: // Left
-				if (!leftInvalid)
+				if (!currentNode.LeftInvalid)
 				{
-					nextNode.x -= 1;
-					leftInvalid = (nextNode.x < 0 || visitedNodes[nextNode.x][nextNode.y]);
-					if (!leftInvalid)
+					nextNodeIndex.x -= 1;
+					currentNode.LeftInvalid = (nextNodeIndex.x < 0 || nodes[nextNodeIndex.x][nextNodeIndex.y].Visited);
+					if (!currentNode.LeftInvalid)
 					{
 						moved = true;
-						nodes[currentNode.x][currentNode.y].CorridorLeft = true;
+						currentNode.CorridorLeft = true;
 					}
 				}
 				break;
 			case 1: // Right
-				if (!rightInvalid)
+				if (!currentNode.RightInvalid)
 				{
-					nextNode.x += 1;
-					rightInvalid = (nextNode.x >= dimensions.x || visitedNodes[nextNode.x][nextNode.y]);
-					if (!rightInvalid)
+					nextNodeIndex.x += 1;
+					currentNode.RightInvalid = (nextNodeIndex.x >= columns || nodes[nextNodeIndex.x][nextNodeIndex.y].Visited);
+					if (!currentNode.RightInvalid)
 					{
 						moved = true;
-						nodes[currentNode.x][currentNode.y].CorridorRight = true;
+						currentNode.CorridorRight = true;
 					}
 				}
 				break;
 			case 2: // Up
-				if (!upInvalid)
+				if (!currentNode.UpInvalid)
 				{
-					nextNode.y -= 1;
-					upInvalid = (nextNode.y < 0 || visitedNodes[nextNode.x][nextNode.y]);
-					if (!upInvalid)
+					nextNodeIndex.y -= 1;
+					currentNode.UpInvalid = (nextNodeIndex.y < 0 || nodes[nextNodeIndex.x][nextNodeIndex.y].Visited);
+					if (!currentNode.UpInvalid)
 					{
 						moved = true;
-						nodes[currentNode.x][currentNode.y].CorridorUp = true;
+						currentNode.CorridorUp = true;
 					}
 				}
 				break;
 			case 3: // Down
-				if (!downInvalid)
+				if (!currentNode.DownInvalid)
 				{
-					nextNode.y += 1;
-					downInvalid = (nextNode.y >= dimensions.y || visitedNodes[nextNode.x][nextNode.y]);
-					if (!downInvalid)
+					nextNodeIndex.y += 1;
+					currentNode.DownInvalid = (nextNodeIndex.y >= rows || nodes[nextNodeIndex.x][nextNodeIndex.y].Visited);
+					if (!currentNode.DownInvalid)
 					{
 						moved = true;
-						nodes[currentNode.x][currentNode.y].CorridorDown = true;
+						currentNode.CorridorDown = true;
 					}
 				}
 			}
 
+			nodes[currentNodeIndex.x][currentNodeIndex.y] = currentNode;
+
 			if (moved)
 			{
-				currentNode = nextNode;
-				visitedNodes[currentNode.x][currentNode.y] = true;
-				visitedNodeIndicies.push_back(currentNode);
+				currentNodeIndex = nextNodeIndex;
+				nodes[currentNodeIndex.x][currentNodeIndex.y].Visited = true;
+				visitedNodeIndicies.push_back(currentNodeIndex);
 				visitedNodeCount++;
 			}
-			if (leftInvalid && rightInvalid && upInvalid && downInvalid)
+			if (currentNode.LeftInvalid && currentNode.RightInvalid && currentNode.UpInvalid && currentNode.DownInvalid)
 			{
-				visitedNodeIndicies.erase(remove(visitedNodeIndicies.begin(), visitedNodeIndicies.end(), currentNode), visitedNodeIndicies.end());
-				currentNode = visitedNodeIndicies[Random(0, visitedNodeIndicies.size() - 1)];
+				visitedNodeIndicies.erase(remove(visitedNodeIndicies.begin(), visitedNodeIndicies.end(), currentNodeIndex), visitedNodeIndicies.end());
+ 				currentNodeIndex = visitedNodeIndicies[Random(0, visitedNodeIndicies.size() - 1)];
 				break;
 			}
 		}

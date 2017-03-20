@@ -29,6 +29,9 @@ LadderBlock.png
 waterBlock
 WaterBlock.png
 
+platformBlock
+PlatformBlock.png
+
 #####################################
 $SOUNDS
 #####################################
