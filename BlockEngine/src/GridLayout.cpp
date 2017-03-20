@@ -9,7 +9,7 @@
 #include "GridLayout.hpp"
 
 
-GridLayout::GridLayout(vector<vector<LayoutCell>> corridors, vector<LayoutRoom> rooms, sf::Vector2i dimensions)
+GridLayout::GridLayout(vector<vector<LayoutNode>> corridors, vector<LayoutRoom> rooms, sf::Vector2i dimensions)
 {
 	this->Corridors = corridors;
 	this->Rooms = rooms;

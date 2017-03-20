@@ -1,21 +1,21 @@
 //
-//  LayoutCell.hpp
+//  LayoutNode.hpp
 //  BlockEngine
 //
 //  Created by Eric Schmitt on 3/2/17.
 //  Copyright © 2017 Eric Schmitt. All rights reserved.
 //
 
-#ifndef LayoutCell_hpp
-#define LayoutCell_hpp
+#ifndef LayoutNode_hpp
+#define LayoutNode_hpp
 
 using namespace std;
 
-class LayoutCell
+class LayoutNode
 {
 public:
-	LayoutCell();
-	~LayoutCell();
+	LayoutNode();
+	~LayoutNode();
 
 	bool Visited;
 
@@ -25,4 +25,4 @@ public:
 	bool CorridorRight;
 };
 
-#endif /* LayoutCell_hpp */
+#endif /* LayoutNode_hpp */

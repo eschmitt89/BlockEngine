@@ -24,12 +24,12 @@ public:
 private:
 	sf::Vector2i dimensions;
 	vector<LayoutRoom> rooms;
-	vector<vector<LayoutCell>> cells;
-	vector<vector<bool>> visitedCells;
-	vector<sf::Vector2i> visitedCellIndicies;
-	int numberOfRoomCells;
+	vector<vector<LayoutNode>> nodes;
+	vector<vector<bool>> visitedNodes;
+	vector<sf::Vector2i> visitedNodeIndicies;
+	int numberOfRoomNodes;
 
-	void InitializeCells();
+	void InitializeNodes();
 
 	void GenerateRooms(int maxNumberOfRooms, int minRoomSize, int maxRoomSize);
 

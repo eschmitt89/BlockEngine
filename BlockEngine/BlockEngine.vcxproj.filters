@@ -125,10 +125,10 @@
     <ClInclude Include="src\GridLayout.hpp">
       <Filter>Source Files\Grid Generation</Filter>
     </ClInclude>
-    <ClInclude Include="src\LayoutCell.hpp">
+    <ClInclude Include="src\LayoutRoom.hpp">
       <Filter>Source Files\Grid Generation</Filter>
     </ClInclude>
-    <ClInclude Include="src\LayoutRoom.hpp">
+    <ClInclude Include="src\LayoutNode.hpp">
       <Filter>Source Files\Grid Generation</Filter>
     </ClInclude>
   </ItemGroup>
@@ -187,10 +187,10 @@
     <ClCompile Include="src\GridLayout.cpp">
       <Filter>Source Files\Grid Generation</Filter>
     </ClCompile>
-    <ClCompile Include="src\LayoutCell.cpp">
+    <ClCompile Include="src\LayoutRoom.cpp">
       <Filter>Source Files\Grid Generation</Filter>
     </ClCompile>
-    <ClCompile Include="src\LayoutRoom.cpp">
+    <ClCompile Include="src\LayoutNode.cpp">
       <Filter>Source Files\Grid Generation</Filter>
     </ClCompile>
   </ItemGroup>

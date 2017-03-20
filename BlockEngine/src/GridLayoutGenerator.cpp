@@ -27,32 +27,32 @@ GridLayout GridLayoutGenerator::Generate(int columns, int rows, int maxRooms, in
 {
 	dimensions = sf::Vector2i(columns, rows);
 
-	InitializeCells();
+	InitializeNodes();
 
 	GenerateRooms(maxRooms, minRoomSize, maxRoomSize);
 	
 	GenerateCorridors();
 
-	return GridLayout(cells, rooms, dimensions);
+	return GridLayout(nodes, rooms, dimensions);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridLayoutGenerator::InitializeCells()
+void GridLayoutGenerator::InitializeNodes()
 {
 	for (int x = 0; x < dimensions.x; x++)
 	{
-		vector<LayoutCell> cellColumn;
-		vector<bool> visitedCellColumn;
+		vector<LayoutNode> nodeColumn;
+		vector<bool> visitedNodeColumn;
 
 		for (int y = 0; y < dimensions.y; y++)
 		{
-			cellColumn.push_back(LayoutCell());
-			visitedCellColumn.push_back(false);
+			nodeColumn.push_back(LayoutNode());
+			visitedNodeColumn.push_back(false);
 		}
 
-		cells.push_back(cellColumn);
-		visitedCells.push_back(visitedCellColumn);
+		nodes.push_back(nodeColumn);
+		visitedNodes.push_back(visitedNodeColumn);
 	}
 }
 
@@ -60,7 +60,7 @@ void GridLayoutGenerator::InitializeCells()
 
 void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, int maxRoomSize)
 {
-	numberOfRoomCells = 0;
+	numberOfRoomNodes = 0;
 	int maxRoomPlacementAttemps = maxNumberOfRooms * 10;
 	int minDoors = 1;
 	int maxDoors = 4;
@@ -81,7 +81,7 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 
 		for (int j = 0; j < rooms.size(); j++)
 		{
-			if (Intersect(room.Position, room.Size, rooms[j].Position, rooms[j].Size))
+			if (Intersect(room.Position + sf::Vector2i(-1, -1), room.Size + sf::Vector2i(2, 2), rooms[j].Position, rooms[j].Size))
 			{
 				roomOverlapsExistingRoom = true;
 				break;
@@ -106,8 +106,8 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 						}
 					}
 
-					visitedCells[x][y] = true;
-					numberOfRoomCells++;
+					visitedNodes[x][y] = true;
+					numberOfRoomNodes++;
 				}
 			}
 
@@ -120,16 +120,17 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 
 void GridLayoutGenerator::GenerateCorridors()
 {
-	sf::Vector2i currentCell = sf::Vector2i(Random(0, dimensions.x - 1), Random(0, dimensions.y - 1));
+	sf::Vector2i currentNode = sf::Vector2i(Random(0, dimensions.x - 1), Random(0, dimensions.y - 1));
 
-	while (visitedCells[currentCell.x][currentCell.y])
+	while (visitedNodes[currentNode.x][currentNode.y])
 	{
-		currentCell = sf::Vector2i(Random(0, dimensions.x - 1), Random(0, dimensions.y - 1));
+		currentNode = sf::Vector2i(Random(0, dimensions.x - 1), Random(0, dimensions.y - 1));
 	}
 
-	int numberOfCells = dimensions.x * dimensions.y;
+	int visitedNodeCount = 0;
+	int numberOfNodes = dimensions.x * dimensions.y;
 
-	while (visitedCellIndicies.size() < numberOfCells - numberOfRoomCells)
+	while (visitedNodeCount < numberOfNodes - numberOfRoomNodes)
 	{
 		bool moved = false;
 		bool leftInvalid = false;
@@ -139,7 +140,7 @@ void GridLayoutGenerator::GenerateCorridors()
 
 		while (!moved)
 		{
-			sf::Vector2i nextCell = currentCell;
+			sf::Vector2i nextNode = currentNode;
 
 			int direction = Random(0, 3);
 
@@ -148,62 +149,63 @@ void GridLayoutGenerator::GenerateCorridors()
 			case 0: // Left
 				if (!leftInvalid)
 				{
-					nextCell.x -= 1;
-					leftInvalid = (nextCell.x < 0 || visitedCells[nextCell.x][nextCell.y]);
+					nextNode.x -= 1;
+					leftInvalid = (nextNode.x < 0 || visitedNodes[nextNode.x][nextNode.y]);
 					if (!leftInvalid)
 					{
 						moved = true;
-						cells[currentCell.x][currentCell.y].CorridorLeft = true;
+						nodes[currentNode.x][currentNode.y].CorridorLeft = true;
 					}
 				}
 				break;
 			case 1: // Right
 				if (!rightInvalid)
 				{
-					nextCell.x += 1;
-					rightInvalid = (nextCell.x >= dimensions.x || visitedCells[nextCell.x][nextCell.y]);
+					nextNode.x += 1;
+					rightInvalid = (nextNode.x >= dimensions.x || visitedNodes[nextNode.x][nextNode.y]);
 					if (!rightInvalid)
 					{
 						moved = true;
-						cells[currentCell.x][currentCell.y].CorridorRight = true;
+						nodes[currentNode.x][currentNode.y].CorridorRight = true;
 					}
 				}
 				break;
 			case 2: // Up
 				if (!upInvalid)
 				{
-					nextCell.y -= 1;
-					upInvalid = (nextCell.y < 0 || visitedCells[nextCell.x][nextCell.y]);
+					nextNode.y -= 1;
+					upInvalid = (nextNode.y < 0 || visitedNodes[nextNode.x][nextNode.y]);
 					if (!upInvalid)
 					{
 						moved = true;
-						cells[currentCell.x][currentCell.y].CorridorUp = true;
+						nodes[currentNode.x][currentNode.y].CorridorUp = true;
 					}
 				}
 				break;
 			case 3: // Down
 				if (!downInvalid)
 				{
-					nextCell.y += 1;
-					downInvalid = (nextCell.y >= dimensions.y || visitedCells[nextCell.x][nextCell.y]);
+					nextNode.y += 1;
+					downInvalid = (nextNode.y >= dimensions.y || visitedNodes[nextNode.x][nextNode.y]);
 					if (!downInvalid)
 					{
 						moved = true;
-						cells[currentCell.x][currentCell.y].CorridorDown = true;
+						nodes[currentNode.x][currentNode.y].CorridorDown = true;
 					}
 				}
 			}
 
 			if (moved)
 			{
-				currentCell = nextCell;
-				visitedCells[currentCell.x][currentCell.y] = true;
-				visitedCellIndicies.push_back(currentCell);
+				currentNode = nextNode;
+				visitedNodes[currentNode.x][currentNode.y] = true;
+				visitedNodeIndicies.push_back(currentNode);
+				visitedNodeCount++;
 			}
 			if (leftInvalid && rightInvalid && upInvalid && downInvalid)
 			{
-				// TODO this can hang
-				currentCell = visitedCellIndicies[Random(0, visitedCellIndicies.size() - 1)];
+				visitedNodeIndicies.erase(remove(visitedNodeIndicies.begin(), visitedNodeIndicies.end(), currentNode), visitedNodeIndicies.end());
+				currentNode = visitedNodeIndicies[Random(0, visitedNodeIndicies.size() - 1)];
 				break;
 			}
 		}

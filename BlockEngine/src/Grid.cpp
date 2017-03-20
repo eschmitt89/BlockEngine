@@ -41,10 +41,10 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 Grid::Grid(GridLayout gridLayout, int blockWidth, int blockHeight)
 {
-	int cellSize = 3;
+	int nodeSize = 3;
 
-	int columns = (gridLayout.Dimensions.x * (cellSize + 1)) + 1;
-	int rows = (gridLayout.Dimensions.y * (cellSize + 1)) + 1;
+	int columns = (gridLayout.Dimensions.x * (nodeSize + 1)) + 1;
+	int rows = (gridLayout.Dimensions.y * (nodeSize + 1)) + 1;
 
 	// Initialize Blocks
 	InitializeBlocks(columns, rows, blockWidth, blockHeight, BlockType::Solid);
@@ -52,8 +52,8 @@ Grid::Grid(GridLayout gridLayout, int blockWidth, int blockHeight)
 	// Place rooms
 	for (int i = 0; i < gridLayout.Rooms.size(); i++)
 	{
-		sf::Vector2f roomPosition = LayoutCellPositionToBlockPosition(gridLayout.Rooms[i].Position, cellSize); 
-		sf::Vector2f roomSize = LayoutCellSizeToGridSize(gridLayout.Rooms[i].Size, cellSize);
+		sf::Vector2f roomPosition = LayoutNodePositionToBlockPosition(gridLayout.Rooms[i].Position, nodeSize); 
+		sf::Vector2f roomSize = LayoutNodeSizeToGridSize(gridLayout.Rooms[i].Size, nodeSize);
 
 		SetBlockType(roomPosition, roomSize, BlockType::Empty);
 	}
@@ -63,36 +63,36 @@ Grid::Grid(GridLayout gridLayout, int blockWidth, int blockHeight)
 	{
 		for (int row = 0; row < gridLayout.Corridors[column].size(); row++)
 		{
-			LayoutCell currentCell = gridLayout.Corridors[column][row];
+			LayoutNode currentNode = gridLayout.Corridors[column][row];
 
-			int blockColumn = LayoutCellIndexToBlockIndex(column, cellSize);
-			int blockRow = LayoutCellIndexToBlockIndex(row, cellSize);;
+			int blockColumn = LayoutNodeIndexToBlockIndex(column, nodeSize);
+			int blockRow = LayoutNodeIndexToBlockIndex(row, nodeSize);;
 
-			for (int i = 0; i < cellSize; i++)
+			for (int i = 0; i < nodeSize; i++)
 			{
-				for (int j = 0; j < cellSize; j++)
+				for (int j = 0; j < nodeSize; j++)
 				{
 					blocks[blockColumn + i][blockRow + j] = BlockType::Empty;
 				}
 			}
 
-			for (int i = 1; i <= cellSize; i++)
+			for (int i = 1; i <= nodeSize; i++)
 			{
-				for (int j = 0; j < cellSize; j++)
+				for (int j = 0; j < nodeSize; j++)
 				{
-					if (currentCell.CorridorLeft)
+					if (currentNode.CorridorLeft)
 					{
 						blocks[blockColumn - i][blockRow + j] = BlockType::Empty;
 					}
-					if (currentCell.CorridorRight)
+					if (currentNode.CorridorRight)
 					{
 						blocks[blockColumn + i][blockRow + j] = BlockType::Empty;
 					}
-					if (currentCell.CorridorUp)
+					if (currentNode.CorridorUp)
 					{
 						blocks[blockColumn + j][blockRow - i] = BlockType::Empty;
 					}
-					if (currentCell.CorridorDown)
+					if (currentNode.CorridorDown)
 					{
 						blocks[blockColumn + j][blockRow + i] = BlockType::Empty;
 					}
@@ -425,24 +425,24 @@ BlockNeighbors Grid::GetNeighbors(int column, int row)
 
 ////////////////////////////////////////////////////////////////////////
 
-int Grid::LayoutCellIndexToBlockIndex(int index, int cellSize)
+int Grid::LayoutNodeIndexToBlockIndex(int index, int nodeSize)
 {
-	return (index * (cellSize + 1)) + 1;
+	return (index * (nodeSize + 1)) + 1;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-sf::Vector2f Grid::LayoutCellPositionToBlockPosition(sf::Vector2i position, int cellSize)
+sf::Vector2f Grid::LayoutNodePositionToBlockPosition(sf::Vector2i position, int nodeSize)
 {
-	sf::Vector2i gridIndex = sf::Vector2i(LayoutCellIndexToBlockIndex(position.x, cellSize), LayoutCellIndexToBlockIndex(position.y, cellSize));
+	sf::Vector2i gridIndex = sf::Vector2i(LayoutNodeIndexToBlockIndex(position.x, nodeSize), LayoutNodeIndexToBlockIndex(position.y, nodeSize));
 	return GetBlockPosition(gridIndex.x, gridIndex.y);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-sf::Vector2f Grid::LayoutCellSizeToGridSize(sf::Vector2i size, int cellSize)
+sf::Vector2f Grid::LayoutNodeSizeToGridSize(sf::Vector2i size, int nodeSize)
 {
-	return sf::Vector2f(((size.x * (cellSize + 1) - 1) * blockSize.x) - 1, ((size.y * (cellSize + 1) - 1) * blockSize.y) - 1);
+	return sf::Vector2f(((size.x * (nodeSize + 1) - 1) * blockSize.x) - 1, ((size.y * (nodeSize + 1) - 1) * blockSize.y) - 1);
 }
 
 

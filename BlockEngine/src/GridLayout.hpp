@@ -10,7 +10,7 @@
 #define GridLayout_hpp
 
 #include "SFML/System.hpp"
-#include "LayoutCell.hpp"
+#include "LayoutNode.hpp"
 #include "LayoutRoom.hpp"
 #include <vector>
 
@@ -20,10 +20,10 @@ using namespace std;
 class GridLayout
 {
 public:
-	GridLayout(vector<vector<LayoutCell>> corridors, vector<LayoutRoom> rooms, sf::Vector2i dimensions);
+	GridLayout(vector<vector<LayoutNode>> corridors, vector<LayoutRoom> rooms, sf::Vector2i dimensions);
     ~GridLayout();
 
-	vector<vector<LayoutCell>> Corridors;
+	vector<vector<LayoutNode>> Corridors;
 	vector<LayoutRoom> Rooms;
 	sf::Vector2i Dimensions;
 

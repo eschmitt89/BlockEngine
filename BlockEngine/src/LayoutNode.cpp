@@ -1,14 +1,14 @@
 //
-//  LayoutCell.cpp
+//  LayoutNode.cpp
 //  BlockEngine
 //
 //  Created by Eric Schmitt on 3/2/17.
 //  Copyright © 2017 Eric Schmitt. All rights reserved.
 //
 
-#include "LayoutCell.hpp"
+#include "LayoutNode.hpp"
 
-LayoutCell::LayoutCell()
+LayoutNode::LayoutNode()
 {
 	Visited = false;
 	CorridorUp = false;
@@ -19,7 +19,7 @@ LayoutCell::LayoutCell()
 
 ////////////////////////////////////////////////////////////////////////
 
-LayoutCell::~LayoutCell()
+LayoutNode::~LayoutNode()
 {
 
 }

@@ -175,7 +175,7 @@
     <ClInclude Include="src\BlockNeighbors.hpp" />
     <ClInclude Include="src\BlockType.hpp" />
     <ClInclude Include="src\Camera.hpp" />
-    <ClInclude Include="src\LayoutCell.hpp" />
+    <ClInclude Include="src\LayoutNode.hpp" />
     <ClInclude Include="src\EventManager.hpp" />
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\GridLayout.hpp" />
@@ -202,7 +202,7 @@
     <ClCompile Include="src\AbstractScreen.cpp" />
     <ClCompile Include="src\Block.cpp" />
     <ClCompile Include="src\Camera.cpp" />
-    <ClCompile Include="src\LayoutCell.cpp" />
+    <ClCompile Include="src\LayoutNode.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\GridLayout.cpp" />
