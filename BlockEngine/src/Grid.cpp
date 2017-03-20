@@ -8,9 +8,12 @@
 
 #include "Grid.hpp"
 #include "ResourcePath.hpp"
+#include "ResourceManager.hpp"
 
 Grid::Grid(int columns, int rows, int blockWidth, int blockHeight)
 {
+	LoadBlockSprites();
+
 	InitializeBlocks(columns, rows, blockWidth, blockHeight, BlockType::Solid);
 }
 
@@ -18,6 +21,8 @@ Grid::Grid(int columns, int rows, int blockWidth, int blockHeight)
 
 Grid::Grid(string fileName, int blockWidth, int blockHeight)
 {
+	LoadBlockSprites();
+
 	sf::Image gridImage;
 	gridImage.loadFromFile(resourcePath() + fileName);
 
@@ -39,9 +44,9 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 ////////////////////////////////////////////////////////////////////////
 
-Grid::Grid(GridLayout gridLayout, int blockWidth, int blockHeight)
+Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 {
-	int nodeSize = 3;
+	LoadBlockSprites();
 
 	int columns = (gridLayout.Dimensions.x * (nodeSize + 1)) + 1;
 	int rows = (gridLayout.Dimensions.y * (nodeSize + 1)) + 1;
@@ -73,28 +78,22 @@ Grid::Grid(GridLayout gridLayout, int blockWidth, int blockHeight)
 				for (int j = 0; j < nodeSize; j++)
 				{
 					blocks[blockColumn + i][blockRow + j] = BlockType::Empty;
-				}
-			}
 
-			for (int i = 1; i <= nodeSize; i++)
-			{
-				for (int j = 0; j < nodeSize; j++)
-				{
 					if (currentNode.CorridorLeft)
 					{
-						blocks[blockColumn - i][blockRow + j] = BlockType::Empty;
+						blocks[blockColumn - (i + 1)][blockRow + j] = BlockType::Empty;
 					}
 					if (currentNode.CorridorRight)
 					{
-						blocks[blockColumn + i][blockRow + j] = BlockType::Empty;
+						blocks[blockColumn + (i + 1)][blockRow + j] = BlockType::Empty;
 					}
 					if (currentNode.CorridorUp)
 					{
-						blocks[blockColumn + j][blockRow - i] = BlockType::Empty;
+						blocks[blockColumn + j][blockRow - (i + 1)] = BlockType::Empty;
 					}
 					if (currentNode.CorridorDown)
 					{
-						blocks[blockColumn + j][blockRow + i] = BlockType::Empty;
+						blocks[blockColumn + j][blockRow + (i + 1)] = BlockType::Empty;
 					}
 				}
 			}
@@ -133,10 +132,6 @@ void Grid::InitializeBlocks(int columns, int rows, int blockWidth, int blockHeig
 
 void Grid::Draw(sf::RenderWindow &window, Camera* camera)
 {
-    sf::RectangleShape block;
-    block.setSize(blockSize);
-	block.setOutlineThickness(1);
-
 	Vector4i visibleBlocks = GetBlockIndicies(camera->GetView().getCenter() - (camera->GetView().getSize() * 0.5f), camera->GetView().getSize());
     
     for (int column = visibleBlocks.x1; column <= visibleBlocks.x2; column++)
@@ -145,50 +140,12 @@ void Grid::Draw(sf::RenderWindow &window, Camera* camera)
         {
 			if (IsValidNonEmptyBlockIndex(column, row))
 			{
-				block.setPosition(GetBlockPosition(column, row));
-				block.setFillColor(sf::Color::White);
-				block.setOutlineColor(sf::Color::Red);
+				blockSprites[blocks[column][row]].setPosition(GetBlockPosition(column, row));
 
-				switch (blocks[column][row])
-				{
-					case Solid:
-						block.setOutlineColor(sf::Color::Red);
-						break;
-					case Ladder:
-						block.setOutlineColor(sf::Color::Blue);
-						break;
-					case LadderTop:
-						block.setOutlineColor(sf::Color::Green);
-						break;
-					case LadderBottom:
-						block.setOutlineColor(sf::Color::Yellow);
-						break;
-					case Corner:
-						block.setOutlineColor(sf::Color::Magenta);
-						break;
-					case Platform:
-						block.setFillColor(sf::Color::Magenta);
-						break;
-					case Liquid:
-						block.setFillColor(sf::Color::Blue);
-						break;
-					case LiquidTop:
-						block.setFillColor(sf::Color::Blue);
-						block.setOutlineColor(sf::Color::Yellow);
-						break;
-				}
-
-				window.draw(block);
+				window.draw(blockSprites[blocks[column][row]]);
 			}
         }
     }
-}
-
-////////////////////////////////////////////////////////////////////////
-
-sf::Vector2i Grid::GetDimensions()
-{
-	return dimensions;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -278,6 +235,20 @@ bool Grid::IsValidBlockIndex(sf::Vector2i blockIndex)
 bool Grid::IsValidNonEmptyBlockIndex(int column, int row)
 {
 	return IsValidBlockIndex(column, row) && blocks[column][row] != BlockType::Empty;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Grid::LoadBlockSprites()
+{
+	blockSprites[BlockType::Solid] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("whiteBlock"));
+	blockSprites[BlockType::Corner] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("whiteBlock"));
+	blockSprites[BlockType::Platform] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("whiteBlock"));
+	blockSprites[BlockType::Ladder] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("ladderBlock"));
+	blockSprites[BlockType::LadderBottom] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("ladderBlock"));
+	blockSprites[BlockType::LadderTop] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("ladderBlock"));
+	blockSprites[BlockType::Liquid] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("waterBlock"));
+	blockSprites[BlockType::LiquidTop] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("waterBlock"));
 }
 
 ////////////////////////////////////////////////////////////////////////

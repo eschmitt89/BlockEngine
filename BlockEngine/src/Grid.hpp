@@ -15,6 +15,7 @@
 #include "Utilities.hpp"
 #include "GridLayoutGenerator.hpp"
 #include <vector>
+#include <map>
 
 using namespace std;
 
@@ -23,14 +24,12 @@ class Grid
 public:
     Grid(int columns, int rows, int blockWidth, int blockHeight);
 	Grid(string fileName, int blockWidth, int blockHeight);
-	Grid(GridLayout gridLayout, int blockWidth, int blockHeight);
+	Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight);
     ~Grid();
 
 	void InitializeBlocks(int columns, int rows, int blockWidth, int blockHeight, BlockType blockType);
     
     void Draw(sf::RenderWindow& window, Camera* camera);
-
-	sf::Vector2i GetDimensions();
     
 	Block GetBlock(int column, int row);
 	int GetBlockKey(int column, int row);
@@ -47,9 +46,11 @@ public:
 
 private:
     vector<vector<BlockType>> blocks;
+	map<BlockType, sf::Sprite> blockSprites;
 	sf::Vector2i dimensions;
 	sf::Vector2f blockSize;
 
+	void LoadBlockSprites();
 	void Save(string fileName);
 
 	sf::Color BlockTypeToColor(BlockType blockType);
