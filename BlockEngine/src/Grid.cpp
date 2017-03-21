@@ -63,7 +63,14 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 		SetBlockType(roomPosition, roomSize, BlockType::Empty);
 	}
 
-	vector<sf::Vector2i> verticalNodes;
+	// Place doors
+	for (int i = 0; i < gridLayout.Doors.size(); i++)
+	{
+		sf::Vector2f doorPosition = LayoutNodePositionToBlockPosition(gridLayout.Doors[i], nodeSize) - sf::Vector2f(blockSize.x, 0);
+		sf::Vector2f doorSize = LayoutNodeSizeToGridSize(sf::Vector2i(1, 1), nodeSize);
+
+		SetBlockType(doorPosition, doorSize, BlockType::Empty);
+	}
 
 	// Place corridors
 	for (int column = 0; column < gridLayout.Corridors.size(); column++)
@@ -92,12 +99,10 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 					if (currentNode.CorridorUp)
 					{
 						blocks[blockColumn + j][blockRow - (i + 1)] = BlockType::Empty;
-						verticalNodes.push_back(sf::Vector2i(column, row));
 					}
 					if (currentNode.CorridorDown)
 					{
 						blocks[blockColumn + j][blockRow + (i + 1)] = BlockType::Empty;
-						verticalNodes.push_back(sf::Vector2i(column, row));
 					}
 				}
 			}
@@ -105,10 +110,10 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 	}
 
 	// Place ladders
-	for (int i = 0; i < verticalNodes.size(); i++)
+	for (int i = 0; i < gridLayout.Ladders.size(); i++)
 	{
-		int column = LayoutNodeIndexToBlockIndex(verticalNodes[i].x, nodeSize);
-		int row = LayoutNodeIndexToBlockIndex(verticalNodes[i].y, nodeSize);
+		int column = LayoutNodeIndexToBlockIndex(gridLayout.Ladders[i].x, nodeSize);
+		int row = LayoutNodeIndexToBlockIndex(gridLayout.Ladders[i].y, nodeSize);
 
 		while (blocks[column][row - 1] == BlockType::Empty)
 		{

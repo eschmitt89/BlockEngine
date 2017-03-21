@@ -20,12 +20,16 @@ using namespace std;
 class GridLayout
 {
 public:
-	GridLayout(vector<vector<LayoutNode>> corridors, vector<LayoutRoom> rooms, sf::Vector2i dimensions);
+	GridLayout(sf::Vector2i dimensions, vector<LayoutRoom> rooms, vector<sf::Vector2i> doors, vector<sf::Vector2i> ladders, vector<vector<LayoutNode>> corridors);
     ~GridLayout();
 
-	vector<vector<LayoutNode>> Corridors;
-	vector<LayoutRoom> Rooms;
 	sf::Vector2i Dimensions;
+	vector<LayoutRoom> Rooms;
+	vector<sf::Vector2i> Doors;
+	vector<sf::Vector2i> Ladders;
+	vector<vector<LayoutNode>> Corridors;
+	
+	
 
 private:
 	

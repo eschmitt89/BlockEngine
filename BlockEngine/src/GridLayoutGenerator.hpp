@@ -24,14 +24,17 @@ public:
 private:
 	sf::Vector2i dimensions;
 	vector<LayoutRoom> rooms;
+	vector<sf::Vector2i> doors;
+	vector<sf::Vector2i> ladders;
 	vector<vector<LayoutNode>> nodes;
-	//vector<vector<bool>> visitedNodes;
 	vector<sf::Vector2i> visitedNodeIndicies;
 	int numberOfRoomNodes;
 
 	void InitializeNodes(int columns, int rows);
 
-	void GenerateRooms(int maxNumberOfRooms, int minRoomSize, int maxRoomSize);
+	void GenerateRooms(int columns, int rows, int maxNumberOfRooms, int minRoomSize, int maxRoomSize);
+
+	void GenerateDoors(int columns, int rows);
 
 	void GenerateCorridors(int columns, int rows);
 

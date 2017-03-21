@@ -9,11 +9,13 @@
 #include "GridLayout.hpp"
 
 
-GridLayout::GridLayout(vector<vector<LayoutNode>> corridors, vector<LayoutRoom> rooms, sf::Vector2i dimensions)
+GridLayout::GridLayout(sf::Vector2i dimensions, vector<LayoutRoom> rooms, vector<sf::Vector2i> doors, vector<sf::Vector2i> ladders, vector<vector<LayoutNode>> corridors)
 {
-	this->Corridors = corridors;
-	this->Rooms = rooms;
 	this->Dimensions = dimensions;
+	this->Rooms = rooms;
+	this->Doors = doors;
+	this->Ladders = ladders;
+	this->Corridors = corridors;
 }
 
 ////////////////////////////////////////////////////////////////////////

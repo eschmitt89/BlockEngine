@@ -29,11 +29,13 @@ GridLayout GridLayoutGenerator::Generate(int columns, int rows, int maxRooms, in
 
 	InitializeNodes(columns, rows);
 
-	GenerateRooms(maxRooms, minRoomSize, maxRoomSize);
+	GenerateRooms(columns, rows, maxRooms, minRoomSize, maxRoomSize);
+
+	GenerateDoors(columns, rows);
 	
 	GenerateCorridors(columns, rows);
 
-	return GridLayout(nodes, rooms, dimensions);
+	return GridLayout(dimensions, rooms, doors, ladders, nodes);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -55,12 +57,10 @@ void GridLayoutGenerator::InitializeNodes(int columns, int rows)
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, int maxRoomSize)
+void GridLayoutGenerator::GenerateRooms(int columns, int rows, int maxNumberOfRooms, int minRoomSize, int maxRoomSize)
 {
 	numberOfRoomNodes = 0;
 	int maxRoomPlacementAttemps = maxNumberOfRooms * 10;
-	int minDoors = 1;
-	int maxDoors = 4;
 
 	for (int i = 0; i < maxRoomPlacementAttemps; i++)
 	{
@@ -70,7 +70,7 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 		}
 
 		sf::Vector2i roomSize = sf::Vector2i(Random(minRoomSize, maxRoomSize), Random(minRoomSize, maxRoomSize));
-		sf::Vector2i roomPosition = sf::Vector2i(Random(0, dimensions.x - roomSize.x - 1), Random(0, dimensions.y - roomSize.y - 1));
+		sf::Vector2i roomPosition = sf::Vector2i(Random(0, columns - roomSize.x - 1), Random(0, rows - roomSize.y - 1));
 
 		LayoutRoom room = LayoutRoom(roomPosition, roomSize);
 
@@ -85,30 +85,37 @@ void GridLayoutGenerator::GenerateRooms(int maxNumberOfRooms, int minRoomSize, i
 			}
 		}
 
-		int doors = 0;
-		int numberOfDoors = Random(minDoors, maxDoors);
-
 		if (!roomOverlapsExistingRoom)
 		{
+			ladders.push_back(roomPosition);
+
 			for (int x = room.Position.x; x < room.Position.x + room.Size.x; x++)
 			{
 				for (int y = room.Position.y; y < room.Position.y + room.Size.y; y++)
 				{
-					if (doors < numberOfDoors && ((x == room.Position.x && x > 0) || (x == room.Position.x + room.Size.x && x < dimensions.x - 1)))
-					{
-						if (Random() < 0.3)
-						{
-							room.Doors.push_back(sf::Vector2i(x, y));
-							doors++;
-						}
-					}
-
 					nodes[x][y].Visited = true;
 					numberOfRoomNodes++;
 				}
 			}
 
 			rooms.push_back(room);
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void GridLayoutGenerator::GenerateDoors(int columns, int rows)
+{
+	for (int i = 0; i < rooms.size(); i++)
+	{
+		if (rooms[i].Position.x > 0)
+		{
+			doors.push_back(sf::Vector2i(rooms[i].Position.x, Random(rooms[i].Position.y, rooms[i].Position.y + rooms[i].Size.y - 1)));
+		}
+		if (rooms[i].Position.x + rooms[i].Size.x - 1 < columns)
+		{
+			doors.push_back(sf::Vector2i(rooms[i].Position.x + rooms[i].Size.x, Random(rooms[i].Position.y, rooms[i].Position.y + rooms[i].Size.y - 1)));
 		}
 	}
 }
@@ -177,6 +184,7 @@ void GridLayoutGenerator::GenerateCorridors(int columns, int rows)
 					{
 						moved = true;
 						currentNode.CorridorUp = true;
+						ladders.push_back(currentNodeIndex);
 					}
 				}
 				break;
@@ -189,6 +197,7 @@ void GridLayoutGenerator::GenerateCorridors(int columns, int rows)
 					{
 						moved = true;
 						currentNode.CorridorDown = true;
+						ladders.push_back(currentNodeIndex);
 					}
 				}
 			}
