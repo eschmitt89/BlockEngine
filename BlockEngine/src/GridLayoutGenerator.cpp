@@ -124,7 +124,10 @@ void GridLayoutGenerator::GenerateCorridors(int columns, int rows)
 		currentNodeIndex = sf::Vector2i(Random(0, columns - 1), Random(0, rows - 1));
 	}
 
-	int visitedNodeCount = 0;
+	nodes[currentNodeIndex.x][currentNodeIndex.y].Visited = true;
+	visitedNodeIndicies.push_back(currentNodeIndex);
+
+	int visitedNodeCount = 1;
 	int numberOfNodes = columns * rows;
 
 	while (visitedNodeCount < numberOfNodes - numberOfRoomNodes)
@@ -202,7 +205,8 @@ void GridLayoutGenerator::GenerateCorridors(int columns, int rows)
 			if (currentNode.LeftInvalid && currentNode.RightInvalid && currentNode.UpInvalid && currentNode.DownInvalid)
 			{
 				visitedNodeIndicies.erase(remove(visitedNodeIndicies.begin(), visitedNodeIndicies.end(), currentNodeIndex), visitedNodeIndicies.end());
- 				currentNodeIndex = visitedNodeIndicies[Random(0, visitedNodeIndicies.size() - 1)];
+				currentNodeIndex = visitedNodeIndicies[Random(0, visitedNodeIndicies.size() - 1)];
+ 				
 				break;
 			}
 		}

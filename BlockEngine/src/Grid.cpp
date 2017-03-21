@@ -298,9 +298,9 @@ sf::Color Grid::BlockTypeToColor(BlockType blockType)
 	switch (blockType)
 	{
 	case Empty:
-		return sf::Color::Black;
-	case Solid:
 		return sf::Color::White;
+	case Solid:
+		return sf::Color::Black;
 	case Liquid:
 		return sf::Color::Blue;
 	case LiquidTop:
@@ -324,11 +324,11 @@ sf::Color Grid::BlockTypeToColor(BlockType blockType)
 
 BlockType Grid::ColorToBlockType(sf::Color color)
 {
-	if (color == sf::Color::Black)
+	if (color == sf::Color::White)
 	{
 		return BlockType::Empty;
 	}
-	else if (color == sf::Color::White)
+	else if (color == sf::Color::Black)
 	{
 		return BlockType::Solid;
 	}
