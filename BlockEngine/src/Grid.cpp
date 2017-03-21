@@ -109,6 +109,21 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 		}
 	}
 
+	// Place platforms
+	for (int i = 0; i < gridLayout.Rooms.size(); i++)
+	{
+		sf::Vector2f roomPosition = LayoutNodePositionToBlockPosition(gridLayout.Rooms[i].Position, nodeSize);
+		sf::Vector2f roomSize = LayoutNodeSizeToGridSize(gridLayout.Rooms[i].Size, nodeSize);
+
+		for (int j = 1; j < roomSize.y / blockSize.y / 2; j++)
+		{
+			sf::Vector2f platformPosition = roomPosition + sf::Vector2f(0, blockSize.y * 2 * j);
+			sf::Vector2f platformSize = sf::Vector2f(roomSize.x, 1);
+
+			SetBlockType(platformPosition, platformSize, BlockType::Platform);
+		}
+	}
+
 	// Place ladders
 	for (int i = 0; i < gridLayout.Ladders.size(); i++)
 	{
