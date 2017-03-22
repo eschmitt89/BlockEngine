@@ -54,24 +54,6 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 	// Initialize Blocks
 	InitializeBlocks(columns, rows, blockWidth, blockHeight, BlockType::Solid);
 
-	// Place rooms
-	for (int i = 0; i < gridLayout.Rooms.size(); i++)
-	{
-		sf::Vector2f roomPosition = LayoutNodePositionToBlockPosition(gridLayout.Rooms[i].Position, nodeSize); 
-		sf::Vector2f roomSize = LayoutNodeSizeToGridSize(gridLayout.Rooms[i].Size, nodeSize);
-
-		SetBlockType(roomPosition, roomSize, BlockType::Empty);
-	}
-
-	// Place doors
-	for (int i = 0; i < gridLayout.Doors.size(); i++)
-	{
-		sf::Vector2f doorPosition = LayoutNodePositionToBlockPosition(gridLayout.Doors[i], nodeSize) - sf::Vector2f(blockSize.x, 0);
-		sf::Vector2f doorSize = LayoutNodeSizeToGridSize(sf::Vector2i(1, 1), nodeSize);
-
-		SetBlockType(doorPosition, doorSize, BlockType::Empty);
-	}
-
 	// Place corridors
 	for (int column = 0; column < gridLayout.Corridors.size(); column++)
 	{
@@ -109,12 +91,15 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 		}
 	}
 
-	// Place platforms
+	// Place rooms
 	for (int i = 0; i < gridLayout.Rooms.size(); i++)
 	{
 		sf::Vector2f roomPosition = LayoutNodePositionToBlockPosition(gridLayout.Rooms[i].Position, nodeSize);
 		sf::Vector2f roomSize = LayoutNodeSizeToGridSize(gridLayout.Rooms[i].Size, nodeSize);
 
+		SetBlockType(roomPosition, roomSize, BlockType::Empty);
+
+		// Place platforms
 		for (int j = 1; j < roomSize.y / blockSize.y / 2; j++)
 		{
 			sf::Vector2f platformPosition = roomPosition + sf::Vector2f(0, blockSize.y * 2 * j);
@@ -122,6 +107,15 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 
 			SetBlockType(platformPosition, platformSize, BlockType::Platform);
 		}
+	}
+
+	// Place doors
+	for (int i = 0; i < gridLayout.Doors.size(); i++)
+	{
+		sf::Vector2f doorPosition = LayoutNodePositionToBlockPosition(gridLayout.Doors[i], nodeSize) - sf::Vector2f(blockSize.x, 0);
+		sf::Vector2f doorSize = sf::Vector2f(1, blockSize.y * (nodeSize - 1));
+
+		SetBlockType(doorPosition, doorSize, BlockType::Empty);
 	}
 
 	// Place ladders
@@ -139,6 +133,24 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 		{
 			blocks[column][row] = BlockType::Ladder;
 			row++;
+		}
+	}
+
+	// Place corners
+	for (int x = 0; x < blocks.size(); x++)
+	{
+		for (int y = 0; y < blocks[x].size(); y++)
+		{
+			if (blocks[x][y] == BlockType::Solid)
+			{
+				BlockNeighbors neighbors = GetBlockNeighbors(x, y);
+
+				if ((neighbors.Left == BlockType::Empty && neighbors.TopLeft == BlockType::Empty && neighbors.Top == BlockType::Empty) 
+					|| (neighbors.Right == BlockType::Empty && neighbors.TopRight == BlockType::Empty && neighbors.Top == BlockType::Empty))
+				{
+					blocks[x][y] = BlockType::Corner;
+				}
+			}
 		}
 	}
 }
@@ -226,6 +238,48 @@ sf::Vector2i Grid::GetBlockIndex(sf::Vector2f position)
 Vector4i Grid::GetBlockIndicies(sf::Vector2f position, sf::Vector2f size)
 {
 	return Vector4i(GetBlockIndex(position), GetBlockIndex(position + size));
+}
+
+////////////////////////////////////////////////////////////////////////
+
+BlockNeighbors Grid::GetBlockNeighbors(int column, int row)
+{
+	BlockNeighbors neighbors;
+
+	if (IsValidBlockIndex(column - 1, row - 1))
+	{
+		neighbors.TopLeft = blocks[column - 1][row - 1];
+	}
+	if (IsValidBlockIndex(column, row - 1))
+	{
+		neighbors.Top = blocks[column][row - 1];
+	}
+	if (IsValidBlockIndex(column + 1, row - 1))
+	{
+		neighbors.TopRight = blocks[column + 1][row - 1];
+	}
+	if (IsValidBlockIndex(column - 1, row))
+	{
+		neighbors.Left = blocks[column - 1][row];
+	}
+	if (IsValidBlockIndex(column + 1, row))
+	{
+		neighbors.Right = blocks[column + 1][row];
+	}
+	if (IsValidBlockIndex(column - 1, row + 1))
+	{
+		neighbors.BottomLeft = blocks[column - 1][row + 1];
+	}
+	if (IsValidBlockIndex(column, row + 1))
+	{
+		neighbors.Bottom = blocks[column][row + 1];
+	}
+	if (IsValidBlockIndex(column + 1, row + 1))
+	{
+		neighbors.BottomRight = blocks[column + 1][row + 1];
+	}
+
+	return neighbors;
 }
 
 ////////////////////////////////////////////////////////////////////////

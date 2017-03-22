@@ -128,6 +128,9 @@
     <ClInclude Include="src\LayoutNode.hpp">
       <Filter>Source Files\Grid Generation</Filter>
     </ClInclude>
+    <ClInclude Include="src\BlockNeighbors.hpp">
+      <Filter>Source Files\Grid</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -189,6 +192,9 @@
     </ClCompile>
     <ClCompile Include="src\LayoutNode.cpp">
       <Filter>Source Files\Grid Generation</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BlockNeighbors.cpp">
+      <Filter>Source Files\Grid</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

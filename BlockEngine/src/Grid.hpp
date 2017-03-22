@@ -14,6 +14,7 @@
 #include "Camera.hpp"
 #include "Utilities.hpp"
 #include "GridLayoutGenerator.hpp"
+#include "BlockNeighbors.hpp"
 #include <vector>
 #include <map>
 
@@ -36,6 +37,7 @@ public:
 	sf::Vector2f GetBlockPosition(int column, int row);
 	sf::Vector2i GetBlockIndex(sf::Vector2f position);
 	Vector4i GetBlockIndicies(sf::Vector2f position, sf::Vector2f size);
+	BlockNeighbors GetBlockNeighbors(int column, int row);
 
 	void SetBlockType(sf::Vector2f position, BlockType blockType);
 	void SetBlockType(sf::Vector2f position, sf::Vector2f size, BlockType blockType);

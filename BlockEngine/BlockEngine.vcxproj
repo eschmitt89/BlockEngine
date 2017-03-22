@@ -172,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp" />
     <ClInclude Include="src\Block.hpp" />
+    <ClInclude Include="src\BlockNeighbors.hpp" />
     <ClInclude Include="src\BlockType.hpp" />
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\LayoutNode.hpp" />
@@ -200,6 +201,7 @@
   <ItemGroup>
     <ClCompile Include="src\AbstractScreen.cpp" />
     <ClCompile Include="src\Block.cpp" />
+    <ClCompile Include="src\BlockNeighbors.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\LayoutNode.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
