@@ -48,6 +48,9 @@
     <Filter Include="Source Files\Grid Generation">
       <UniqueIdentifier>{52e1e13e-fc7b-4b49-bcc3-e44387c12cb8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Grid Generator">
+      <UniqueIdentifier>{7ae96b2f-cdc0-4588-a0c2-7f0a44600d13}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -131,6 +134,9 @@
     <ClInclude Include="src\BlockNeighbors.hpp">
       <Filter>Source Files\Grid</Filter>
     </ClInclude>
+    <ClInclude Include="src\GridGenerator.hpp">
+      <Filter>Source Files\Grid Generator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -195,6 +201,9 @@
     </ClCompile>
     <ClCompile Include="src\BlockNeighbors.cpp">
       <Filter>Source Files\Grid</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GridGenerator.cpp">
+      <Filter>Source Files\Grid Generator</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -103,93 +103,93 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 
 		
 
-		while (currentPosition.y > roomPosition.y)
-		{
-			int action = Random(0, 3);
+		//while (currentPosition.y > roomPosition.y)
+		//{
+		//	int action = Random(0, 3);
 
-			if (action == 0) // climb
-			{
-				int ladderHeight = Random(2, (roomSize.y / blockSize.y) / 4);
-				for (int i = 0; i < ladderHeight; i++)
-				{
-					currentPosition.y -= blockSize.y;
-					if (currentPosition.y > roomPosition.y) 
-					{
-						SetBlockType(currentPosition, BlockType::Ladder);
-					}
-				}
-				if (currentPosition.y - blockSize.y > roomPosition.y)
-				{
-					currentPosition.y -= blockSize.y;
-					SetBlockType(currentPosition, BlockType::Platform);
-				}
-			}
-			else if (action == 1) // jump vertical
-			{
-				currentPosition.y -= (blockSize.y * 2);
-				if (currentPosition.y > roomPosition.y)
-				{
-					SetBlockType(currentPosition, BlockType::Platform);
-				}
-			}
-			else if (action == 2) // jump horizontal
-			{
-				int jumpDistance = (blockSize.x * 3);
-				int direction = Random(0, 1);
-				if (direction == 0)
-				{
-					if (currentPosition.x + jumpDistance < roomPosition.x + roomSize.x)
-					{
-						currentPosition.x += jumpDistance;
-					}
-				}
-				else if (direction == 1)
-				{
-					if (currentPosition.x - jumpDistance > roomPosition.x)
-					{
-						currentPosition.x -= jumpDistance;
-					}
-				}
+		//	if (action == 0) // climb
+		//	{
+		//		int ladderHeight = Random(2, (roomSize.y / blockSize.y) / 4);
+		//		for (int i = 0; i < ladderHeight; i++)
+		//		{
+		//			currentPosition.y -= blockSize.y;
+		//			if (currentPosition.y > roomPosition.y) 
+		//			{
+		//				SetBlockType(currentPosition, BlockType::Ladder);
+		//			}
+		//		}
+		//		if (currentPosition.y - blockSize.y > roomPosition.y)
+		//		{
+		//			currentPosition.y -= blockSize.y;
+		//			SetBlockType(currentPosition, BlockType::Platform);
+		//		}
+		//	}
+		//	else if (action == 1) // jump vertical
+		//	{
+		//		currentPosition.y -= (blockSize.y * 2);
+		//		if (currentPosition.y > roomPosition.y)
+		//		{
+		//			SetBlockType(currentPosition, BlockType::Platform);
+		//		}
+		//	}
+		//	else if (action == 2) // jump horizontal
+		//	{
+		//		int jumpDistance = (blockSize.x * 3);
+		//		int direction = Random(0, 1);
+		//		if (direction == 0)
+		//		{
+		//			if (currentPosition.x + jumpDistance < roomPosition.x + roomSize.x)
+		//			{
+		//				currentPosition.x += jumpDistance;
+		//			}
+		//		}
+		//		else if (direction == 1)
+		//		{
+		//			if (currentPosition.x - jumpDistance > roomPosition.x)
+		//			{
+		//				currentPosition.x -= jumpDistance;
+		//			}
+		//		}
 
-				if (currentPosition.y < roomPosition.y + roomSize.y && currentPosition.y > roomPosition.y)
-				{
-					SetBlockType(currentPosition, BlockType::Platform);
-				}
-			}
-			else if (action == 3) // drop
-			{
-				if (currentPosition.y + (blockSize.y * 2) < roomPosition.y + roomSize.y)
-				{
-					currentPosition.y += (blockSize.y * 2);
-					SetBlockType(currentPosition, BlockType::Platform);
-				}
-			}
+		//		if (currentPosition.y < roomPosition.y + roomSize.y && currentPosition.y > roomPosition.y)
+		//		{
+		//			SetBlockType(currentPosition, BlockType::Platform);
+		//		}
+		//	}
+		//	else if (action == 3) // drop
+		//	{
+		//		if (currentPosition.y + (blockSize.y * 2) < roomPosition.y + roomSize.y)
+		//		{
+		//			currentPosition.y += (blockSize.y * 2);
+		//			SetBlockType(currentPosition, BlockType::Platform);
+		//		}
+		//	}
 
-			int direction = Random(0, 1);
-			int moveDistance = Random(2, roomSize.y / blockSize.y / 4);
-			if (direction == 0) // right
-			{
-				for (int i = 0; i < moveDistance; i++)
-				{
-					if (currentPosition.x + blockSize.x < roomPosition.x + roomSize.x && currentPosition.y < roomPosition.y + roomSize.y && currentPosition.y > roomPosition.y)
-					{
-						currentPosition.x += blockSize.x;
-						SetBlockType(currentPosition, BlockType::Platform);
-					}
-				}
-			}
-			else if (direction == 1) // left
-			{
-				for (int i = 0; i < moveDistance; i++)
-				{
-					if (currentPosition.x - blockSize.x > roomPosition.x && currentPosition.y < roomPosition.y + roomSize.y && currentPosition.y > roomPosition.y)
-					{
-						currentPosition.x -= blockSize.x;
-						SetBlockType(currentPosition, BlockType::Platform);
-					}
-				}
-			}
-		}
+		//	int direction = Random(0, 1);
+		//	int moveDistance = Random(2, roomSize.y / blockSize.y / 4);
+		//	if (direction == 0) // right
+		//	{
+		//		for (int i = 0; i < moveDistance; i++)
+		//		{
+		//			if (currentPosition.x + blockSize.x < roomPosition.x + roomSize.x && currentPosition.y < roomPosition.y + roomSize.y && currentPosition.y > roomPosition.y)
+		//			{
+		//				currentPosition.x += blockSize.x;
+		//				SetBlockType(currentPosition, BlockType::Platform);
+		//			}
+		//		}
+		//	}
+		//	else if (direction == 1) // left
+		//	{
+		//		for (int i = 0; i < moveDistance; i++)
+		//		{
+		//			if (currentPosition.x - blockSize.x > roomPosition.x && currentPosition.y < roomPosition.y + roomSize.y && currentPosition.y > roomPosition.y)
+		//			{
+		//				currentPosition.x -= blockSize.x;
+		//				SetBlockType(currentPosition, BlockType::Platform);
+		//			}
+		//		}
+		//	}
+		//}
 		
 
 		// Place platforms
@@ -208,7 +208,7 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 		sf::Vector2f doorPosition = LayoutNodePositionToBlockPosition(gridLayout.Doors[i], nodeSize) -sf::Vector2f(blockSize.x, 0);
 		sf::Vector2f doorSize = sf::Vector2f(1, blockSize.y * (nodeSize - 1));
 
-		SetBlockType(doorPosition, doorSize, BlockType::Empty);
+		//SetBlockType(doorPosition, doorSize, BlockType::Empty);
 	}
 
 	// Place ladders
@@ -224,7 +224,7 @@ Grid::Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight)
 
 		while (blocks[column][row] == BlockType::Empty)
 		{
-			blocks[column][row] = BlockType::Ladder;
+			//blocks[column][row] = BlockType::Ladder;
 			row++;
 		}
 	}
