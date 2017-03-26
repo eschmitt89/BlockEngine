@@ -27,8 +27,8 @@ public:
 private:
 	sf::Vector2i dimensions;
 	vector<vector<GridNode*>> nodes;
-	vector<sf::Vector2i> horizontalNodes;
-	vector<sf::Vector2i> verticalNodes;
+	vector<Vector4i> horizontalSections;
+	vector<Vector4i> verticalSections;
 	vector<GridRoom> rooms;
 	int roomNodeCount;
 
@@ -36,9 +36,15 @@ private:
 	void GenerateRooms(int roomCount, int minRoomSize, int maxRoomSize);
 	void GenerateDoors(int minDoors, int maxDoors);
 	void GenerateCorridors();
-	
 	Grid* GenerateGrid(int nodeSize, int blockWidth, int blockHeight);
-	void GenerateTraversableBlocks(Grid* grid, int nodeSize);
+	void FindHorizontalSections(Grid* grid, int nodeSize);
+	void FindVerticalSections(Grid* grid, int nodeSize);
+	void FillHorizontalSections(Grid* grid, int nodeSize);
+	void FillVerticalSections(Grid* grid, int nodeSize);
+
+	void GenerateLadder(sf::Vector2i& currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid* grid, int minLadderHeight, int maxLadderHeight);
+	void GeneratePlatform(sf::Vector2i& currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid* grid, int minPlatformLength, int maxPlatformLength);
+	void GenerateCorner(sf::Vector2i& currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid* grid, int minPlatformLength, int maxPlatformLength);
 
 	bool RoomOverlapsExistingRoom(sf::Vector2i roomPosition, sf::Vector2i roomSize);
 	void PlaceRoomNodes(sf::Vector2i roomPosition, sf::Vector2i roomSize);

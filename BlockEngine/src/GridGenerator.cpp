@@ -46,7 +46,11 @@ Grid * GridGenerator::Generate(int columns, int rows, int rooms, int minRoomSize
 
 	Grid* grid = GenerateGrid(nodeSize, blockWidth, blockHeight);
 
-	GenerateTraversableBlocks(grid, nodeSize);
+	FindHorizontalSections(grid, nodeSize);
+	FillHorizontalSections(grid, nodeSize);
+
+	FindVerticalSections(grid, nodeSize);
+	FillVerticalSections(grid, nodeSize);
 
 	return grid;
 }
@@ -303,28 +307,20 @@ Grid * GridGenerator::GenerateGrid(int nodeSize, int blockWidth, int blockHeight
 	return grid;
 }
 
-////////////////////////////////////////////////////////////////////////
-
-void GridGenerator::GenerateTraversableBlocks(Grid* grid, int nodeSize)
+void GridGenerator::FindHorizontalSections(Grid * grid, int nodeSize)
 {
-	vector<Vector4i> horizontalSections;
-	vector<Vector4i> verticalSections;
-
-	// Go through each node and look for horizontal and vertical sections
+	// Go through each node and look for horizontal sections
 	for (int x = 0; x < nodes.size(); x++)
 	{
 		for (int y = 0; y < nodes[x].size(); y++)
 		{
-			sf::Vector2i minGridIndex;
-			sf::Vector2i maxGridIndex;
 			GridNode* node = nodes[x][y];
-
-			// If the node is a horizontal section find its left and right indicies
+			sf::Vector2i minGridIndex = NodeIndexToGridIndex(node->index, nodeSize);
+			sf::Vector2i maxGridIndex = sf::Vector2i(minGridIndex.x, minGridIndex.y + nodeSize - 1);
+			
+			// If the node is a horizontal section find its minimum (left) and maximum (right) indicies
 			if (node->leftNode || node->rightNode)
 			{
-				minGridIndex = NodeIndexToGridIndex(node->index, nodeSize);
-				maxGridIndex = NodeIndexToGridIndex(node->index, nodeSize);
-
 				while (grid->GetBlockType(minGridIndex.x - 1, minGridIndex.y) != BlockType::Solid)
 				{
 					minGridIndex.x--;
@@ -334,18 +330,32 @@ void GridGenerator::GenerateTraversableBlocks(Grid* grid, int nodeSize)
 					maxGridIndex.x++;
 				}
 
+				// Add the horizontal node if it is new
 				if (find(horizontalSections.begin(), horizontalSections.end(), Vector4i(minGridIndex, maxGridIndex)) == horizontalSections.end())
 				{
 					horizontalSections.push_back(Vector4i(minGridIndex, maxGridIndex));
 				}
 			}
+		}
+	}
+}
 
-			// If the node is a vertical section find its top and bottom indicies
+////////////////////////////////////////////////////////////////////////
+
+void GridGenerator::FindVerticalSections(Grid * grid, int nodeSize)
+{
+	// Go through each node and look for horizontal and vertical sections
+	for (int x = 0; x < nodes.size(); x++)
+	{
+		for (int y = 0; y < nodes[x].size(); y++)
+		{
+			GridNode* node = nodes[x][y];
+			sf::Vector2i minGridIndex = NodeIndexToGridIndex(node->index, nodeSize);
+			sf::Vector2i maxGridIndex = sf::Vector2i(minGridIndex.x + nodeSize - 1, minGridIndex.y);
+
+			// If the node is a vertical section find its minimum (top) and maximum (bottom) indicies
 			if (node->upNode || node->downNode)
 			{
-				minGridIndex = NodeIndexToGridIndex(node->index, nodeSize);
-				maxGridIndex = NodeIndexToGridIndex(node->index, nodeSize);
-
 				while (grid->GetBlockType(minGridIndex.x, minGridIndex.y - 1) != BlockType::Solid)
 				{
 					minGridIndex.y--;
@@ -355,6 +365,7 @@ void GridGenerator::GenerateTraversableBlocks(Grid* grid, int nodeSize)
 					maxGridIndex.y++;
 				}
 
+				// Add the vertical node if it is new
 				if (find(verticalSections.begin(), verticalSections.end(), Vector4i(minGridIndex, maxGridIndex)) == verticalSections.end())
 				{
 					verticalSections.push_back(Vector4i(minGridIndex, maxGridIndex));
@@ -362,58 +373,180 @@ void GridGenerator::GenerateTraversableBlocks(Grid* grid, int nodeSize)
 			}
 		}
 	}
+}
 
+////////////////////////////////////////////////////////////////////////
+
+void GridGenerator::FillHorizontalSections(Grid * grid, int nodeSize)
+{
+
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void GridGenerator::FillVerticalSections(Grid * grid, int nodeSize)
+{
 	for (int i = 0; i < verticalSections.size(); i++)
 	{
-		// TODO dont need x value here;
-		sf::Vector2i topIndex = sf::Vector2i(verticalSections[i].x1, verticalSections[i].y1);
-		sf::Vector2i bottomIndex = sf::Vector2i(verticalSections[i].x2, verticalSections[i].y2 + 1);
-		sf::Vector2i currentIndex = bottomIndex;
+		// Get the minimum and maximim indicies for the vertical section
+		sf::Vector2i minIndex = sf::Vector2i(verticalSections[i].x1, verticalSections[i].y1);
+		sf::Vector2i maxIndex = sf::Vector2i(verticalSections[i].x2, verticalSections[i].y2);
 
-		while (currentIndex.y > topIndex.y)
+		// Set the current indicies x position to a random position within the section and its y position to the bottom of the section
+		sf::Vector2i currentIndex = sf::Vector2i(Random(minIndex.x, maxIndex.x), maxIndex.y + 1);
+
+		// Continue building up until the top of the section is reached
+		while (currentIndex.y > minIndex.y)
 		{
-			int action = Random(0, 1);
+			// Choose a random vertical build type (ladder, platform, or corner)
+			int buildType = Random(0, 2);
 
-			switch (action)
+			switch (buildType)
 			{
 			case 0: // Ladder
 			{
-				int jumpDistance = Random(0, 3);
-				int ladderHeight = Random(2, 5);
-
-				if (currentIndex.y - jumpDistance >= topIndex.y)
-				{
-					currentIndex.y -= jumpDistance;
-				}
-
-				for (int i = 0; i < ladderHeight; i++)
-				{
-					if (currentIndex.y - 1 > topIndex.y)
-					{
-						currentIndex.y--;
-						grid->SetBlockType(currentIndex, BlockType::Ladder);
-					}
-				}
+				GenerateLadder(currentIndex, minIndex, maxIndex, grid, 2, 5);
 				break;
 			}
 			case 1: // Platform
 			{
-				int jumpDistance = 2;
-
-				if (currentIndex.y - jumpDistance > topIndex.y)
-				{
-					currentIndex.y -= jumpDistance;
-					grid->SetBlockType(currentIndex, BlockType::Platform);
-				}
-
+				GeneratePlatform(currentIndex, minIndex, maxIndex, grid, 2, nodeSize);
 				break;
 			}
 			case 2: // Corner
 			{
+				GenerateCorner(currentIndex, minIndex, maxIndex, grid, 2, nodeSize / 2);
 				break;
 			}
 			}
 		}
+	}
+}
+
+void GridGenerator::GenerateLadder(sf::Vector2i & currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid * grid, int minLadderHeight, int maxLadderHeight)
+{
+	// Determine the length of the ladder and how far the player will have to jump to reach it
+	int verticalJumpDistance = Random(0, 3);
+	int horizontalJumpDistance = verticalJumpDistance == 3 ? Random(0, 2) : Random(0, 3);
+	int horizontalJumpDirection = Random(0, 1) == 0 ? -1 : 1;
+	int ladderHeight = Random(minLadderHeight, maxLadderHeight);
+
+	// Move the ladder's start position horizontally in the jump direction by the jump distance amount
+	if (currentIndex.x + (horizontalJumpDirection * horizontalJumpDistance) >= minIndex.x && currentIndex.x + (horizontalJumpDirection * horizontalJumpDistance) <= maxIndex.x)
+	{
+		currentIndex.x += (horizontalJumpDirection * horizontalJumpDistance);
+	}
+
+	// Move the ladder's start position vertically by the jump distance amount
+	if (currentIndex.y - verticalJumpDistance > minIndex.y)
+	{
+		currentIndex.y -= verticalJumpDistance;
+	}
+
+	// Build the ladder its specified height
+	for (int i = 0; i < ladderHeight; i++)
+	{
+		if (currentIndex.y - 1 > minIndex.y)
+		{
+			currentIndex.y--;
+			grid->SetBlockType(currentIndex, BlockType::Ladder);
+		}
+		else
+		{
+			// Stop if the ladder's intended position is above the top of the section
+			currentIndex.y = minIndex.y;
+		}
+	}
+}
+
+void GridGenerator::GeneratePlatform(sf::Vector2i & currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid * grid, int minPlatformLength, int maxPlatformLength)
+{
+	// Determine the length of the platform and how far the player will have to jump to reach it
+	int verticalJumpDistance = 2;
+	int horizontalJumpDistance = Random(0, 3);
+	int horizontalJumpDirection = Random(0, 1) == 0 ? -1 : 1;
+	int platformLength = Random(minPlatformLength, maxPlatformLength);
+	int platformDirection = Random(0, 1) == 0 ? -1 : 1;
+
+	// Move the platform's start position horizontally in the jump direction by the jump distance amount
+	if (currentIndex.x + (horizontalJumpDirection * horizontalJumpDistance) >= minIndex.x && currentIndex.x + (horizontalJumpDirection * horizontalJumpDistance) <= maxIndex.x)
+	{
+		currentIndex.x += (horizontalJumpDirection * horizontalJumpDistance);
+	}
+
+	// Move the platform's start position vertically by the jump distance amount
+	if (currentIndex.y - verticalJumpDistance > minIndex.y)
+	{
+		// Place the platform's start block
+		currentIndex.y -= verticalJumpDistance;
+		grid->SetBlockType(currentIndex, BlockType::Platform);
+
+		// Build out the platform's length
+		for (int i = 0; i < platformLength; i++)
+		{
+			if (currentIndex.x + platformDirection >= minIndex.x && currentIndex.x + platformDirection <= maxIndex.x)
+			{
+				currentIndex.x += platformDirection;
+				grid->SetBlockType(currentIndex, BlockType::Platform);
+			}
+		}
+	}
+	else
+	{
+		// Stop if the platform's intended position is above the top of the section
+		currentIndex.y = minIndex.y;
+	}
+}
+
+void GridGenerator::GenerateCorner(sf::Vector2i & currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid * grid, int minPlatformLength, int maxPlatformLength)
+{
+	// Determine the length of the corner's platform and how far the player will have to jump to reach it
+	int verticalJumpDistance = 3;
+	int horizontalJumpDistance = Random(1, 3);
+	int horizontalJumpDirection = Random(0, 1) == 0 ? -1 : 1;
+	int platformLength = Random(minPlatformLength, maxPlatformLength);
+	int platformDirection = horizontalJumpDirection;
+
+	// If the corner's position is on an edge of the section make its direction move away from the edge
+	if (currentIndex.x == minIndex.x)
+	{
+		horizontalJumpDirection = 1;
+	}
+	else if (currentIndex.x == maxIndex.x)
+	{
+		horizontalJumpDirection = -1;
+	}
+
+	// Move the corner's start position horizontally in the jump direction by the jump distance amount
+	for (int i = 0; i < horizontalJumpDistance; i++)
+	{
+		if (currentIndex.x + horizontalJumpDirection >= minIndex.x && currentIndex.x + horizontalJumpDirection <= maxIndex.x)
+		{
+			currentIndex.x += horizontalJumpDirection;
+		}
+	}
+
+	// Move the corner's start position vertically by the jump distance amount
+	if (currentIndex.y - verticalJumpDistance > minIndex.y)
+	{
+		// Place the corner's start block
+		currentIndex.y -= verticalJumpDistance;
+		grid->SetBlockType(currentIndex, BlockType::Corner);
+
+		// Build out the corner's platform length
+		for (int i = 0; i < platformLength; i++)
+		{
+			if (currentIndex.x + platformDirection >= minIndex.x && currentIndex.x + platformDirection <= maxIndex.x)
+			{
+				currentIndex.x += platformDirection;
+				grid->SetBlockType(currentIndex, BlockType::Solid);
+			}
+		}
+	}
+	else
+	{
+		// Stop if the corner's intended position is above the top of the section
+		currentIndex.y = minIndex.y;
 	}
 }
 
