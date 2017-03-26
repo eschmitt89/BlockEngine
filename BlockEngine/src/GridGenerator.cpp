@@ -46,7 +46,7 @@ Grid * GridGenerator::Generate(int columns, int rows, int rooms, int minRoomSize
 
 	Grid* grid = GenerateGrid(nodeSize, blockWidth, blockHeight);
 
-	GenerateLadders(grid, nodeSize);
+	GenerateTraversableBlocks(grid, nodeSize);
 
 	return grid;
 }
@@ -305,39 +305,115 @@ Grid * GridGenerator::GenerateGrid(int nodeSize, int blockWidth, int blockHeight
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridGenerator::GenerateLadders(Grid* grid, int nodeSize)
+void GridGenerator::GenerateTraversableBlocks(Grid* grid, int nodeSize)
 {
-	vector<sf::Vector2i> horizontalNodes;
-	vector<sf::Vector2i> verticalNodes;
+	vector<Vector4i> horizontalSections;
+	vector<Vector4i> verticalSections;
 
+	// Go through each node and look for horizontal and vertical sections
 	for (int x = 0; x < nodes.size(); x++)
 	{
 		for (int y = 0; y < nodes[x].size(); y++)
 		{
+			sf::Vector2i minGridIndex;
+			sf::Vector2i maxGridIndex;
 			GridNode* node = nodes[x][y];
 
+			// If the node is a horizontal section find its left and right indicies
 			if (node->leftNode || node->rightNode)
 			{
-				horizontalNodes.push_back(sf::Vector2i(x, y));
+				minGridIndex = NodeIndexToGridIndex(node->index, nodeSize);
+				maxGridIndex = NodeIndexToGridIndex(node->index, nodeSize);
+
+				while (grid->GetBlockType(minGridIndex.x - 1, minGridIndex.y) != BlockType::Solid)
+				{
+					minGridIndex.x--;
+				}
+				while (grid->GetBlockType(maxGridIndex.x + 1, maxGridIndex.y) != BlockType::Solid)
+				{
+					maxGridIndex.x++;
+				}
+
+				if (find(horizontalSections.begin(), horizontalSections.end(), Vector4i(minGridIndex, maxGridIndex)) == horizontalSections.end())
+				{
+					horizontalSections.push_back(Vector4i(minGridIndex, maxGridIndex));
+				}
 			}
 
+			// If the node is a vertical section find its top and bottom indicies
 			if (node->upNode || node->downNode)
 			{
-				verticalNodes.push_back(sf::Vector2i(x, y));
+				minGridIndex = NodeIndexToGridIndex(node->index, nodeSize);
+				maxGridIndex = NodeIndexToGridIndex(node->index, nodeSize);
+
+				while (grid->GetBlockType(minGridIndex.x, minGridIndex.y - 1) != BlockType::Solid)
+				{
+					minGridIndex.y--;
+				}
+				while (grid->GetBlockType(maxGridIndex.x, maxGridIndex.y + 1) != BlockType::Solid)
+				{
+					maxGridIndex.y++;
+				}
+
+				if (find(verticalSections.begin(), verticalSections.end(), Vector4i(minGridIndex, maxGridIndex)) == verticalSections.end())
+				{
+					verticalSections.push_back(Vector4i(minGridIndex, maxGridIndex));
+				}
 			}
 		}
 	}
 
-	for (int i = 0; i < verticalNodes.size(); i++)
+	for (int i = 0; i < verticalSections.size(); i++)
 	{
-		sf::Vector2i gridIndex = NodeIndexToGridIndex(verticalNodes[i], nodeSize);
+		// TODO dont need x value here;
+		sf::Vector2i topIndex = sf::Vector2i(verticalSections[i].x1, verticalSections[i].y1);
+		sf::Vector2i bottomIndex = sf::Vector2i(verticalSections[i].x2, verticalSections[i].y2 + 1);
+		sf::Vector2i currentIndex = bottomIndex;
 
-		while (grid->GetBlockType(sf::Vector2i(gridIndex.x, gridIndex.y + 1)) != BlockType::Solid)
+		while (currentIndex.y > topIndex.y)
 		{
-			gridIndex.y++;
-		}
+			int action = Random(0, 1);
 
-		grid->SetBlockType(gridIndex, BlockType::Ladder);
+			switch (action)
+			{
+			case 0: // Ladder
+			{
+				int jumpDistance = Random(0, 3);
+				int ladderHeight = Random(2, 5);
+
+				if (currentIndex.y - jumpDistance >= topIndex.y)
+				{
+					currentIndex.y -= jumpDistance;
+				}
+
+				for (int i = 0; i < ladderHeight; i++)
+				{
+					if (currentIndex.y - 1 > topIndex.y)
+					{
+						currentIndex.y--;
+						grid->SetBlockType(currentIndex, BlockType::Ladder);
+					}
+				}
+				break;
+			}
+			case 1: // Platform
+			{
+				int jumpDistance = 2;
+
+				if (currentIndex.y - jumpDistance > topIndex.y)
+				{
+					currentIndex.y -= jumpDistance;
+					grid->SetBlockType(currentIndex, BlockType::Platform);
+				}
+
+				break;
+			}
+			case 2: // Corner
+			{
+				break;
+			}
+			}
+		}
 	}
 }
 

@@ -38,7 +38,7 @@ private:
 	void GenerateCorridors();
 	
 	Grid* GenerateGrid(int nodeSize, int blockWidth, int blockHeight);
-	void GenerateLadders(Grid* grid, int nodeSize);
+	void GenerateTraversableBlocks(Grid* grid, int nodeSize);
 
 	bool RoomOverlapsExistingRoom(sf::Vector2i roomPosition, sf::Vector2i roomSize);
 	void PlaceRoomNodes(sf::Vector2i roomPosition, sf::Vector2i roomSize);

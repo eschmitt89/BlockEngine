@@ -314,14 +314,9 @@ int Grid::GetBlockKey(int column, int row)
 
 ////////////////////////////////////////////////////////////////////////
 
-BlockType Grid::GetBlockType(sf::Vector2i blockIndex)
+BlockType Grid::GetBlockType(int column, int row)
 {
-	if (IsValidBlockIndex(blockIndex))
-	{
-		return blocks[blockIndex.x][blockIndex.y];
-	}
-
-	return BlockType::NoBlock;
+	return IsValidBlockIndex(column, row) ? blocks[column][row] : BlockType::NoBlock;
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -110,6 +110,11 @@ struct Vector4i
 		x2 = vector2.x;
 		y2 = vector2.y;
 	}
+
+	bool operator==( const Vector4i &v)
+	{
+		return ((x1 == v.x1) && (x2 == v.x2) && (y1 == v.y1) && (y2 = v.y2));
+	}
 };
 
 #endif /* Utilties_hpp */
