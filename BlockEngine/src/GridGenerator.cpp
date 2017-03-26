@@ -48,8 +48,8 @@ Grid * GridGenerator::Generate(int columns, int rows, int rooms, int minRoomSize
 	
 	FillCorridors(grid, nodeSize);
 
-	FindHorizontalAreas(grid, nodeSize);
-	FillHorizontalAreas(grid, nodeSize);
+	//FindHorizontalAreas(grid, nodeSize);
+	//FillHorizontalAreas(grid, nodeSize);
 
 	FindVerticalAreas(grid, nodeSize);
 	FillVerticalAreas(grid, nodeSize);
@@ -418,17 +418,17 @@ void GridGenerator::FillVerticalAreas(Grid * grid, int nodeSize)
 			{
 			case 0: // Ladder
 			{
-				GenerateLadder(currentIndex, minIndex, maxIndex, grid, 2, 5);
+				GenerateLadder(currentIndex, minIndex, maxIndex, grid, 1, 5);
 				break;
 			}
 			case 1: // Platform
 			{
-				GeneratePlatform(currentIndex, minIndex, maxIndex, grid, 2, nodeSize);
+				GeneratePlatform(currentIndex, minIndex, maxIndex, grid, 1, nodeSize);
 				break;
 			}
 			case 2: // Solid platform
 			{
-				GenerateSolidPlatform(currentIndex, minIndex, maxIndex, grid, 2, nodeSize / 2);
+				GenerateSolidPlatform(currentIndex, minIndex, maxIndex, grid, 1, nodeSize / 2);
 				break;
 			}
 			}

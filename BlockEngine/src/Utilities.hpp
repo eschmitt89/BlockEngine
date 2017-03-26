@@ -74,9 +74,14 @@ float inline AbsoluteDistance(sf::Vector2f position1, sf::Vector2f position2)
 
 int inline Random(int min, int max)
 {
-	int diff = max - min + 1;
+	if (max < min)
+	{
+		int tmp = max;
+		max = min;
+		min = tmp;
+	}
 
-	return (rand() % diff) + min;
+	return (rand() % (max - min + 1)) + min;
 }
 
 
