@@ -39,7 +39,7 @@ Grid * GridGenerator::Generate(int columns, int rows, int rooms, int minRoomSize
 
 	GenerateRooms(rooms, minRoomSize, maxRoomSize);
 
-	GenerateDoors(1, 4);
+	GenerateDoors(1, 3);
 
 	GenerateCorridors();
 
@@ -98,107 +98,52 @@ void GridGenerator::GenerateDoors(int minDoors, int maxDoors)
 {
 	for (int i = 0; i < rooms.size(); i++)
 	{
-		vector<GridNode*> validDoorNodes;
 		GridRoom room = rooms[i];
 		int doorsPlaced = 0;
 		int doorsToPlace = Random(minDoors, maxDoors);
-		
-		// Find the room's border nodes that could be doors
 
 		while (doorsPlaced < doorsToPlace)
 		{
-			int x = Random(0, 1) == 0 ? room.position.x : room.position.x + room.size.x - 1;
-			int y = Random(0, 1) == 0 ? room.position.y : room.position.y + room.size.y - 1;
+			GridNode* node = nullptr;
 
-			GridNode* node = nodes[x][y];
+			int direction = Random(0, 3);
 
-			if (x == room.position.x && !nodes[x][y]->leftInvalid)
+			switch (direction)
 			{
-				nodes[x][y]->leftNode = nodes[x - 1][y];
-				doorsPlaced++;
-			}
-			else if (x == (room.position.x + room.size.x - 1) && !nodes[x][y]->rightInvalid)
-			{
-				nodes[x][y]->rightNode = nodes[x + 1][y];
-				doorsPlaced++;
-			}
-
-			if (y == room.position.y && !nodes[x][y]->upInvalid)
-			{
-				nodes[x][y]->upNode = nodes[x][y - 1];
-				doorsPlaced++;
-			}
-			else if (y == (room.position.y + room.size.y - 1) && !nodes[x][y]->downInvalid)
-			{
-				nodes[x][y]->downNode = nodes[x][y + 1];
-				doorsPlaced++;
+			case 0: // Left
+				node = nodes[room.position.x][Random(room.position.y, room.position.y + room.size.y - 1)];
+				if (!node->leftInvalid)
+				{
+					node->leftNode = GetLeftNode(node);
+					doorsPlaced++;
+				}
+				break;
+			case 1: // Right
+				node = nodes[room.position.x + room.size.x - 1][Random(room.position.y, room.position.y + room.size.y - 1)];
+				if (!node->rightInvalid)
+				{
+					node->rightNode = GetRightNode(node);
+					doorsPlaced++;
+				}
+				break;
+			case 2: // Up
+				node = nodes[Random(room.position.x, room.position.x + room.size.x - 1)][room.position.y];
+				if (!node->upInvalid)
+				{
+					node->upNode = GetUpNode(node);
+					doorsPlaced++;
+				}
+				break;
+			case 3: // Down
+				node = nodes[Random(room.position.x, room.position.x + room.size.x - 1)][room.position.y + room.size.y - 1];
+				if (!node->downInvalid)
+				{
+					node->downNode = GetDownNode(node);
+					doorsPlaced++;
+				}
+				break;
 			}
 		}
-
-		//for (int x = room.position.x; x < room.position.x + room.size.x; x++)
-		//{
-		//	for (int y = room.position.y; y < room.position.y + room.size.y; y++)
-		//	{
-		//		if (x == room.position.x || x == (room.position.x + room.size.x - 1) || y == room.position.y || y == (room.position.y + room.size.y - 1))
-		//		{
-		//			validDoorNodes.push_back(nodes[x][y]);
-		//		}
-		//		if (x == room.position.x)
-		//		{
-		//			// door on left
-
-		//		}
-		//	}
-		//}
-
-		//// Place a random number of doors in each room
-		//while (validDoorNodes.size() > 0 && doorsPlaced < doorsToPlace)
-		//{
-		//	GridNode* doorNode = validDoorNodes[Random(0, validDoorNodes.size() - 1)];
-
-		//	bool doorPlaced = false;
-
-		//	while (!doorPlaced)
-		//	{
-		//		int direction = Random(0, 3);
-
-		//		switch (direction)
-		//		{
-		//		case 0: // Left
-		//			if (!doorNode->leftInvalid)
-		//			{
-		//				doorNode->leftNode = nodes[doorNode->index.x - 1][doorNode->index.y];
-		//				doorPlaced = true;
-		//				doorsPlaced++;
-		//			}
-		//			break;
-		//		case 1: // Right
-		//			if (!doorNode->rightInvalid)
-		//			{
-		//				doorNode->rightNode = nodes[doorNode->index.x + 1][doorNode->index.y];
-		//				doorPlaced = true;
-		//				doorsPlaced++;
-		//			}
-		//			break;
-		//		case 2: // Up
-		//			if (!doorNode->upInvalid)
-		//			{
-		//				doorNode->upNode = nodes[doorNode->index.x][doorNode->index.y - 1];
-		//				doorPlaced = true;
-		//				doorsPlaced++;
-		//			}
-		//			break;
-		//		case 3: // Down
-		//			if (!doorNode->downInvalid)
-		//			{
-		//				doorNode->downNode = nodes[doorNode->index.x][doorNode->index.y + 1];
-		//				doorPlaced = true;
-		//				doorsPlaced++;
-		//			}
-		//			break;
-		//		}
-		//	}
-		//}
 	}
 }
 
@@ -229,21 +174,20 @@ void GridGenerator::GenerateCorridors()
 	while (visitedNodes < totalNodes - roomNodeCount)
 	{
 		bool moved = false;
-		vector<int> directions = { 0, 1, 2, 3 };
 
 		while (!moved)
 		{
 			GridNode* nextNode = currentNode;
 
-			// Try to move in a random untried direction
-			int direction = Random(0, 3);//directions[Random(0, directions.size() - 1)];
+			// Try to move in a random direction
+			int direction = Random(0, 3);
 
 			switch (direction)
 			{
 			case 0: // Left
 				if (!currentNode->leftInvalid)
 				{
-					nextNode = nodes[currentNode->index.x - 1][currentNode->index.y];
+					nextNode = GetLeftNode(currentNode);
 					currentNode->leftInvalid = nextNode->visited;
 					if (!nextNode->visited)
 					{
@@ -251,15 +195,11 @@ void GridGenerator::GenerateCorridors()
 						moved = true;
 					}
 				}
-				else
-				{
-					VectorEraseElement(directions, 0);
-				}
 				break;
 			case 1: // Right
 				if (!currentNode->rightInvalid)
 				{
-					nextNode = nodes[currentNode->index.x + 1][currentNode->index.y];
+					nextNode = GetRightNode(currentNode);
 					currentNode->rightInvalid = nextNode->visited;
 					if (!nextNode->visited)
 					{
@@ -267,15 +207,11 @@ void GridGenerator::GenerateCorridors()
 						moved = true;
 					}
 				}
-				else
-				{
-					VectorEraseElement(directions, 1);
-				}
 				break;
 			case 2: // Up
 				if (!currentNode->upInvalid)
 				{
-					nextNode = nodes[currentNode->index.x][currentNode->index.y - 1];
+					nextNode = GetUpNode(currentNode);
 					currentNode->upInvalid = nextNode->visited;
 					if (!nextNode->visited)
 					{
@@ -283,25 +219,17 @@ void GridGenerator::GenerateCorridors()
 						moved = true;
 					}
 				}
-				else
-				{
-					VectorEraseElement(directions, 2);
-				}
 				break;
 			case 3: // Down
 				if (!currentNode->downInvalid)
 				{
-					nextNode = nodes[currentNode->index.x][currentNode->index.y + 1];
+					nextNode = GetDownNode(currentNode);
 					currentNode->downInvalid = nextNode->visited;
 					if (!nextNode->visited)
 					{
 						currentNode->downNode = nextNode;
 						moved = true;
 					}
-				}
-				else
-				{
-					VectorEraseElement(directions, 3);
 				}
 				break;
 			}
@@ -375,7 +303,7 @@ bool GridGenerator::RoomOverlapsExistingRoom(sf::Vector2i roomPosition, sf::Vect
 {
 	for (int i  = 0; i < rooms.size(); i++)
 	{
-		// Add a 1 node buffer around the existing room to prevent adjacent room placement
+		// Add a 1 node buffer around existing rooms to prevent adjacent room placement
 		if (Intersect(roomPosition, roomSize, rooms[i].position - sf::Vector2i(1, 1), rooms[i].size + sf::Vector2i(2, 2)))
 		{
 			return true;
@@ -399,17 +327,45 @@ void GridGenerator::PlaceRoomNodes(sf::Vector2i roomPosition, sf::Vector2i roomS
 			// Keep track of the number of room nodes
 			roomNodeCount++;
 
-			//// Connect all the interior nodes of the room
-			//if (x < roomPosition.x + roomSize.x - 1)
-			//{
-			//	nodes[x][y]->rightNode = nodes[x + 1][y];
-			//}
-			//if (y < roomPosition.y + roomSize.y - 1)
-			//{
-			//	nodes[x][y]->downNode = nodes[x][y + 1];
-			//}
+			// Connect all the interior nodes of the room
+			if (x < roomPosition.x + roomSize.x - 1)
+			{
+				nodes[x][y]->rightNode = nodes[x + 1][y];
+			}
+			if (y < roomPosition.y + roomSize.y - 1)
+			{
+				nodes[x][y]->downNode = nodes[x][y + 1];
+			}
 		}
 	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+GridNode * GridGenerator::GetLeftNode(GridNode * node)
+{
+	return nodes[node->index.x - 1][node->index.y];
+}
+
+////////////////////////////////////////////////////////////////////////
+
+GridNode * GridGenerator::GetRightNode(GridNode * node)
+{
+	return nodes[node->index.x + 1][node->index.y];
+}
+
+////////////////////////////////////////////////////////////////////////
+
+GridNode * GridGenerator::GetUpNode(GridNode * node)
+{
+	return nodes[node->index.x][node->index.y - 1];
+}
+
+////////////////////////////////////////////////////////////////////////
+
+GridNode * GridGenerator::GetDownNode(GridNode * node)
+{
+	return nodes[node->index.x][node->index.y + 1];
 }
 
 ////////////////////////////////////////////////////////////////////////

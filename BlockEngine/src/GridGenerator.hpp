@@ -37,9 +37,13 @@ private:
 	
 	Grid* GenerateGrid(int nodeSize, int blockWidth, int blockHeight);
 
-
 	bool RoomOverlapsExistingRoom(sf::Vector2i roomPosition, sf::Vector2i roomSize);
 	void PlaceRoomNodes(sf::Vector2i roomPosition, sf::Vector2i roomSize);
+
+	GridNode* GetLeftNode(GridNode* node);
+	GridNode* GetRightNode(GridNode* node);
+	GridNode* GetUpNode(GridNode* node);
+	GridNode* GetDownNode(GridNode* node);
 
 	int NodeValueToGridValue(int index, int nodeSize);
 	sf::Vector2i NodeIndexToGridIndex(sf::Vector2i index, int nodeSize);
