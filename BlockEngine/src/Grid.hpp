@@ -13,7 +13,6 @@
 #include "Block.hpp"
 #include "Camera.hpp"
 #include "Utilities.hpp"
-#include "GridLayoutGenerator.hpp"
 #include "BlockNeighbors.hpp"
 #include <vector>
 #include <map>
@@ -25,7 +24,6 @@ class Grid
 public:
     Grid(int columns, int rows, int blockWidth, int blockHeight);
 	Grid(string fileName, int blockWidth, int blockHeight);
-	Grid(GridLayout gridLayout, int nodeSize, int blockWidth, int blockHeight);
     ~Grid();
 
 	void InitializeBlocks(int columns, int rows, int blockWidth, int blockHeight, BlockType blockType);

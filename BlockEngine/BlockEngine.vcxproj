@@ -177,11 +177,8 @@
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\GridGenerator.hpp" />
     <ClInclude Include="src\GridRoom.hpp" />
-    <ClInclude Include="src\LayoutNode.hpp" />
     <ClInclude Include="src\EventManager.hpp" />
     <ClInclude Include="src\Grid.hpp" />
-    <ClInclude Include="src\GridLayout.hpp" />
-    <ClInclude Include="src\GridLayoutGenerator.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
     <ClInclude Include="src\KeyBindings.hpp" />
     <ClInclude Include="src\MovementAxis.hpp" />
@@ -195,7 +192,6 @@
     <ClInclude Include="src\ResourceLoader.hpp" />
     <ClInclude Include="src\ResourceManager.hpp" />
     <ClInclude Include="src\ResourcePath.hpp" />
-    <ClInclude Include="src\LayoutRoom.hpp" />
     <ClInclude Include="src\ScreenManager.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
     <ClInclude Include="src\HorizontalState.hpp" />
@@ -208,11 +204,8 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\GridGenerator.cpp" />
     <ClCompile Include="src\GridRoom.cpp" />
-    <ClCompile Include="src\LayoutNode.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\Grid.cpp" />
-    <ClCompile Include="src\GridLayout.cpp" />
-    <ClCompile Include="src\GridLayoutGenerator.cpp" />
     <ClCompile Include="src\HomeScreen.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MovementAxis.cpp" />
@@ -224,7 +217,6 @@
     <ClCompile Include="src\ResourceLoader.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\ResourcePath.cpp" />
-    <ClCompile Include="src\LayoutRoom.cpp" />
     <ClCompile Include="src\ScreenManager.cpp" />
   </ItemGroup>
   <ItemGroup>

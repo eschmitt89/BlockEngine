@@ -55,6 +55,7 @@ Grid * GridGenerator::Generate(int columns, int rows, int rooms, int minRoomSize
 	FillVerticalAreas(grid, nodeSize);
 
 	FindAndSetCornerBlocks(grid);
+	FindAndSetLadderEnds(grid);
 
 	return grid;
 }
@@ -417,7 +418,7 @@ void GridGenerator::FillVerticalAreas(Grid * grid, int nodeSize)
 			{
 			case 0: // Ladder
 			{
-				GenerateLadder(currentIndex, minIndex, maxIndex, grid, 2, nodeSize / 2);
+				GenerateLadder(currentIndex, minIndex, maxIndex, grid, 2, 5);
 				break;
 			}
 			case 1: // Platform
@@ -486,10 +487,21 @@ void GridGenerator::GeneratePlatform(sf::Vector2i & currentIndex, sf::Vector2i m
 		currentIndex.x += (horizontalJumpDirection * horizontalJumpDistance);
 	}
 
+	// If the corner's position is on an edge of the section make its direction move away from the edge
+	if (currentIndex.x == minIndex.x)
+	{
+		platformDirection = 1;
+	}
+	else if (currentIndex.x == maxIndex.x)
+	{
+		platformDirection = -1;
+	}
+
 	// Move the platform's start position vertically by the jump distance amount
 	if (currentIndex.y - verticalJumpDistance > minIndex.y)
 	{
 		// Place the platform's start block
+		int actualPlatformLength = 1;
 		currentIndex.y -= verticalJumpDistance;
 		grid->SetBlockType(currentIndex, BlockType::Platform);
 
@@ -498,10 +510,14 @@ void GridGenerator::GeneratePlatform(sf::Vector2i & currentIndex, sf::Vector2i m
 		{
 			if (currentIndex.x + platformDirection >= minIndex.x && currentIndex.x + platformDirection <= maxIndex.x)
 			{
+				actualPlatformLength++;
 				currentIndex.x += platformDirection;
 				grid->SetBlockType(currentIndex, BlockType::Platform);
 			}
 		}
+
+		// Set the currentIndex's horizontal value to a random location on the platform
+		currentIndex.x -= (platformDirection * Random(0, actualPlatformLength - 1));
 	}
 	else
 	{
@@ -517,7 +533,6 @@ void GridGenerator::GenerateSolidPlatform(sf::Vector2i & currentIndex, sf::Vecto
 	int horizontalJumpDistance = Random(1, 3);
 	int horizontalJumpDirection = Random(0, 1) == 0 ? -1 : 1;
 	int platformLength = Random(minPlatformLength, maxPlatformLength);
-	int platformDirection = horizontalJumpDirection;
 
 	// If the corner's position is on an edge of the section make its direction move away from the edge
 	if (currentIndex.x == minIndex.x)
@@ -542,6 +557,8 @@ void GridGenerator::GenerateSolidPlatform(sf::Vector2i & currentIndex, sf::Vecto
 	if (currentIndex.y - verticalJumpDistance > minIndex.y)
 	{
 		// Place the corner's start block
+		int actualPlatformLength = 1;
+		int platformDirection = horizontalJumpDirection;
 		currentIndex.y -= verticalJumpDistance;
 		grid->SetBlockType(currentIndex, BlockType::Solid);
 
@@ -550,10 +567,14 @@ void GridGenerator::GenerateSolidPlatform(sf::Vector2i & currentIndex, sf::Vecto
 		{
 			if (currentIndex.x + platformDirection >= minIndex.x && currentIndex.x + platformDirection <= maxIndex.x)
 			{
+				actualPlatformLength++;
 				currentIndex.x += platformDirection;
 				grid->SetBlockType(currentIndex, BlockType::Solid);
 			}
 		}
+
+		// Set the currentIndex's horizontal value to a random location on the platform
+		currentIndex.x -= (platformDirection * Random(0, actualPlatformLength - 1));
 	}
 	else
 	{
@@ -579,6 +600,32 @@ void GridGenerator::FindAndSetCornerBlocks(Grid * grid)
 					(blockNeighbors.Right == BlockType::Empty && blockNeighbors.TopRight == BlockType::Empty && blockNeighbors.Top == BlockType::Empty))
 				{
 					grid->SetBlockType(sf::Vector2i(x, y), BlockType::Corner);
+				}
+			}
+		}
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void GridGenerator::FindAndSetLadderEnds(Grid * grid)
+{
+	// Find all the corner blocks and set their type to corner
+	for (int x = 0; x < grid->GetDimensions().x; x++)
+	{
+		for (int y = 0; y < grid->GetDimensions().y; y++)
+		{
+			if (grid->GetBlockType(x, y) == BlockType::Ladder)
+			{
+				BlockNeighbors blockNeighbors = grid->GetBlockNeighbors(x, y);
+
+				if (blockNeighbors.Top != BlockType::Ladder && blockNeighbors.Top != BlockType::LadderTop)
+				{
+					grid->SetBlockType(sf::Vector2i(x, y), BlockType::LadderTop);
+				}
+				if (blockNeighbors.Bottom != BlockType::Ladder)
+				{
+					grid->SetBlockType(sf::Vector2i(x, y), BlockType::LadderBottom);
 				}
 			}
 		}

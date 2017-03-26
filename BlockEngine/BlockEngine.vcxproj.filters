@@ -45,9 +45,6 @@
     <Filter Include="Source Files\Event Manager">
       <UniqueIdentifier>{55dd62e8-aaf8-4c6c-b555-800e5391c286}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Grid Generation">
-      <UniqueIdentifier>{52e1e13e-fc7b-4b49-bcc3-e44387c12cb8}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Grid Generator">
       <UniqueIdentifier>{7ae96b2f-cdc0-4588-a0c2-7f0a44600d13}</UniqueIdentifier>
     </Filter>
@@ -119,18 +116,6 @@
     <ClInclude Include="src\MovementState.hpp">
       <Filter>Source Files\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\GridLayoutGenerator.hpp">
-      <Filter>Source Files\Grid Generation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\GridLayout.hpp">
-      <Filter>Source Files\Grid Generation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\LayoutRoom.hpp">
-      <Filter>Source Files\Grid Generation</Filter>
-    </ClInclude>
-    <ClInclude Include="src\LayoutNode.hpp">
-      <Filter>Source Files\Grid Generation</Filter>
-    </ClInclude>
     <ClInclude Include="src\BlockNeighbors.hpp">
       <Filter>Source Files\Grid</Filter>
     </ClInclude>
@@ -192,18 +177,6 @@
     </ClCompile>
     <ClCompile Include="src\MovementAxis.cpp">
       <Filter>Source Files\Player</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GridLayoutGenerator.cpp">
-      <Filter>Source Files\Grid Generation</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GridLayout.cpp">
-      <Filter>Source Files\Grid Generation</Filter>
-    </ClCompile>
-    <ClCompile Include="src\LayoutRoom.cpp">
-      <Filter>Source Files\Grid Generation</Filter>
-    </ClCompile>
-    <ClCompile Include="src\LayoutNode.cpp">
-      <Filter>Source Files\Grid Generation</Filter>
     </ClCompile>
     <ClCompile Include="src\BlockNeighbors.cpp">
       <Filter>Source Files\Grid</Filter>

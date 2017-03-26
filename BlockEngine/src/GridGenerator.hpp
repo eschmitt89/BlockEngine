@@ -52,6 +52,7 @@ private:
 	void GenerateSolidPlatform(sf::Vector2i& currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid* grid, int minPlatformLength, int maxPlatformLength);
 
 	void FindAndSetCornerBlocks(Grid* grid);
+	void FindAndSetLadderEnds(Grid* grid);
 
 	bool RoomOverlapsExistingRoom(sf::Vector2i roomPosition, sf::Vector2i roomSize);
 	void PlaceRoomNodes(sf::Vector2i roomPosition, sf::Vector2i roomSize);

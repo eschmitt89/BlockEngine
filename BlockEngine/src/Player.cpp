@@ -237,16 +237,16 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 
 			if (block.GetType() == BlockType::LadderTop)
 			{
-				if (position.y < block.GetPosition().y)
+				if (position.y + (size.y / 2) < block.GetPosition().y)
 				{
-					position.y = block.GetPosition().y;
+					position.y = block.GetPosition().y - (size.y / 2);
 				}
 			}
 			else if (block.GetType() == BlockType::LadderBottom)
 			{
-				if (position.y > block.GetPosition().y)
+				if (position.y - (size.y / 2) > block.GetPosition().y)
 				{
-					position.y = block.GetPosition().y;
+					position.y = block.GetPosition().y +(size.y / 2);
 				}
 			}
 		}
