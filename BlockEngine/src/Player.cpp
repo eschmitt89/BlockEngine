@@ -153,7 +153,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 					movementState = TryDrop;
 				}
 			}
-			else
+			else if (!jumpKeyHeld)
 			{
 				Jump();
 			}

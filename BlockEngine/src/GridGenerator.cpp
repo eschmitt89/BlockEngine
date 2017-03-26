@@ -9,6 +9,10 @@
 #include "GridGenerator.hpp"
 #include <set>
 
+#define LADDER_JUMP_DISTANCE 3
+#define PLATFORM_JUMP_DISTANCE 2
+#define SOLID_PLATFORM_JUMP_DISTANCE 3
+
 GridGenerator::GridGenerator()
 {
 
@@ -418,12 +422,12 @@ void GridGenerator::FillVerticalAreas(Grid * grid, int nodeSize)
 			{
 			case 0: // Ladder
 			{
-				GenerateLadder(currentIndex, minIndex, maxIndex, grid, 1, 5);
+				GenerateLadder(currentIndex, minIndex, maxIndex, grid, 2, 5);
 				break;
 			}
 			case 1: // Platform
 			{
-				GeneratePlatform(currentIndex, minIndex, maxIndex, grid, 1, nodeSize);
+				GeneratePlatform(currentIndex, minIndex, maxIndex, grid, 2, nodeSize);
 				break;
 			}
 			case 2: // Solid platform
@@ -439,8 +443,8 @@ void GridGenerator::FillVerticalAreas(Grid * grid, int nodeSize)
 void GridGenerator::GenerateLadder(sf::Vector2i & currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid * grid, int minLadderHeight, int maxLadderHeight)
 {
 	// Determine the length of the ladder and how far the player will have to jump to reach it
-	int verticalJumpDistance = Random(0, 3);
-	int horizontalJumpDistance = verticalJumpDistance == 3 ? Random(0, 2) : Random(0, 3);
+	int verticalJumpDistance = Random(0, LADDER_JUMP_DISTANCE);
+	int horizontalJumpDistance = verticalJumpDistance == LADDER_JUMP_DISTANCE ? Random(0, 2) : Random(0, 3);
 	int horizontalJumpDirection = Random(0, 1) == 0 ? -1 : 1;
 	int ladderHeight = Random(minLadderHeight, maxLadderHeight);
 
@@ -475,7 +479,7 @@ void GridGenerator::GenerateLadder(sf::Vector2i & currentIndex, sf::Vector2i min
 void GridGenerator::GeneratePlatform(sf::Vector2i & currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid * grid, int minPlatformLength, int maxPlatformLength)
 {
 	// Determine the length of the platform and how far the player will have to jump to reach it
-	int verticalJumpDistance = 2;
+	int verticalJumpDistance = PLATFORM_JUMP_DISTANCE;
 	int horizontalJumpDistance = Random(0, 3);
 	int horizontalJumpDirection = Random(0, 1) == 0 ? -1 : 1;
 	int platformLength = Random(minPlatformLength, maxPlatformLength);
@@ -529,7 +533,7 @@ void GridGenerator::GeneratePlatform(sf::Vector2i & currentIndex, sf::Vector2i m
 void GridGenerator::GenerateSolidPlatform(sf::Vector2i & currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid * grid, int minPlatformLength, int maxPlatformLength)
 {
 	// Determine the length of the corner's platform and how far the player will have to jump to reach it
-	int verticalJumpDistance = 3;
+	int verticalJumpDistance = SOLID_PLATFORM_JUMP_DISTANCE;
 	int horizontalJumpDistance = Random(1, 3);
 	int horizontalJumpDirection = Random(0, 1) == 0 ? -1 : 1;
 	int platformLength = Random(minPlatformLength, maxPlatformLength);
@@ -596,8 +600,8 @@ void GridGenerator::FindAndSetCornerBlocks(Grid * grid)
 			{
 				BlockNeighbors blockNeighbors = grid->GetBlockNeighbors(x, y);
 
-				if ((blockNeighbors.Left == BlockType::Empty && blockNeighbors.TopLeft == BlockType::Empty && blockNeighbors.Top == BlockType::Empty) ||
-					(blockNeighbors.Right == BlockType::Empty && blockNeighbors.TopRight == BlockType::Empty && blockNeighbors.Top == BlockType::Empty))
+				if ((blockNeighbors.Left == BlockType::Empty && blockNeighbors.TopLeft != BlockType::Solid && blockNeighbors.TopLeft != BlockType::Corner && blockNeighbors.Top == BlockType::Empty) ||
+					(blockNeighbors.Right == BlockType::Empty && blockNeighbors.TopRight != BlockType::Solid && blockNeighbors.TopRight != BlockType::Corner && blockNeighbors.Top == BlockType::Empty))
 				{
 					grid->SetBlockType(sf::Vector2i(x, y), BlockType::Corner);
 				}
