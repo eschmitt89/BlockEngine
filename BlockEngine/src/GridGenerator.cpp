@@ -7,6 +7,7 @@
 //
 
 #include "GridGenerator.hpp"
+#include <set>
 
 GridGenerator::GridGenerator()
 {
@@ -31,25 +32,29 @@ GridGenerator::~GridGenerator()
 
 ////////////////////////////////////////////////////////////////////////
 
-Grid * GridGenerator::Generate(int columns, int rows, int rooms, int minRoomSize, int maxRoomSize, int nodeSize, int blockWidth, int blockHeight)
+Grid * GridGenerator::Generate(int columns, int rows, int rooms, int minRoomSize, int maxRoomSize, int minDoorCount, int maxDoorCount, int nodeSize, int blockWidth, int blockHeight)
 {
 	dimensions = sf::Vector2i(columns, rows);
 
-	InitializeNodes();
+	CreateNodes();
 
 	GenerateRooms(rooms, minRoomSize, maxRoomSize);
 
-	GenerateDoors(1, 3);
+	GenerateDoors(minDoorCount, maxDoorCount);
 
 	GenerateCorridors();
 
-	return GenerateGrid(nodeSize, blockWidth, blockHeight);
+	Grid* grid = GenerateGrid(nodeSize, blockWidth, blockHeight);
+
+	GenerateLadders(grid, nodeSize);
+
+	return grid;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 
-void GridGenerator::InitializeNodes()
+void GridGenerator::CreateNodes()
 {
 	for (int x = 0; x < dimensions.x; x++)
 	{
@@ -96,6 +101,7 @@ void GridGenerator::GenerateRooms(int roomCount, int minRoomSize, int maxRoomSiz
 
 void GridGenerator::GenerateDoors(int minDoors, int maxDoors)
 {
+	// Go through each room and place doors
 	for (int i = 0; i < rooms.size(); i++)
 	{
 		GridRoom room = rooms[i];
@@ -295,6 +301,44 @@ Grid * GridGenerator::GenerateGrid(int nodeSize, int blockWidth, int blockHeight
 	}
 
 	return grid;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void GridGenerator::GenerateLadders(Grid* grid, int nodeSize)
+{
+	vector<sf::Vector2i> horizontalNodes;
+	vector<sf::Vector2i> verticalNodes;
+
+	for (int x = 0; x < nodes.size(); x++)
+	{
+		for (int y = 0; y < nodes[x].size(); y++)
+		{
+			GridNode* node = nodes[x][y];
+
+			if (node->leftNode || node->rightNode)
+			{
+				horizontalNodes.push_back(sf::Vector2i(x, y));
+			}
+
+			if (node->upNode || node->downNode)
+			{
+				verticalNodes.push_back(sf::Vector2i(x, y));
+			}
+		}
+	}
+
+	for (int i = 0; i < verticalNodes.size(); i++)
+	{
+		sf::Vector2i gridIndex = NodeIndexToGridIndex(verticalNodes[i], nodeSize);
+
+		while (grid->GetBlockType(sf::Vector2i(gridIndex.x, gridIndex.y + 1)) != BlockType::Solid)
+		{
+			gridIndex.y++;
+		}
+
+		grid->SetBlockType(gridIndex, BlockType::Ladder);
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////

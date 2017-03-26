@@ -34,12 +34,14 @@ public:
     
 	Block GetBlock(int column, int row);
 	int GetBlockKey(int column, int row);
+	BlockType GetBlockType(sf::Vector2i blockIndex);
 	sf::Vector2f GetBlockPosition(int column, int row);
 	sf::Vector2i GetBlockIndex(sf::Vector2f position);
 	Vector4i GetBlockIndicies(sf::Vector2f position, sf::Vector2f size);
 	BlockNeighbors GetBlockNeighbors(int column, int row);
 
 	void SetBlockType(int column, int row, BlockType blockType);
+	void SetBlockType(sf::Vector2i blockIndex, BlockType blockType);
 	void SetBlockType(sf::Vector2f position, BlockType blockType);
 	void SetBlockType(sf::Vector2f position, sf::Vector2f size, BlockType blockType);
 

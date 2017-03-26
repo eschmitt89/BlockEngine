@@ -22,20 +22,23 @@ public:
 	GridGenerator();
     ~GridGenerator();
 
-	Grid * Generate(int columns, int rows, int rooms, int minRoomSize, int maxRoomSize, int nodeSize, int blockWidth, int blockHeight);
+	Grid * Generate(int columns, int rows, int rooms, int minRoomSize, int maxRoomSize, int minDoorCount, int maxDoorCount, int nodeSize, int blockWidth, int blockHeight);
 
 private:
 	sf::Vector2i dimensions;
 	vector<vector<GridNode*>> nodes;
+	vector<sf::Vector2i> horizontalNodes;
+	vector<sf::Vector2i> verticalNodes;
 	vector<GridRoom> rooms;
 	int roomNodeCount;
 
-	void InitializeNodes();
+	void CreateNodes();
 	void GenerateRooms(int roomCount, int minRoomSize, int maxRoomSize);
 	void GenerateDoors(int minDoors, int maxDoors);
 	void GenerateCorridors();
 	
 	Grid* GenerateGrid(int nodeSize, int blockWidth, int blockHeight);
+	void GenerateLadders(Grid* grid, int nodeSize);
 
 	bool RoomOverlapsExistingRoom(sf::Vector2i roomPosition, sf::Vector2i roomSize);
 	void PlaceRoomNodes(sf::Vector2i roomPosition, sf::Vector2i roomSize);

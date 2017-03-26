@@ -314,6 +314,18 @@ int Grid::GetBlockKey(int column, int row)
 
 ////////////////////////////////////////////////////////////////////////
 
+BlockType Grid::GetBlockType(sf::Vector2i blockIndex)
+{
+	if (IsValidBlockIndex(blockIndex))
+	{
+		return blocks[blockIndex.x][blockIndex.y];
+	}
+
+	return BlockType::NoBlock;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 sf::Vector2f Grid::GetBlockPosition(int column, int row)
 {
 	return sf::Vector2f(column * blockSize.x, row * blockSize.y);
@@ -382,6 +394,16 @@ void Grid::SetBlockType(int column, int row, BlockType blockType)
 	if (IsValidBlockIndex(column, row))
 	{
 		blocks[column][row] = blockType;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Grid::SetBlockType(sf::Vector2i blockIndex, BlockType blockType)
+{
+	if (IsValidBlockIndex(blockIndex))
+	{
+		blocks[blockIndex.x][blockIndex.y] = blockType;
 	}
 }
 
