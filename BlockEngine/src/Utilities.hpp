@@ -10,6 +10,7 @@
 #define Utilties_hpp
 
 #include <SFML/Graphics.hpp>
+#include <vector>
 
 using namespace std;
 
@@ -87,6 +88,14 @@ float inline Random()
 }
 
 ////////////////////////////////////////////////////////////////////////
+
+template <typename T> void inline VectorEraseElement(vector<T>& vector, T element)
+{
+	vector.erase(remove(vector.begin(), vector.end(), element), vector.end());
+}
+
+////////////////////////////////////////////////////////////////////////
+
 struct Vector4i 
 {
 	int x1;

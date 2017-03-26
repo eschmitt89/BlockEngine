@@ -39,6 +39,7 @@ public:
 	Vector4i GetBlockIndicies(sf::Vector2f position, sf::Vector2f size);
 	BlockNeighbors GetBlockNeighbors(int column, int row);
 
+	void SetBlockType(int column, int row, BlockType blockType);
 	void SetBlockType(sf::Vector2f position, BlockType blockType);
 	void SetBlockType(sf::Vector2f position, sf::Vector2f size, BlockType blockType);
 

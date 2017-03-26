@@ -140,6 +140,9 @@
     <ClInclude Include="src\GridNode.hpp">
       <Filter>Source Files\Grid Generator</Filter>
     </ClInclude>
+    <ClInclude Include="src\GridRoom.hpp">
+      <Filter>Source Files\Grid Generator</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -209,6 +212,9 @@
       <Filter>Source Files\Grid Generator</Filter>
     </ClCompile>
     <ClCompile Include="src\GridNode.cpp">
+      <Filter>Source Files\Grid Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GridRoom.cpp">
       <Filter>Source Files\Grid Generator</Filter>
     </ClCompile>
   </ItemGroup>

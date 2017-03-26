@@ -377,6 +377,16 @@ BlockNeighbors Grid::GetBlockNeighbors(int column, int row)
 
 ////////////////////////////////////////////////////////////////////////
 
+void Grid::SetBlockType(int column, int row, BlockType blockType)
+{
+	if (IsValidBlockIndex(column, row))
+	{
+		blocks[column][row] = blockType;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
 void Grid::SetBlockType(sf::Vector2f position, BlockType blockType)
 {
 	sf::Vector2i blockIndex = GetBlockIndex(position);
