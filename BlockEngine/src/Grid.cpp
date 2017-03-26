@@ -297,6 +297,13 @@ void Grid::Draw(sf::RenderWindow &window, Camera* camera)
 
 ////////////////////////////////////////////////////////////////////////
 
+sf::Vector2i Grid::GetDimensions()
+{
+	return dimensions;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 Block Grid::GetBlock(int column, int row)
 {
 	if (IsValidBlockIndex(column, row))

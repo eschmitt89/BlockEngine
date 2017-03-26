@@ -31,7 +31,8 @@ public:
 	void InitializeBlocks(int columns, int rows, int blockWidth, int blockHeight, BlockType blockType);
     
     void Draw(sf::RenderWindow& window, Camera* camera);
-    
+
+	sf::Vector2i GetDimensions();
 	Block GetBlock(int column, int row);
 	int GetBlockKey(int column, int row);
 	BlockType GetBlockType(int column, int row);

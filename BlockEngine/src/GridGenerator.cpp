@@ -38,19 +38,23 @@ Grid * GridGenerator::Generate(int columns, int rows, int rooms, int minRoomSize
 
 	CreateNodes();
 
-	GenerateRooms(rooms, minRoomSize, maxRoomSize);
-
-	GenerateDoors(minDoorCount, maxDoorCount);
+	GenerateRooms(rooms, minRoomSize, maxRoomSize, minDoorCount, maxDoorCount);
 
 	GenerateCorridors();
 
-	Grid* grid = GenerateGrid(nodeSize, blockWidth, blockHeight);
+	Grid* grid = new Grid(NodeValueToGridValue(dimensions.x, nodeSize), NodeValueToGridValue(dimensions.y, nodeSize), blockWidth, blockHeight);
 
-	FindHorizontalSections(grid, nodeSize);
-	FillHorizontalSections(grid, nodeSize);
+	FillRooms(grid, nodeSize, blockWidth, blockHeight);
+	
+	FillCorridors(grid, nodeSize);
 
-	FindVerticalSections(grid, nodeSize);
-	FillVerticalSections(grid, nodeSize);
+	FindHorizontalAreas(grid, nodeSize);
+	FillHorizontalAreas(grid, nodeSize);
+
+	FindVerticalAreas(grid, nodeSize);
+	FillVerticalAreas(grid, nodeSize);
+
+	FindAndSetCornerBlocks(grid);
 
 	return grid;
 }
@@ -75,7 +79,7 @@ void GridGenerator::CreateNodes()
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridGenerator::GenerateRooms(int roomCount, int minRoomSize, int maxRoomSize)
+void GridGenerator::GenerateRooms(int roomCount, int minRoomSize, int maxRoomSize, int minDoors, int maxDoors)
 {
 	int roomPlacementAttemps = roomCount * 10;
 
@@ -96,63 +100,60 @@ void GridGenerator::GenerateRooms(int roomCount, int minRoomSize, int maxRoomSiz
 		if (!RoomOverlapsExistingRoom(roomPosition, roomSize))
 		{
 			PlaceRoomNodes(roomPosition, roomSize);
-			rooms.push_back(GridRoom(roomPosition, roomSize));
+			GridRoom room = GridRoom(roomPosition, roomSize);
+			GenerateDoors(room, minDoors, maxDoors);
+			rooms.push_back(room);
 		}
 	}
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridGenerator::GenerateDoors(int minDoors, int maxDoors)
+void GridGenerator::GenerateDoors(GridRoom room, int minDoors, int maxDoors)
 {
-	// Go through each room and place doors
-	for (int i = 0; i < rooms.size(); i++)
+	int doorsPlaced = 0;
+	int doorsToPlace = Random(minDoors, maxDoors);
+
+	while (doorsPlaced < doorsToPlace)
 	{
-		GridRoom room = rooms[i];
-		int doorsPlaced = 0;
-		int doorsToPlace = Random(minDoors, maxDoors);
+		GridNode* node = nullptr;
 
-		while (doorsPlaced < doorsToPlace)
+		int direction = Random(0, 3);
+
+		switch (direction)
 		{
-			GridNode* node = nullptr;
-
-			int direction = Random(0, 3);
-
-			switch (direction)
+		case 0: // Left
+			node = nodes[room.position.x][Random(room.position.y, room.position.y + room.size.y - 1)];
+			if (!node->leftInvalid)
 			{
-			case 0: // Left
-				node = nodes[room.position.x][Random(room.position.y, room.position.y + room.size.y - 1)];
-				if (!node->leftInvalid)
-				{
-					node->leftNode = GetLeftNode(node);
-					doorsPlaced++;
-				}
-				break;
-			case 1: // Right
-				node = nodes[room.position.x + room.size.x - 1][Random(room.position.y, room.position.y + room.size.y - 1)];
-				if (!node->rightInvalid)
-				{
-					node->rightNode = GetRightNode(node);
-					doorsPlaced++;
-				}
-				break;
-			case 2: // Up
-				node = nodes[Random(room.position.x, room.position.x + room.size.x - 1)][room.position.y];
-				if (!node->upInvalid)
-				{
-					node->upNode = GetUpNode(node);
-					doorsPlaced++;
-				}
-				break;
-			case 3: // Down
-				node = nodes[Random(room.position.x, room.position.x + room.size.x - 1)][room.position.y + room.size.y - 1];
-				if (!node->downInvalid)
-				{
-					node->downNode = GetDownNode(node);
-					doorsPlaced++;
-				}
-				break;
+				node->leftNode = GetLeftNode(node);
+				doorsPlaced++;
 			}
+			break;
+		case 1: // Right
+			node = nodes[room.position.x + room.size.x - 1][Random(room.position.y, room.position.y + room.size.y - 1)];
+			if (!node->rightInvalid)
+			{
+				node->rightNode = GetRightNode(node);
+				doorsPlaced++;
+			}
+			break;
+		case 2: // Up
+			node = nodes[Random(room.position.x, room.position.x + room.size.x - 1)][room.position.y];
+			if (!node->upInvalid)
+			{
+				node->upNode = GetUpNode(node);
+				doorsPlaced++;
+			}
+			break;
+		case 3: // Down
+			node = nodes[Random(room.position.x, room.position.x + room.size.x - 1)][room.position.y + room.size.y - 1];
+			if (!node->downInvalid)
+			{
+				node->downNode = GetDownNode(node);
+				doorsPlaced++;
+			}
+			break;
 		}
 	}
 }
@@ -265,10 +266,21 @@ void GridGenerator::GenerateCorridors()
 
 ////////////////////////////////////////////////////////////////////////
 
-Grid * GridGenerator::GenerateGrid(int nodeSize, int blockWidth, int blockHeight)
+void GridGenerator::FillRooms(Grid * grid, int nodeSize, int blockWidth, int blockHeight)
 {
-	Grid* grid = new Grid(NodeValueToGridValue(dimensions.x, nodeSize), NodeValueToGridValue(dimensions.y, nodeSize), blockWidth, blockHeight);
+	for (int i = 0; i < rooms.size(); i++)
+	{
+		sf::Vector2f roomPosition = NodeIndexToGridPosition(rooms[i].position, nodeSize, blockWidth, blockHeight);
+		sf::Vector2f roomSize = sf::Vector2f(NodeValueToGridValue(rooms[i].size.x - 1, nodeSize) * blockWidth, NodeValueToGridValue(rooms[i].size.y - 1, nodeSize) * blockHeight);
 
+		grid->SetBlockType(roomPosition, roomSize, BlockType::Empty);
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void GridGenerator::FillCorridors(Grid * grid, int nodeSize)
+{
 	for (int x = 0; x < nodes.size(); x++)
 	{
 		for (int y = 0; y < nodes[x].size(); y++)
@@ -303,11 +315,11 @@ Grid * GridGenerator::GenerateGrid(int nodeSize, int blockWidth, int blockHeight
 			}
 		}
 	}
-
-	return grid;
 }
 
-void GridGenerator::FindHorizontalSections(Grid * grid, int nodeSize)
+////////////////////////////////////////////////////////////////////////
+
+void GridGenerator::FindHorizontalAreas(Grid * grid, int nodeSize)
 {
 	// Go through each node and look for horizontal sections
 	for (int x = 0; x < nodes.size(); x++)
@@ -331,9 +343,9 @@ void GridGenerator::FindHorizontalSections(Grid * grid, int nodeSize)
 				}
 
 				// Add the horizontal node if it is new
-				if (find(horizontalSections.begin(), horizontalSections.end(), Vector4i(minGridIndex, maxGridIndex)) == horizontalSections.end())
+				if (find(horizontalAreas.begin(), horizontalAreas.end(), Vector4i(minGridIndex, maxGridIndex)) == horizontalAreas.end())
 				{
-					horizontalSections.push_back(Vector4i(minGridIndex, maxGridIndex));
+					horizontalAreas.push_back(Vector4i(minGridIndex, maxGridIndex));
 				}
 			}
 		}
@@ -342,7 +354,7 @@ void GridGenerator::FindHorizontalSections(Grid * grid, int nodeSize)
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridGenerator::FindVerticalSections(Grid * grid, int nodeSize)
+void GridGenerator::FindVerticalAreas(Grid * grid, int nodeSize)
 {
 	// Go through each node and look for horizontal and vertical sections
 	for (int x = 0; x < nodes.size(); x++)
@@ -366,9 +378,9 @@ void GridGenerator::FindVerticalSections(Grid * grid, int nodeSize)
 				}
 
 				// Add the vertical node if it is new
-				if (find(verticalSections.begin(), verticalSections.end(), Vector4i(minGridIndex, maxGridIndex)) == verticalSections.end())
+				if (find(verticalAreas.begin(), verticalAreas.end(), Vector4i(minGridIndex, maxGridIndex)) == verticalAreas.end())
 				{
-					verticalSections.push_back(Vector4i(minGridIndex, maxGridIndex));
+					verticalAreas.push_back(Vector4i(minGridIndex, maxGridIndex));
 				}
 			}
 		}
@@ -377,20 +389,20 @@ void GridGenerator::FindVerticalSections(Grid * grid, int nodeSize)
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridGenerator::FillHorizontalSections(Grid * grid, int nodeSize)
+void GridGenerator::FillHorizontalAreas(Grid * grid, int nodeSize)
 {
 
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void GridGenerator::FillVerticalSections(Grid * grid, int nodeSize)
+void GridGenerator::FillVerticalAreas(Grid * grid, int nodeSize)
 {
-	for (int i = 0; i < verticalSections.size(); i++)
+	for (int i = 0; i < verticalAreas.size(); i++)
 	{
 		// Get the minimum and maximim indicies for the vertical section
-		sf::Vector2i minIndex = sf::Vector2i(verticalSections[i].x1, verticalSections[i].y1);
-		sf::Vector2i maxIndex = sf::Vector2i(verticalSections[i].x2, verticalSections[i].y2);
+		sf::Vector2i minIndex = sf::Vector2i(verticalAreas[i].x1, verticalAreas[i].y1);
+		sf::Vector2i maxIndex = sf::Vector2i(verticalAreas[i].x2, verticalAreas[i].y2);
 
 		// Set the current indicies x position to a random position within the section and its y position to the bottom of the section
 		sf::Vector2i currentIndex = sf::Vector2i(Random(minIndex.x, maxIndex.x), maxIndex.y + 1);
@@ -398,14 +410,14 @@ void GridGenerator::FillVerticalSections(Grid * grid, int nodeSize)
 		// Continue building up until the top of the section is reached
 		while (currentIndex.y > minIndex.y)
 		{
-			// Choose a random vertical build type (ladder, platform, or corner)
+			// Choose a random vertical build type (ladder, platform, or solid platform)
 			int buildType = Random(0, 2);
 
 			switch (buildType)
 			{
 			case 0: // Ladder
 			{
-				GenerateLadder(currentIndex, minIndex, maxIndex, grid, 2, 5);
+				GenerateLadder(currentIndex, minIndex, maxIndex, grid, 2, nodeSize / 2);
 				break;
 			}
 			case 1: // Platform
@@ -413,9 +425,9 @@ void GridGenerator::FillVerticalSections(Grid * grid, int nodeSize)
 				GeneratePlatform(currentIndex, minIndex, maxIndex, grid, 2, nodeSize);
 				break;
 			}
-			case 2: // Corner
+			case 2: // Solid platform
 			{
-				GenerateCorner(currentIndex, minIndex, maxIndex, grid, 2, nodeSize / 2);
+				GenerateSolidPlatform(currentIndex, minIndex, maxIndex, grid, 2, nodeSize / 2);
 				break;
 			}
 			}
@@ -498,7 +510,7 @@ void GridGenerator::GeneratePlatform(sf::Vector2i & currentIndex, sf::Vector2i m
 	}
 }
 
-void GridGenerator::GenerateCorner(sf::Vector2i & currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid * grid, int minPlatformLength, int maxPlatformLength)
+void GridGenerator::GenerateSolidPlatform(sf::Vector2i & currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid * grid, int minPlatformLength, int maxPlatformLength)
 {
 	// Determine the length of the corner's platform and how far the player will have to jump to reach it
 	int verticalJumpDistance = 3;
@@ -531,10 +543,10 @@ void GridGenerator::GenerateCorner(sf::Vector2i & currentIndex, sf::Vector2i min
 	{
 		// Place the corner's start block
 		currentIndex.y -= verticalJumpDistance;
-		grid->SetBlockType(currentIndex, BlockType::Corner);
+		grid->SetBlockType(currentIndex, BlockType::Solid);
 
 		// Build out the corner's platform length
-		for (int i = 0; i < platformLength; i++)
+		for (int i = 1; i < platformLength; i++)
 		{
 			if (currentIndex.x + platformDirection >= minIndex.x && currentIndex.x + platformDirection <= maxIndex.x)
 			{
@@ -547,6 +559,29 @@ void GridGenerator::GenerateCorner(sf::Vector2i & currentIndex, sf::Vector2i min
 	{
 		// Stop if the corner's intended position is above the top of the section
 		currentIndex.y = minIndex.y;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void GridGenerator::FindAndSetCornerBlocks(Grid * grid)
+{
+	// Find all the corner blocks and set their type to corner
+	for (int x = 0; x < grid->GetDimensions().x; x++)
+	{
+		for (int y = 0; y < grid->GetDimensions().y; y++)
+		{
+			if (grid->GetBlockType(x, y) == BlockType::Solid)
+			{
+				BlockNeighbors blockNeighbors = grid->GetBlockNeighbors(x, y);
+
+				if ((blockNeighbors.Left == BlockType::Empty && blockNeighbors.TopLeft == BlockType::Empty && blockNeighbors.Top == BlockType::Empty) ||
+					(blockNeighbors.Right == BlockType::Empty && blockNeighbors.TopRight == BlockType::Empty && blockNeighbors.Top == BlockType::Empty))
+				{
+					grid->SetBlockType(sf::Vector2i(x, y), BlockType::Corner);
+				}
+			}
+		}
 	}
 }
 
@@ -634,6 +669,11 @@ int GridGenerator::NodeValueToGridValue(int index, int nodeSize)
 sf::Vector2i GridGenerator::NodeIndexToGridIndex(sf::Vector2i index, int nodeSize)
 {
 	return sf::Vector2i(NodeValueToGridValue(index.x, nodeSize), NodeValueToGridValue(index.y, nodeSize));
+}
+
+sf::Vector2f GridGenerator::NodeIndexToGridPosition(sf::Vector2i index, int nodeSize, int blockWidth, int blockHeight)
+{
+	return sf::Vector2f(NodeValueToGridValue(index.x, nodeSize) * blockWidth, NodeValueToGridValue(index.y, nodeSize) * blockHeight);
 }
 
 ////////////////////////////////////////////////////////////////////////

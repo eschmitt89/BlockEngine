@@ -27,24 +27,31 @@ public:
 private:
 	sf::Vector2i dimensions;
 	vector<vector<GridNode*>> nodes;
-	vector<Vector4i> horizontalSections;
-	vector<Vector4i> verticalSections;
+	vector<Vector4i> horizontalAreas;
+	vector<Vector4i> verticalAreas;
 	vector<GridRoom> rooms;
 	int roomNodeCount;
 
 	void CreateNodes();
-	void GenerateRooms(int roomCount, int minRoomSize, int maxRoomSize);
-	void GenerateDoors(int minDoors, int maxDoors);
+
+	void GenerateRooms(int roomCount, int minRoomSize, int maxRoomSize, int minDoors, int maxDoors);
+	void GenerateDoors(GridRoom room, int minDoors, int maxDoors);
 	void GenerateCorridors();
-	Grid* GenerateGrid(int nodeSize, int blockWidth, int blockHeight);
-	void FindHorizontalSections(Grid* grid, int nodeSize);
-	void FindVerticalSections(Grid* grid, int nodeSize);
-	void FillHorizontalSections(Grid* grid, int nodeSize);
-	void FillVerticalSections(Grid* grid, int nodeSize);
+
+	void FillRooms(Grid* grid, int nodeSize, int blockWidth, int blockHeight);
+	void FillCorridors(Grid* grid, int nodeSize);
+
+	void FindHorizontalAreas(Grid* grid, int nodeSize);
+	void FindVerticalAreas(Grid* grid, int nodeSize);
+
+	void FillHorizontalAreas(Grid* grid, int nodeSize);
+	void FillVerticalAreas(Grid* grid, int nodeSize);
 
 	void GenerateLadder(sf::Vector2i& currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid* grid, int minLadderHeight, int maxLadderHeight);
 	void GeneratePlatform(sf::Vector2i& currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid* grid, int minPlatformLength, int maxPlatformLength);
-	void GenerateCorner(sf::Vector2i& currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid* grid, int minPlatformLength, int maxPlatformLength);
+	void GenerateSolidPlatform(sf::Vector2i& currentIndex, sf::Vector2i minIndex, sf::Vector2i maxIndex, Grid* grid, int minPlatformLength, int maxPlatformLength);
+
+	void FindAndSetCornerBlocks(Grid* grid);
 
 	bool RoomOverlapsExistingRoom(sf::Vector2i roomPosition, sf::Vector2i roomSize);
 	void PlaceRoomNodes(sf::Vector2i roomPosition, sf::Vector2i roomSize);
@@ -56,6 +63,7 @@ private:
 
 	int NodeValueToGridValue(int index, int nodeSize);
 	sf::Vector2i NodeIndexToGridIndex(sf::Vector2i index, int nodeSize);
+	sf::Vector2f NodeIndexToGridPosition(sf::Vector2i index, int nodeSize, int blockWidth, int blockHeight);
 };
 
 #endif /* GridGenerator_hpp */
