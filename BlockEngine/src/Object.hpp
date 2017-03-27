@@ -14,6 +14,7 @@
 class Object
 {
 public:
+	Object(sf::Vector2f position, sf::Vector2f size);
 	Object(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size);
     virtual ~Object();
 
@@ -28,7 +29,7 @@ public:
 	void SetSize(sf::Vector2f size);
     
 protected:
-	sf::Sprite sprite;
+	sf::RectangleShape sprite;
 	sf::Vector2f position;
 	sf::Vector2f size;
 };

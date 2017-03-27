@@ -12,17 +12,28 @@
 
 Grid::Grid(int columns, int rows, int blockWidth, int blockHeight)
 {
-	LoadBlockSprites();
+	dimensions = sf::Vector2i(columns, rows);
+	blockSize = sf::Vector2f(blockWidth, blockHeight);
 
-	InitializeBlocks(columns, rows, blockWidth, blockHeight, BlockType::Solid);
+	for (int column = 0; column < dimensions.x; column++)
+	{
+		vector<BlockType> blockColumn;
+
+		for (int row = 0; row < dimensions.y; row++)
+		{
+			blockColumn.push_back(BlockType::Solid);
+		}
+
+		blocks.push_back(blockColumn);
+	}
+
+	LoadBlockTextures();
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 Grid::Grid(string fileName, int blockWidth, int blockHeight)
 {
-	LoadBlockSprites();
-
 	sf::Image gridImage;
 	gridImage.loadFromFile(resourcePath() + fileName);
 
@@ -40,6 +51,8 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 		blocks.push_back(blockColumn);
 	}
+
+	LoadBlockTextures();
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -47,26 +60,6 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 Grid::~Grid()
 {
 	Save("gridSave.png");
-}
-
-////////////////////////////////////////////////////////////////////////
-
-void Grid::InitializeBlocks(int columns, int rows, int blockWidth, int blockHeight, BlockType blockType)
-{
-	dimensions = sf::Vector2i(columns, rows);
-	blockSize = sf::Vector2f(blockWidth, blockHeight);
-
-	for (int column = 0; column < dimensions.x; column++)
-	{
-		vector<BlockType> blockColumn;
-
-		for (int row = 0; row < dimensions.y; row++)
-		{
-			blockColumn.push_back(blockType);
-		}
-
-		blocks.push_back(blockColumn);
-	}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -81,9 +74,9 @@ void Grid::Draw(sf::RenderWindow &window, Camera* camera)
         {
 			if (IsValidNonEmptyBlockIndex(column, row))
 			{
-				blockSprites[blocks[column][row]].setPosition(GetBlockPosition(column, row));
+				blockTextures[blocks[column][row]].setPosition(GetBlockPosition(column, row));
 
-				window.draw(blockSprites[blocks[column][row]]);
+				window.draw(blockTextures[blocks[column][row]]);
 			}
         }
     }
@@ -256,16 +249,25 @@ bool Grid::IsValidNonEmptyBlockIndex(int column, int row)
 
 ////////////////////////////////////////////////////////////////////////
 
-void Grid::LoadBlockSprites()
+void Grid::LoadBlockTextures()
 {
-	blockSprites[BlockType::Solid] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("whiteBlock"));
-	blockSprites[BlockType::Corner] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("whiteBlock"));
-	blockSprites[BlockType::Platform] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("platformBlock"));
-	blockSprites[BlockType::Ladder] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("ladderBlock"));
-	blockSprites[BlockType::LadderBottom] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("ladderBlock"));
-	blockSprites[BlockType::LadderTop] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("ladderBlock"));
-	blockSprites[BlockType::Liquid] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("waterBlock"));
-	blockSprites[BlockType::LiquidTop] = sf::Sprite(*ResourceManager::GetInstance().GetTexture("waterBlock"));
+	blockTextures[BlockType::Solid] = LoadBlockTexture("whiteBlock");
+	blockTextures[BlockType::Corner] = LoadBlockTexture("whiteBlock");
+	blockTextures[BlockType::Platform] = LoadBlockTexture("platformBlock");
+	blockTextures[BlockType::Ladder] = LoadBlockTexture("ladderBlock");
+	blockTextures[BlockType::LadderBottom] = LoadBlockTexture("ladderBlock");
+	blockTextures[BlockType::LadderTop] = LoadBlockTexture("ladderBlock");
+	blockTextures[BlockType::Liquid] = LoadBlockTexture("waterBlock");
+	blockTextures[BlockType::LiquidTop] = LoadBlockTexture("waterBlock");
+}
+
+////////////////////////////////////////////////////////////////////////
+
+sf::RectangleShape Grid::LoadBlockTexture(string textureName)
+{
+	sf::RectangleShape block(blockSize);
+	block.setTexture(ResourceManager::GetInstance().GetTexture(textureName));
+	return block;
 }
 
 ////////////////////////////////////////////////////////////////////////

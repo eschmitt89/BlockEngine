@@ -8,6 +8,22 @@
 
 #include "PhysicsObject.hpp"
 
+PhysicsObject::PhysicsObject(sf::Vector2f position, sf::Vector2f size)
+	: Object(position, size)
+{
+	gravity = 1200;
+	velocity = sf::Vector2f(10, 20);
+	acceleration = sf::Vector2f(0, gravity);
+	friction = sf::Vector2f(0.5, 0.5);
+	elasticity = 0.5;
+	mass = 1;
+
+	horizontalState = NotOnWall;
+	verticalState = InAir;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
 	: Object(texture, position, size)
 {

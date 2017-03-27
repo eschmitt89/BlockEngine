@@ -48,6 +48,9 @@
     <Filter Include="Source Files\Grid Generator">
       <UniqueIdentifier>{7ae96b2f-cdc0-4588-a0c2-7f0a44600d13}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Particles">
+      <UniqueIdentifier>{ebbbf3f3-4e24-4213-a1ba-e970b86bf6e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -128,6 +131,9 @@
     <ClInclude Include="src\GridRoom.hpp">
       <Filter>Source Files\Grid Generator</Filter>
     </ClInclude>
+    <ClInclude Include="src\Particle.hpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -189,6 +195,9 @@
     </ClCompile>
     <ClCompile Include="src\GridRoom.cpp">
       <Filter>Source Files\Grid Generator</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Particle.cpp">
+      <Filter>Source Files\Particles</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -25,8 +25,6 @@ public:
     Grid(int columns, int rows, int blockWidth, int blockHeight);
 	Grid(string fileName, int blockWidth, int blockHeight);
     ~Grid();
-
-	void InitializeBlocks(int columns, int rows, int blockWidth, int blockHeight, BlockType blockType);
     
     void Draw(sf::RenderWindow& window, Camera* camera);
 
@@ -50,11 +48,12 @@ public:
 
 private:
     vector<vector<BlockType>> blocks;
-	map<BlockType, sf::Sprite> blockSprites;
+	map<BlockType, sf::RectangleShape> blockTextures;
 	sf::Vector2i dimensions;
 	sf::Vector2f blockSize;
 
-	void LoadBlockSprites();
+	void LoadBlockTextures();
+	sf::RectangleShape LoadBlockTexture(string textureName);
 	void Save(string fileName);
 
 	sf::Color BlockTypeToColor(BlockType blockType);
