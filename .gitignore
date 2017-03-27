@@ -38,6 +38,7 @@
 *.idb
 *.DS_Store
 *.suo
+*.vc.db
 /BlockEngine.VC.VC.opendb
 /Debug
 /Release
