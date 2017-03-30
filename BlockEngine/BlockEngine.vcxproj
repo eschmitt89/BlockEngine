@@ -209,7 +209,6 @@
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\HomeScreen.cpp" />
-    <ClCompile Include="src\Keyframe.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MovementAxis.cpp" />
     <ClCompile Include="src\GridNode.cpp" />

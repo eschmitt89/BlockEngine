@@ -8,13 +8,17 @@
 
 #ifndef Keyframe_hpp
 #define Keyframe_hpp
-
+ 
 template <typename T>
 
 struct Keyframe 
 {
-	Keyframe(float key, const T& value);
-    ~Keyframe();
+	Keyframe<T>(float key, const T& value)
+	{
+		this->key = key;
+		this->value = value;
+	}
+    ~Keyframe<T>() { }
 
 	float key;
 	T value;

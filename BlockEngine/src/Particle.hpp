@@ -26,10 +26,13 @@ protected:
 	float currentDuration;
 
 	vector<Keyframe<sf::Color>> colorKeyframes;
+	vector<Keyframe<sf::Vector2f>> sizeKeyframes;
 
 	void AddColorKeyframe(float durationPercent, sf::Color color);
+	void AddSizeKeyframe(float durationPercent, sf::Vector2f size);
 
 	sf::Color ComputeColor(float durationPercent);
+	sf::Vector2f ComputeSize(float durationPercent);
 };
 
 #endif /* Particle_hpp */

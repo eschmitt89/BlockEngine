@@ -84,7 +84,7 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 	{
-		physicsManager->AddPhysicsObject(new Particle(GetMousePosition(window), sf::Vector2f(10,10), 5));
+		physicsManager->AddPhysicsObject(new Particle(GetMousePosition(window), sf::Vector2f(10,10), 1));
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	{
