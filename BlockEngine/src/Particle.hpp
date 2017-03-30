@@ -29,7 +29,7 @@ protected:
 
 	void AddColorKeyframe(float durationPercent, sf::Color color);
 
-	sf::Color GetCurrentColor(float durationPercent);
+	sf::Color ComputeColor(float durationPercent);
 };
 
 #endif /* Particle_hpp */
