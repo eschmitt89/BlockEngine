@@ -11,14 +11,14 @@
 
 #include "Object.hpp"
 #include "Block.hpp"
-#include "HorizontalState.hpp"
-#include "VerticalState.hpp"
+#include "XState.hpp"
+#include "YState.hpp"
 
 class PhysicsObject : public Object
 {
 public:
-	PhysicsObject(sf::Vector2f position, sf::Vector2f size);
 	PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size);
+	PhysicsObject(sf::Vector2f position, sf::Vector2f size) : PhysicsObject(nullptr, position, size) { }
     virtual ~PhysicsObject();
 
 	virtual void Update(float dt);
@@ -31,17 +31,16 @@ public:
 	sf::Vector2f GetVelocity();
 	float GetElasticity();
 	float GetMass();
+	bool GetExpired();
 
 	virtual void ResolveBlockCollisionX(Block block, float dt);
 	virtual void ResolveBlockCollisionY(Block block, float dt);
 	virtual void CollideWith(PhysicsObject* physicsObject);
 
-	static void ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block, float dt);
-	static void ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block, float dt);
-
 	typedef void(*ResolveBlockCollision)(PhysicsObject* physicsObject, Block block, float dt);
 
-	ResolveBlockCollision res;
+	static void ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block, float dt);
+	static void ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block, float dt);
 
 protected:
 	sf::Vector2f velocity;
@@ -52,8 +51,10 @@ protected:
 
 	float gravity;
 
-	HorizontalState horizontalState;
-	VerticalState verticalState;
+	XState xState;
+	YState yState;
+
+	bool expired;
 };
 
 #endif /* PhysicsObject_hpp */

@@ -110,12 +110,6 @@
     <ClInclude Include="src\KeyBindings.hpp">
       <Filter>Source Files\Player</Filter>
     </ClInclude>
-    <ClInclude Include="src\HorizontalState.hpp">
-      <Filter>Source Files\Physics Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="src\VerticalState.hpp">
-      <Filter>Source Files\Physics Manager</Filter>
-    </ClInclude>
     <ClInclude Include="src\MovementState.hpp">
       <Filter>Source Files\Player</Filter>
     </ClInclude>
@@ -132,6 +126,15 @@
       <Filter>Source Files\Grid Generator</Filter>
     </ClInclude>
     <ClInclude Include="src\Particle.hpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClInclude>
+    <ClInclude Include="src\XState.hpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YState.hpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Keyframe.hpp">
       <Filter>Source Files\Particles</Filter>
     </ClInclude>
   </ItemGroup>
@@ -197,6 +200,9 @@
       <Filter>Source Files\Grid Generator</Filter>
     </ClCompile>
     <ClCompile Include="src\Particle.cpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Keyframe.cpp">
       <Filter>Source Files\Particles</Filter>
     </ClCompile>
   </ItemGroup>

@@ -9,26 +9,22 @@
 #ifndef Block_hpp
 #define Block_hpp
 
-#include <SFML/Graphics.hpp>
+#include "Object.hpp"
 #include "BlockType.hpp"
 
 using namespace std;
 
-class Block
+class Block : public Object
 {
 public:
 	Block(BlockType type, sf::Vector2f position, sf::Vector2f size);
     ~Block();
 
 	BlockType GetType();
-	sf::Vector2f GetPosition();
-	sf::Vector2f GetSize();
-	sf::Vector2f GetCenter();
 
 private:
 	BlockType type;
-	sf::Vector2f position;
-	sf::Vector2f size;
+
 };
 
 #endif /* Block_hpp */

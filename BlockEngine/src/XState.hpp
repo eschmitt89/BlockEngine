@@ -1,19 +1,19 @@
 //
-//  HorizontalState.hpp
+//  XState.hpp
 //  BlockEngine
 //
 //  Created by Eric Schmitt on 3/2/17.
 //  Copyright © 2017 Eric Schmitt. All rights reserved.
 //
 
-#ifndef HorizontalState_hpp
-#define HorizontalState_hpp
+#ifndef XState_hpp
+#define XState_hpp
 
-enum HorizontalState
+enum XState
 {
 	OnWallLeft,
 	NotOnWall,
 	OnWallRight,
 };
 
-#endif /* HorizontalState_hpp */
+#endif /* XState_hpp */

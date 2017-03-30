@@ -1,19 +1,19 @@
 //
-//  VerticalState.hpp
+//  YState.hpp
 //  BlockEngine
 //
 //  Created by Eric Schmitt on 3/2/17.
 //  Copyright © 2017 Eric Schmitt. All rights reserved.
 //
 
-#ifndef VerticalState_hpp
-#define VerticalState_hpp
+#ifndef YState_hpp
+#define YState_hpp
 
-enum VerticalState
+enum YState
 {
 	OnCeiling,
 	InAir,
 	OnGround,
 };
 
-#endif /* VerticalState_hpp */
+#endif /* YState_hpp */

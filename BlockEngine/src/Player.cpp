@@ -50,7 +50,7 @@ void Player::Update(float dt)
 		velocity.y = movementAxis.y * movementSpeed;
 	}
 
-	if (movementState == TryGrabLedge && verticalState != InAir)
+	if (movementState == TryGrabLedge && yState != InAir)
 	{
 		movementState = MovementStateNone;
 	}
@@ -68,7 +68,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			movementAxis.x = XAxisLeft;
 		}
-		if (movementState == MovementStateNone && verticalState == InAir)
+		if (movementState == MovementStateNone && yState == InAir)
 		{
 			movementState = TryGrabLedge;
 		}
@@ -79,7 +79,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			movementAxis.x = XAxisRight;
 		}
-		if (movementState == MovementStateNone && verticalState == InAir)
+		if (movementState == MovementStateNone && yState == InAir)
 		{
 			movementState = TryGrabLedge;
 		}
@@ -144,7 +144,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::Jump))
 	{
-		if (verticalState == OnGround)
+		if (yState == OnGround)
 		{
 			if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveDown))
 			{
@@ -316,7 +316,7 @@ void Player::UpdateDebugText()
 {
 	stringstream ss;
 
-	switch (horizontalState)
+	switch (xState)
 	{
 	case OnWallLeft:
 		ss << "wall left \n";
@@ -331,7 +331,7 @@ void Player::UpdateDebugText()
 		break;
 	}
 
-	switch(verticalState)
+	switch(yState)
 	{
 		case OnCeiling:
 			ss << "on ceiling \n";

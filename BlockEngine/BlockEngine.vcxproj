@@ -181,6 +181,7 @@
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
     <ClInclude Include="src\KeyBindings.hpp" />
+    <ClInclude Include="src\Keyframe.hpp" />
     <ClInclude Include="src\MovementAxis.hpp" />
     <ClInclude Include="src\GridNode.hpp" />
     <ClInclude Include="src\Object.hpp" />
@@ -195,8 +196,8 @@
     <ClInclude Include="src\ResourcePath.hpp" />
     <ClInclude Include="src\ScreenManager.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
-    <ClInclude Include="src\HorizontalState.hpp" />
-    <ClInclude Include="src\VerticalState.hpp" />
+    <ClInclude Include="src\XState.hpp" />
+    <ClInclude Include="src\YState.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AbstractScreen.cpp" />
@@ -208,6 +209,7 @@
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\HomeScreen.cpp" />
+    <ClCompile Include="src\Keyframe.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MovementAxis.cpp" />
     <ClCompile Include="src\GridNode.cpp" />

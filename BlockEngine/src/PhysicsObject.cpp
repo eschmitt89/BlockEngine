@@ -8,22 +8,6 @@
 
 #include "PhysicsObject.hpp"
 
-PhysicsObject::PhysicsObject(sf::Vector2f position, sf::Vector2f size)
-	: Object(position, size)
-{
-	gravity = 1200;
-	velocity = sf::Vector2f(10, 20);
-	acceleration = sf::Vector2f(0, gravity);
-	friction = sf::Vector2f(0.5, 0.5);
-	elasticity = 0.5;
-	mass = 1;
-
-	horizontalState = NotOnWall;
-	verticalState = InAir;
-}
-
-////////////////////////////////////////////////////////////////////////
-
 PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
 	: Object(texture, position, size)
 {
@@ -34,8 +18,10 @@ PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, 
 	elasticity = 0.5;
 	mass = 1;
 
-	horizontalState = NotOnWall;
-	verticalState = InAir;
+	xState = NotOnWall;
+	yState = InAir;
+
+	expired = false;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -56,7 +42,7 @@ void PhysicsObject::Update(float dt)
 
 void PhysicsObject::UpdateX(float dt)
 {
-	horizontalState = NotOnWall;
+	xState = NotOnWall;
 
 	velocity.x += acceleration.x * dt;
 	position.x += velocity.x * dt;
@@ -66,7 +52,7 @@ void PhysicsObject::UpdateX(float dt)
 
 void PhysicsObject::UpdateY(float dt)
 {
-	verticalState = InAir;
+	yState = InAir;
 
 	velocity.y += acceleration.y * dt;
 	position.y += velocity.y * dt;
@@ -102,19 +88,24 @@ float PhysicsObject::GetMass()
 
 ////////////////////////////////////////////////////////////////////////
 
+bool PhysicsObject::GetExpired()
+{
+	return expired;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 void PhysicsObject::ResolveBlockCollisionX(Block block, float dt)
 {
 	if (velocity.x < 0)
 	{
-		// Moving left
+		xState = OnWallLeft;
 		position.x = block.GetPosition().x + block.GetSize().x;
-		horizontalState = OnWallLeft;
 	}
 	else
 	{
-		// Moving right
+		xState = OnWallRight;
 		position.x = block.GetPosition().x - size.x;
-		horizontalState = OnWallRight;
 	}
 
 	velocity.x *= -elasticity;
@@ -127,15 +118,13 @@ void PhysicsObject::ResolveBlockCollisionY(Block block, float dt)
 {
 	if (velocity.y < 0)
 	{
-		// Moving up
+		yState = OnCeiling;
 		position.y = block.GetPosition().y + block.GetSize().y;
-		verticalState = OnCeiling;
 	}
 	else
 	{
-		// Moving down
+		yState = OnGround;
 		position.y = block.GetPosition().y - size.y;
-		verticalState = OnGround;
 	}
 
 	velocity.x *= pow(1 - friction.x, dt);

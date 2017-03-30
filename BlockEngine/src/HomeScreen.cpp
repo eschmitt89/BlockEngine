@@ -9,6 +9,7 @@
 #include "HomeScreen.hpp"
 #include "GridGenerator.hpp"
 #include "ResourceManager.hpp"
+#include "Particle.hpp"
 #include <sstream>
 
 HomeScreen::HomeScreen() 
@@ -80,12 +81,10 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	{
 		grid->SetBlockType(GetMousePosition(window), BlockType::LiquidTop);
 	}
-	
-	
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
 	{
-		physicsManager->AddPhysicsObject(new PhysicsObject(ResourceManager::GetInstance().GetTexture("whiteBlock"), GetMousePosition(window), sf::Vector2f(10,10)));
+		physicsManager->AddPhysicsObject(new Particle(GetMousePosition(window), sf::Vector2f(10,10), 5));
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	{

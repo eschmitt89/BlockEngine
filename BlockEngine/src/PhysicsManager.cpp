@@ -40,6 +40,13 @@ void PhysicsManager::Update(float dt)
 		HandleGridCollisions(physicsObjects[i], PhysicsObject::ResolveBlockCollisionYFunction, dt);
 
 		HandlePhysicsObjectCollisions(i, &collisionMap);
+
+		if (physicsObjects[i]->GetExpired())
+		{
+			delete physicsObjects[i];
+			physicsObjects.erase(physicsObjects.begin() + i);
+			i--;
+		}
 	}
 }
 

@@ -534,7 +534,7 @@ void GridGenerator::GenerateSolidPlatform(sf::Vector2i & currentIndex, sf::Vecto
 {
 	// Determine the length of the corner's platform and how far the player will have to jump to reach it
 	int verticalJumpDistance = SOLID_PLATFORM_JUMP_DISTANCE;
-	int horizontalJumpDistance = Random(1, 3);
+	int horizontalJumpDistance = Random(2, 3);
 	int horizontalJumpDirection = Random(0, 1) == 0 ? -1 : 1;
 	int platformLength = Random(minPlatformLength, maxPlatformLength);
 
@@ -600,8 +600,8 @@ void GridGenerator::FindAndSetCornerBlocks(Grid * grid)
 			{
 				BlockNeighbors blockNeighbors = grid->GetBlockNeighbors(x, y);
 
-				if ((blockNeighbors.Left == BlockType::Empty && blockNeighbors.TopLeft != BlockType::Solid && blockNeighbors.TopLeft != BlockType::Corner && blockNeighbors.Top == BlockType::Empty) ||
-					(blockNeighbors.Right == BlockType::Empty && blockNeighbors.TopRight != BlockType::Solid && blockNeighbors.TopRight != BlockType::Corner && blockNeighbors.Top == BlockType::Empty))
+				if ((blockNeighbors.Left == BlockType::Empty && blockNeighbors.TopLeft != BlockType::Solid && blockNeighbors.TopLeft != BlockType::Corner && blockNeighbors.Top != BlockType::Solid && blockNeighbors.Top != BlockType::Corner) ||
+					(blockNeighbors.Right == BlockType::Empty && blockNeighbors.TopRight != BlockType::Solid && blockNeighbors.TopRight != BlockType::Corner && blockNeighbors.Top != BlockType::Solid && blockNeighbors.Top != BlockType::Corner))
 				{
 					grid->SetBlockType(sf::Vector2i(x, y), BlockType::Corner);
 				}

@@ -14,8 +14,8 @@
 class Object
 {
 public:
-	Object(sf::Vector2f position, sf::Vector2f size);
 	Object(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size);
+	Object(sf::Vector2f position, sf::Vector2f size) : Object(nullptr, position, size) { }
     virtual ~Object();
 
 	virtual void Update(float dt);

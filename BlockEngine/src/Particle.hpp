@@ -14,14 +14,21 @@
 class Particle : public PhysicsObject
 {
 public:
-	Particle(sf::Vector2f position, sf::Vector2f size);
-	Particle(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size);
+	Particle(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size, float duration);
+	Particle(sf::Vector2f position, sf::Vector2f size, float duration) : Particle(nullptr, position, size, duration) { }
     virtual ~Particle();
     
+	virtual void Update(float dt);
+
 protected:
-	sf::RectangleShape sprite;
-	sf::Vector2f position;
-	sf::Vector2f size;
+	float totalDuration;
+	float currentDuration;
+
+	map<float, sf::Vector2f> SizeKeyframes;
+	map<float, sf::Color> ColorKeyframes;
+
+	sf::Color GetCurrentColor(float durationPercent);
+	sf::Vector2f GetCurrentSize(float durationPercent);
 };
 
 #endif /* Particle_hpp */

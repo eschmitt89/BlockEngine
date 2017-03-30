@@ -8,14 +8,6 @@
 
 #include "Object.hpp"
 
-Object::Object(sf::Vector2f position, sf::Vector2f size)
-{
-	SetPosition(position);
-	SetSize(size);
-}
-
-////////////////////////////////////////////////////////////////////////
-
 Object::Object(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
 {
 	sprite.setTexture(texture);
@@ -62,7 +54,7 @@ sf::Vector2f Object::GetSize()
 
 sf::Vector2f Object::GetCenter()
 {
-	return  position + (size * 0.5f);
+	return position + (size * 0.5f);
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -9,10 +9,9 @@
 #include "Block.hpp"
 
 Block::Block(BlockType type, sf::Vector2f position, sf::Vector2f size)
+	:Object(position, size)
 {
 	this->type = type;
-	this->position = position;
-	this->size = size;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -30,22 +29,3 @@ BlockType Block::GetType()
 }
 
 ////////////////////////////////////////////////////////////////////////
-
-sf::Vector2f Block::GetPosition()
-{
-	return position;
-}
-
-////////////////////////////////////////////////////////////////////////
-
-sf::Vector2f Block::GetSize()
-{
-	return size;
-}
-
-////////////////////////////////////////////////////////////////////////
-
-sf::Vector2f Block::GetCenter()
-{
-	return position + (size * 0.5f);
-}
