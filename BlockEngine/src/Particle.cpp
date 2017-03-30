@@ -13,9 +13,12 @@ Particle::Particle(const sf::Texture* texture, sf::Vector2f position, sf::Vector
 {
 	this->currentDuration = 0;
 	this->totalDuration = duration;
-
-	ColorKeyframes[0] = sf::Color::White;
-	ColorKeyframes[1] = sf::Color::Red;
+	
+	AddColorKeyframe(0.0, sf::Color::White);
+	AddColorKeyframe(0.25, sf::Color::Red);
+	AddColorKeyframe(0.5, sf::Color::Green);
+	AddColorKeyframe(0.75, sf::Color::Blue);
+	AddColorKeyframe(1.0, sf::Color::Black);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -35,8 +38,7 @@ void Particle::Update(float dt)
 
 	float durationPercent = currentDuration / totalDuration;
 
-	sprite.setFillColor(GetCurrentColor(durationPercent));
-	sprite.setSize(GetCurrentSize(durationPercent));
+	sprite.setFillColor(ComputeColor(durationPercent));
 
 	if (currentDuration >= totalDuration)
 	{
@@ -44,13 +46,39 @@ void Particle::Update(float dt)
 	}
 }
 
-sf::Color Particle::GetCurrentColor(float durationPercent)
+////////////////////////////////////////////////////////////////////////
+
+void Particle::AddColorKeyframe(float durationPercent, sf::Color color)
 {
-	//for (int i = 0; i < )
-	return sf::Color();
+	colorKeyframes.push_back(Keyframe<sf::Color>(durationPercent, color));
 }
 
-sf::Vector2f Particle::GetCurrentSize(float durationPercent)
+////////////////////////////////////////////////////////////////////////
+
+sf::Color Particle::ComputeColor(float durationPercent)
 {
-	return sf::Vector2f();
+	Keyframe<sf::Color> startColor = Keyframe<sf::Color>(0, sf::Color::White);
+	Keyframe<sf::Color> endColor = Keyframe<sf::Color>(1, sf::Color::White);
+
+	for (int i = colorKeyframes.size() - 1; i >= 0; i--)
+	{
+		if (colorKeyframes[i].key <= durationPercent)
+		{
+			startColor = colorKeyframes[i];
+			if (i < colorKeyframes.size() - 1)
+			{
+				endColor = colorKeyframes[i + 1];
+			}
+			break;
+		}
+	}
+
+	float transitionPercent = (durationPercent - startColor.key) / (endColor.key - startColor.key);
+
+	int red = startColor.value.r + (transitionPercent * (endColor.value.r - startColor.value.r));
+	int green = startColor.value.g + (transitionPercent * (endColor.value.g - startColor.value.g));
+	int blue = startColor.value.b + (transitionPercent * (endColor.value.b - startColor.value.b));
+	int alpha = startColor.value.a + (transitionPercent * (endColor.value.a - startColor.value.a));
+
+	return sf::Color(red, green, blue, alpha);
 }

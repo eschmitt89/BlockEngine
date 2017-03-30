@@ -9,12 +9,15 @@
 #ifndef Keyframe_hpp
 #define Keyframe_hpp
 
+template <typename T>
+
 struct Keyframe 
 {
-	Keyframe();
-    virtual ~Keyframe();
+	Keyframe(float key, const T& value);
+    ~Keyframe();
 
-	
+	float key;
+	T value;
 };
 
 #endif /* Keyframe_hpp */

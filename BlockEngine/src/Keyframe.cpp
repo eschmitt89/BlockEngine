@@ -6,18 +6,25 @@
 //  Copyright © 2017 Eric Schmitt. All rights reserved.
 //
 
+#include "SFML/Graphics.hpp"
 #include "Keyframe.hpp"
 
-Keyframe::Keyframe()
+template<typename T>
+Keyframe<T>::Keyframe(float key, const T & value)
+{
+	this->key = key;
+	this->value = value;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+template<typename T>
+Keyframe<T>::~Keyframe()
 {
 
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-Keyframe::~Keyframe()
-{
-    
-}
-
-////////////////////////////////////////////////////////////////////////
+template class Keyframe<sf::Vector2f>;
+template class Keyframe<sf::Color>;

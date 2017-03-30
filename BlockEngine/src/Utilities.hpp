@@ -84,7 +84,6 @@ int inline Random(int min, int max)
 	return (rand() % (max - min + 1)) + min;
 }
 
-
 ////////////////////////////////////////////////////////////////////////
 
 float inline Random()
