@@ -121,4 +121,61 @@ struct Vector4i
 	}
 };
 
+////////////////////////////////////////////////////////////////////////
+
+template <typename T> struct Keyframe
+{
+	Keyframe<T>() { }
+	Keyframe<T>(float key, const T& value)
+	{
+		this->key = key;
+		this->value = value;
+	}
+	~Keyframe<T>() { }
+
+	float key;
+	T value;
+};
+
+template <typename T> struct KeyFrameTransition
+{
+	KeyFrameTransition<T>() { }
+	KeyFrameTransition<T>(Keyframe<T> start, Keyframe<T> end)
+	{
+		this->start = start;
+		this->end = end;
+		this->percent = 0;
+	}
+
+	Keyframe<T> start;
+	Keyframe<T> end;
+	float percent;
+};
+
+////////////////////////////////////////////////////////////////////////
+
+template<typename T> inline KeyFrameTransition<T> FindTransitionPoints(vector<Keyframe<T>> keyframes, float key)
+{
+	KeyFrameTransition<T> transition;
+
+	for (int i = 0; i < keyframes.size(); i++)
+	{
+		if (keyframes[i].key >= key)
+		{
+			transition.end = keyframes[i];
+
+			if (i > 0)
+			{
+				transition.start = keyframes[i - 1];
+			}
+
+			break;
+		}
+	}
+
+	transition.percent = (key - transition.start.key) / (transition.end.key - transition.start.key);
+
+	return transition;
+}
+
 #endif /* Utilties_hpp */

@@ -181,7 +181,6 @@
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
     <ClInclude Include="src\KeyBindings.hpp" />
-    <ClInclude Include="src\Keyframe.hpp" />
     <ClInclude Include="src\MovementAxis.hpp" />
     <ClInclude Include="src\GridNode.hpp" />
     <ClInclude Include="src\Object.hpp" />
@@ -195,6 +194,7 @@
     <ClInclude Include="src\ResourceManager.hpp" />
     <ClInclude Include="src\ResourcePath.hpp" />
     <ClInclude Include="src\ScreenManager.hpp" />
+    <ClInclude Include="src\TransitionParticle.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
     <ClInclude Include="src\XState.hpp" />
     <ClInclude Include="src\YState.hpp" />
@@ -221,6 +221,7 @@
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\ResourcePath.cpp" />
     <ClCompile Include="src\ScreenManager.cpp" />
+    <ClCompile Include="src\TransitionParticle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\icon.png" />

@@ -10,7 +10,7 @@
 #define Particle_hpp
 
 #include "PhysicsObject.hpp"
-#include "Keyframe.hpp"
+#include "Utilities.hpp"
 
 class Particle : public PhysicsObject
 {
@@ -22,17 +22,7 @@ public:
 	virtual void Update(float dt);
 
 protected:
-	float totalDuration;
-	float currentDuration;
-
-	vector<Keyframe<sf::Color>> colorKeyframes;
-	vector<Keyframe<sf::Vector2f>> sizeKeyframes;
-
-	void AddColorKeyframe(float durationPercent, sf::Color color);
-	void AddSizeKeyframe(float durationPercent, sf::Vector2f size);
-
-	sf::Color ComputeColor(float durationPercent);
-	sf::Vector2f ComputeSize(float durationPercent);
+	float duration;
 };
 
 #endif /* Particle_hpp */
