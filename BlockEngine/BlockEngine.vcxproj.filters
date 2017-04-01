@@ -137,6 +137,9 @@
     <ClInclude Include="src\TransitionParticle.hpp">
       <Filter>Source Files\Particles</Filter>
     </ClInclude>
+    <ClInclude Include="src\Emitter.hpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -203,6 +206,9 @@
       <Filter>Source Files\Particles</Filter>
     </ClCompile>
     <ClCompile Include="src\TransitionParticle.cpp">
+      <Filter>Source Files\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Emitter.cpp">
       <Filter>Source Files\Particles</Filter>
     </ClCompile>
   </ItemGroup>

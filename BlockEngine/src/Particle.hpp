@@ -22,7 +22,7 @@ public:
 	virtual void Update(float dt);
 
 protected:
-	float duration;
+	float remainingDuration;
 };
 
 #endif /* Particle_hpp */

@@ -36,7 +36,7 @@ void TransitionParticle::Update(float dt)
 {
 	Particle::Update(dt);
 
-	float durationPercent = 1 - (duration / totalDuration);
+	float durationPercent = 1 - (remainingDuration / totalDuration);
 
 	UpdateColor(durationPercent);
 	UpdateSize(durationPercent);
@@ -63,7 +63,6 @@ void TransitionParticle::UpdateColor(float durationPercent)
 	if (colorKeyframes.size() == 0)
 	{
 		return;
-
 	}
 
 	KeyFrameTransition<sf::Color> transition = FindTransitionPoints(colorKeyframes, durationPercent);

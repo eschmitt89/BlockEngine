@@ -6,33 +6,30 @@
 //  Copyright © 2017 Eric Schmitt. All rights reserved.
 //
 
-#include "Particle.hpp"
+#include "Emitter.hpp"
 
-Particle::Particle(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size, float duration)
-	:PhysicsObject(texture, position, size)
+Emitter::Emitter(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size, float duration)
+	:Particle(texture, position, size, duration)
 {
-	this->remainingDuration = duration;
 
-	velocity = sf::Vector2f(Random(-20, 20), Random(-50, -100));
-	acceleration = sf::Vector2f();
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-Particle::~Particle()
+Emitter::~Emitter()
 {
     
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void Particle::Update(float dt)
+void Emitter::Update(float dt)
 {
 	PhysicsObject::Update(dt);
 
-	remainingDuration -= dt;
+	duration -= dt;
 
-	if (remainingDuration <= 0)
+	if (duration <= 0)
 	{
 		expired = true;
 	}
