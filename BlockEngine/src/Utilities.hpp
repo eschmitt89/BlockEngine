@@ -180,4 +180,62 @@ template<typename T> inline KeyFrameTransition<T> FindTransitionPoints(vector<Ke
 	return transition;
 }
 
+////////////////////////////////////////////////////////////////////////
+
+template <typename T> struct DropRate
+{
+	DropRate<T>() { }
+	DropRate<T>(const T& type, float percent)
+	{
+		this->type = type;
+		this->percent = percent;
+	}
+	~DropRate<T>() { }
+
+	T type;
+	float percent;
+};
+
+////////////////////////////////////////////////////////////////////////
+
+template <typename T> class DropRateCollection
+{
+public:
+	DropRateCollection<T>() { }
+	~DropRateCollection<T>() { }
+
+	void AddDropRate(T type, float percent)
+	{
+		if (dropRates.size() > 0)
+		{
+			dropRates.push_back(DropRate<T>(type, dropRates[dropRates.size() - 1].percent + percent));
+		}
+		else
+		{
+			dropRates.push_back(DropRate<T>(type, percent));
+		}
+
+		if (dropRates[dropRates.size() - 1].percent > 1.0)
+		{
+			throw new exception("Total drop % of collection exceeds 100%.");
+		}
+	}
+
+	T Roll()
+	{
+		float roll = Random(1, 1000) / 1000.f;
+
+		for (int i = 0; i < dropRates.size(); i++)
+		{
+			if (roll <= dropRates[i].percent)
+			{
+				return dropRates[i].type;
+			}
+		}
+	}
+
+private:
+	vector<DropRate<T>> dropRates;
+};
+
 #endif /* Utilties_hpp */

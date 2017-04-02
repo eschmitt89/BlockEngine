@@ -10,6 +10,7 @@
 #define Item_hpp
 
 #include "ItemType.hpp"
+#include "Utilities.hpp"
 
 class Item
 {
@@ -19,9 +20,6 @@ public:
 
 protected:
 	ItemType itemType;
-
-	void Generate();
-
 
 };
 

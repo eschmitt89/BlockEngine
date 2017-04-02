@@ -11,12 +11,12 @@
 
 enum ArmorType
 {
-	ArmorType_Head = 0,
-	ArmorType_Chest = 1,
-	ArmorType_Hands = 2,
-	ArmorType_Waist = 3,
-	ArmorType_Legs = 4,
-	ArmorType_Feet = 5
+	ArmorType_Head = 1,
+	ArmorType_Chest = 2,
+	ArmorType_Hands = 3,
+	ArmorType_Waist = 4,
+	ArmorType_Legs = 5,
+	ArmorType_Feet = 6
 };
 
 #endif /* ArmorType_hpp */

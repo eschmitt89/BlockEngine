@@ -32,6 +32,21 @@ WaterBlock.png
 platformBlock
 PlatformBlock.png
 
+armor
+Armor.png
+
+weapon
+Weapon.png
+
+scroll
+Scroll.png
+
+potion
+Potion.png
+
+gem
+Gem.png
+
 #####################################
 $SOUNDS
 #####################################

@@ -12,7 +12,7 @@
 #include "ResourceManager.hpp"
 #include "TransitionParticle.hpp"
 #include "Emitter.hpp"
-#include "Armor.hpp"
+#include "ItemGenerator.hpp"
 #include <sstream>
 
 HomeScreen::HomeScreen() 
@@ -93,7 +93,8 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::M))
 	{
-		Armor a = Armor(ArmorType_Head, EquipmentRarity_Artifact, 10);
+		ItemGenerator * i = new ItemGenerator();
+		i->Generate(10);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	{

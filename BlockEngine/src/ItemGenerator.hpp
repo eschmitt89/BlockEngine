@@ -10,6 +10,7 @@
 #define ItemGenerator_hpp
 
 #include "Armor.hpp"
+#include "Weapon.hpp"
 
 class ItemGenerator
 {
@@ -17,7 +18,16 @@ public:
 	ItemGenerator();
     virtual ~ItemGenerator();
 
-	static Item* Generate();
+	Item* Generate(int level);
+	Equipment* GenerateEquipment(int level);
+	Armor* GenerateArmor(int level);
+	Weapon* GenerateWeapon();
+
+private:
+	DropRateCollection<ItemType> ItemDropRates;
+	DropRateCollection<EquipmentType> EquipmentDropRates;
+
+	int GetStatValue(int maxValue, int level);
 
 };
 

@@ -11,11 +11,11 @@
 
 enum EquipmentStat
 {
-	EquipmentStat_Health,
-	EquipmentStat_Armor,
-	EquipmentStat_Crit,
-	EquipmentStat_Dodge,
-	EquipmentStat_Power
+	EquipmentStat_Health = 1,
+	EquipmentStat_Armor = 2,
+	EquipmentStat_Crit = 3,
+	EquipmentStat_Dodge = 4,
+	EquipmentStat_Power = 5
 };
 
 #endif /* EquipmentStat_hpp */

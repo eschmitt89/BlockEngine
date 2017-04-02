@@ -8,10 +8,11 @@
 
 #include "Weapon.hpp"
 
-Weapon::Weapon(WeaponType weaponType, EquipmentRarity rarity, int level)
-	:Equipment(EquipmentType_Weapon, rarity, level)
+Weapon::Weapon(WeaponType weaponType, WeaponSlot weaponSlot, EquipmentRarity rarity, int level, int health, int armor, int crit, int dodge, int power)
+	:Equipment(EquipmentType_Weapon, rarity, level, health, armor, crit, dodge, power)
 {
 	this->weaponType = weaponType;
+	this->weaponSlot = weaponSlot;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -19,13 +20,6 @@ Weapon::Weapon(WeaponType weaponType, EquipmentRarity rarity, int level)
 Weapon::~Weapon()
 {
     
-}
-
-////////////////////////////////////////////////////////////////////////
-
-void Weapon::GenerateStats(EquipmentRarity rarity, int level)
-{
-
 }
 
 ////////////////////////////////////////////////////////////////////////

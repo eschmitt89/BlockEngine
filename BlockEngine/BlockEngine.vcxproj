@@ -207,6 +207,7 @@
     <ClInclude Include="src\TransitionParticle.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
     <ClInclude Include="src\Weapon.hpp" />
+    <ClInclude Include="src\WeaponSlot.hpp" />
     <ClInclude Include="src\WeaponType.hpp" />
     <ClInclude Include="src\XState.hpp" />
     <ClInclude Include="src\YState.hpp" />

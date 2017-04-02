@@ -15,14 +15,11 @@
 class Armor : public Equipment
 {
 public:
-	Armor(ArmorType armorType, EquipmentRarity rarity, int level);
+	Armor(ArmorType armorType, EquipmentRarity rarity, int level, int health, int armor, int crit, int dodge, int power);
     virtual ~Armor();
 
 protected:
 	ArmorType armorType;
-
-private:
-	void GenerateStats(EquipmentRarity rarity, int level);
 };
 
 #endif /* Armor_hpp */

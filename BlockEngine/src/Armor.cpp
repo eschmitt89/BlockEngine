@@ -8,8 +8,8 @@
 
 #include "Armor.hpp"
 
-Armor::Armor(ArmorType armorType, EquipmentRarity rarity, int level)
-	:Equipment(EquipmentType_Armor, rarity, level)
+Armor::Armor(ArmorType armorType, EquipmentRarity rarity, int level, int health, int armor, int crit, int dodge, int power)
+	:Equipment(EquipmentType_Armor, rarity, level, health, armor, crit, dodge, power)
 {
 	this->armorType = armorType;
 }
@@ -20,13 +20,3 @@ Armor::~Armor()
 {
     
 }
-
-////////////////////////////////////////////////////////////////////////
-
-void Armor::GenerateStats(EquipmentRarity rarity, int level)
-{
-
-}
-
-////////////////////////////////////////////////////////////////////////
-

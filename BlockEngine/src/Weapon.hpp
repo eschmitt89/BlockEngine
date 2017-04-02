@@ -11,18 +11,19 @@
 
 #include "Equipment.hpp"
 #include "WeaponType.hpp"
+#include "WeaponSlot.hpp"
 
 class Weapon : public Equipment
 {
 public:
-	Weapon(WeaponType weaponType, EquipmentRarity rarity, int level);
+	Weapon(WeaponType weaponType, WeaponSlot weaponSlot, EquipmentRarity rarity, int level, int health, int armor, int crit, int dodge, int power);
     virtual ~Weapon();
 
 protected:
 	WeaponType weaponType;
+	WeaponSlot weaponSlot;
 
 private:
-	void GenerateStats(EquipmentRarity rarity, int level);
 };
 
 #endif /* Weapon_hpp */
