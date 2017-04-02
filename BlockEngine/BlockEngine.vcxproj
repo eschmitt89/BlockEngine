@@ -171,17 +171,25 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp" />
+    <ClInclude Include="src\Armor.hpp" />
+    <ClInclude Include="src\ArmorType.hpp" />
     <ClInclude Include="src\Block.hpp" />
     <ClInclude Include="src\BlockNeighbors.hpp" />
     <ClInclude Include="src\BlockType.hpp" />
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Emitter.hpp" />
+    <ClInclude Include="src\Equipment.hpp" />
+    <ClInclude Include="src\EquipmentRarity.hpp" />
+    <ClInclude Include="src\EquipmentStat.hpp" />
+    <ClInclude Include="src\EquipmentType.hpp" />
     <ClInclude Include="src\GridGenerator.hpp" />
     <ClInclude Include="src\GridRoom.hpp" />
     <ClInclude Include="src\EventManager.hpp" />
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
     <ClInclude Include="src\Item.hpp" />
+    <ClInclude Include="src\ItemGenerator.hpp" />
+    <ClInclude Include="src\ItemType.hpp" />
     <ClInclude Include="src\KeyBindings.hpp" />
     <ClInclude Include="src\MovementAxis.hpp" />
     <ClInclude Include="src\GridNode.hpp" />
@@ -198,21 +206,26 @@
     <ClInclude Include="src\ScreenManager.hpp" />
     <ClInclude Include="src\TransitionParticle.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
+    <ClInclude Include="src\Weapon.hpp" />
+    <ClInclude Include="src\WeaponType.hpp" />
     <ClInclude Include="src\XState.hpp" />
     <ClInclude Include="src\YState.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\AbstractScreen.cpp" />
+    <ClCompile Include="src\Armor.cpp" />
     <ClCompile Include="src\Block.cpp" />
     <ClCompile Include="src\BlockNeighbors.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Emitter.cpp" />
+    <ClCompile Include="src\Equipment.cpp" />
     <ClCompile Include="src\GridGenerator.cpp" />
     <ClCompile Include="src\GridRoom.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\HomeScreen.cpp" />
     <ClCompile Include="src\Item.cpp" />
+    <ClCompile Include="src\ItemGenerator.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MovementAxis.cpp" />
     <ClCompile Include="src\GridNode.cpp" />
@@ -226,6 +239,7 @@
     <ClCompile Include="src\ResourcePath.cpp" />
     <ClCompile Include="src\ScreenManager.cpp" />
     <ClCompile Include="src\TransitionParticle.cpp" />
+    <ClCompile Include="src\Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\icon.png" />

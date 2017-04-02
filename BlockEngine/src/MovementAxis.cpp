@@ -10,8 +10,8 @@
 
 MovementAxis::MovementAxis()
 {
-	x = XAxisNone;
-	y = YAxisNone;
+	x = XAxis_None;
+	y = YAxis_None;
 }
 
 ////////////////////////////////////////////////////////////////////////

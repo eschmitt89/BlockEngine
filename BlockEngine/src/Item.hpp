@@ -9,13 +9,20 @@
 #ifndef Item_hpp
 #define Item_hpp
 
+#include "ItemType.hpp"
+
 class Item
 {
 public:
-	Item();
+	Item(ItemType itemType);
     virtual ~Item();
 
 protected:
+	ItemType itemType;
+
+	void Generate();
+
+
 };
 
 #endif /* Item_hpp */

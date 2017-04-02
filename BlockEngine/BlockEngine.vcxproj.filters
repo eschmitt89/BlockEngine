@@ -54,6 +54,15 @@
     <Filter Include="Source Files\Items">
       <UniqueIdentifier>{f591a458-7ec5-44e2-987e-f3f67279ced0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Items\Equipment">
+      <UniqueIdentifier>{2fd675d5-fe04-40d5-bb9a-cce019d074ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items\Equipment\Armor">
+      <UniqueIdentifier>{e7406928-f42e-4442-bdf7-0acba7bae0d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items\Equipment\Weapon">
+      <UniqueIdentifier>{d7fa3c25-edf4-417e-a6ca-2493ed7aa5e4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -146,6 +155,36 @@
     <ClInclude Include="src\Item.hpp">
       <Filter>Source Files\Items</Filter>
     </ClInclude>
+    <ClInclude Include="src\ItemType.hpp">
+      <Filter>Source Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Equipment.hpp">
+      <Filter>Source Files\Items\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EquipmentType.hpp">
+      <Filter>Source Files\Items\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Armor.hpp">
+      <Filter>Source Files\Items\Equipment\Armor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ArmorType.hpp">
+      <Filter>Source Files\Items\Equipment\Armor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EquipmentRarity.hpp">
+      <Filter>Source Files\Items\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EquipmentStat.hpp">
+      <Filter>Source Files\Items\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemGenerator.hpp">
+      <Filter>Source Files\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Weapon.hpp">
+      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WeaponType.hpp">
+      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -219,6 +258,18 @@
     </ClCompile>
     <ClCompile Include="src\Item.cpp">
       <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Equipment.cpp">
+      <Filter>Source Files\Items\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Armor.cpp">
+      <Filter>Source Files\Items\Equipment\Armor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemGenerator.cpp">
+      <Filter>Source Files\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Weapon.cpp">
+      <Filter>Source Files\Items\Equipment\Weapon</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

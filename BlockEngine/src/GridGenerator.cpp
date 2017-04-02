@@ -278,7 +278,7 @@ void GridGenerator::FillRooms(Grid * grid, int nodeSize, int blockWidth, int blo
 		sf::Vector2f roomPosition = NodeIndexToGridPosition(rooms[i].position, nodeSize, blockWidth, blockHeight);
 		sf::Vector2f roomSize = sf::Vector2f(NodeValueToGridValue(rooms[i].size.x - 1, nodeSize) * blockWidth, NodeValueToGridValue(rooms[i].size.y - 1, nodeSize) * blockHeight);
 
-		grid->SetBlockType(roomPosition, roomSize, BlockType::Empty);
+		grid->SetBlockType(roomPosition, roomSize, BlockType::BlockType_Empty);
 	}
 }
 
@@ -298,23 +298,23 @@ void GridGenerator::FillCorridors(Grid * grid, int nodeSize)
 			{
 				for (int j = 0; j < nodeSize; j++)
 				{
-					grid->SetBlockType(gridIndex.x + i, gridIndex.y + j, BlockType::Empty);
+					grid->SetBlockType(gridIndex.x + i, gridIndex.y + j, BlockType::BlockType_Empty);
 
 					if (node->leftNode)
 					{
-						grid->SetBlockType(gridIndex.x - (i + 1), gridIndex.y + j, BlockType::Empty);
+						grid->SetBlockType(gridIndex.x - (i + 1), gridIndex.y + j, BlockType::BlockType_Empty);
 					}
 					if (node->rightNode)
 					{
-						grid->SetBlockType(gridIndex.x + (i + 1), gridIndex.y + j, BlockType::Empty);
+						grid->SetBlockType(gridIndex.x + (i + 1), gridIndex.y + j, BlockType::BlockType_Empty);
 					}
 					if (node->upNode)
 					{
-						grid->SetBlockType(gridIndex.x + j, gridIndex.y - (i + 1), BlockType::Empty);
+						grid->SetBlockType(gridIndex.x + j, gridIndex.y - (i + 1), BlockType::BlockType_Empty);
 					}
 					if (node->downNode)
 					{
-						grid->SetBlockType(gridIndex.x + j, gridIndex.y + (i + 1), BlockType::Empty);
+						grid->SetBlockType(gridIndex.x + j, gridIndex.y + (i + 1), BlockType::BlockType_Empty);
 					}
 				}
 			}
@@ -338,11 +338,11 @@ void GridGenerator::FindHorizontalAreas(Grid * grid, int nodeSize)
 			// If the node is a horizontal section find its minimum (left) and maximum (right) indicies
 			if (node->leftNode || node->rightNode)
 			{
-				while (grid->GetBlockType(minGridIndex.x - 1, minGridIndex.y) != BlockType::Solid)
+				while (grid->GetBlockType(minGridIndex.x - 1, minGridIndex.y) != BlockType::BlockType_Solid)
 				{
 					minGridIndex.x--;
 				}
-				while (grid->GetBlockType(maxGridIndex.x + 1, maxGridIndex.y) != BlockType::Solid)
+				while (grid->GetBlockType(maxGridIndex.x + 1, maxGridIndex.y) != BlockType::BlockType_Solid)
 				{
 					maxGridIndex.x++;
 				}
@@ -373,11 +373,11 @@ void GridGenerator::FindVerticalAreas(Grid * grid, int nodeSize)
 			// If the node is a vertical section find its minimum (top) and maximum (bottom) indicies
 			if (node->upNode || node->downNode)
 			{
-				while (grid->GetBlockType(minGridIndex.x, minGridIndex.y - 1) != BlockType::Solid)
+				while (grid->GetBlockType(minGridIndex.x, minGridIndex.y - 1) != BlockType::BlockType_Solid)
 				{
 					minGridIndex.y--;
 				}
-				while (grid->GetBlockType(maxGridIndex.x, maxGridIndex.y + 1) != BlockType::Solid)
+				while (grid->GetBlockType(maxGridIndex.x, maxGridIndex.y + 1) != BlockType::BlockType_Solid)
 				{
 					maxGridIndex.y++;
 				}
@@ -466,7 +466,7 @@ void GridGenerator::GenerateLadder(sf::Vector2i & currentIndex, sf::Vector2i min
 		if (currentIndex.y - 1 > minIndex.y)
 		{
 			currentIndex.y--;
-			grid->SetBlockType(currentIndex, BlockType::Ladder);
+			grid->SetBlockType(currentIndex, BlockType::BlockType_Ladder);
 		}
 		else
 		{
@@ -507,7 +507,7 @@ void GridGenerator::GeneratePlatform(sf::Vector2i & currentIndex, sf::Vector2i m
 		// Place the platform's start block
 		int actualPlatformLength = 1;
 		currentIndex.y -= verticalJumpDistance;
-		grid->SetBlockType(currentIndex, BlockType::Platform);
+		grid->SetBlockType(currentIndex, BlockType::BlockType_Platform);
 
 		// Build out the platform's length
 		for (int i = 0; i < platformLength; i++)
@@ -516,7 +516,7 @@ void GridGenerator::GeneratePlatform(sf::Vector2i & currentIndex, sf::Vector2i m
 			{
 				actualPlatformLength++;
 				currentIndex.x += platformDirection;
-				grid->SetBlockType(currentIndex, BlockType::Platform);
+				grid->SetBlockType(currentIndex, BlockType::BlockType_Platform);
 			}
 		}
 
@@ -564,7 +564,7 @@ void GridGenerator::GenerateSolidPlatform(sf::Vector2i & currentIndex, sf::Vecto
 		int actualPlatformLength = 1;
 		int platformDirection = horizontalJumpDirection;
 		currentIndex.y -= verticalJumpDistance;
-		grid->SetBlockType(currentIndex, BlockType::Solid);
+		grid->SetBlockType(currentIndex, BlockType::BlockType_Solid);
 
 		// Build out the corner's platform length
 		for (int i = 1; i < platformLength; i++)
@@ -573,7 +573,7 @@ void GridGenerator::GenerateSolidPlatform(sf::Vector2i & currentIndex, sf::Vecto
 			{
 				actualPlatformLength++;
 				currentIndex.x += platformDirection;
-				grid->SetBlockType(currentIndex, BlockType::Solid);
+				grid->SetBlockType(currentIndex, BlockType::BlockType_Solid);
 			}
 		}
 
@@ -596,14 +596,14 @@ void GridGenerator::FindAndSetCornerBlocks(Grid * grid)
 	{
 		for (int y = 0; y < grid->GetDimensions().y; y++)
 		{
-			if (grid->GetBlockType(x, y) == BlockType::Solid)
+			if (grid->GetBlockType(x, y) == BlockType::BlockType_Solid)
 			{
 				BlockNeighbors blockNeighbors = grid->GetBlockNeighbors(x, y);
 
-				if ((blockNeighbors.Left == BlockType::Empty && blockNeighbors.TopLeft != BlockType::Solid && blockNeighbors.TopLeft != BlockType::Corner && blockNeighbors.Top != BlockType::Solid && blockNeighbors.Top != BlockType::Corner) ||
-					(blockNeighbors.Right == BlockType::Empty && blockNeighbors.TopRight != BlockType::Solid && blockNeighbors.TopRight != BlockType::Corner && blockNeighbors.Top != BlockType::Solid && blockNeighbors.Top != BlockType::Corner))
+				if ((blockNeighbors.Left == BlockType::BlockType_Empty && blockNeighbors.TopLeft != BlockType::BlockType_Solid && blockNeighbors.TopLeft != BlockType::BlockType_Corner && blockNeighbors.Top != BlockType::BlockType_Solid && blockNeighbors.Top != BlockType::BlockType_Corner) ||
+					(blockNeighbors.Right == BlockType::BlockType_Empty && blockNeighbors.TopRight != BlockType::BlockType_Solid && blockNeighbors.TopRight != BlockType::BlockType_Corner && blockNeighbors.Top != BlockType::BlockType_Solid && blockNeighbors.Top != BlockType::BlockType_Corner))
 				{
-					grid->SetBlockType(sf::Vector2i(x, y), BlockType::Corner);
+					grid->SetBlockType(sf::Vector2i(x, y), BlockType::BlockType_Corner);
 				}
 			}
 		}
@@ -619,17 +619,17 @@ void GridGenerator::FindAndSetLadderEnds(Grid * grid)
 	{
 		for (int y = 0; y < grid->GetDimensions().y; y++)
 		{
-			if (grid->GetBlockType(x, y) == BlockType::Ladder)
+			if (grid->GetBlockType(x, y) == BlockType::BlockType_Ladder)
 			{
 				BlockNeighbors blockNeighbors = grid->GetBlockNeighbors(x, y);
 
-				if (blockNeighbors.Top != BlockType::Ladder && blockNeighbors.Top != BlockType::LadderTop)
+				if (blockNeighbors.Top != BlockType::BlockType_Ladder && blockNeighbors.Top != BlockType::BlockType_LadderTop)
 				{
-					grid->SetBlockType(sf::Vector2i(x, y), BlockType::LadderTop);
+					grid->SetBlockType(sf::Vector2i(x, y), BlockType::BlockType_LadderTop);
 				}
-				if (blockNeighbors.Bottom != BlockType::Ladder)
+				if (blockNeighbors.Bottom != BlockType::BlockType_Ladder)
 				{
-					grid->SetBlockType(sf::Vector2i(x, y), BlockType::LadderBottom);
+					grid->SetBlockType(sf::Vector2i(x, y), BlockType::BlockType_LadderBottom);
 				}
 			}
 		}

@@ -11,16 +11,16 @@
 
 enum BlockType
 {
-	NoBlock = 'x',
-	Empty = '0',
-	Solid = '1',
-	Liquid = '2',
-	LiquidTop = '3',
-	Ladder = '4',
-	LadderTop = '5',
-	LadderBottom = '6',
-	Corner = '7',
-	Platform = '8'
+	BlockType_None = 'x',
+	BlockType_Empty = '0',
+	BlockType_Solid = '1',
+	BlockType_Liquid = '2',
+	BlockType_LiquidTop = '3',
+	BlockType_Ladder = '4',
+	BlockType_LadderTop = '5',
+	BlockType_LadderBottom = '6',
+	BlockType_Corner = '7',
+	BlockType_Platform = '8'
 };
 
 #endif /* BlockType_hpp */

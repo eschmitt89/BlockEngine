@@ -8,8 +8,9 @@
 
 #include "Item.hpp"
 
-Item::Item()
+Item::Item(ItemType itemType)
 {
+	this->itemType = itemType;
 }
 
 ////////////////////////////////////////////////////////////////////////

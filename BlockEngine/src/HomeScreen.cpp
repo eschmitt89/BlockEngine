@@ -12,6 +12,7 @@
 #include "ResourceManager.hpp"
 #include "TransitionParticle.hpp"
 #include "Emitter.hpp"
+#include "Armor.hpp"
 #include <sstream>
 
 HomeScreen::HomeScreen() 
@@ -49,45 +50,50 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 {
 	if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
 	{
-		grid->SetBlockType(GetMousePosition(window), BlockType::Solid);
+		grid->SetBlockType(GetMousePosition(window), BlockType::BlockType_Solid);
 	}
 	else if (sf::Mouse::isButtonPressed(sf::Mouse::Right))
 	{
-		grid->SetBlockType(GetMousePosition(window), BlockType::Empty);
+		grid->SetBlockType(GetMousePosition(window), BlockType::BlockType_Empty);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad8))
 	{
-		grid->SetBlockType(GetMousePosition(window), BlockType::LadderTop);
+		grid->SetBlockType(GetMousePosition(window), BlockType::BlockType_LadderTop);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad5))
 	{
-		grid->SetBlockType(GetMousePosition(window), BlockType::Ladder);
+		grid->SetBlockType(GetMousePosition(window), BlockType::BlockType_Ladder);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad2))
 	{
-		grid->SetBlockType(GetMousePosition(window), BlockType::LadderBottom);
+		grid->SetBlockType(GetMousePosition(window), BlockType::BlockType_LadderBottom);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad9))
 	{
-		grid->SetBlockType(GetMousePosition(window), BlockType::Corner);
+		grid->SetBlockType(GetMousePosition(window), BlockType::BlockType_Corner);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad7))
 	{
-		grid->SetBlockType(GetMousePosition(window), BlockType::Platform);
+		grid->SetBlockType(GetMousePosition(window), BlockType::BlockType_Platform);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad1))
 	{
-		grid->SetBlockType(GetMousePosition(window), BlockType::Liquid);
+		grid->SetBlockType(GetMousePosition(window), BlockType::BlockType_Liquid);
 	}
 	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Numpad3))
 	{
-		grid->SetBlockType(GetMousePosition(window), BlockType::LiquidTop);
+		grid->SetBlockType(GetMousePosition(window), BlockType::BlockType_LiquidTop);
 	}
 
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::P))
 	{
 		//physicsManager->AddPhysicsObject(new TransitionParticle(GetMousePosition(window), sf::Vector2f(3,3), 5));
 		physicsManager->AddPhysicsObject(new Emitter(new TransitionParticle(GetMousePosition(window), sf::Vector2f(3, 3), 5), GetMousePosition(window), sf::Vector2f(6, 6), 1));
+	}
+
+	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::M))
+	{
+		Armor a = Armor(ArmorType_Head, EquipmentRarity_Artifact, 10);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	{

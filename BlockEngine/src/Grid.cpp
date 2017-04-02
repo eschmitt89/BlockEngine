@@ -21,7 +21,7 @@ Grid::Grid(int columns, int rows, int blockWidth, int blockHeight)
 
 		for (int row = 0; row < dimensions.y; row++)
 		{
-			blockColumn.push_back(BlockType::Solid);
+			blockColumn.push_back(BlockType::BlockType_Solid);
 		}
 
 		blocks.push_back(blockColumn);
@@ -110,7 +110,7 @@ int Grid::GetBlockKey(int column, int row)
 
 BlockType Grid::GetBlockType(int column, int row)
 {
-	return IsValidBlockIndex(column, row) ? blocks[column][row] : BlockType::NoBlock;
+	return IsValidBlockIndex(column, row) ? blocks[column][row] : BlockType::BlockType_None;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -244,21 +244,21 @@ bool Grid::IsValidBlockIndex(sf::Vector2i blockIndex)
 
 bool Grid::IsValidNonEmptyBlockIndex(int column, int row)
 {
-	return IsValidBlockIndex(column, row) && blocks[column][row] != BlockType::Empty;
+	return IsValidBlockIndex(column, row) && blocks[column][row] != BlockType::BlockType_Empty;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 void Grid::LoadBlockTextures()
 {
-	blockTextures[BlockType::Solid] = LoadBlockTexture("whiteBlock");
-	blockTextures[BlockType::Corner] = LoadBlockTexture("whiteBlock");
-	blockTextures[BlockType::Platform] = LoadBlockTexture("platformBlock");
-	blockTextures[BlockType::Ladder] = LoadBlockTexture("ladderBlock");
-	blockTextures[BlockType::LadderBottom] = LoadBlockTexture("ladderBlock");
-	blockTextures[BlockType::LadderTop] = LoadBlockTexture("ladderBlock");
-	blockTextures[BlockType::Liquid] = LoadBlockTexture("waterBlock");
-	blockTextures[BlockType::LiquidTop] = LoadBlockTexture("waterBlock");
+	blockTextures[BlockType::BlockType_Solid] = LoadBlockTexture("whiteBlock");
+	blockTextures[BlockType::BlockType_Corner] = LoadBlockTexture("whiteBlock");
+	blockTextures[BlockType::BlockType_Platform] = LoadBlockTexture("platformBlock");
+	blockTextures[BlockType::BlockType_Ladder] = LoadBlockTexture("ladderBlock");
+	blockTextures[BlockType::BlockType_LadderBottom] = LoadBlockTexture("ladderBlock");
+	blockTextures[BlockType::BlockType_LadderTop] = LoadBlockTexture("ladderBlock");
+	blockTextures[BlockType::BlockType_Liquid] = LoadBlockTexture("waterBlock");
+	blockTextures[BlockType::BlockType_LiquidTop] = LoadBlockTexture("waterBlock");
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -294,23 +294,23 @@ sf::Color Grid::BlockTypeToColor(BlockType blockType)
 {
 	switch (blockType)
 	{
-	case Empty:
+	case BlockType_Empty:
 		return sf::Color::White;
-	case Solid:
+	case BlockType_Solid:
 		return sf::Color::Black;
-	case Liquid:
+	case BlockType_Liquid:
 		return sf::Color::Blue;
-	case LiquidTop:
+	case BlockType_LiquidTop:
 		return sf::Color(123, 12, 67, 255);
-	case Ladder:
+	case BlockType_Ladder:
 		return sf::Color(185, 122, 87, 255);
-	case LadderTop:
+	case BlockType_LadderTop:
 		return sf::Color(90, 56, 37, 255);
-	case LadderBottom:
+	case BlockType_LadderBottom:
 		return sf::Color(213, 174, 153, 255);
-	case Corner:
+	case BlockType_Corner:
 		return sf::Color(128, 128, 128, 255);
-	case Platform:
+	case BlockType_Platform:
 		return sf::Color::Red;
 	default:
 		return sf::Color::White;
@@ -323,42 +323,42 @@ BlockType Grid::ColorToBlockType(sf::Color color)
 {
 	if (color == sf::Color::White)
 	{
-		return BlockType::Empty;
+		return BlockType::BlockType_Empty;
 	}
 	else if (color == sf::Color::Black)
 	{
-		return BlockType::Solid;
+		return BlockType::BlockType_Solid;
 	}
 	else if (color == sf::Color::Blue)
 	{
-		return BlockType::Liquid;
+		return BlockType::BlockType_Liquid;
 	}
 	else if (color == sf::Color(123, 12, 67, 255))
 	{
-		return BlockType::LiquidTop;
+		return BlockType::BlockType_LiquidTop;
 	}
 	else if (color == sf::Color(185, 122, 87, 255))
 	{
-		return BlockType::Ladder;
+		return BlockType::BlockType_Ladder;
 	}
 	else if (color == sf::Color(90, 56, 37, 255))
 	{
-		return BlockType::LadderTop;
+		return BlockType::BlockType_LadderTop;
 	}
 	else if (color == sf::Color(213, 174, 153, 255))
 	{
-		return BlockType::LadderBottom;
+		return BlockType::BlockType_LadderBottom;
 	}
 	else if (color == sf::Color(128, 128, 128, 255))
 	{
-		return BlockType::Corner;
+		return BlockType::BlockType_Corner;
 	}
 	else if (color == sf::Color::Red)
 	{
-		return BlockType::Platform;
+		return BlockType::BlockType_Platform;
 	}
 
-	return BlockType::Empty;
+	return BlockType::BlockType_Empty;
 }
 
 ////////////////////////////////////////////////////////////////////////

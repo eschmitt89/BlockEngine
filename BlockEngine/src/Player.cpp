@@ -21,7 +21,7 @@ Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f s
 	jumpPower = 450;
 	movementSpeed = 150;
 	climbSpeed = 150;
-	movementState = MovementStateNone;
+	movementState = MovementState_None;
 
 	jumpKeyHeld = false;
 
@@ -45,14 +45,14 @@ void Player::Update(float dt)
 
 	velocity.x = movementAxis.x * movementSpeed;
 
-	if (movementState == OnLadder || movementState == InLiquid)
+	if (movementState == MovementState_OnLadder || movementState == MovementState_InLiquid)
 	{
 		velocity.y = movementAxis.y * movementSpeed;
 	}
 
-	if (movementState == TryGrabLedge && yState != InAir)
+	if (movementState == MovementState_TryGrabLedge && yState != InAir)
 	{
-		movementState = MovementStateNone;
+		movementState = MovementState_None;
 	}
 
 	UpdateDebugText();
@@ -64,82 +64,82 @@ void Player::HandleInput(const sf::RenderWindow & window)
 {
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveLeft))
 	{
-		if (movementState != OnLadder && movementState != OnLedge)
+		if (movementState != MovementState_OnLadder && movementState != MovementState_OnLedge)
 		{
-			movementAxis.x = XAxisLeft;
+			movementAxis.x = XAxis_Left;
 		}
-		if (movementState == MovementStateNone && yState == InAir)
+		if (movementState == MovementState_None && yState == InAir)
 		{
-			movementState = TryGrabLedge;
+			movementState = MovementState_TryGrabLedge;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
 	{
-		if (movementState != OnLadder && movementState != OnLedge)
+		if (movementState != MovementState_OnLadder && movementState != MovementState_OnLedge)
 		{
-			movementAxis.x = XAxisRight;
+			movementAxis.x = XAxis_Right;
 		}
-		if (movementState == MovementStateNone && yState == InAir)
+		if (movementState == MovementState_None && yState == InAir)
 		{
-			movementState = TryGrabLedge;
+			movementState = MovementState_TryGrabLedge;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveLeft) && EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
 	{
-		movementAxis.x = XAxisNone;
+		movementAxis.x = XAxis_None;
 
-		if (movementState == TryGrabLedge)
+		if (movementState == MovementState_TryGrabLedge)
 		{
-			movementState = MovementStateNone;
+			movementState = MovementState_None;
 		}
 	}
 	if (!EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveLeft) && !EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
 	{
-		movementAxis.x = XAxisNone;
+		movementAxis.x = XAxis_None;
 
-		if (movementState == TryGrabLedge)
+		if (movementState == MovementState_TryGrabLedge)
 		{
-			movementState = MovementStateNone;
+			movementState = MovementState_None;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveUp))
 	{
-		if (movementState == MovementStateNone || movementState == TryGrabLedge)
+		if (movementState == MovementState_None || movementState == MovementState_TryGrabLedge)
 		{
-			movementState = TryGrabLadder;
+			movementState = MovementState_TryGrabLadder;
 		}
-		if (movementState == OnLadder || movementState == InLiquid)
+		if (movementState == MovementState_OnLadder || movementState == MovementState_InLiquid)
 		{
-			movementAxis.y = YAxisUp;
+			movementAxis.y = YAxis_Up;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyReleased(KeyBindings::MoveUp))
 	{
-		if (movementState == TryGrabLadder)
+		if (movementState == MovementState_TryGrabLadder)
 		{
-			movementState = MovementStateNone;
+			movementState = MovementState_None;
 		}
-		if (movementState == OnLadder || movementState == InLiquid)
+		if (movementState == MovementState_OnLadder || movementState == MovementState_InLiquid)
 		{
-			movementAxis.y = YAxisNone;
+			movementAxis.y = YAxis_None;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveDown))
 	{
-		if (movementState == OnLadder || movementState == InLiquid)
+		if (movementState == MovementState_OnLadder || movementState == MovementState_InLiquid)
 		{
-			movementAxis.y = YAxisDown;
+			movementAxis.y = YAxis_Down;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyReleased(KeyBindings::MoveDown))
 	{
-		if (movementState == OnLadder || movementState == InLiquid)
+		if (movementState == MovementState_OnLadder || movementState == MovementState_InLiquid)
 		{
-			movementAxis.y = YAxisNone;
+			movementAxis.y = YAxis_None;
 		}
-		if (movementState == TryDrop || movementState == Dropped)
+		if (movementState == MovementState_TryDrop || movementState == MovementState_Dropped)
 		{
-			movementState = MovementStateNone;
+			movementState = MovementState_None;
 		}
 	}
 	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::Jump))
@@ -148,9 +148,9 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveDown))
 			{
-				if (movementState != Dropped)
+				if (movementState != MovementState_Dropped)
 				{
-					movementState = TryDrop;
+					movementState = MovementState_TryDrop;
 				}
 			}
 			else if (!jumpKeyHeld)
@@ -158,9 +158,9 @@ void Player::HandleInput(const sf::RenderWindow & window)
 				Jump();
 			}
 		}
-		else if (movementState == OnLedge || movementState == InLiquid || (movementState == OnLadder && !jumpKeyHeld))
+		else if (movementState == MovementState_OnLedge || movementState == MovementState_InLiquid || (movementState == MovementState_OnLadder && !jumpKeyHeld))
 		{
-			movementState = MovementStateNone;
+			movementState = MovementState_None;
 			velocity.y = 0;
 			GravityOn();
 			Jump();
@@ -171,9 +171,9 @@ void Player::HandleInput(const sf::RenderWindow & window)
 	{
 		jumpKeyHeld = false;
 
-		if (movementState == TryDrop || movementState == Dropped)
+		if (movementState == MovementState_TryDrop || movementState == MovementState_Dropped)
 		{
-			movementState = MovementStateNone;
+			movementState = MovementState_None;
 		}
 	}
 }
@@ -190,18 +190,18 @@ void Player::Draw(sf::RenderWindow & window)
 
 void Player::ResolveBlockCollisionX(Block block, float dt)
 {
-	if (block.GetType() == BlockType::Solid || block.GetType() == BlockType::Corner)
+	if (block.GetType() == BlockType::BlockType_Solid || block.GetType() == BlockType::BlockType_Corner)
 	{
 		PhysicsObject::ResolveBlockCollisionX(block, dt);
 	}
-    if (block.GetType() == Corner)
+    if (block.GetType() == BlockType_Corner)
 	{
-		if (movementState == TryGrabLedge && velocity.y >= 0)
+		if (movementState == MovementState_TryGrabLedge && velocity.y >= 0)
 		{
 			if (abs(position.y - block.GetPosition().y) < 8)
 			{
 				GravityOff();
-				movementState = OnLedge;
+				movementState = MovementState_OnLedge;
 				velocity = sf::Vector2f();
 				position.y = block.GetPosition().y;
 			}
@@ -213,36 +213,36 @@ void Player::ResolveBlockCollisionX(Block block, float dt)
 
 void Player::ResolveBlockCollisionY(Block block, float dt)
 {
-	if (block.GetType() == BlockType::Solid || block.GetType() == BlockType::Corner)
+	if (block.GetType() == BlockType::BlockType_Solid || block.GetType() == BlockType::BlockType_Corner)
 	{
 		PhysicsObject::ResolveBlockCollisionY(block, dt);
 	}
-	else if (block.GetType() == BlockType::Ladder || block.GetType() == BlockType::LadderTop || block.GetType() == BlockType::LadderBottom)
+	else if (block.GetType() == BlockType::BlockType_Ladder || block.GetType() == BlockType::BlockType_LadderTop || block.GetType() == BlockType::BlockType_LadderBottom)
 	{
-		if (movementState == TryGrabLadder && velocity.y >= 0)
+		if (movementState == MovementState_TryGrabLadder && velocity.y >= 0)
 		{
 			if (abs(GetCenter().x - block.GetCenter().x) < 8)
 			{
-				if (block.GetType() != BlockType::LadderTop || (block.GetType() == BlockType::LadderTop && abs(GetCenter().y - block.GetCenter().y) < 8))
+				if (block.GetType() != BlockType::BlockType_LadderTop || (block.GetType() == BlockType::BlockType_LadderTop && abs(GetCenter().y - block.GetCenter().y) < 8))
 				{
 					GravityOff();
-					movementState = OnLadder;
+					movementState = MovementState_OnLadder;
 					velocity = sf::Vector2f();
 				}
 			}
 		}
-		if (movementState == OnLadder)
+		if (movementState == MovementState_OnLadder)
 		{
 			position.x = block.GetPosition().x;
 
-			if (block.GetType() == BlockType::LadderTop)
+			if (block.GetType() == BlockType::BlockType_LadderTop)
 			{
 				if (position.y + (size.y / 2) < block.GetPosition().y)
 				{
 					position.y = block.GetPosition().y - (size.y / 2);
 				}
 			}
-			else if (block.GetType() == BlockType::LadderBottom)
+			else if (block.GetType() == BlockType::BlockType_LadderBottom)
 			{
 				if (position.y - (size.y / 2) > block.GetPosition().y)
 				{
@@ -251,13 +251,13 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 			}
 		}
 	}
-	else if (block.GetType() == BlockType::Platform)
+	else if (block.GetType() == BlockType::BlockType_Platform)
 	{
-		if (movementState == TryDrop)
+		if (movementState == MovementState_TryDrop)
 		{
 			if (GetCenter().y > block.GetCenter().y)
 			{
-				movementState = Dropped;
+				movementState = MovementState_Dropped;
 			}
 		}
 		else 
@@ -268,12 +268,12 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 			}
 		}
 	}
-	else if (block.GetType() == BlockType::Liquid)
+	else if (block.GetType() == BlockType::BlockType_Liquid)
 	{
-		movementState = InLiquid;
+		movementState = MovementState_InLiquid;
 		GravityOff();
 	}
-	else if (block.GetType() == BlockType::LiquidTop)
+	else if (block.GetType() == BlockType::BlockType_LiquidTop)
 	{
 		if (position.y < block.GetPosition().y && velocity.y < 0 && acceleration.y == 0)
 		{
@@ -348,25 +348,25 @@ void Player::UpdateDebugText()
 
 	switch (movementState)
 	{
-		case TryGrabLadder:
+		case MovementState_TryGrabLadder:
 			ss << "grabbing ladder \n";
 			break;
-		case OnLadder:
+		case MovementState_OnLadder:
 			ss << "on ladder \n";
 			break;
-		case TryGrabLedge:
+		case MovementState_TryGrabLedge:
 			ss << "grabbing ledge \n";
 			break;
-		case OnLedge:
+		case MovementState_OnLedge:
 			ss << "on ledge \n";
 			break;
-		case TryDrop:
+		case MovementState_TryDrop:
 			ss << "try drop \n";
 			break;
-		case Dropped:
+		case MovementState_Dropped:
 			ss << "dropped \n";
 			break;
-		case InLiquid:
+		case MovementState_InLiquid:
 			ss << "in liquid \n";
 			break;
 		default:

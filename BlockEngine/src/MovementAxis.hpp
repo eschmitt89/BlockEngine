@@ -13,29 +13,25 @@ using namespace std;
 
 enum XAxis
 {
-	XAxisLeft = -1,
-	XAxisNone = 0,
-	XAxisRight = 1,
+	XAxis_Left = -1,
+	XAxis_None = 0,
+	XAxis_Right = 1,
 };
 
 enum YAxis
 {
-	YAxisUp = -1,
-	YAxisNone = 0,
-	YAxisDown = 1,
+	YAxis_Up = -1,
+	YAxis_None = 0,
+	YAxis_Down = 1,
 };
 
-class MovementAxis
+struct MovementAxis
 {
-public:
 	MovementAxis();
     ~MovementAxis();
 
 	XAxis x;
 	YAxis y;
-
-private:
-	
 };
 
 #endif /* MovementAxis_hpp */

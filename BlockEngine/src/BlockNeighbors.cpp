@@ -10,14 +10,14 @@
 
 BlockNeighbors::BlockNeighbors()
 {
-	TopLeft = BlockType::NoBlock;
-	Top = BlockType::NoBlock;
-	TopRight = BlockType::NoBlock;
-	Left = BlockType::NoBlock;
-	Right = BlockType::NoBlock;
-	BottomLeft = BlockType::NoBlock;
-	Bottom = BlockType::NoBlock;
-	BottomRight = BlockType::NoBlock;
+	TopLeft = BlockType::BlockType_None;
+	Top = BlockType::BlockType_None;
+	TopRight = BlockType::BlockType_None;
+	Left = BlockType::BlockType_None;
+	Right = BlockType::BlockType_None;
+	BottomLeft = BlockType::BlockType_None;
+	Bottom = BlockType::BlockType_None;
+	BottomRight = BlockType::BlockType_None;
 }
 
 ////////////////////////////////////////////////////////////////////////
