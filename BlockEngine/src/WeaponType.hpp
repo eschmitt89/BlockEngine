@@ -9,16 +9,18 @@
 #ifndef WeaponType_hpp
 #define WeaponType_hpp
 
+#define WEAPON_TYPE_COUNT 8
+
 enum WeaponType
 {
-	WeaponType_Dagger = 0,
-	WeaponType_Sword = 1,
-	WeaponType_Axe = 2,
-	WeaponType_Mace = 3,
-	WeaponType_Wand = 4,
-	WeaponType_Staff = 5,
-	WeaponType_Orb = 6,
-	WeaponType_Shield = 7,
+	WeaponType_Dagger = 1,
+	WeaponType_Sword = 2,
+	WeaponType_Axe = 3,
+	WeaponType_Mace = 4,
+	WeaponType_Wand = 5,
+	WeaponType_Staff = 6,
+	WeaponType_Orb = 7,
+	WeaponType_Shield = 8,
 };
 
 #endif /* WeaponType_hpp */

@@ -20,7 +20,6 @@ public:
 
 protected:
 	ItemType itemType;
-
 };
 
 #endif /* Item_hpp */

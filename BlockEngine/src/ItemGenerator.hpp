@@ -20,14 +20,10 @@ public:
 
 	Item* Generate(int level);
 	Equipment* GenerateEquipment(int level);
-	Armor* GenerateArmor(int level);
-	Weapon* GenerateWeapon();
 
 private:
-	DropRateCollection<ItemType> ItemDropRates;
-	DropRateCollection<EquipmentType> EquipmentDropRates;
-
-	int GetStatValue(int maxValue, int level);
+	DropRateCollection<ItemType> randomItemType;
+	DropRateCollection<EquipmentType> randomEquipmentType;
 
 };
 

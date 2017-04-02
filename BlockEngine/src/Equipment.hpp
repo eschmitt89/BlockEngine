@@ -14,6 +14,16 @@
 #include "EquipmentType.hpp"
 #include "EquipmentRarity.hpp"
 
+#define EQUIPMENT_SLOT_COUNT 8
+
+#define MAX_STATS 5
+#define MAX_LEVEL 100
+#define MAX_HEALTH 10000
+#define MAX_ARMOR 10000
+#define MAX_CRIT 10000
+#define MAX_DODGE 10000
+#define MAX_POWER 10000
+
 class Equipment : public Item
 {
 public:
@@ -32,6 +42,10 @@ protected:
 	int dodge;
 	int power;
 
+	DropRateCollection<EquipmentRarity> rarityDropRates;
+
+	virtual void GenerateStats(int level);
+	int GetStatValue(int level, int maxValue);
 };
 
 #endif /* Equipment_hpp */

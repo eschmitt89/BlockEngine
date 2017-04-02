@@ -93,8 +93,13 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::M))
 	{
-		ItemGenerator * i = new ItemGenerator();
-		i->Generate(10);
+		for (int i = 0; i < 1; i++)
+		{
+			ItemGenerator * ig = new ItemGenerator();
+			Item* item = ig->Generate(10);
+			int x = 0;
+		}
+		
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	{

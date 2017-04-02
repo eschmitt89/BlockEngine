@@ -9,6 +9,8 @@
 #ifndef ArmorType_hpp
 #define ArmorType_hpp
 
+#define ARMOR_TYPE_COUNT 6
+
 enum ArmorType
 {
 	ArmorType_Head = 1,

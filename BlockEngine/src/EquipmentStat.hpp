@@ -9,6 +9,8 @@
 #ifndef EquipmentStat_hpp
 #define EquipmentStat_hpp
 
+#define EQUIPMENT_STAT_COUNT 5
+
 enum EquipmentStat
 {
 	EquipmentStat_Health = 1,
