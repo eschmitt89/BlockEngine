@@ -51,6 +51,9 @@
     <Filter Include="Source Files\Particles">
       <UniqueIdentifier>{ebbbf3f3-4e24-4213-a1ba-e970b86bf6e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Items">
+      <UniqueIdentifier>{f591a458-7ec5-44e2-987e-f3f67279ced0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -140,6 +143,9 @@
     <ClInclude Include="src\Emitter.hpp">
       <Filter>Source Files\Particles</Filter>
     </ClInclude>
+    <ClInclude Include="src\Item.hpp">
+      <Filter>Source Files\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -210,6 +216,9 @@
     </ClCompile>
     <ClCompile Include="src\Emitter.cpp">
       <Filter>Source Files\Particles</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Item.cpp">
+      <Filter>Source Files\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

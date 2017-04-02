@@ -35,7 +35,7 @@ void Emitter::Update(float dt)
 
 	if (spawnTimer <= 0)
 	{
-		spawnedPhysicsObjects.push_back(new TransitionParticle(position, size, 1.f));
+		spawnedPhysicsObjects.push_back(new TransitionParticle(position, size, 0.6));
 		spawnTimer = 60 / (float)particlesPerMinute;
 	}
 }

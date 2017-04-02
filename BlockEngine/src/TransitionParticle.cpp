@@ -13,7 +13,7 @@ TransitionParticle::TransitionParticle(const sf::Texture* texture, sf::Vector2f 
 {
 	this->totalDuration = duration;
 
-	velocity = sf::Vector2f(Random(-50, 50), Random(-50, 50));
+	velocity = sf::Vector2f(Random(-20, 20), Random(-20, 20));
 	acceleration = sf::Vector2f();
 	
 	//AddColorKeyframe(0.0, sf::Color::White);
@@ -24,7 +24,7 @@ TransitionParticle::TransitionParticle(const sf::Texture* texture, sf::Vector2f 
 
 	
 	
-	AddColorKeyframe(0.0, sf::Color(0, 255, 128, 255));
+	AddColorKeyframe(0.0, sf::Color(0, 255, 64, 255));
 	AddColorKeyframe(0.5, sf::Color(64, 0, 128, 255));
 	AddColorKeyframe(1.0, sf::Color(64, 0, 128, 0));
 }
