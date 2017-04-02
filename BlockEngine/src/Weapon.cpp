@@ -8,8 +8,8 @@
 
 #include "Weapon.hpp"
 
-Weapon::Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity rarity, int level, int health, int armor, int crit, int dodge, int power, int damage)
-	:Equipment(EquipmentType_Weapon, rarity, level, health, armor, crit, dodge, power)
+Weapon::Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, int level, int health, int armor, int crit, int dodge, int power, int damage)
+	:Equipment(EquipmentType_Weapon, equipmentRarity, level, health, armor, crit, dodge, power)
 {
 	this->weaponType = weaponType;
 	this->weaponSlot = weaponSlot;
@@ -19,10 +19,10 @@ Weapon::Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, 
 
 ////////////////////////////////////////////////////////////////////////
 
-Weapon::Weapon(int level)
-	:Equipment(EquipmentType_Weapon, EquipmentRarity_Common, level, 0, 0, 0, 0, 0)
+Weapon::Weapon(EquipmentRarity equipmentRarity, int level)
+	:Equipment(EquipmentType_Weapon, equipmentRarity, level, 0, 0, 0, 0, 0)
 {
-	GenerateStats(level);
+	GenerateStats(equipmentRarity, level);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -34,10 +34,8 @@ Weapon::~Weapon()
 
 ////////////////////////////////////////////////////////////////////////
 
-void Weapon::GenerateStats(int level)
+void Weapon::GenerateStats(EquipmentRarity equipmentRarity, int level)
 {
-	equipmentRarity = rarityDropRates.Roll();
-
 	weaponType = GetRandomWeaponType(level);
 	weaponSlot = GenerateWeaponSlot(weaponType);
 	speed = GenerateWeaponSpeed(weaponType, weaponSlot);
@@ -45,6 +43,8 @@ void Weapon::GenerateStats(int level)
 
 	GenerateWeaponStats(level, weaponType, equipmentRarity);
 }
+
+////////////////////////////////////////////////////////////////////////
 
 WeaponType Weapon::GetRandomWeaponType(int level)
 {

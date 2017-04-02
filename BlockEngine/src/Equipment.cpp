@@ -21,14 +21,6 @@ Equipment::Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarit
 	this->crit = crit;
 	this->dodge = dodge;
 	this->power = power;
-
-	rarityDropRates = DropRateCollection<EquipmentRarity>();
-	rarityDropRates.AddDropRate(EquipmentRarity_Common, 0.489);
-	rarityDropRates.AddDropRate(EquipmentRarity_Good, 0.30);
-	rarityDropRates.AddDropRate(EquipmentRarity_Rare, 0.15);
-	rarityDropRates.AddDropRate(EquipmentRarity_Epic, 0.05);
-	rarityDropRates.AddDropRate(EquipmentRarity_Legendary, 0.01);
-	rarityDropRates.AddDropRate(EquipmentRarity_Artifact, 0.001);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -40,16 +32,9 @@ Equipment::~Equipment()
 
 ////////////////////////////////////////////////////////////////////////
 
-void Equipment::GenerateStats(int level)
-{
-
-}
-
-////////////////////////////////////////////////////////////////////////
-
 int Equipment::GetStatValue(int level, int maxValue)
 {
-	return ((float)level / MAX_LEVEL) * (maxValue / EQUIPMENT_SLOT_COUNT / MAX_STATS);
+	return ((float)level / MAX_LEVEL) * (maxValue / EQUIPMENT_SLOT_COUNT / EQUIPMENT_MAX_STATS);
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -12,11 +12,11 @@
 enum EquipmentRarity
 {
 	EquipmentRarity_Common = 0,
-	EquipmentRarity_Good = 1,
-	EquipmentRarity_Rare = 2,
-	EquipmentRarity_Epic = 3,
-	EquipmentRarity_Legendary = 4,
-	EquipmentRarity_Artifact = 5
+	EquipmentRarity_Good = 5,
+	EquipmentRarity_Rare = 10,
+	EquipmentRarity_Epic = 15,
+	EquipmentRarity_Legendary = 20,
+	EquipmentRarity_Artifact = 25
 };
 
 #endif /* EquipmentRarity_hpp */

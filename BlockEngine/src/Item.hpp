@@ -9,6 +9,7 @@
 #ifndef Item_hpp
 #define Item_hpp
 
+#include "SFML/Window.hpp"
 #include "ItemType.hpp"
 #include "Utilities.hpp"
 
@@ -20,6 +21,7 @@ public:
 
 protected:
 	ItemType itemType;
+	sf::RectangleShape sprite;
 };
 
 #endif /* Item_hpp */

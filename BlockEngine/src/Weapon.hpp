@@ -22,18 +22,17 @@
 class Weapon : public Equipment
 {
 public:
-	Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity rarity, int level, int health, int armor, int crit, int dodge, int power, int damage);
-	Weapon(int level);
+	Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, int level, int health, int armor, int crit, int dodge, int power, int damage);
+	Weapon(EquipmentRarity equipmentRarity, int level);
     virtual ~Weapon();
 
 protected:
 	WeaponType weaponType;
 	WeaponSlot weaponSlot;
 	WeaponSpeed speed;
-
 	int damage;
 
-	void GenerateStats(int level);
+	void GenerateStats(EquipmentRarity equipmentRarity, int level);
 
 	WeaponType GetRandomWeaponType(int level);
 	WeaponSlot GenerateWeaponSlot(WeaponType weaponType);

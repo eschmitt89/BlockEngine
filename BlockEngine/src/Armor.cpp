@@ -8,18 +8,18 @@
 
 #include "Armor.hpp"
 
-Armor::Armor(ArmorType armorType, EquipmentRarity rarity, int level, int health, int armor, int crit, int dodge, int power)
-	:Equipment(EquipmentType_Armor, rarity, level, health, armor, crit, dodge, power)
+Armor::Armor(ArmorType armorType, EquipmentRarity equipmentRarity, int level, int health, int armor, int crit, int dodge, int power)
+	:Equipment(EquipmentType_Armor, equipmentRarity, level, health, armor, crit, dodge, power)
 {
 	this->armorType = armorType;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-Armor::Armor(int level)
-	:Equipment(EquipmentType_Armor, EquipmentRarity_Common, level, 0, 0, 0, 0, 0)
+Armor::Armor(EquipmentRarity equipmentRarity, int level)
+	:Equipment(EquipmentType_Armor, equipmentRarity, level, 0, 0, 0, 0, 0)
 {
-	GenerateStats(level);
+	GenerateStats(equipmentRarity, level);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -31,11 +31,9 @@ Armor::~Armor()
 
 ////////////////////////////////////////////////////////////////////////
 
-void Armor::GenerateStats(int level)
+void Armor::GenerateStats(EquipmentRarity equipmentRarity, int level)
 {
 	armorType = static_cast<ArmorType>(Random(1, ARMOR_TYPE_COUNT));
-
-	equipmentRarity = rarityDropRates.Roll();
 
 	for (int i = 0; i < equipmentRarity; i++)
 	{

@@ -20,10 +20,12 @@ public:
 
 	Item* Generate(int level);
 	Equipment* GenerateEquipment(int level);
+	EquipmentRarity GenerateEquipmentRarity(int level);
 
 private:
 	DropRateCollection<ItemType> randomItemType;
 	DropRateCollection<EquipmentType> randomEquipmentType;
+	DropRateCollection<EquipmentRarity> randomEquipmentRarity;
 
 };
 
