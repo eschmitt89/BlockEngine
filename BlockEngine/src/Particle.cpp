@@ -13,7 +13,7 @@ Particle::Particle(const sf::Texture* texture, sf::Vector2f position, sf::Vector
 {
 	this->remainingDuration = duration;
 
-	velocity = sf::Vector2f(Random(-20, 20), Random(-50, -100));
+	velocity = sf::Vector2f(Random(-100, 100), Random(-100, 100));
 	acceleration = sf::Vector2f();
 }
 

@@ -7,32 +7,44 @@
 //
 
 #include "Emitter.hpp"
+#include "TransitionParticle.hpp"
 
-Emitter::Emitter(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size, float duration)
-	:Particle(texture, position, size, duration)
+Emitter::Emitter(Particle* particle, sf::Vector2f position, sf::Vector2f size, float duration)
+	:Particle(nullptr, position, size, duration)
 {
-
+	velocity = sf::Vector2f(500, 0);
+	this->particle = particle;
+	particlesPerMinute = 10000;
+	spawnTimer = 0;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 Emitter::~Emitter()
 {
-    
+	delete particle;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 void Emitter::Update(float dt)
 {
-	PhysicsObject::Update(dt);
+	Particle::Update(dt);
 
-	duration -= dt;
+	spawnTimer -= dt;
 
-	if (duration <= 0)
+	if (spawnTimer <= 0)
 	{
-		expired = true;
+		spawnedPhysicsObjects.push_back(new TransitionParticle(position, size, 1.f));
+		spawnTimer = 60 / (float)particlesPerMinute;
 	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Emitter::Draw(sf::RenderWindow & window)
+{
+	
 }
 
 ////////////////////////////////////////////////////////////////////////

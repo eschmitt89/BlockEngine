@@ -7,9 +7,11 @@
 //
 
 #include "HomeScreen.hpp"
+#include "EventManager.hpp"
 #include "GridGenerator.hpp"
 #include "ResourceManager.hpp"
 #include "TransitionParticle.hpp"
+#include "Emitter.hpp"
 #include <sstream>
 
 HomeScreen::HomeScreen() 
@@ -82,9 +84,10 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 		grid->SetBlockType(GetMousePosition(window), BlockType::LiquidTop);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::P))
+	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::P))
 	{
-		physicsManager->AddPhysicsObject(new TransitionParticle(GetMousePosition(window), sf::Vector2f(3,3), 5));
+		//physicsManager->AddPhysicsObject(new TransitionParticle(GetMousePosition(window), sf::Vector2f(3,3), 5));
+		physicsManager->AddPhysicsObject(new Emitter(new TransitionParticle(GetMousePosition(window), sf::Vector2f(3, 3), 5), GetMousePosition(window), sf::Vector2f(3, 3), 5));
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	{

@@ -42,6 +42,8 @@ public:
 	static void ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block, float dt);
 	static void ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block, float dt);
 
+	vector<PhysicsObject*> spawnedPhysicsObjects;
+
 protected:
 	sf::Vector2f velocity;
 	sf::Vector2f acceleration;

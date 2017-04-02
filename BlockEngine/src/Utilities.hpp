@@ -137,6 +137,8 @@ template <typename T> struct Keyframe
 	T value;
 };
 
+////////////////////////////////////////////////////////////////////////
+
 template <typename T> struct KeyFrameTransition
 {
 	KeyFrameTransition<T>() { }

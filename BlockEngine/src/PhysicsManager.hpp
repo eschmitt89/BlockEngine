@@ -28,6 +28,8 @@ public:
 
 	void AddPhysicsObject(PhysicsObject* physicsObject);
 	void ClearPhyiscsObjects();
+
+	typedef void(*spawn)(PhysicsObject* p);
     
 private:
 	Grid* grid;

@@ -14,14 +14,16 @@
 class Emitter : public Particle
 {
 public:
-	Emitter(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size, float duration);
-	Emitter(sf::Vector2f position, sf::Vector2f size, float duration) : Emitter(nullptr, position, size, duration) { }
+	Emitter(Particle* particle, sf::Vector2f position, sf::Vector2f size, float duration);
     virtual ~Emitter();
     
-	virtual void Update(float dt);
+	void Update(float dt);
+	void Draw(sf::RenderWindow& window);
 
 protected:
-	vector<Particle> particles;
+	Particle* particle;
+	int particlesPerMinute;
+	float spawnTimer;
 };
 
 #endif /* Emitter_hpp */
