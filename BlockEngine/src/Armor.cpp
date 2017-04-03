@@ -11,6 +11,7 @@
 Armor::Armor(ArmorType armorType, EquipmentRarity equipmentRarity, int level, int health, int armor, int crit, int dodge, int power)
 	:Equipment(EquipmentType_Armor, equipmentRarity, level, health, armor, crit, dodge, power)
 {
+	LoadTexture(armorType, equipmentRarity);
 	this->armorType = armorType;
 }
 
@@ -27,6 +28,13 @@ Armor::Armor(EquipmentRarity equipmentRarity, int level)
 Armor::~Armor()
 {
     
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Armor::LoadTexture(ArmorType armorType, EquipmentRarity rarity)
+{
+	
 }
 
 ////////////////////////////////////////////////////////////////////////

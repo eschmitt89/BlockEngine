@@ -22,6 +22,7 @@ public:
 protected:
 	ArmorType armorType;
 
+	void LoadTexture(ArmorType armorType, EquipmentRarity rarity);
 	void GenerateStats(EquipmentRarity equipmentRarity, int level);
 
 };

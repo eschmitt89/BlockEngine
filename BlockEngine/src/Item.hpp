@@ -12,6 +12,7 @@
 #include "SFML/Window.hpp"
 #include "ItemType.hpp"
 #include "Utilities.hpp"
+#include "ResourceManager.hpp"
 
 class Item
 {

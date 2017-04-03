@@ -52,14 +52,14 @@ void TransitionParticle::Update(float dt)
 
 void TransitionParticle::AddColorKeyframe(float durationPercent, sf::Color color)
 {
-	colorKeyframes.push_back(Keyframe<sf::Color>(durationPercent, color));
+	colorKeyframes.push_back(TypeValue<sf::Color>(color, durationPercent));
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 void TransitionParticle::AddSizeKeyframe(float durationPercent, sf::Vector2f size)
 {
-	sizeKeyframes.push_back(Keyframe<sf::Vector2f>(durationPercent, size));
+	sizeKeyframes.push_back(TypeValue<sf::Vector2f>(size, durationPercent));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -71,12 +71,12 @@ void TransitionParticle::UpdateColor(float durationPercent)
 		return;
 	}
 
-	KeyFrameTransition<sf::Color> transition = FindTransitionPoints(colorKeyframes, durationPercent);
+	TypeTransition<sf::Color> transition = FindTransitionPoints(colorKeyframes, durationPercent);
 
-	int red = transition.start.value.r + (transition.percent * (transition.end.value.r - transition.start.value.r));
-	int green = transition.start.value.g + (transition.percent * (transition.end.value.g - transition.start.value.g));
-	int blue = transition.start.value.b + (transition.percent * (transition.end.value.b - transition.start.value.b));
-	int alpha = transition.start.value.a + (transition.percent * (transition.end.value.a - transition.start.value.a));
+	int red = transition.start.type.r + (transition.percent * (transition.end.type.r - transition.start.type.r));
+	int green = transition.start.type.g + (transition.percent * (transition.end.type.g - transition.start.type.g));
+	int blue = transition.start.type.b + (transition.percent * (transition.end.type.b - transition.start.type.b));
+	int alpha = transition.start.type.a + (transition.percent * (transition.end.type.a - transition.start.type.a));
 
 	sprite.setFillColor(sf::Color(red, green, blue, alpha));
 }
@@ -90,10 +90,10 @@ void TransitionParticle::UpdateSize(float durationPercent)
 		return;
 	}
 
-	KeyFrameTransition<sf::Vector2f> transition = FindTransitionPoints(sizeKeyframes, durationPercent);
+	TypeTransition<sf::Vector2f> transition = FindTransitionPoints(sizeKeyframes, durationPercent);
 
-	float x = transition.start.value.x + (transition.percent * (transition.end.value.x - transition.start.value.x));
-	float y = transition.start.value.y + (transition.percent * (transition.end.value.y - transition.start.value.y));
+	float x = transition.start.type.x + (transition.percent * (transition.end.type.x - transition.start.type.x));
+	float y = transition.start.type.y + (transition.percent * (transition.end.type.y - transition.start.type.y));
 
 	SetSize(sf::Vector2f(x, y));
 }

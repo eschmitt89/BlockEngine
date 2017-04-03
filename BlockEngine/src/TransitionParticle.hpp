@@ -23,8 +23,8 @@ public:
 protected:
 	float totalDuration;
 
-	vector<Keyframe<sf::Color>> colorKeyframes;
-	vector<Keyframe<sf::Vector2f>> sizeKeyframes;
+	vector<TypeValue<sf::Color>> colorKeyframes;
+	vector<TypeValue<sf::Vector2f>> sizeKeyframes;
 
 	void AddColorKeyframe(float durationPercent, sf::Color color);
 	void AddSizeKeyframe(float durationPercent, sf::Vector2f size);

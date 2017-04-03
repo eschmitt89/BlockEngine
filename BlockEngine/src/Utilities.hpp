@@ -123,46 +123,47 @@ struct Vector4i
 
 ////////////////////////////////////////////////////////////////////////
 
-template <typename T> struct Keyframe
+template <typename T> struct TypeValue
 {
-	Keyframe<T>() { }
-	Keyframe<T>(float key, const T& value)
+	TypeValue<T>() { }
+	TypeValue<T>(const T& type, float value)
 	{
-		this->key = key;
+		this->type = type;
 		this->value = value;
 	}
-	~Keyframe<T>() { }
+	~TypeValue<T>() { }
 
-	float key;
-	T value;
+	T type;
+	float value;
 };
 
 ////////////////////////////////////////////////////////////////////////
 
-template <typename T> struct KeyFrameTransition
+template <typename T> struct TypeTransition
 {
-	KeyFrameTransition<T>() { }
-	KeyFrameTransition<T>(Keyframe<T> start, Keyframe<T> end)
+	TypeTransition<T>() { 
+	}
+	TypeTransition<T>(TypeValue<T> start, TypeValue<T> end)
 	{
 		this->start = start;
 		this->end = end;
 		this->percent = 0;
 	}
 
-	Keyframe<T> start;
-	Keyframe<T> end;
+	TypeValue<T> start;
+	TypeValue<T> end;
 	float percent;
 };
 
 ////////////////////////////////////////////////////////////////////////
 
-template<typename T> inline KeyFrameTransition<T> FindTransitionPoints(vector<Keyframe<T>> keyframes, float key)
+template<typename T> inline TypeTransition<T> FindTransitionPoints(vector<TypeValue<T>> keyframes, float percent)
 {
-	KeyFrameTransition<T> transition;
+	TypeTransition<T> transition;
 
 	for (int i = 0; i < keyframes.size(); i++)
 	{
-		if (keyframes[i].key >= key)
+		if (keyframes[i].value >= percent)
 		{
 			transition.end = keyframes[i];
 
@@ -175,26 +176,10 @@ template<typename T> inline KeyFrameTransition<T> FindTransitionPoints(vector<Ke
 		}
 	}
 
-	transition.percent = (key - transition.start.key) / (transition.end.key - transition.start.key);
+	transition.percent = (percent - transition.start.value) / (transition.end.value - transition.start.value);
 
 	return transition;
 }
-
-////////////////////////////////////////////////////////////////////////
-
-template <typename T> struct DropRate
-{
-	DropRate<T>() { }
-	DropRate<T>(const T& type, float percent)
-	{
-		this->type = type;
-		this->percent = percent;
-	}
-	~DropRate<T>() { }
-
-	T type;
-	float percent;
-};
 
 ////////////////////////////////////////////////////////////////////////
 
@@ -204,18 +189,18 @@ public:
 	DropRateCollection<T>() { }
 	~DropRateCollection<T>() { }
 
-	void AddDropRate(T type, float percent)
+	void AddDropRate(T type, float dropRate)
 	{
 		if (dropRates.size() > 0)
 		{
-			dropRates.push_back(DropRate<T>(type, dropRates[dropRates.size() - 1].percent + percent));
+			dropRates.push_back(TypeValue<T>(type, dropRates[dropRates.size() - 1].value + dropRate));
 		}
 		else
 		{
-			dropRates.push_back(DropRate<T>(type, percent));
+			dropRates.push_back(TypeValue<T>(type, dropRate));
 		}
 
-		if (dropRates[dropRates.size() - 1].percent > 1.0)
+		if (dropRates[dropRates.size() - 1].value > 1.0)
 		{
 			throw new exception("Total drop % of collection exceeds 100%.");
 		}
@@ -227,7 +212,7 @@ public:
 
 		for (int i = 0; i < dropRates.size(); i++)
 		{
-			if (roll <= dropRates[i].percent)
+			if (roll <= dropRates[i].value)
 			{
 				return dropRates[i].type;
 			}
@@ -235,7 +220,7 @@ public:
 	}
 
 private:
-	vector<DropRate<T>> dropRates;
+	vector<TypeValue<T>> dropRates;
 };
 
 #endif /* Utilties_hpp */
