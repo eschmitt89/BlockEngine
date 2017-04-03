@@ -31,6 +31,10 @@ public:
 	Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarity, int level, int health, int armor, int crit, int dodge, int power);
     virtual ~Equipment();
 
+	EquipmentType GetEquipmentType();
+	EquipmentRarity GetEquipmentRarity();
+	
+
 protected:
 	EquipmentType equipmentType;
 	EquipmentRarity equipmentRarity;

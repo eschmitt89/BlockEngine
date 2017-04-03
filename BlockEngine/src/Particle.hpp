@@ -15,6 +15,7 @@
 class Particle : public PhysicsObject
 {
 public:
+	Particle(sf::Color color, sf::Vector2f position, sf::Vector2f size, float duration);
 	Particle(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size, float duration);
 	Particle(sf::Vector2f position, sf::Vector2f size, float duration) : Particle(nullptr, position, size, duration) { }
     virtual ~Particle();

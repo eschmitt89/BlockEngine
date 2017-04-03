@@ -23,6 +23,7 @@ HomeScreen::HomeScreen()
 	player = new Player(ResourceManager::GetInstance().GetTexture("player"), sf::Vector2f(100,100), sf::Vector2f(32, 32));
 	physicsManager = new PhysicsManager(grid);
 	physicsManager->AddPhysicsObject(player);
+	itemGenerator = new ItemGenerator();
 
 	fpsText = sf::Text("", *ResourceManager::GetInstance().GetFont("font"));
 	fpsText.setFillColor(sf::Color::Red);
@@ -35,6 +36,7 @@ HomeScreen::~HomeScreen()
 	delete grid;
 	delete camera;
 	delete physicsManager;
+	delete itemGenerator;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -93,13 +95,51 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::M))
 	{
-		for (int i = 0; i < 1; i++)
+		for (int i = 0; i < 10; i++)
 		{
-			ItemGenerator * ig = new ItemGenerator();
-			Item* item = ig->Generate(10);
-			int x = 0;
-		}
+
 		
+		Item* item = itemGenerator->Generate(10);
+		if (item->GetItemType() == ItemType_Equipment)
+		{
+			Equipment* equipment = (Equipment*)item;
+			sf::Color color = sf::Color::White;
+
+
+		    if (equipment->GetEquipmentRarity() == EquipmentRarity_Good)
+			{
+				color = sf::Color::Green;
+			}
+			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Rare)
+			{
+				color = sf::Color::Blue;
+			}
+			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Epic)
+			{
+				color = sf::Color(128, 0, 255, 155);
+			}
+			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Legendary)
+			{
+				color = sf::Color(250,100,0,155);
+			}
+			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Artifact)
+			{
+				color = sf::Color::Red;
+			}
+
+			physicsManager->AddPhysicsObject(new Particle(color, GetMousePosition(window), sf::Vector2f(10, 10), 4));
+		}
+
+		delete item;
+		}
+	}
+	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::RBracket))
+	{
+		currentItemLevel++;
+	}
+	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::LBracket))
+	{
+		currentItemLevel--;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	{
@@ -156,5 +196,6 @@ string HomeScreen::GetFpsString(float dt)
 {
 	stringstream ss;
 	ss << (int)(1 / dt);
+	ss << "\ncurrent item level: " << currentItemLevel;
 	return ss.str();
 }

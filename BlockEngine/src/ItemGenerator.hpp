@@ -19,13 +19,16 @@ public:
     virtual ~ItemGenerator();
 
 	Item* Generate(int level);
-	Equipment* GenerateEquipment(int level);
+	Armor* GenerateArmor(int level);
+	Weapon* GenerateWeapon(int level);
 	EquipmentRarity GenerateEquipmentRarity(int level);
 
 private:
 	DropRateCollection<ItemType> randomItemType;
 	DropRateCollection<EquipmentType> randomEquipmentType;
 	DropRateCollection<EquipmentRarity> randomEquipmentRarity;
+
+	Equipment* GenerateEquipment(int level);
 
 };
 

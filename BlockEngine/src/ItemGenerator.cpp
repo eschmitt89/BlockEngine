@@ -59,6 +59,20 @@ Item * ItemGenerator::Generate(int level)
 
 ////////////////////////////////////////////////////////////////////////
 
+Armor * ItemGenerator::GenerateArmor(int level)
+{
+	return nullptr;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+Weapon * ItemGenerator::GenerateWeapon(int level)
+{
+	return nullptr;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 Equipment * ItemGenerator::GenerateEquipment(int level)
 {
 	EquipmentType equipmentType = randomEquipmentType.Roll();
@@ -67,11 +81,11 @@ Equipment * ItemGenerator::GenerateEquipment(int level)
 	switch (equipmentType)
 	{
 	case EquipmentType_Armor:
-		return new Armor(equipmentRarity, level);
+		return GenerateArmor(level);
 	case EquipmentType_Weapon:
-		return new Weapon(equipmentRarity, level);
+		return GenerateWeapon(level);
 	default:
-		return new Armor(equipmentRarity, level);
+		return GenerateArmor(level);
 	}
 }
 

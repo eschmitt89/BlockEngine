@@ -14,6 +14,7 @@
 #include "Camera.hpp"
 #include "Player.hpp"
 #include "PhysicsManager.hpp"
+#include "ItemGenerator.hpp"
 
 class HomeScreen : public AbstractScreen
 {
@@ -32,8 +33,11 @@ private:
 	Camera* camera;
 	Player* player;
 	PhysicsManager* physicsManager;
+	ItemGenerator* itemGenerator;
 
 	sf::Text fpsText;
+
+	int currentItemLevel;
 
 	string GetFpsString(float dt);
 };

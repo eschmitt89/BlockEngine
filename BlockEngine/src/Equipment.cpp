@@ -32,6 +32,20 @@ Equipment::~Equipment()
 
 ////////////////////////////////////////////////////////////////////////
 
+EquipmentType Equipment::GetEquipmentType()
+{
+	return equipmentType;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+EquipmentRarity Equipment::GetEquipmentRarity()
+{
+	return equipmentRarity;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 int Equipment::GetStatValue(int level, int maxValue)
 {
 	return ((float)level / MAX_LEVEL) * (maxValue / EQUIPMENT_SLOT_COUNT / EQUIPMENT_MAX_STATS);

@@ -20,6 +20,8 @@ public:
 	Item(ItemType itemType);
     virtual ~Item();
 
+	ItemType GetItemType();
+
 protected:
 	ItemType itemType;
 	sf::RectangleShape sprite;
