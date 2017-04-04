@@ -39,11 +39,11 @@ Item * ItemGenerator::Generate(int level)
 	case ItemType_Equipment:
 		return GenerateEquipment(level);
 	case ItemType_Potion:
-		//return GeneratePotion(level);
+		return GeneratePotion(level);
 	case ItemType_Scroll:
-		//return GenerateScroll(level);
+		return GenerateScroll(level);
 	case ItemType_Gem:
-		//return GenerateGem(level);
+		return GenerateGem(level);
 	default:
 		return GenerateEquipment(level);
 	}
@@ -84,21 +84,21 @@ Weapon * ItemGenerator::GenerateWeapon(int level)
 
 Item * ItemGenerator::GeneratePotion(int level)
 {
-	return nullptr;
+	return potionGenerator.Generate(level);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 Item * ItemGenerator::GenerateScroll(int level)
 {
-	return nullptr;
+	return scrollGenerator.Generate(level);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 Item * ItemGenerator::GenerateGem(int level)
 {
-	return nullptr;
+	return gemGenerator.Generate(level);
 }
 
 ////////////////////////////////////////////////////////////////////////

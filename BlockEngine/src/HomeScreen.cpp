@@ -105,6 +105,8 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 			Equipment* equipment = (Equipment*)item;
 			sf::Color color = sf::Color::White;
 
+			string texture = (equipment->GetEquipmentType() == EquipmentType_Armor) ? "armor" : "weapon";
+
 
 		    if (equipment->GetEquipmentRarity() == EquipmentRarity_Good)
 			{
@@ -116,18 +118,30 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 			}
 			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Epic)
 			{
-				color = sf::Color(128, 0, 255, 155);
+				color = sf::Color(128, 0, 255, 255);
 			}
 			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Legendary)
 			{
-				color = sf::Color(250,100,0,155);
+				color = sf::Color(250,100,0, 255);
 			}
 			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Artifact)
 			{
 				color = sf::Color::Red;
 			}
 
-			physicsManager->AddPhysicsObject(new Particle(color, GetMousePosition(window), sf::Vector2f(10, 10), 4));
+			physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture(texture), color, GetMousePosition(window), sf::Vector2f(32, 32), 4));
+		}
+		else if (item->GetItemType() == ItemType_Potion)
+		{
+			physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("potion"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
+		}
+		else if (item->GetItemType() == ItemType_Scroll)
+		{
+			physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("scroll"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
+		}
+		else if (item->GetItemType() == ItemType_Gem)
+		{
+			physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("gem"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
 		}
 
 		delete item;

@@ -185,6 +185,8 @@
     <ClInclude Include="src\EquipmentStat.hpp" />
     <ClInclude Include="src\EquipmentStats.hpp" />
     <ClInclude Include="src\EquipmentType.hpp" />
+    <ClInclude Include="src\Gem.hpp" />
+    <ClInclude Include="src\GemGenerator.hpp" />
     <ClInclude Include="src\GridGenerator.hpp" />
     <ClInclude Include="src\GridRoom.hpp" />
     <ClInclude Include="src\EventManager.hpp" />
@@ -203,10 +205,14 @@
     <ClInclude Include="src\PhysicsObject.hpp" />
     <ClInclude Include="src\Player.hpp" />
     <ClInclude Include="src\MovementState.hpp" />
+    <ClInclude Include="src\Potion.hpp" />
+    <ClInclude Include="src\PotionGenerator.hpp" />
     <ClInclude Include="src\ResourceLoader.hpp" />
     <ClInclude Include="src\ResourceManager.hpp" />
     <ClInclude Include="src\ResourcePath.hpp" />
     <ClInclude Include="src\ScreenManager.hpp" />
+    <ClInclude Include="src\Scroll.hpp" />
+    <ClInclude Include="src\ScrollGenerator.hpp" />
     <ClInclude Include="src\TransitionParticle.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
     <ClInclude Include="src\Weapon.hpp" />
@@ -227,6 +233,8 @@
     <ClCompile Include="src\Emitter.cpp" />
     <ClCompile Include="src\Equipment.cpp" />
     <ClCompile Include="src\EquipmentGenerator.cpp" />
+    <ClCompile Include="src\Gem.cpp" />
+    <ClCompile Include="src\GemGenerator.cpp" />
     <ClCompile Include="src\GridGenerator.cpp" />
     <ClCompile Include="src\GridRoom.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
@@ -242,19 +250,28 @@
     <ClCompile Include="src\PhysicsManager.cpp" />
     <ClCompile Include="src\PhysicsObject.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Potion.cpp" />
+    <ClCompile Include="src\PotionGenerator.cpp" />
     <ClCompile Include="src\ResourceLoader.cpp" />
     <ClCompile Include="src\ResourceManager.cpp" />
     <ClCompile Include="src\ResourcePath.cpp" />
     <ClCompile Include="src\ScreenManager.cpp" />
+    <ClCompile Include="src\Scroll.cpp" />
+    <ClCompile Include="src\ScrollGenerator.cpp" />
     <ClCompile Include="src\TransitionParticle.cpp" />
     <ClCompile Include="src\Weapon.cpp" />
     <ClCompile Include="src\WeaponGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="resources\Armor.png" />
+    <Image Include="resources\Gem.png" />
     <Image Include="resources\icon.png" />
     <Image Include="resources\LadderBlock.png" />
     <Image Include="resources\Player.png" />
+    <Image Include="resources\Potion.png" />
+    <Image Include="resources\Scroll.png" />
     <Image Include="resources\WaterBlock.png" />
+    <Image Include="resources\Weapon.png" />
     <Image Include="resources\WhiteBlock.png" />
   </ItemGroup>
   <ItemGroup>

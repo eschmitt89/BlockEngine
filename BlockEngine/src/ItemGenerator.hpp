@@ -11,6 +11,9 @@
 
 #include "ArmorGenerator.hpp"
 #include "WeaponGenerator.hpp"
+#include "PotionGenerator.hpp"
+#include "ScrollGenerator.hpp"
+#include "GemGenerator.hpp"
 
 class ItemGenerator
 {
@@ -26,10 +29,14 @@ public:
 	Item* GenerateGem(int level);
 
 private:
-	ArmorGenerator armorGenerator;
-	WeaponGenerator weaponGenerator;
 	DropRateCollection<ItemType> randomItemType;
 	DropRateCollection<EquipmentType> randomEquipmentType;
+
+	ArmorGenerator armorGenerator;
+	WeaponGenerator weaponGenerator;
+	PotionGenerator potionGenerator;
+	ScrollGenerator scrollGenerator;
+	GemGenerator gemGenerator;
 
 	Equipment* GenerateEquipment(int level);
 };

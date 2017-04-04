@@ -63,6 +63,15 @@
     <Filter Include="Source Files\Items\Equipment\Weapon">
       <UniqueIdentifier>{d7fa3c25-edf4-417e-a6ca-2493ed7aa5e4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Items\Potion">
+      <UniqueIdentifier>{15fedcbc-0a7f-464b-af87-3eae37200c7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items\Scrolls">
+      <UniqueIdentifier>{85cfe776-e0bc-473a-b5b9-022af2748c91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Items\Gems">
+      <UniqueIdentifier>{5afc8f09-2695-45de-ad3c-11dd240aeb16}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -203,6 +212,24 @@
     <ClInclude Include="src\EquipmentStats.hpp">
       <Filter>Source Files\Items\Equipment</Filter>
     </ClInclude>
+    <ClInclude Include="src\Potion.hpp">
+      <Filter>Source Files\Items\Potion</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PotionGenerator.hpp">
+      <Filter>Source Files\Items\Potion</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Scroll.hpp">
+      <Filter>Source Files\Items\Scrolls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ScrollGenerator.hpp">
+      <Filter>Source Files\Items\Scrolls</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Gem.hpp">
+      <Filter>Source Files\Items\Gems</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GemGenerator.hpp">
+      <Filter>Source Files\Items\Gems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -298,6 +325,24 @@
     <ClCompile Include="src\WeaponGenerator.cpp">
       <Filter>Source Files\Items\Equipment\Weapon</Filter>
     </ClCompile>
+    <ClCompile Include="src\Potion.cpp">
+      <Filter>Source Files\Items\Potion</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PotionGenerator.cpp">
+      <Filter>Source Files\Items\Potion</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Scroll.cpp">
+      <Filter>Source Files\Items\Scrolls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ScrollGenerator.cpp">
+      <Filter>Source Files\Items\Scrolls</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Gem.cpp">
+      <Filter>Source Files\Items\Gems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GemGenerator.cpp">
+      <Filter>Source Files\Items\Gems</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\icon.png">
@@ -313,6 +358,21 @@
       <Filter>Resource Files\Images</Filter>
     </Image>
     <Image Include="resources\Player.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="resources\Armor.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="resources\Gem.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="resources\Potion.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="resources\Scroll.png">
+      <Filter>Resource Files\Images</Filter>
+    </Image>
+    <Image Include="resources\Weapon.png">
       <Filter>Resource Files\Images</Filter>
     </Image>
   </ItemGroup>
