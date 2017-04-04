@@ -24,45 +24,14 @@ WeaponGenerator::~WeaponGenerator()
 
 Weapon * WeaponGenerator::Generate(int level)
 {
-	WeaponType weaponType = GetRandomWeaponType(level);
-	WeaponSlot weaponSlot = GenerateWeaponSlot(weaponType);
-	WeaponSpeed speed = GenerateWeaponSpeed(weaponType, weaponSlot);
-	EquipmentRarity equipmentRarity = GenerateEquipmentRarity(level);
-	int damage = GenerateWeaponDamage(level, speed, equipmentRarity);
+	WeaponType type = GetRandomWeaponType(level);
+	WeaponSlot slot = GenerateWeaponSlot(type);
+	WeaponSpeed speed = GenerateWeaponSpeed(type, slot);
+	EquipmentRarity rarity = GenerateEquipmentRarity(level);
+	EquipmentStats stats = GenerateEquipmentStats(level, rarity);
+	int damage = GenerateWeaponDamage(level, speed, rarity);
 	
-	int health = 0;
-	int armor = 0;
-	int crit = 0;
-	int dodge = 0;
-	int power = 0;
-
-	for (int i = 0; i < equipmentRarity; i++)
-	{
-		EquipmentStat stat = static_cast<EquipmentStat>(Random(1, EQUIPMENT_STAT_COUNT));
-		
-		switch (stat)
-		{
-		case EquipmentStat_Health:
-			health += GenerateEquipmentStatValue(level, MAX_HEALTH);
-			break;
-		case EquipmentStat_Armor:
-			armor += GenerateEquipmentStatValue(level, MAX_ARMOR);
-			break;
-		case EquipmentStat_Crit:
-			crit += GenerateEquipmentStatValue(level, MAX_CRIT);
-			break;
-		case EquipmentStat_Dodge:
-			dodge += GenerateEquipmentStatValue(level, MAX_DODGE);
-			break;
-		case EquipmentStat_Power:
-			power += GenerateEquipmentStatValue(level, MAX_POWER);
-			break;
-		default:
-			break;
-		}
-	}
-
-	return new Weapon(weaponType, weaponSlot, speed, equipmentRarity, level, health, armor, crit, dodge, power, damage);
+	return new Weapon(type, slot, speed, rarity, stats, level, damage);
 }
 
 ////////////////////////////////////////////////////////////////////////

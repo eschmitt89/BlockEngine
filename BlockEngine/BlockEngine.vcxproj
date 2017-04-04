@@ -183,6 +183,7 @@
     <ClInclude Include="src\EquipmentGenerator.hpp" />
     <ClInclude Include="src\EquipmentRarity.hpp" />
     <ClInclude Include="src\EquipmentStat.hpp" />
+    <ClInclude Include="src\EquipmentStats.hpp" />
     <ClInclude Include="src\EquipmentType.hpp" />
     <ClInclude Include="src\GridGenerator.hpp" />
     <ClInclude Include="src\GridRoom.hpp" />

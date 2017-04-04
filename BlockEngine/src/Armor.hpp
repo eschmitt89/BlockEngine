@@ -15,7 +15,7 @@
 class Armor : public Equipment
 {
 public:
-	Armor(ArmorType armorType, EquipmentRarity rarity, int level, int health, int armor, int crit, int dodge, int power);
+	Armor(ArmorType armorType, EquipmentRarity rarity, EquipmentStats equipmentStats, int level);
     virtual ~Armor();
 
 protected:

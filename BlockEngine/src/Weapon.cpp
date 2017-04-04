@@ -8,8 +8,8 @@
 
 #include "Weapon.hpp"
 
-Weapon::Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, int level, int health, int armor, int crit, int dodge, int power, int damage)
-	:Equipment(EquipmentType_Weapon, equipmentRarity, level, health, armor, crit, dodge, power)
+Weapon::Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, int damage)
+	:Equipment(EquipmentType_Weapon, equipmentRarity, equipmentStats, level)
 {
 	this->weaponType = weaponType;
 	this->weaponSlot = weaponSlot;

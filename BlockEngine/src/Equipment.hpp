@@ -11,31 +11,26 @@
 
 #include "Item.hpp"
 #include "EquipmentStat.hpp"
+#include "EquipmentStats.hpp"
 #include "EquipmentType.hpp"
 #include "EquipmentRarity.hpp"
 
 class Equipment : public Item
 {
 public:
-	Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarity, int level, int health, int armor, int crit, int dodge, int power);
+	Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level);
     virtual ~Equipment();
 
 	EquipmentType GetEquipmentType();
 	EquipmentRarity GetEquipmentRarity();
-	
+	EquipmentStats GetEquipmentStats();
 
 protected:
 	EquipmentType equipmentType;
 	EquipmentRarity equipmentRarity;
+	EquipmentStats equipmentStats;
 	
 	int level;
-
-	int health;
-	int armor;
-	int crit;
-	int dodge;
-	int power;
-
 };
 
 #endif /* Equipment_hpp */

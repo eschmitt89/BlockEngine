@@ -8,19 +8,13 @@
 
 #include "Equipment.hpp"
 
-Equipment::Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarity, int level, int health, int armor, int crit, int dodge, int power)
+Equipment::Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level)
 	:Item(ItemType_Equipment)
 {
 	this->equipmentType = equipmentType;
 	this->equipmentRarity = equipmentRarity;
-
+	this->equipmentStats = equipmentStats;
 	this->level = level;
-
-	this->health = health;
-	this->armor = armor;
-	this->crit = crit;
-	this->dodge = dodge;
-	this->power = power;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -42,6 +36,13 @@ EquipmentType Equipment::GetEquipmentType()
 EquipmentRarity Equipment::GetEquipmentRarity()
 {
 	return equipmentRarity;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+EquipmentStats Equipment::GetEquipmentStats()
+{
+	return equipmentStats;
 }
 
 ////////////////////////////////////////////////////////////////////////

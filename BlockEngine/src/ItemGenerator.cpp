@@ -39,11 +39,11 @@ Item * ItemGenerator::Generate(int level)
 	case ItemType_Equipment:
 		return GenerateEquipment(level);
 	case ItemType_Potion:
-		return GeneratePotion(level);
+		//return GeneratePotion(level);
 	case ItemType_Scroll:
-		return GenerateScroll(level);
+		//return GenerateScroll(level);
 	case ItemType_Gem:
-		return GenerateGem(level);
+		//return GenerateGem(level);
 	default:
 		return GenerateEquipment(level);
 	}

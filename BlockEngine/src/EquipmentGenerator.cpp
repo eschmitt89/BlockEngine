@@ -58,6 +58,41 @@ EquipmentRarity EquipmentGenerator::GenerateEquipmentRarity(int level)
 
 ////////////////////////////////////////////////////////////////////////
 
+EquipmentStats EquipmentGenerator::GenerateEquipmentStats(int level, EquipmentRarity equipmentRarity)
+{
+	EquipmentStats equipmentStats = EquipmentStats(0, 0, 0, 0, 0);
+
+	for (int i = 0; i < equipmentRarity; i++)
+	{
+		EquipmentStat stat = static_cast<EquipmentStat>(Random(1, EQUIPMENT_STAT_COUNT));
+
+		switch (stat)
+		{
+		case EquipmentStat_Health:
+			equipmentStats.health += GenerateEquipmentStatValue(level, MAX_HEALTH);
+			break;
+		case EquipmentStat_Armor:
+			equipmentStats.armor += GenerateEquipmentStatValue(level, MAX_ARMOR);
+			break;
+		case EquipmentStat_Crit:
+			equipmentStats.crit += GenerateEquipmentStatValue(level, MAX_CRIT);
+			break;
+		case EquipmentStat_Dodge:
+			equipmentStats.dodge += GenerateEquipmentStatValue(level, MAX_DODGE);
+			break;
+		case EquipmentStat_Power:
+			equipmentStats.power += GenerateEquipmentStatValue(level, MAX_POWER);
+			break;
+		default:
+			break;
+		}
+	}
+
+	return equipmentStats;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 int EquipmentGenerator::GenerateEquipmentStatValue(int level, int maxValue)
 {
 	return ((float)level / EQUIPMENT_MAX_LEVEL) * (maxValue / EQUIPMENT_SLOTS / EQUIPMENT_MAX_STAT_COUNT);

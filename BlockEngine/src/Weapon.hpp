@@ -22,7 +22,7 @@
 class Weapon : public Equipment
 {
 public:
-	Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, int level, int health, int armor, int crit, int dodge, int power, int damage);
+	Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, int damage);
     virtual ~Weapon();
 
 protected:

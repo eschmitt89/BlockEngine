@@ -200,6 +200,9 @@
     <ClInclude Include="src\WeaponGenerator.hpp">
       <Filter>Source Files\Items\Equipment\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="src\EquipmentStats.hpp">
+      <Filter>Source Files\Items\Equipment</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
