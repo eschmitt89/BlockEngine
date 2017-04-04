@@ -16,15 +16,10 @@ class Armor : public Equipment
 {
 public:
 	Armor(ArmorType armorType, EquipmentRarity rarity, int level, int health, int armor, int crit, int dodge, int power);
-	Armor(EquipmentRarity equipmentRarity, int level);
     virtual ~Armor();
 
 protected:
 	ArmorType armorType;
-
-	void LoadTexture(ArmorType armorType, EquipmentRarity rarity);
-	void GenerateStats(EquipmentRarity equipmentRarity, int level);
-
 };
 
 #endif /* Armor_hpp */

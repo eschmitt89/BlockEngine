@@ -172,6 +172,7 @@
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp" />
     <ClInclude Include="src\Armor.hpp" />
+    <ClInclude Include="src\ArmorGenerator.hpp" />
     <ClInclude Include="src\ArmorType.hpp" />
     <ClInclude Include="src\Block.hpp" />
     <ClInclude Include="src\BlockNeighbors.hpp" />
@@ -179,6 +180,7 @@
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Emitter.hpp" />
     <ClInclude Include="src\Equipment.hpp" />
+    <ClInclude Include="src\EquipmentGenerator.hpp" />
     <ClInclude Include="src\EquipmentRarity.hpp" />
     <ClInclude Include="src\EquipmentStat.hpp" />
     <ClInclude Include="src\EquipmentType.hpp" />
@@ -207,6 +209,7 @@
     <ClInclude Include="src\TransitionParticle.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
     <ClInclude Include="src\Weapon.hpp" />
+    <ClInclude Include="src\WeaponGenerator.hpp" />
     <ClInclude Include="src\WeaponSlot.hpp" />
     <ClInclude Include="src\WeaponSpeed.hpp" />
     <ClInclude Include="src\WeaponType.hpp" />
@@ -216,11 +219,13 @@
   <ItemGroup>
     <ClCompile Include="src\AbstractScreen.cpp" />
     <ClCompile Include="src\Armor.cpp" />
+    <ClCompile Include="src\ArmorGenerator.cpp" />
     <ClCompile Include="src\Block.cpp" />
     <ClCompile Include="src\BlockNeighbors.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Emitter.cpp" />
     <ClCompile Include="src\Equipment.cpp" />
+    <ClCompile Include="src\EquipmentGenerator.cpp" />
     <ClCompile Include="src\GridGenerator.cpp" />
     <ClCompile Include="src\GridRoom.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
@@ -242,6 +247,7 @@
     <ClCompile Include="src\ScreenManager.cpp" />
     <ClCompile Include="src\TransitionParticle.cpp" />
     <ClCompile Include="src\Weapon.cpp" />
+    <ClCompile Include="src\WeaponGenerator.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resources\icon.png" />

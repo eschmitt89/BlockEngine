@@ -99,7 +99,7 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 		{
 
 		
-		Item* item = itemGenerator->Generate(10);
+		Item* item = itemGenerator->Generate(currentItemLevel);
 		if (item->GetItemType() == ItemType_Equipment)
 		{
 			Equipment* equipment = (Equipment*)item;

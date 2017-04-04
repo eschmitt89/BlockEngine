@@ -9,8 +9,8 @@
 #ifndef ItemGenerator_hpp
 #define ItemGenerator_hpp
 
-#include "Armor.hpp"
-#include "Weapon.hpp"
+#include "ArmorGenerator.hpp"
+#include "WeaponGenerator.hpp"
 
 class ItemGenerator
 {
@@ -21,15 +21,17 @@ public:
 	Item* Generate(int level);
 	Armor* GenerateArmor(int level);
 	Weapon* GenerateWeapon(int level);
-	EquipmentRarity GenerateEquipmentRarity(int level);
+	Item* GeneratePotion(int level);
+	Item* GenerateScroll(int level);
+	Item* GenerateGem(int level);
 
 private:
+	ArmorGenerator armorGenerator;
+	WeaponGenerator weaponGenerator;
 	DropRateCollection<ItemType> randomItemType;
 	DropRateCollection<EquipmentType> randomEquipmentType;
-	DropRateCollection<EquipmentRarity> randomEquipmentRarity;
 
 	Equipment* GenerateEquipment(int level);
-
 };
 
 #endif /* ItemGenerator_hpp */

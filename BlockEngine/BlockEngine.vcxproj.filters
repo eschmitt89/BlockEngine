@@ -191,6 +191,15 @@
     <ClInclude Include="src\WeaponSpeed.hpp">
       <Filter>Source Files\Items\Equipment\Weapon</Filter>
     </ClInclude>
+    <ClInclude Include="src\ArmorGenerator.hpp">
+      <Filter>Source Files\Items\Equipment\Armor</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EquipmentGenerator.hpp">
+      <Filter>Source Files\Items\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WeaponGenerator.hpp">
+      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -275,6 +284,15 @@
       <Filter>Source Files\Items</Filter>
     </ClCompile>
     <ClCompile Include="src\Weapon.cpp">
+      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ArmorGenerator.cpp">
+      <Filter>Source Files\Items\Equipment\Armor</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EquipmentGenerator.cpp">
+      <Filter>Source Files\Items\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WeaponGenerator.cpp">
       <Filter>Source Files\Items\Equipment\Weapon</Filter>
     </ClCompile>
   </ItemGroup>

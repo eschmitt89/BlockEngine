@@ -19,14 +19,6 @@ ItemGenerator::ItemGenerator()
 	randomEquipmentType = DropRateCollection<EquipmentType>();
 	randomEquipmentType.AddDropRate(EquipmentType_Armor, 0.75);
 	randomEquipmentType.AddDropRate(EquipmentType_Weapon, 0.25);
-
-	randomEquipmentRarity = DropRateCollection<EquipmentRarity>();
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Common, 0.489);
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Good, 0.30);
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Rare, 0.15);
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Epic, 0.05);
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Legendary, 0.01);
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Artifact, 0.001);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -47,11 +39,11 @@ Item * ItemGenerator::Generate(int level)
 	case ItemType_Equipment:
 		return GenerateEquipment(level);
 	case ItemType_Potion:
-		return GenerateEquipment(level);
+		return GeneratePotion(level);
 	case ItemType_Scroll:
-		return GenerateEquipment(level);
+		return GenerateScroll(level);
 	case ItemType_Gem:
-		return GenerateEquipment(level);
+		return GenerateGem(level);
 	default:
 		return GenerateEquipment(level);
 	}
@@ -59,24 +51,9 @@ Item * ItemGenerator::Generate(int level)
 
 ////////////////////////////////////////////////////////////////////////
 
-Armor * ItemGenerator::GenerateArmor(int level)
-{
-	return nullptr;
-}
-
-////////////////////////////////////////////////////////////////////////
-
-Weapon * ItemGenerator::GenerateWeapon(int level)
-{
-	return nullptr;
-}
-
-////////////////////////////////////////////////////////////////////////
-
 Equipment * ItemGenerator::GenerateEquipment(int level)
 {
 	EquipmentType equipmentType = randomEquipmentType.Roll();
-	EquipmentRarity equipmentRarity = randomEquipmentRarity.Roll();
 
 	switch (equipmentType)
 	{
@@ -91,30 +68,37 @@ Equipment * ItemGenerator::GenerateEquipment(int level)
 
 ////////////////////////////////////////////////////////////////////////
 
-EquipmentRarity ItemGenerator::GenerateEquipmentRarity(int level)
+Armor * ItemGenerator::GenerateArmor(int level)
 {
-	EquipmentRarity equipmentRarity = randomEquipmentRarity.Roll();
-
-	if (equipmentRarity == EquipmentRarity_Artifact && level < EquipmentRarity_Artifact)
-	{
-		equipmentRarity = EquipmentRarity_Legendary;
-	}
-	if (equipmentRarity == EquipmentRarity_Legendary && level < EquipmentRarity_Legendary)
-	{
-		equipmentRarity = EquipmentRarity_Epic;
-	}
-	if (equipmentRarity == EquipmentRarity_Epic && level < EquipmentRarity_Epic)
-	{
-		equipmentRarity = EquipmentRarity_Rare;
-	}
-	if (equipmentRarity == EquipmentRarity_Rare && level < EquipmentRarity_Rare)
-	{
-		equipmentRarity = EquipmentRarity_Good;
-	}
-	if (equipmentRarity == EquipmentRarity_Good && level < EquipmentRarity_Good)
-	{
-		equipmentRarity = EquipmentRarity_Common;
-	}
-
-	return equipmentRarity;
+	return armorGenerator.Generate(level);
 }
+
+////////////////////////////////////////////////////////////////////////
+
+Weapon * ItemGenerator::GenerateWeapon(int level)
+{
+	return weaponGenerator.Generate(level);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+Item * ItemGenerator::GeneratePotion(int level)
+{
+	return nullptr;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+Item * ItemGenerator::GenerateScroll(int level)
+{
+	return nullptr;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+Item * ItemGenerator::GenerateGem(int level)
+{
+	return nullptr;
+}
+
+////////////////////////////////////////////////////////////////////////

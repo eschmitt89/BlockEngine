@@ -14,17 +14,6 @@
 #include "EquipmentType.hpp"
 #include "EquipmentRarity.hpp"
 
-#define EQUIPMENT_SLOT_COUNT 8
-#define EQUIPMENT_MAX_STATS 5
-
-#define MAX_LEVEL 100
-
-#define MAX_HEALTH 10000
-#define MAX_ARMOR 10000
-#define MAX_CRIT 10000
-#define MAX_DODGE 10000
-#define MAX_POWER 10000
-
 class Equipment : public Item
 {
 public:
@@ -46,8 +35,6 @@ protected:
 	int crit;
 	int dodge;
 	int power;
-
-	int GetStatValue(int level, int maxValue);
 
 };
 
