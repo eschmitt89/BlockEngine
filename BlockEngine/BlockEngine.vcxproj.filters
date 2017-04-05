@@ -48,9 +48,6 @@
     <Filter Include="Source Files\Grid Generator">
       <UniqueIdentifier>{7ae96b2f-cdc0-4588-a0c2-7f0a44600d13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Particles">
-      <UniqueIdentifier>{ebbbf3f3-4e24-4213-a1ba-e970b86bf6e1}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Items">
       <UniqueIdentifier>{f591a458-7ec5-44e2-987e-f3f67279ced0}</UniqueIdentifier>
     </Filter>
@@ -71,6 +68,18 @@
     </Filter>
     <Filter Include="Source Files\Items\Gems">
       <UniqueIdentifier>{5afc8f09-2695-45de-ad3c-11dd240aeb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects">
+      <UniqueIdentifier>{427c7532-0351-4282-b2f6-3db42ff2f7cd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Physics Objects">
+      <UniqueIdentifier>{794e695c-2527-4693-ae1a-eb46d2d86af6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Physics Objects\Particles">
+      <UniqueIdentifier>{ebbbf3f3-4e24-4213-a1ba-e970b86bf6e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Physics Objects\Items">
+      <UniqueIdentifier>{55fffc8a-4dac-419b-8c80-f85315c8770b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -95,9 +104,6 @@
     <ClInclude Include="src\Camera.hpp">
       <Filter>Source Files\Camera</Filter>
     </ClInclude>
-    <ClInclude Include="src\Object.hpp">
-      <Filter>Source Files\Physics Manager</Filter>
-    </ClInclude>
     <ClInclude Include="src\ResourceLoader.hpp">
       <Filter>Source Files\Resource Manager</Filter>
     </ClInclude>
@@ -109,9 +115,6 @@
     </ClInclude>
     <ClInclude Include="src\ResourcePath.hpp">
       <Filter>Source Files\Resource Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="src\PhysicsObject.hpp">
-      <Filter>Source Files\Physics Manager</Filter>
     </ClInclude>
     <ClInclude Include="src\PhysicsManager.hpp">
       <Filter>Source Files\Physics Manager</Filter>
@@ -147,19 +150,13 @@
       <Filter>Source Files\Grid Generator</Filter>
     </ClInclude>
     <ClInclude Include="src\Particle.hpp">
-      <Filter>Source Files\Particles</Filter>
-    </ClInclude>
-    <ClInclude Include="src\XState.hpp">
-      <Filter>Source Files\Physics Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="src\YState.hpp">
-      <Filter>Source Files\Physics Manager</Filter>
+      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
     </ClInclude>
     <ClInclude Include="src\TransitionParticle.hpp">
-      <Filter>Source Files\Particles</Filter>
+      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
     </ClInclude>
     <ClInclude Include="src\Emitter.hpp">
-      <Filter>Source Files\Particles</Filter>
+      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
     </ClInclude>
     <ClInclude Include="src\Item.hpp">
       <Filter>Source Files\Items</Filter>
@@ -230,6 +227,24 @@
     <ClInclude Include="src\GemGenerator.hpp">
       <Filter>Source Files\Items\Gems</Filter>
     </ClInclude>
+    <ClInclude Include="src\Object.hpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\PhysicsObject.hpp">
+      <Filter>Source Files\Objects\Physics Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\XState.hpp">
+      <Filter>Source Files\Objects\Physics Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YState.hpp">
+      <Filter>Source Files\Objects\Physics Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ObjectType.hpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemPhysicsObject.hpp">
+      <Filter>Source Files\Objects\Physics Objects\Items</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -253,17 +268,11 @@
     <ClCompile Include="src\Camera.cpp">
       <Filter>Source Files\Camera</Filter>
     </ClCompile>
-    <ClCompile Include="src\Object.cpp">
-      <Filter>Source Files\Physics Manager</Filter>
-    </ClCompile>
     <ClCompile Include="src\ResourceLoader.cpp">
       <Filter>Source Files\Resource Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\ResourceManager.cpp">
       <Filter>Source Files\Resource Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\PhysicsObject.cpp">
-      <Filter>Source Files\Physics Manager</Filter>
     </ClCompile>
     <ClCompile Include="src\PhysicsManager.cpp">
       <Filter>Source Files\Physics Manager</Filter>
@@ -293,13 +302,13 @@
       <Filter>Source Files\Grid Generator</Filter>
     </ClCompile>
     <ClCompile Include="src\Particle.cpp">
-      <Filter>Source Files\Particles</Filter>
+      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
     </ClCompile>
     <ClCompile Include="src\TransitionParticle.cpp">
-      <Filter>Source Files\Particles</Filter>
+      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
     </ClCompile>
     <ClCompile Include="src\Emitter.cpp">
-      <Filter>Source Files\Particles</Filter>
+      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
     </ClCompile>
     <ClCompile Include="src\Item.cpp">
       <Filter>Source Files\Items</Filter>
@@ -342,6 +351,15 @@
     </ClCompile>
     <ClCompile Include="src\GemGenerator.cpp">
       <Filter>Source Files\Items\Gems</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Object.cpp">
+      <Filter>Source Files\Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\PhysicsObject.cpp">
+      <Filter>Source Files\Objects\Physics Objects</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemPhysicsObject.cpp">
+      <Filter>Source Files\Objects\Physics Objects\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

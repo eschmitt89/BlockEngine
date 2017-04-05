@@ -15,7 +15,7 @@
 class Armor : public Equipment
 {
 public:
-	Armor(ArmorType armorType, EquipmentRarity rarity, EquipmentStats equipmentStats, int level);
+	Armor(ArmorType armorType, EquipmentRarity rarity, EquipmentStats equipmentStats, int level, const sf::Texture* texture);
     virtual ~Armor();
 
 protected:

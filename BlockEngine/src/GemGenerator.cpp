@@ -24,7 +24,7 @@ GemGenerator::~GemGenerator()
 
 Gem * GemGenerator::Generate(int level)
 {
-	return new Gem();
+	return new Gem(nullptr);
 }
 
 ////////////////////////////////////////////////////////////////////////

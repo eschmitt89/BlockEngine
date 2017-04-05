@@ -93,6 +93,13 @@ float inline Random()
 
 ////////////////////////////////////////////////////////////////////////
 
+bool inline StringContains(string s, string subString)
+{
+	return s.find(subString) != string::npos;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 template <typename T> void inline VectorEraseElement(vector<T>& vector, T element)
 {
 	vector.erase(remove(vector.begin(), vector.end(), element), vector.end());

@@ -10,6 +10,7 @@
 #define Object_hpp
 
 #include <SFML/Graphics.hpp>
+#include "ObjectType.hpp"
 
 class Object
 {
@@ -17,6 +18,7 @@ public:
 	Object(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size);
 	Object(sf::Vector2f position, sf::Vector2f size) : Object(nullptr, position, size) { }
     virtual ~Object();
+	virtual ObjectType GetObjectType() { return ObjectType_Object; }
 
 	virtual void Update(float dt);
 	virtual void Draw(sf::RenderWindow& window);

@@ -8,8 +8,8 @@
 
 #include "Equipment.hpp"
 
-Equipment::Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level)
-	:Item(ItemType_Equipment)
+Equipment::Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, const sf::Texture* texture)
+	:Item(ItemType_Equipment, texture)
 {
 	this->equipmentType = equipmentType;
 	this->equipmentRarity = equipmentRarity;

@@ -24,7 +24,7 @@ PotionGenerator::~PotionGenerator()
 
 Potion * PotionGenerator::Generate(int level)
 {
-	return new Potion();
+	return new Potion(nullptr);
 }
 
 ////////////////////////////////////////////////////////////////////////

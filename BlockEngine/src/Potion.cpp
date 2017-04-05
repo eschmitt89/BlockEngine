@@ -8,8 +8,8 @@
 
 #include "Potion.hpp"
 
-Potion::Potion()
-	:Item(ItemType_Potion)
+Potion::Potion(const sf::Texture* texture)
+	:Item(ItemType_Potion, texture)
 {
 
 }

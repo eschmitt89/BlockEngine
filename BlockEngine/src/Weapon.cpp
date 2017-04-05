@@ -8,8 +8,8 @@
 
 #include "Weapon.hpp"
 
-Weapon::Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, int damage)
-	:Equipment(EquipmentType_Weapon, equipmentRarity, equipmentStats, level)
+Weapon::Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, int damage, const sf::Texture* texture)
+	:Equipment(EquipmentType_Weapon, equipmentRarity, equipmentStats, level, texture)
 {
 	this->weaponType = weaponType;
 	this->weaponSlot = weaponSlot;

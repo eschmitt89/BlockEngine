@@ -12,19 +12,19 @@
 #include "SFML/Window.hpp"
 #include "ItemType.hpp"
 #include "Utilities.hpp"
-#include "ResourceManager.hpp"
 
 class Item
 {
 public:
-	Item(ItemType itemType);
+	Item(ItemType itemType, const sf::Texture* texture);
     virtual ~Item();
 
 	ItemType GetItemType();
+	const sf::Texture* GetTexture();
 
 protected:
 	ItemType itemType;
-	sf::RectangleShape sprite;
+	const sf::Texture* texture;
 };
 
 #endif /* Item_hpp */

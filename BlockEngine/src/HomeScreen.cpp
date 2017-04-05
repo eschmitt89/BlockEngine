@@ -13,6 +13,7 @@
 #include "TransitionParticle.hpp"
 #include "Emitter.hpp"
 #include "ItemGenerator.hpp"
+#include "ItemPhysicsObject.hpp"
 #include <sstream>
 
 HomeScreen::HomeScreen() 
@@ -105,9 +106,6 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 			Equipment* equipment = (Equipment*)item;
 			sf::Color color = sf::Color::White;
 
-			string texture = (equipment->GetEquipmentType() == EquipmentType_Armor) ? "armor" : "weapon";
-
-
 		    if (equipment->GetEquipmentRarity() == EquipmentRarity_Good)
 			{
 				color = sf::Color::Green;
@@ -129,19 +127,26 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 				color = sf::Color::Red;
 			}
 
-			physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture(texture), color, GetMousePosition(window), sf::Vector2f(32, 32), 4));
+			if (equipment->GetEquipmentType() == EquipmentType_Armor)
+			{
+				physicsManager->AddPhysicsObject(new ItemPhysicsObject(item, GetMousePosition(window), sf::Vector2f(32, 32)));
+			}
+			else
+			{
+				//physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("weapon"), color, GetMousePosition(window), sf::Vector2f(32, 32), 4));
+			}
 		}
 		else if (item->GetItemType() == ItemType_Potion)
 		{
-			physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("potion"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
+			//physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("potion"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
 		}
 		else if (item->GetItemType() == ItemType_Scroll)
 		{
-			physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("scroll"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
+			//physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("scroll"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
 		}
 		else if (item->GetItemType() == ItemType_Gem)
 		{
-			physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("gem"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
+			//physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("gem"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
 		}
 
 		delete item;

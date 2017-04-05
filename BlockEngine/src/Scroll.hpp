@@ -14,7 +14,7 @@
 class Scroll : public Item
 {
 public:
-	Scroll();
+	Scroll(const sf::Texture* texture);
     virtual ~Scroll();
 
 protected:

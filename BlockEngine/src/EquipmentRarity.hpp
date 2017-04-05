@@ -9,6 +9,8 @@
 #ifndef EquipmentRarity_hpp
 #define EquipmentRarity_hpp
 
+#define EQUIPMENT_RARITY_COUNT 6
+
 enum EquipmentRarity
 {
 	EquipmentRarity_Common = 0,

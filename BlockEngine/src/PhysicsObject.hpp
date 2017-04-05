@@ -20,6 +20,7 @@ public:
 	PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size);
 	PhysicsObject(sf::Vector2f position, sf::Vector2f size) : PhysicsObject(nullptr, position, size) { }
     virtual ~PhysicsObject();
+	virtual ObjectType GetObjectType() { return ObjectType_PhysicsObject; }
 
 	virtual void Update(float dt);
 
@@ -50,7 +51,6 @@ protected:
 	sf::Vector2f friction;
 	float elasticity;
 	float mass;
-
 	float gravity;
 
 	XState xState;

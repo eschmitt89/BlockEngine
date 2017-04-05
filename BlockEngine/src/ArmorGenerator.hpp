@@ -11,6 +11,7 @@
 
 #include "EquipmentGenerator.hpp"
 #include "Armor.hpp"
+#include <map>
 
 class ArmorGenerator : public EquipmentGenerator
 {
@@ -21,7 +22,15 @@ public:
 	Armor* Generate(int level);
 	
 private:
+	map<ArmorType, string> armorTypeNames;
+	map<EquipmentRarity, string> equipmentRarityNames;
+	map<ArmorType, map<EquipmentRarity, vector<string>>> textureNames;
 
+	void InitializeArmorTypeNames();
+	void InitializeEquipmentRarityNames();
+	void InitializeTextureNames();
+
+	const sf::Texture* GetArmorTexture(ArmorType armorType, EquipmentRarity equipmentRarity);
 };
 
 #endif /* ArmorGenerator_hpp */

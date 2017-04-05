@@ -10,6 +10,7 @@
 #define EquipmentGenerator_hpp
 
 #include "Equipment.hpp"
+#include "ResourceManager.hpp"
 
 #define EQUIPMENT_MAX_LEVEL 100
 #define EQUIPMENT_SLOTS 8

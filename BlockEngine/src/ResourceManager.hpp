@@ -29,10 +29,12 @@ public:
 	const sf::SoundBuffer* GetSound(string sound);
 	const sf::Font* GetFont(string font);
 
+	vector<string> GetTextureNames(string filter);
+
 private:
 	ResourceManager() {}
 	ResourceManager(ResourceManager const &);
-	void operator = (ResourceManager const &);
+	void operator = (ResourceManager const &) {}
 
 	map<string, sf::Texture*>* textureMap;
 	map<string, sf::SoundBuffer*>* soundMap;

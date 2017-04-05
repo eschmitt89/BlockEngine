@@ -31,7 +31,7 @@ Weapon * WeaponGenerator::Generate(int level)
 	EquipmentStats stats = GenerateEquipmentStats(level, rarity);
 	int damage = GenerateWeaponDamage(level, speed, rarity);
 	
-	return new Weapon(type, slot, speed, rarity, stats, level, damage);
+	return new Weapon(type, slot, speed, rarity, stats, level, damage, nullptr);
 }
 
 ////////////////////////////////////////////////////////////////////////

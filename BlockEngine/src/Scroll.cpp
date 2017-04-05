@@ -8,8 +8,8 @@
 
 #include "Scroll.hpp"
 
-Scroll::Scroll()
-	:Item(ItemType_Scroll)
+Scroll::Scroll(const sf::Texture* texture)
+	:Item(ItemType_Scroll, texture)
 {
 
 }

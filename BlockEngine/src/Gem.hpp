@@ -14,7 +14,7 @@
 class Gem : public Item
 {
 public:
-	Gem();
+	Gem(const sf::Texture* texture);
     virtual ~Gem();
 
 protected:

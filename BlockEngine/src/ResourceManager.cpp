@@ -1,6 +1,7 @@
 #include "ResourceManager.hpp"
 #include "ResourceLoader.hpp"
 #include "OutputManager.hpp"
+#include "Utilities.hpp"
 
 ResourceManager::~ResourceManager()
 {
@@ -61,4 +62,21 @@ const sf::SoundBuffer* ResourceManager::GetSound(string sound)
 const sf::Font* ResourceManager::GetFont(string font)
 {
 	return (*fontMap)[font];
+}
+
+////////////////////////////////////////////////////////////////////////
+
+vector<string> ResourceManager::GetTextureNames(string filter = "")
+{
+	vector<string> textureNames;
+
+	for (map<string, sf::Texture*>::iterator textureItor = textureMap->begin(); textureItor != textureMap->end(); textureItor++)
+	{
+		if (StringContains((*textureItor).first, filter))
+		{
+			textureNames.push_back((*textureItor).first);
+		}
+	}
+
+	return textureNames;
 }

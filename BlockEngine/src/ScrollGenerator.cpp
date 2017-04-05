@@ -24,7 +24,7 @@ ScrollGenerator::~ScrollGenerator()
 
 Scroll * ScrollGenerator::Generate(int level)
 {
-	return new Scroll();
+	return new Scroll(nullptr);
 }
 
 ////////////////////////////////////////////////////////////////////////

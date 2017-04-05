@@ -286,7 +286,10 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 
 void Player::CollideWith(PhysicsObject * physicsObject)
 {
-
+	if (physicsObject->GetObjectType() == ObjectType_Item)
+	{
+		//Item* item = (Item*)physicsObject;
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////

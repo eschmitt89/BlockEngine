@@ -14,7 +14,7 @@
 class Potion : public Item
 {
 public:
-	Potion();
+	Potion(const sf::Texture* texture);
     virtual ~Potion();
 
 protected:

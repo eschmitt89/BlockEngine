@@ -22,7 +22,7 @@
 class Weapon : public Equipment
 {
 public:
-	Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, int damage);
+	Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, int damage, const sf::Texture* texture);
     virtual ~Weapon();
 
 protected:
