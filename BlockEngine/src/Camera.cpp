@@ -1,11 +1,3 @@
- //
-//  Camera.cpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #include "Camera.hpp"
 
 Camera::Camera(sf::Vector2f center, sf::Vector2f size)

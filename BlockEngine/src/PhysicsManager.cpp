@@ -6,10 +6,10 @@
 //  Copyright © 2017 Eric Schmitt. All rights reserved.
 //
 
-#include "PhysicsManager.hpp"
-
 #define XAXIS 'x'
 #define YAXIS 'y'
+
+#include "PhysicsManager.hpp"
 
 PhysicsManager::PhysicsManager(Grid* grid)
 {

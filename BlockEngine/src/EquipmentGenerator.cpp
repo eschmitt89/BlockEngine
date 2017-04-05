@@ -1,11 +1,3 @@
-//
-//  EquipmentGenerator.cpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #include "EquipmentGenerator.hpp"
 
 EquipmentGenerator::EquipmentGenerator()
@@ -24,36 +16,6 @@ EquipmentGenerator::EquipmentGenerator()
 EquipmentGenerator::~EquipmentGenerator()
 {
     
-}
-
-////////////////////////////////////////////////////////////////////////
-
-EquipmentRarity EquipmentGenerator::GenerateEquipmentRarity(int level)
-{
-	EquipmentRarity equipmentRarity = randomEquipmentRarity.Roll();
-
-	if (equipmentRarity == EquipmentRarity_Artifact && level < MIN_ARTIFACT_LEVEL)
-	{
-		equipmentRarity = EquipmentRarity_Legendary;
-	}
-	if (equipmentRarity == EquipmentRarity_Legendary && level < MIN_LEGENDARY_LEVEL)
-	{
-		equipmentRarity = EquipmentRarity_Epic;
-	}
-	if (equipmentRarity == EquipmentRarity_Epic && level < MIN_EPIC_LEVEL)
-	{
-		equipmentRarity = EquipmentRarity_Rare;
-	}
-	if (equipmentRarity == EquipmentRarity_Rare && level < MIN_RARE_LEVEL)
-	{
-		equipmentRarity = EquipmentRarity_Good;
-	}
-	if (equipmentRarity == EquipmentRarity_Good && level < MIN_GOOD_LEVEL)
-	{
-		equipmentRarity = EquipmentRarity_Common;
-	}
-
-	return equipmentRarity;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -96,6 +58,48 @@ EquipmentStats EquipmentGenerator::GenerateEquipmentStats(int level, EquipmentRa
 int EquipmentGenerator::GenerateEquipmentStatValue(int level, int maxValue)
 {
 	return ((float)level / EQUIPMENT_MAX_LEVEL) * (maxValue / EQUIPMENT_SLOTS / EQUIPMENT_MAX_STAT_COUNT);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+EquipmentRarity EquipmentGenerator::GenerateEquipmentRarity(int level)
+{
+	EquipmentRarity equipmentRarity = randomEquipmentRarity.Roll();
+
+	if (equipmentRarity == EquipmentRarity_Artifact && level < MIN_ARTIFACT_LEVEL)
+	{
+		equipmentRarity = EquipmentRarity_Legendary;
+	}
+	if (equipmentRarity == EquipmentRarity_Legendary && level < MIN_LEGENDARY_LEVEL)
+	{
+		equipmentRarity = EquipmentRarity_Epic;
+	}
+	if (equipmentRarity == EquipmentRarity_Epic && level < MIN_EPIC_LEVEL)
+	{
+		equipmentRarity = EquipmentRarity_Rare;
+	}
+	if (equipmentRarity == EquipmentRarity_Rare && level < MIN_RARE_LEVEL)
+	{
+		equipmentRarity = EquipmentRarity_Good;
+	}
+	if (equipmentRarity == EquipmentRarity_Good && level < MIN_GOOD_LEVEL)
+	{
+		equipmentRarity = EquipmentRarity_Common;
+	}
+
+	return equipmentRarity;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void EquipmentGenerator::InitializeEquipmentRarityNames()
+{
+	equipmentRarityNames[EquipmentRarity_Common] = "common";
+	equipmentRarityNames[EquipmentRarity_Good] = "good";
+	equipmentRarityNames[EquipmentRarity_Rare] = "rare";
+	equipmentRarityNames[EquipmentRarity_Epic] = "epic";
+	equipmentRarityNames[EquipmentRarity_Legendary] = "legendary";
+	equipmentRarityNames[EquipmentRarity_Artifact] = "artifact";
 }
 
 ////////////////////////////////////////////////////////////////////////

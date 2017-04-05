@@ -1,17 +1,9 @@
-//
-//  GridGenerator.cpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
-#include "GridGenerator.hpp"
-#include <set>
-
 #define LADDER_JUMP_DISTANCE 3
 #define PLATFORM_JUMP_DISTANCE 2
 #define SOLID_PLATFORM_JUMP_DISTANCE 3
+
+#include "GridGenerator.hpp"
+#include <set>
 
 GridGenerator::GridGenerator()
 {

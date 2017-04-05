@@ -230,4 +230,17 @@ private:
 	vector<TypeValue<T>> dropRates;
 };
 
+////////////////////////////////////////////////////////////////////////
+
+template <typename T> T GetTypeFromString(map<T, string> typeMap, string s)
+{
+	for (map<T, string>::iterator itor = typeMap.begin(); itor != typeMap.end(); itor++)
+	{
+		if (StringContains(s, itor->second))
+		{
+			return itor->first;
+		}
+	}
+}
+
 #endif /* Utilties_hpp */

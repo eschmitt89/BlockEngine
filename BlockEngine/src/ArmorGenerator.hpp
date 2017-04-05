@@ -1,17 +1,8 @@
-//
-//  ArmorGenerator.hpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #ifndef ArmorGenerator_hpp
 #define ArmorGenerator_hpp
 
 #include "EquipmentGenerator.hpp"
 #include "Armor.hpp"
-#include <map>
 
 class ArmorGenerator : public EquipmentGenerator
 {
@@ -23,14 +14,12 @@ public:
 	
 private:
 	map<ArmorType, string> armorTypeNames;
-	map<EquipmentRarity, string> equipmentRarityNames;
-	map<ArmorType, map<EquipmentRarity, vector<string>>> textureNames;
+	map<ArmorType, map<EquipmentRarity, vector<string>>> armorTextureNames;
 
 	void InitializeArmorTypeNames();
-	void InitializeEquipmentRarityNames();
 	void InitializeTextureNames();
 
-	const sf::Texture* GetArmorTexture(ArmorType armorType, EquipmentRarity equipmentRarity);
+	const sf::Texture* GenerateArmorTexture(ArmorType armorType, EquipmentRarity equipmentRarity);
 };
 
 #endif /* ArmorGenerator_hpp */

@@ -1,11 +1,3 @@
-//
-//  Grid.cpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #include "Grid.hpp"
 #include "ResourcePath.hpp"
 #include "ResourceManager.hpp"
