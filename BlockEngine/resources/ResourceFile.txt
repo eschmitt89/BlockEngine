@@ -32,6 +32,9 @@ WaterBlock.png
 platformBlock
 PlatformBlock.png
 
+goldCoin
+goldCoin.png
+
 armor_head_common_1
 armor_head_common_1.png
 

@@ -34,6 +34,8 @@ public:
 	float GetMass();
 	bool GetExpired();
 
+	void SetExpired(bool expired);
+
 	virtual void ResolveBlockCollisionX(Block block, float dt);
 	virtual void ResolveBlockCollisionY(Block block, float dt);
 	virtual void CollideWith(PhysicsObject* physicsObject);

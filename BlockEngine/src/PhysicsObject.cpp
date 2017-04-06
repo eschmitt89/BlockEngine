@@ -95,6 +95,13 @@ bool PhysicsObject::GetExpired()
 
 ////////////////////////////////////////////////////////////////////////
 
+void PhysicsObject::SetExpired(bool expired)
+{
+	this->expired = expired;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 void PhysicsObject::ResolveBlockCollisionX(Block block, float dt)
 {
 	if (velocity.x < 0)

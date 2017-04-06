@@ -14,6 +14,7 @@ enum ObjectType
 	ObjectType_Object,
 	ObjectType_PhysicsObject,
 	ObjectType_Item,
+	ObjectType_GoldCoin,
 };
 
 #endif /* ObjectType_hpp */

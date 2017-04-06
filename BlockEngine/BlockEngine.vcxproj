@@ -187,6 +187,7 @@
     <ClInclude Include="src\EquipmentType.hpp" />
     <ClInclude Include="src\Gem.hpp" />
     <ClInclude Include="src\GemGenerator.hpp" />
+    <ClInclude Include="src\GoldCoin.hpp" />
     <ClInclude Include="src\GridGenerator.hpp" />
     <ClInclude Include="src\GridRoom.hpp" />
     <ClInclude Include="src\EventManager.hpp" />
@@ -237,6 +238,7 @@
     <ClCompile Include="src\EquipmentGenerator.cpp" />
     <ClCompile Include="src\Gem.cpp" />
     <ClCompile Include="src\GemGenerator.cpp" />
+    <ClCompile Include="src\GoldCoin.cpp" />
     <ClCompile Include="src\GridGenerator.cpp" />
     <ClCompile Include="src\GridRoom.cpp" />
     <ClCompile Include="src\EventManager.cpp" />

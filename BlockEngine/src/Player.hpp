@@ -45,6 +45,8 @@ private:
 
 	sf::Text debugText;
 	void UpdateDebugText();
+
+	int goldCoins;
 };
 
 #endif /* Player_hpp */

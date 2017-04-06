@@ -1,14 +1,7 @@
-//
-//  Player.cpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #include "Player.hpp"
-#include "ResourceManager.hpp"
+#include "GoldCoin.hpp"
 #include "EventManager.hpp"
+#include "ResourceManager.hpp"
 #include "Utilities.hpp"
 #include <sstream>
 
@@ -289,6 +282,12 @@ void Player::CollideWith(PhysicsObject * physicsObject)
 	if (physicsObject->GetObjectType() == ObjectType_Item)
 	{
 		//Item* item = (Item*)physicsObject;
+	}
+	else if (physicsObject->GetObjectType() == ObjectType_GoldCoin)
+	{
+		GoldCoin* goldCoin = (GoldCoin*)physicsObject;
+		goldCoins += goldCoin->GetValue();
+		goldCoin->SetExpired(true);
 	}
 }
 
