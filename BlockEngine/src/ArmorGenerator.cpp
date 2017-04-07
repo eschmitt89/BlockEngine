@@ -18,13 +18,13 @@ Armor * ArmorGenerator::Generate(int level)
 {
 	ArmorType armorType = static_cast<ArmorType>(Random(1, ARMOR_TYPE_COUNT));
 
-	EquipmentRarity equipmentRarity = GenerateEquipmentRarity(level);
+	EquipmentQuality equipmentQuality = GenerateEquipmentQuality(level);
 
-	EquipmentStats equipmentStats = GenerateEquipmentStats(level, equipmentRarity);
+	EquipmentStats equipmentStats = GenerateEquipmentStats(level, equipmentQuality);
 
-	const sf::Texture* texture = GenerateArmorTexture(armorType, equipmentRarity);
+	const sf::Texture* texture = GenerateArmorTexture(armorType, equipmentQuality);
 
-	return new Armor(armorType, equipmentRarity, equipmentStats, level, texture);
+	return new Armor(armorType, equipmentQuality, equipmentStats, level, texture);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -44,10 +44,10 @@ void ArmorGenerator::InitializeArmorTypeNames()
 void ArmorGenerator::InitializeTextureNames()
 {
 	InitializeArmorTypeNames();
-	InitializeEquipmentRarityNames();
+	InitializeEquipmentQualityNames();
 
 	ArmorType armorType;
-	EquipmentRarity equipmentRarity;
+	EquipmentQuality equipmentQuality;
 
 	vector<string> textureNames = ResourceManager::GetInstance().GetTextureNames("armor");
 
@@ -55,22 +55,22 @@ void ArmorGenerator::InitializeTextureNames()
 	{
 		armorType = GetTypeFromString<ArmorType>(armorTypeNames, textureNames[i]);
 
-		equipmentRarity = GetTypeFromString<EquipmentRarity>(equipmentRarityNames, textureNames[i]);
+		equipmentQuality = GetTypeFromString<EquipmentQuality>(equipmentQualityNames, textureNames[i]);
 
-		armorTextureNames[armorType][equipmentRarity].push_back(textureNames[i]);
+		armorTextureNames[armorType][equipmentQuality].push_back(textureNames[i]);
 	}
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-const sf::Texture * ArmorGenerator::GenerateArmorTexture(ArmorType armorType, EquipmentRarity equipmentRarity)
+const sf::Texture * ArmorGenerator::GenerateArmorTexture(ArmorType armorType, EquipmentQuality equipmentQuality)
 {
-	if (armorTextureNames[armorType][equipmentRarity].size() == 0)
+	if (armorTextureNames[armorType][equipmentQuality].size() == 0)
 	{
 		return nullptr;
 	}
 
-	return ResourceManager::GetInstance().GetTexture(armorTextureNames[armorType][equipmentRarity][Random(0, armorTextureNames[armorType][equipmentRarity].size() - 1)]);
+	return ResourceManager::GetInstance().GetTexture(armorTextureNames[armorType][equipmentQuality][Random(0, armorTextureNames[armorType][equipmentQuality].size() - 1)]);
 }
 
 ////////////////////////////////////////////////////////////////////////

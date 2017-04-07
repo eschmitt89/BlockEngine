@@ -5,22 +5,22 @@
 #include "EquipmentStat.hpp"
 #include "EquipmentStats.hpp"
 #include "EquipmentType.hpp"
-#include "EquipmentRarity.hpp"
+#include "EquipmentQuality.hpp"
 
 class Equipment : public Item
 {
 public:
-	Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, const sf::Texture* texture);
+	Equipment(EquipmentType equipmentType, EquipmentQuality equipmentQuality, EquipmentStats equipmentStats, int level, const sf::Texture* texture);
 	Equipment(const Equipment& equipment);
     virtual ~Equipment();
 
 	EquipmentType GetEquipmentType();
-	EquipmentRarity GetEquipmentRarity();
+	EquipmentQuality GetEquipmentQuality();
 	EquipmentStats GetEquipmentStats();
 
 protected:
 	EquipmentType equipmentType;
-	EquipmentRarity equipmentRarity;
+	EquipmentQuality equipmentQuality;
 	EquipmentStats equipmentStats;
 	
 	int level;

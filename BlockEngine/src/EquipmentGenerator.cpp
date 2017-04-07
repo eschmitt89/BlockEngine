@@ -2,13 +2,13 @@
 
 EquipmentGenerator::EquipmentGenerator()
 {
-	randomEquipmentRarity = DropRateCollection<EquipmentRarity>();
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Common, 0.489);
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Good, 0.30);
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Rare, 0.15);
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Epic, 0.05);
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Legendary, 0.01);
-	randomEquipmentRarity.AddDropRate(EquipmentRarity_Artifact, 0.001);
+	randomEquipmentQuality = DropRateCollection<EquipmentQuality>();
+	randomEquipmentQuality.AddDropRate(EquipmentQuality_Common, 0.489);
+	randomEquipmentQuality.AddDropRate(EquipmentQuality_Good, 0.30);
+	randomEquipmentQuality.AddDropRate(EquipmentQuality_Rare, 0.15);
+	randomEquipmentQuality.AddDropRate(EquipmentQuality_Epic, 0.05);
+	randomEquipmentQuality.AddDropRate(EquipmentQuality_Legendary, 0.01);
+	randomEquipmentQuality.AddDropRate(EquipmentQuality_Artifact, 0.001);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -20,11 +20,11 @@ EquipmentGenerator::~EquipmentGenerator()
 
 ////////////////////////////////////////////////////////////////////////
 
-EquipmentStats EquipmentGenerator::GenerateEquipmentStats(int level, EquipmentRarity equipmentRarity)
+EquipmentStats EquipmentGenerator::GenerateEquipmentStats(int level, EquipmentQuality equipmentQuality)
 {
 	EquipmentStats equipmentStats = EquipmentStats(0, 0, 0, 0, 0);
 
-	for (int i = 0; i < equipmentRarity; i++)
+	for (int i = 0; i < equipmentQuality; i++)
 	{
 		EquipmentStat stat = static_cast<EquipmentStat>(Random(1, EQUIPMENT_STAT_COUNT));
 
@@ -62,44 +62,44 @@ int EquipmentGenerator::GenerateEquipmentStatValue(int level, int maxValue)
 
 ////////////////////////////////////////////////////////////////////////
 
-EquipmentRarity EquipmentGenerator::GenerateEquipmentRarity(int level)
+EquipmentQuality EquipmentGenerator::GenerateEquipmentQuality(int level)
 {
-	EquipmentRarity equipmentRarity = randomEquipmentRarity.Roll();
+	EquipmentQuality equipmentQuality = randomEquipmentQuality.Roll();
 
-	if (equipmentRarity == EquipmentRarity_Artifact && level < MIN_ARTIFACT_LEVEL)
+	if (equipmentQuality == EquipmentQuality_Artifact && level < MIN_ARTIFACT_LEVEL)
 	{
-		equipmentRarity = EquipmentRarity_Legendary;
+		equipmentQuality = EquipmentQuality_Legendary;
 	}
-	if (equipmentRarity == EquipmentRarity_Legendary && level < MIN_LEGENDARY_LEVEL)
+	if (equipmentQuality == EquipmentQuality_Legendary && level < MIN_LEGENDARY_LEVEL)
 	{
-		equipmentRarity = EquipmentRarity_Epic;
+		equipmentQuality = EquipmentQuality_Epic;
 	}
-	if (equipmentRarity == EquipmentRarity_Epic && level < MIN_EPIC_LEVEL)
+	if (equipmentQuality == EquipmentQuality_Epic && level < MIN_EPIC_LEVEL)
 	{
-		equipmentRarity = EquipmentRarity_Rare;
+		equipmentQuality = EquipmentQuality_Rare;
 	}
-	if (equipmentRarity == EquipmentRarity_Rare && level < MIN_RARE_LEVEL)
+	if (equipmentQuality == EquipmentQuality_Rare && level < MIN_RARE_LEVEL)
 	{
-		equipmentRarity = EquipmentRarity_Good;
+		equipmentQuality = EquipmentQuality_Good;
 	}
-	if (equipmentRarity == EquipmentRarity_Good && level < MIN_GOOD_LEVEL)
+	if (equipmentQuality == EquipmentQuality_Good && level < MIN_GOOD_LEVEL)
 	{
-		equipmentRarity = EquipmentRarity_Common;
+		equipmentQuality = EquipmentQuality_Common;
 	}
 
-	return equipmentRarity;
+	return equipmentQuality;
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-void EquipmentGenerator::InitializeEquipmentRarityNames()
+void EquipmentGenerator::InitializeEquipmentQualityNames()
 {
-	equipmentRarityNames[EquipmentRarity_Common] = "common";
-	equipmentRarityNames[EquipmentRarity_Good] = "good";
-	equipmentRarityNames[EquipmentRarity_Rare] = "rare";
-	equipmentRarityNames[EquipmentRarity_Epic] = "epic";
-	equipmentRarityNames[EquipmentRarity_Legendary] = "legendary";
-	equipmentRarityNames[EquipmentRarity_Artifact] = "artifact";
+	equipmentQualityNames[EquipmentQuality_Common] = "common";
+	equipmentQualityNames[EquipmentQuality_Good] = "good";
+	equipmentQualityNames[EquipmentQuality_Rare] = "rare";
+	equipmentQualityNames[EquipmentQuality_Epic] = "epic";
+	equipmentQualityNames[EquipmentQuality_Legendary] = "legendary";
+	equipmentQualityNames[EquipmentQuality_Artifact] = "artifact";
 }
 
 ////////////////////////////////////////////////////////////////////////

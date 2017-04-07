@@ -14,12 +14,12 @@ public:
 	
 private:
 	map<ArmorType, string> armorTypeNames;
-	map<ArmorType, map<EquipmentRarity, vector<string>>> armorTextureNames;
+	map<ArmorType, map<EquipmentQuality, vector<string>>> armorTextureNames;
 
 	void InitializeArmorTypeNames();
 	void InitializeTextureNames();
 
-	const sf::Texture* GenerateArmorTexture(ArmorType armorType, EquipmentRarity equipmentRarity);
+	const sf::Texture* GenerateArmorTexture(ArmorType armorType, EquipmentQuality equipmentQuality);
 };
 
 #endif /* ArmorGenerator_hpp */

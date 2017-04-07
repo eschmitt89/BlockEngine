@@ -180,8 +180,9 @@
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Emitter.hpp" />
     <ClInclude Include="src\Equipment.hpp" />
+    <ClInclude Include="src\EquipmentCollection.hpp" />
     <ClInclude Include="src\EquipmentGenerator.hpp" />
-    <ClInclude Include="src\EquipmentRarity.hpp" />
+    <ClInclude Include="src\EquipmentQuality.hpp" />
     <ClInclude Include="src\EquipmentStat.hpp" />
     <ClInclude Include="src\EquipmentStats.hpp" />
     <ClInclude Include="src\EquipmentType.hpp" />
@@ -237,6 +238,7 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Emitter.cpp" />
     <ClCompile Include="src\Equipment.cpp" />
+    <ClCompile Include="src\EquipmentCollection.cpp" />
     <ClCompile Include="src\EquipmentGenerator.cpp" />
     <ClCompile Include="src\Gem.cpp" />
     <ClCompile Include="src\GemGenerator.cpp" />

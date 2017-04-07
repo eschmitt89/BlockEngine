@@ -19,12 +19,12 @@ Weapon * WeaponGenerator::Generate(int level)
 	WeaponType type = GetRandomWeaponType(level);
 	WeaponSlot slot = GenerateWeaponSlot(type);
 	WeaponSpeed speed = GenerateWeaponSpeed(type, slot);
-	EquipmentRarity rarity = GenerateEquipmentRarity(level);
-	EquipmentStats stats = GenerateEquipmentStats(level, rarity);
-	int damage = GenerateWeaponDamage(level, speed, rarity);
-	const sf::Texture* texture = GenerateWeaponTexture(type, slot, rarity);
+	EquipmentQuality quality = GenerateEquipmentQuality(level);
+	EquipmentStats stats = GenerateEquipmentStats(level, quality);
+	int damage = GenerateWeaponDamage(level, speed, quality);
+	const sf::Texture* texture = GenerateWeaponTexture(type, slot, quality);
 	
-	return new Weapon(type, slot, speed, rarity, stats, level, damage, texture);
+	return new Weapon(type, slot, speed, quality, stats, level, damage, texture);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -86,7 +86,7 @@ WeaponSpeed WeaponGenerator::GenerateWeaponSpeed(WeaponType weaponType, WeaponSl
 
 ////////////////////////////////////////////////////////////////////////
 
-int WeaponGenerator::GenerateWeaponDamage(int level, WeaponSpeed speed, EquipmentRarity equipmentRarity)
+int WeaponGenerator::GenerateWeaponDamage(int level, WeaponSpeed speed, EquipmentQuality equipmentQuality)
 {
 	switch (speed)
 	{
@@ -135,7 +135,7 @@ void WeaponGenerator::InitializeTextureNames()
 
 	WeaponType weaponType;
 	WeaponSlot weaponSlot;
-	EquipmentRarity equipmentRarity;
+	EquipmentQuality equipmentQuality;
 
 	vector<string> textureNames = ResourceManager::GetInstance().GetTextureNames("weapon");
 
@@ -145,22 +145,22 @@ void WeaponGenerator::InitializeTextureNames()
 
 		weaponSlot = GetTypeFromString<WeaponSlot>(weaponSlotNames, textureNames[i]);
 
-		equipmentRarity = GetTypeFromString<EquipmentRarity>(equipmentRarityNames, textureNames[i]);
+		equipmentQuality = GetTypeFromString<EquipmentQuality>(equipmentQualityNames, textureNames[i]);
 
-		weaponTextureNames[weaponType][weaponSlot][equipmentRarity].push_back(textureNames[i]);
+		weaponTextureNames[weaponType][weaponSlot][equipmentQuality].push_back(textureNames[i]);
 	}
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-const sf::Texture * WeaponGenerator::GenerateWeaponTexture(WeaponType weaponType, WeaponSlot weaponSlot, EquipmentRarity equipmentRarity)
+const sf::Texture * WeaponGenerator::GenerateWeaponTexture(WeaponType weaponType, WeaponSlot weaponSlot, EquipmentQuality equipmentQuality)
 {
-	if (weaponTextureNames[weaponType][weaponSlot][equipmentRarity].size() == 0)
+	if (weaponTextureNames[weaponType][weaponSlot][equipmentQuality].size() == 0)
 	{
 		return nullptr;
 	}
 
-	return ResourceManager::GetInstance().GetTexture(weaponTextureNames[weaponType][weaponSlot][equipmentRarity][Random(0, weaponTextureNames[weaponType][weaponSlot][equipmentRarity].size() - 1)]);
+	return ResourceManager::GetInstance().GetTexture(weaponTextureNames[weaponType][weaponSlot][equipmentQuality][Random(0, weaponTextureNames[weaponType][weaponSlot][equipmentQuality].size() - 1)]);
 }
 
 ////////////////////////////////////////////////////////////////////////

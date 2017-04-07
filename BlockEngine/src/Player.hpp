@@ -14,6 +14,7 @@
 #include "MovementAxis.hpp"
 #include "MovementState.hpp"
 #include "ItemCollection.hpp"
+#include "EquipmentCollection.hpp"
 
 using namespace std;
 
@@ -48,8 +49,8 @@ private:
 	void UpdateDebugText();
 
 	int goldCoins;
-
 	ItemCollection* backpack;
+	EquipmentCollection equipment;
 };
 
 #endif /* Player_hpp */

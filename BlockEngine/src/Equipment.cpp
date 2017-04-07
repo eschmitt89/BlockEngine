@@ -1,10 +1,10 @@
 #include "Equipment.hpp"
 
-Equipment::Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, const sf::Texture* texture)
+Equipment::Equipment(EquipmentType equipmentType, EquipmentQuality equipmentQuality, EquipmentStats equipmentStats, int level, const sf::Texture* texture)
 	:Item(ItemType_Equipment, texture)
 {
 	this->equipmentType = equipmentType;
-	this->equipmentRarity = equipmentRarity;
+	this->equipmentQuality = equipmentQuality;
 	this->equipmentStats = equipmentStats;
 	this->level = level;
 }
@@ -13,7 +13,7 @@ Equipment::Equipment(const Equipment & equipment)
 	:Item(equipment.itemType, equipment.texture)
 {
 	this->equipmentType = equipment.equipmentType;
-	this->equipmentRarity = equipment.equipmentRarity;
+	this->equipmentQuality = equipment.equipmentQuality;
 	this->equipmentStats = equipment.equipmentStats;
 	this->level = equipment.level;
 }
@@ -34,9 +34,9 @@ EquipmentType Equipment::GetEquipmentType()
 
 ////////////////////////////////////////////////////////////////////////
 
-EquipmentRarity Equipment::GetEquipmentRarity()
+EquipmentQuality Equipment::GetEquipmentQuality()
 {
-	return equipmentRarity;
+	return equipmentQuality;
 }
 
 ////////////////////////////////////////////////////////////////////////

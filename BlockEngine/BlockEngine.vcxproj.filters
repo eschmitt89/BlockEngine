@@ -182,9 +182,6 @@
     <ClInclude Include="src\ArmorType.hpp">
       <Filter>Source Files\Loot\Items\Equipment\Armor</Filter>
     </ClInclude>
-    <ClInclude Include="src\EquipmentRarity.hpp">
-      <Filter>Source Files\Loot\Items\Equipment</Filter>
-    </ClInclude>
     <ClInclude Include="src\EquipmentStat.hpp">
       <Filter>Source Files\Loot\Items\Equipment</Filter>
     </ClInclude>
@@ -259,6 +256,12 @@
     </ClInclude>
     <ClInclude Include="src\ItemCollection.hpp">
       <Filter>Source Files\Loot\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EquipmentQuality.hpp">
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EquipmentCollection.hpp">
+      <Filter>Source Files\Player</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -384,6 +387,9 @@
     </ClCompile>
     <ClCompile Include="src\ItemCollection.cpp">
       <Filter>Source Files\Loot\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EquipmentCollection.cpp">
+      <Filter>Source Files\Player</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

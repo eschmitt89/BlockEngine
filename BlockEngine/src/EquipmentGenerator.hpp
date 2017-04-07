@@ -27,13 +27,13 @@ public:
     virtual ~EquipmentGenerator();
 
 protected:
-	map<EquipmentRarity, string> equipmentRarityNames;
-	DropRateCollection<EquipmentRarity> randomEquipmentRarity;
+	map<EquipmentQuality, string> equipmentQualityNames;
+	DropRateCollection<EquipmentQuality> randomEquipmentQuality;
 
-	virtual EquipmentStats GenerateEquipmentStats(int level, EquipmentRarity equipmentRarity);
+	virtual EquipmentStats GenerateEquipmentStats(int level, EquipmentQuality equipmentQuality);
 	int GenerateEquipmentStatValue(int level, int maxValue);
-	EquipmentRarity GenerateEquipmentRarity(int level);
-	void InitializeEquipmentRarityNames();
+	EquipmentQuality GenerateEquipmentQuality(int level);
+	void InitializeEquipmentQualityNames();
 };
 
 #endif /* EquipmentGenerator_hpp */
