@@ -48,27 +48,6 @@
     <Filter Include="Source Files\Grid Generator">
       <UniqueIdentifier>{7ae96b2f-cdc0-4588-a0c2-7f0a44600d13}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Items">
-      <UniqueIdentifier>{f591a458-7ec5-44e2-987e-f3f67279ced0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Items\Equipment">
-      <UniqueIdentifier>{2fd675d5-fe04-40d5-bb9a-cce019d074ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Items\Equipment\Armor">
-      <UniqueIdentifier>{e7406928-f42e-4442-bdf7-0acba7bae0d0}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Items\Equipment\Weapon">
-      <UniqueIdentifier>{d7fa3c25-edf4-417e-a6ca-2493ed7aa5e4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Items\Potion">
-      <UniqueIdentifier>{15fedcbc-0a7f-464b-af87-3eae37200c7f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Items\Scrolls">
-      <UniqueIdentifier>{85cfe776-e0bc-473a-b5b9-022af2748c91}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Items\Gems">
-      <UniqueIdentifier>{5afc8f09-2695-45de-ad3c-11dd240aeb16}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Objects">
       <UniqueIdentifier>{427c7532-0351-4282-b2f6-3db42ff2f7cd}</UniqueIdentifier>
     </Filter>
@@ -80,6 +59,33 @@
     </Filter>
     <Filter Include="Source Files\Objects\Physics Objects\Items">
       <UniqueIdentifier>{55fffc8a-4dac-419b-8c80-f85315c8770b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loot">
+      <UniqueIdentifier>{f7698b30-90b5-4381-ac7f-30bf86f5fa66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loot\Items">
+      <UniqueIdentifier>{f591a458-7ec5-44e2-987e-f3f67279ced0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loot\Items\Equipment">
+      <UniqueIdentifier>{2fd675d5-fe04-40d5-bb9a-cce019d074ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loot\Items\Equipment\Armor">
+      <UniqueIdentifier>{e7406928-f42e-4442-bdf7-0acba7bae0d0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loot\Items\Equipment\Weapon">
+      <UniqueIdentifier>{d7fa3c25-edf4-417e-a6ca-2493ed7aa5e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loot\Items\Potion">
+      <UniqueIdentifier>{15fedcbc-0a7f-464b-af87-3eae37200c7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loot\Items\Scrolls">
+      <UniqueIdentifier>{85cfe776-e0bc-473a-b5b9-022af2748c91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loot\Items\Gems">
+      <UniqueIdentifier>{5afc8f09-2695-45de-ad3c-11dd240aeb16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Loot\Currency">
+      <UniqueIdentifier>{b173629d-6529-48ea-add0-dfba47950b5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -159,85 +165,76 @@
       <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
     </ClInclude>
     <ClInclude Include="src\Item.hpp">
-      <Filter>Source Files\Items</Filter>
+      <Filter>Source Files\Loot\Items</Filter>
     </ClInclude>
     <ClInclude Include="src\ItemType.hpp">
-      <Filter>Source Files\Items</Filter>
+      <Filter>Source Files\Loot\Items</Filter>
     </ClInclude>
     <ClInclude Include="src\Equipment.hpp">
-      <Filter>Source Files\Items\Equipment</Filter>
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="src\EquipmentType.hpp">
-      <Filter>Source Files\Items\Equipment</Filter>
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="src\Armor.hpp">
-      <Filter>Source Files\Items\Equipment\Armor</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Armor</Filter>
     </ClInclude>
     <ClInclude Include="src\ArmorType.hpp">
-      <Filter>Source Files\Items\Equipment\Armor</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Armor</Filter>
     </ClInclude>
     <ClInclude Include="src\EquipmentRarity.hpp">
-      <Filter>Source Files\Items\Equipment</Filter>
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="src\EquipmentStat.hpp">
-      <Filter>Source Files\Items\Equipment</Filter>
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="src\ItemGenerator.hpp">
-      <Filter>Source Files\Items</Filter>
+      <Filter>Source Files\Loot\Items</Filter>
     </ClInclude>
     <ClInclude Include="src\Weapon.hpp">
-      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="src\WeaponType.hpp">
-      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="src\WeaponSlot.hpp">
-      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="src\WeaponSpeed.hpp">
-      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="src\ArmorGenerator.hpp">
-      <Filter>Source Files\Items\Equipment\Armor</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Armor</Filter>
     </ClInclude>
     <ClInclude Include="src\EquipmentGenerator.hpp">
-      <Filter>Source Files\Items\Equipment</Filter>
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="src\WeaponGenerator.hpp">
-      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Weapon</Filter>
     </ClInclude>
     <ClInclude Include="src\EquipmentStats.hpp">
-      <Filter>Source Files\Items\Equipment</Filter>
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="src\Potion.hpp">
-      <Filter>Source Files\Items\Potion</Filter>
+      <Filter>Source Files\Loot\Items\Potion</Filter>
     </ClInclude>
     <ClInclude Include="src\PotionGenerator.hpp">
-      <Filter>Source Files\Items\Potion</Filter>
+      <Filter>Source Files\Loot\Items\Potion</Filter>
     </ClInclude>
     <ClInclude Include="src\Scroll.hpp">
-      <Filter>Source Files\Items\Scrolls</Filter>
+      <Filter>Source Files\Loot\Items\Scrolls</Filter>
     </ClInclude>
     <ClInclude Include="src\ScrollGenerator.hpp">
-      <Filter>Source Files\Items\Scrolls</Filter>
+      <Filter>Source Files\Loot\Items\Scrolls</Filter>
     </ClInclude>
     <ClInclude Include="src\Gem.hpp">
-      <Filter>Source Files\Items\Gems</Filter>
+      <Filter>Source Files\Loot\Items\Gems</Filter>
     </ClInclude>
     <ClInclude Include="src\GemGenerator.hpp">
-      <Filter>Source Files\Items\Gems</Filter>
+      <Filter>Source Files\Loot\Items\Gems</Filter>
     </ClInclude>
     <ClInclude Include="src\Object.hpp">
       <Filter>Source Files\Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="src\PhysicsObject.hpp">
-      <Filter>Source Files\Objects\Physics Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="src\XState.hpp">
-      <Filter>Source Files\Objects\Physics Objects</Filter>
-    </ClInclude>
-    <ClInclude Include="src\YState.hpp">
-      <Filter>Source Files\Objects\Physics Objects</Filter>
     </ClInclude>
     <ClInclude Include="src\ObjectType.hpp">
       <Filter>Source Files\Objects</Filter>
@@ -245,8 +242,23 @@
     <ClInclude Include="src\ItemPhysicsObject.hpp">
       <Filter>Source Files\Objects\Physics Objects\Items</Filter>
     </ClInclude>
+    <ClInclude Include="src\PhysicsObject.hpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\XState.hpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YState.hpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClInclude>
     <ClInclude Include="src\GoldCoin.hpp">
-      <Filter>Source Files\Objects\Physics Objects\Items</Filter>
+      <Filter>Source Files\Loot\Currency</Filter>
+    </ClInclude>
+    <ClInclude Include="src\LootGenerator.hpp">
+      <Filter>Source Files\Loot</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemCollection.hpp">
+      <Filter>Source Files\Loot\Items</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -314,58 +326,64 @@
       <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
     </ClCompile>
     <ClCompile Include="src\Item.cpp">
-      <Filter>Source Files\Items</Filter>
+      <Filter>Source Files\Loot\Items</Filter>
     </ClCompile>
     <ClCompile Include="src\Equipment.cpp">
-      <Filter>Source Files\Items\Equipment</Filter>
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
     </ClCompile>
     <ClCompile Include="src\Armor.cpp">
-      <Filter>Source Files\Items\Equipment\Armor</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Armor</Filter>
     </ClCompile>
     <ClCompile Include="src\ItemGenerator.cpp">
-      <Filter>Source Files\Items</Filter>
+      <Filter>Source Files\Loot\Items</Filter>
     </ClCompile>
     <ClCompile Include="src\Weapon.cpp">
-      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="src\ArmorGenerator.cpp">
-      <Filter>Source Files\Items\Equipment\Armor</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Armor</Filter>
     </ClCompile>
     <ClCompile Include="src\EquipmentGenerator.cpp">
-      <Filter>Source Files\Items\Equipment</Filter>
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
     </ClCompile>
     <ClCompile Include="src\WeaponGenerator.cpp">
-      <Filter>Source Files\Items\Equipment\Weapon</Filter>
+      <Filter>Source Files\Loot\Items\Equipment\Weapon</Filter>
     </ClCompile>
     <ClCompile Include="src\Potion.cpp">
-      <Filter>Source Files\Items\Potion</Filter>
+      <Filter>Source Files\Loot\Items\Potion</Filter>
     </ClCompile>
     <ClCompile Include="src\PotionGenerator.cpp">
-      <Filter>Source Files\Items\Potion</Filter>
+      <Filter>Source Files\Loot\Items\Potion</Filter>
     </ClCompile>
     <ClCompile Include="src\Scroll.cpp">
-      <Filter>Source Files\Items\Scrolls</Filter>
+      <Filter>Source Files\Loot\Items\Scrolls</Filter>
     </ClCompile>
     <ClCompile Include="src\ScrollGenerator.cpp">
-      <Filter>Source Files\Items\Scrolls</Filter>
+      <Filter>Source Files\Loot\Items\Scrolls</Filter>
     </ClCompile>
     <ClCompile Include="src\Gem.cpp">
-      <Filter>Source Files\Items\Gems</Filter>
+      <Filter>Source Files\Loot\Items\Gems</Filter>
     </ClCompile>
     <ClCompile Include="src\GemGenerator.cpp">
-      <Filter>Source Files\Items\Gems</Filter>
+      <Filter>Source Files\Loot\Items\Gems</Filter>
     </ClCompile>
     <ClCompile Include="src\Object.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\PhysicsObject.cpp">
-      <Filter>Source Files\Objects\Physics Objects</Filter>
-    </ClCompile>
     <ClCompile Include="src\ItemPhysicsObject.cpp">
       <Filter>Source Files\Objects\Physics Objects\Items</Filter>
     </ClCompile>
+    <ClCompile Include="src\PhysicsObject.cpp">
+      <Filter>Source Files\Physics Manager</Filter>
+    </ClCompile>
     <ClCompile Include="src\GoldCoin.cpp">
-      <Filter>Source Files\Objects\Physics Objects\Items</Filter>
+      <Filter>Source Files\Loot\Currency</Filter>
+    </ClCompile>
+    <ClCompile Include="src\LootGenerator.cpp">
+      <Filter>Source Files\Loot</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemCollection.cpp">
+      <Filter>Source Files\Loot\Items</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

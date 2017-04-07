@@ -161,3 +161,19 @@ void PhysicsObject::ResolveBlockCollisionYFunction(PhysicsObject* physicsObject,
 
 ////////////////////////////////////////////////////////////////////////
 
+void PhysicsObject::SpawnPhysicsObjects(vector<PhysicsObject*>& physicsManagerObjects)
+{
+	physicsManagerObjects.insert(physicsManagerObjects.end(), spawnedPhysicsObjects.begin(), spawnedPhysicsObjects.end());
+
+	spawnedPhysicsObjects.clear();
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsObject::Spawn(PhysicsObject * physicsObject)
+{
+	spawnedPhysicsObjects.push_back(physicsObject);
+}
+
+////////////////////////////////////////////////////////////////////////
+

@@ -92,7 +92,12 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::P))
 	{
 		//physicsManager->AddPhysicsObject(new TransitionParticle(GetMousePosition(window), sf::Vector2f(3,3), 5));
-		//physicsManager->AddPhysicsObject(new Emitter(new TransitionParticle(GetMousePosition(window), sf::Vector2f(3, 3), 5), GetMousePosition(window), sf::Vector2f(6, 6), 1));
+		physicsManager->AddPhysicsObject(new Emitter(new TransitionParticle(GetMousePosition(window), sf::Vector2f(3, 3), 5), GetMousePosition(window), sf::Vector2f(6, 6), 1));
+	}
+
+
+	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::L))
+	{
 		physicsManager->AddPhysicsObject(new GoldCoin(GetMousePosition(window), 1));
 	}
 

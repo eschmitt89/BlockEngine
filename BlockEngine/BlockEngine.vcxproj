@@ -194,10 +194,12 @@
     <ClInclude Include="src\Grid.hpp" />
     <ClInclude Include="src\HomeScreen.hpp" />
     <ClInclude Include="src\Item.hpp" />
+    <ClInclude Include="src\ItemCollection.hpp" />
     <ClInclude Include="src\ItemGenerator.hpp" />
     <ClInclude Include="src\ItemPhysicsObject.hpp" />
     <ClInclude Include="src\ItemType.hpp" />
     <ClInclude Include="src\KeyBindings.hpp" />
+    <ClInclude Include="src\LootGenerator.hpp" />
     <ClInclude Include="src\MovementAxis.hpp" />
     <ClInclude Include="src\GridNode.hpp" />
     <ClInclude Include="src\Object.hpp" />
@@ -245,8 +247,10 @@
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\HomeScreen.cpp" />
     <ClCompile Include="src\Item.cpp" />
+    <ClCompile Include="src\ItemCollection.cpp" />
     <ClCompile Include="src\ItemGenerator.cpp" />
     <ClCompile Include="src\ItemPhysicsObject.cpp" />
+    <ClCompile Include="src\LootGenerator.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MovementAxis.cpp" />
     <ClCompile Include="src\GridNode.cpp" />

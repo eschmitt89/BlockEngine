@@ -41,9 +41,7 @@ void PhysicsManager::Update(float dt)
 
 		HandlePhysicsObjectCollisions(i, &collisionMap);
 
-		physicsObjects.insert(physicsObjects.end(), physicsObjects[i]->spawnedPhysicsObjects.begin(), physicsObjects[i]->spawnedPhysicsObjects.end());
-
-		physicsObjects[i]->spawnedPhysicsObjects.clear();
+		physicsObjects[i]->SpawnPhysicsObjects(physicsObjects);
 
 		if (physicsObjects[i]->GetExpired())
 		{

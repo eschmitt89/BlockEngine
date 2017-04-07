@@ -45,7 +45,7 @@ public:
 	static void ResolveBlockCollisionXFunction(PhysicsObject* physicsObject, Block block, float dt);
 	static void ResolveBlockCollisionYFunction(PhysicsObject* physicsObject, Block block, float dt);
 
-	vector<PhysicsObject*> spawnedPhysicsObjects;
+	void SpawnPhysicsObjects(vector<PhysicsObject*>& physicsManagerObjects);
 
 protected:
 	sf::Vector2f velocity;
@@ -59,6 +59,10 @@ protected:
 	YState yState;
 
 	bool expired;
+
+	vector<PhysicsObject*> spawnedPhysicsObjects;
+
+	void Spawn(PhysicsObject* physicsObject);
 };
 
 #endif /* PhysicsObject_hpp */
