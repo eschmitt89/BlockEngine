@@ -7,6 +7,7 @@
 //
 
 #include "PotionGenerator.hpp"
+#include "ResourceManager.hpp"
 
 PotionGenerator::PotionGenerator()
 {
@@ -24,7 +25,7 @@ PotionGenerator::~PotionGenerator()
 
 Potion * PotionGenerator::Generate(int level)
 {
-	return new Potion(nullptr);
+	return new Potion(ResourceManager::GetInstance().GetTexture("potion"));
 }
 
 ////////////////////////////////////////////////////////////////////////

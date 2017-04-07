@@ -1,15 +1,9 @@
 //
 //  Player.hpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #ifndef Player_hpp
 #define Player_hpp
 
-#include "PhysicsObject.hpp"
+#include "Character.hpp"
 #include "KeyBindings.hpp"
 #include "MovementAxis.hpp"
 #include "MovementState.hpp"
@@ -18,7 +12,7 @@
 
 using namespace std;
 
-class Player : public PhysicsObject
+class Player : public Character
 {
 public:
 	Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size);
@@ -33,15 +27,10 @@ public:
 	void CollideWith(PhysicsObject* physicsObject);
 
 private:
-	float jumpPower;
-	float movementSpeed;
 	float climbSpeed;
-	MovementAxis movementAxis;
-	MovementState movementState;
 
 	bool jumpKeyHeld;
 
-	void Jump();
 	void GravityOn();
 	void GravityOff();
 

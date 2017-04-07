@@ -27,5 +27,10 @@ Weapon::~Weapon()
 
 }
 
+WeaponSlot Weapon::GetWeaponSlot()
+{
+	return weaponSlot;
+}
+
 //////////////////////////////////////////////////////////////////////////
 

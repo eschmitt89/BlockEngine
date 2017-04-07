@@ -7,6 +7,7 @@
 //
 
 #include "ScrollGenerator.hpp"
+#include "ResourceManager.hpp"
 
 ScrollGenerator::ScrollGenerator()
 {
@@ -24,7 +25,7 @@ ScrollGenerator::~ScrollGenerator()
 
 Scroll * ScrollGenerator::Generate(int level)
 {
-	return new Scroll(nullptr);
+	return new Scroll(ResourceManager::GetInstance().GetTexture("scroll"));
 }
 
 ////////////////////////////////////////////////////////////////////////

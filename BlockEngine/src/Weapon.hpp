@@ -18,6 +18,8 @@ public:
 	Weapon(const Weapon& weapon);
     virtual ~Weapon();
 
+	WeaponSlot GetWeaponSlot();
+
 protected:
 	WeaponType weaponType;
 	WeaponSlot weaponSlot;

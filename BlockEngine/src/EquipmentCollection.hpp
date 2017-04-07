@@ -12,6 +12,8 @@ public:
 
 	void Equip(Equipment* equipment);
 
+	EquipmentStats GetEquipmentStats();
+
 private:
 	map<ArmorType, Armor*> armor;
 

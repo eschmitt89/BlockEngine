@@ -39,7 +39,10 @@ void PhysicsManager::Update(float dt)
 		physicsObjects[i]->UpdateY(dt);
 		HandleGridCollisions(physicsObjects[i], PhysicsObject::ResolveBlockCollisionYFunction, dt);
 
-		HandlePhysicsObjectCollisions(i, &collisionMap);
+		if (physicsObjects[i]->GetCollidesWithPhysicsObjects())
+		{
+			HandlePhysicsObjectCollisions(i, &collisionMap);
+		}
 
 		physicsObjects[i]->SpawnPhysicsObjects(physicsObjects);
 

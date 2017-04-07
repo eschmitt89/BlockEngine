@@ -20,6 +20,14 @@ struct EquipmentStats
 		this->dodge = dodge;
 		this->power = power;
 	}
+	void operator += (const EquipmentStats & equipmentStats)
+	{
+		this->health = equipmentStats.health;
+		this->armor = equipmentStats.armor;
+		this->crit = equipmentStats.crit;
+		this->dodge = equipmentStats.dodge;
+		this->power = equipmentStats.power;
+	}
 
 	int health;
 	int armor;

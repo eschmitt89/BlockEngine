@@ -32,6 +32,7 @@ public:
 	sf::Vector2f GetVelocity();
 	float GetElasticity();
 	float GetMass();
+	bool GetCollidesWithPhysicsObjects();
 	bool GetExpired();
 
 	void SetExpired(bool expired);
@@ -61,6 +62,7 @@ protected:
 	XState xState;
 	YState yState;
 
+	bool collidesWithPhysicsObjects;
 	bool expired;
 
 	vector<PhysicsObject*> spawnedPhysicsObjects;

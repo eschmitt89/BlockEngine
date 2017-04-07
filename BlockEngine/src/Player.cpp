@@ -7,7 +7,7 @@
 #include <sstream>
 
 Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
-	:PhysicsObject(texture, position, size)
+	:Character(texture, position, size, 1, 100)
 {
 	friction = sf::Vector2f(1, 0);
 	elasticity = 0;
@@ -174,6 +174,10 @@ void Player::HandleInput(const sf::RenderWindow & window)
 			movementState = MovementState_None;
 		}
 	}
+	if (EventManager::GetInstance().IsKeyReleased(KeyBindings::Attack))
+	{
+		Spawn(new Attack(ResourceManager::GetInstance().GetTexture("redX"), sf::Vector2f(position.x + size.x + 5, position.y), size, 50));
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -284,6 +288,8 @@ void Player::ResolveBlockCollisionY(Block block, float dt)
 
 void Player::CollideWith(PhysicsObject * physicsObject)
 {
+	Character::CollideWith(physicsObject);
+
 	if (physicsObject->GetObjectType() == ObjectType_Item)
 	{
 		if (backpack->GetAvailableSpace() > 0)
@@ -299,13 +305,6 @@ void Player::CollideWith(PhysicsObject * physicsObject)
 		goldCoins += goldCoin->GetValue();
 		goldCoin->SetExpired(true);
 	}
-}
-
-////////////////////////////////////////////////////////////////////////
-
-void Player::Jump()
-{
-	Impulse(sf::Vector2f(0, -jumpPower));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -390,6 +389,7 @@ void Player::UpdateDebugText()
 	//	ss << "jump pressed \n";
 	//}
 
+	ss << "Health: " << health << "\n";
 	ss << "Gold: " << goldCoins << "\n";
 	ss << "AvailableSpace: " << backpack->GetAvailableSpace() << "\n";
 

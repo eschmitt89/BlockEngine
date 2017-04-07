@@ -21,6 +21,7 @@ PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, 
 	xState = NotOnWall;
 	yState = InAir;
 
+	collidesWithPhysicsObjects = true;
 	expired = false;
 }
 
@@ -84,6 +85,13 @@ float PhysicsObject::GetElasticity()
 float PhysicsObject::GetMass()
 {
 	return mass;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+bool PhysicsObject::GetCollidesWithPhysicsObjects()
+{
+	return collidesWithPhysicsObjects;
 }
 
 ////////////////////////////////////////////////////////////////////////

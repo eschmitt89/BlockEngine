@@ -19,6 +19,7 @@ public:
 	static const sf::Keyboard::Key MoveLeft = sf::Keyboard::Key::A;
 	static const sf::Keyboard::Key MoveRight = sf::Keyboard::Key::D;
 	static const sf::Keyboard::Key Jump = sf::Keyboard::Key::Space;
+	static const sf::Keyboard::Key Attack = sf::Keyboard::Key::F;
     
 private:
 

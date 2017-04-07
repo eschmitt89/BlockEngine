@@ -15,13 +15,14 @@
 #include "ItemGenerator.hpp"
 #include "GoldCoin.hpp"
 #include "ItemPhysicsObject.hpp"
+#include "Enemy.hpp"
 #include <sstream>
 
 HomeScreen::HomeScreen() 
 {
 	GridGenerator gridGenerator;
 	grid = gridGenerator.Generate(12, 12, 20, 2, 4, 1, 3, 5, 32, 32);
-	camera = new Camera(sf::Vector2f(480,0), sf::Vector2f(960,540));
+	camera = new Camera(sf::Vector2f(480,0), sf::Vector2f(1920,1080));
 	player = new Player(ResourceManager::GetInstance().GetTexture("player"), sf::Vector2f(100,100), sf::Vector2f(32, 32));
 	physicsManager = new PhysicsManager(grid);
 	physicsManager->AddPhysicsObject(player);
@@ -98,7 +99,8 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::L))
 	{
-		physicsManager->AddPhysicsObject(new GoldCoin(GetMousePosition(window), 1));
+		//physicsManager->AddPhysicsObject(new GoldCoin(GetMousePosition(window), 1));
+		physicsManager->AddPhysicsObject(new Enemy(ResourceManager::GetInstance().GetTexture("whiteBlock"), GetMousePosition(window), sf::Vector2f(32, 32)));
 	}
 
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::M))

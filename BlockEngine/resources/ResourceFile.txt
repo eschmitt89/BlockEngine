@@ -32,6 +32,9 @@ WaterBlock.png
 platformBlock
 PlatformBlock.png
 
+redX
+redX.png
+
 goldCoin
 goldCoin.png
 

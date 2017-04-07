@@ -90,6 +90,9 @@
     <Filter Include="Source Files\Character\Enemies">
       <UniqueIdentifier>{0931b10b-4802-4385-8085-0622ed3668c6}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Objects\Attacks">
+      <UniqueIdentifier>{4e7b0418-23ea-4b64-9f4d-31071d01cd35}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -272,6 +275,9 @@
     <ClInclude Include="src\Enemy.hpp">
       <Filter>Source Files\Character\Enemies</Filter>
     </ClInclude>
+    <ClInclude Include="src\Attack.hpp">
+      <Filter>Source Files\Objects\Attacks</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -405,6 +411,9 @@
     </ClCompile>
     <ClCompile Include="src\Enemy.cpp">
       <Filter>Source Files\Character\Enemies</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Attack.cpp">
+      <Filter>Source Files\Objects\Attacks</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
