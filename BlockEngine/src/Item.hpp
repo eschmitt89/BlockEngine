@@ -17,6 +17,7 @@ class Item
 {
 public:
 	Item(ItemType itemType, const sf::Texture* texture);
+	Item(const Item& item);
     virtual ~Item();
 
 	ItemType GetItemType();

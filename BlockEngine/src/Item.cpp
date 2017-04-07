@@ -16,6 +16,14 @@ Item::Item(ItemType itemType, const sf::Texture* texture)
 
 ////////////////////////////////////////////////////////////////////////
 
+Item::Item(const Item & item)
+{
+	this->itemType = item.itemType;
+	this->texture = item.texture;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 Item::~Item()
 {
     

@@ -11,6 +11,7 @@
 ItemPhysicsObject::ItemPhysicsObject(Item* item, sf::Vector2f position, sf::Vector2f size)
 	:PhysicsObject(item->GetTexture(), position, size)
 {
+	this->item = item;
 	velocity = sf::Vector2f(Random(-100, 100), Random(-100, 100));
 }
 
@@ -18,6 +19,13 @@ ItemPhysicsObject::ItemPhysicsObject(Item* item, sf::Vector2f position, sf::Vect
 
 ItemPhysicsObject::~ItemPhysicsObject()
 {
-    
+	delete item;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+Item * ItemPhysicsObject::GetItem()
+{
+	return item;
 }
 

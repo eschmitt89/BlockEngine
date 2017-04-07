@@ -8,6 +8,14 @@ Armor::Armor(ArmorType armorType, EquipmentRarity equipmentRarity, EquipmentStat
 
 ////////////////////////////////////////////////////////////////////////
 
+Armor::Armor(const Armor & armor)
+	: Equipment(armor.equipmentType, armor.equipmentRarity, armor.equipmentStats, armor.level, armor.texture)
+{
+	this->armorType = armor.armorType;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 Armor::~Armor()
 {
 

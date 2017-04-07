@@ -11,6 +11,7 @@ class Equipment : public Item
 {
 public:
 	Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, const sf::Texture* texture);
+	Equipment(const Equipment& equipment);
     virtual ~Equipment();
 
 	EquipmentType GetEquipmentType();

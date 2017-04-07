@@ -103,61 +103,7 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::M))
 	{
-		for (int i = 0; i < 10; i++)
-		{
-
-		
-		Item* item = itemGenerator->Generate(currentItemLevel);
-		if (item->GetItemType() == ItemType_Equipment)
-		{
-			Equipment* equipment = (Equipment*)item;
-			sf::Color color = sf::Color::White;
-
-		    if (equipment->GetEquipmentRarity() == EquipmentRarity_Good)
-			{
-				color = sf::Color::Green;
-			}
-			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Rare)
-			{
-				color = sf::Color::Blue;
-			}
-			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Epic)
-			{
-				color = sf::Color(128, 0, 255, 255);
-			}
-			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Legendary)
-			{
-				color = sf::Color(250,100,0, 255);
-			}
-			else if (equipment->GetEquipmentRarity() == EquipmentRarity_Artifact)
-			{
-				color = sf::Color::Red;
-			}
-
-			if (equipment->GetEquipmentType() == EquipmentType_Armor)
-			{
-				physicsManager->AddPhysicsObject(new ItemPhysicsObject(item, GetMousePosition(window), sf::Vector2f(32, 32)));
-			}
-			else
-			{
-				//physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("weapon"), color, GetMousePosition(window), sf::Vector2f(32, 32), 4));
-			}
-		}
-		else if (item->GetItemType() == ItemType_Potion)
-		{
-			//physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("potion"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
-		}
-		else if (item->GetItemType() == ItemType_Scroll)
-		{
-			//physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("scroll"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
-		}
-		else if (item->GetItemType() == ItemType_Gem)
-		{
-			//physicsManager->AddPhysicsObject(new Particle(ResourceManager::GetInstance().GetTexture("gem"), GetMousePosition(window), sf::Vector2f(32, 32), 4));
-		}
-
-		delete item;
-		}
+		physicsManager->AddPhysicsObject(new ItemPhysicsObject(itemGenerator->Generate(currentItemLevel), GetMousePosition(window), sf::Vector2f(32, 32)));
 	}
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::RBracket))
 	{

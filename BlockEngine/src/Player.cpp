@@ -2,6 +2,7 @@
 #include "GoldCoin.hpp"
 #include "EventManager.hpp"
 #include "ResourceManager.hpp"
+#include "ItemPhysicsObject.hpp"
 #include "Utilities.hpp"
 #include <sstream>
 
@@ -21,6 +22,10 @@ Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f s
 	debugText = sf::Text("debug", *ResourceManager::GetInstance().GetFont("font"));
 	debugText.setFillColor(sf::Color::Red);
 	debugText.setOrigin(sf::Vector2f(-30, 30));
+
+	goldCoins = 0;
+
+	backpack = new ItemCollection(50);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -281,7 +286,12 @@ void Player::CollideWith(PhysicsObject * physicsObject)
 {
 	if (physicsObject->GetObjectType() == ObjectType_Item)
 	{
-		//Item* item = (Item*)physicsObject;
+		if (backpack->GetAvailableSpace() > 0)
+		{
+			ItemPhysicsObject* itemPhysicsObject = (ItemPhysicsObject*)physicsObject;
+			backpack->InsertItem(new Item(*itemPhysicsObject->GetItem()));
+			itemPhysicsObject->SetExpired(true);
+		}
 	}
 	else if (physicsObject->GetObjectType() == ObjectType_GoldCoin)
 	{
@@ -318,67 +328,70 @@ void Player::UpdateDebugText()
 {
 	stringstream ss;
 
-	switch (xState)
-	{
-	case OnWallLeft:
-		ss << "wall left \n";
-		break;
-	case NotOnWall:
-		ss << "no wall \n";
-		break;
-	case OnWallRight:
-		ss << "wall right \n";
-		break;
-	default:
-		break;
-	}
+	//switch (xState)
+	//{
+	//case OnWallLeft:
+	//	ss << "wall left \n";
+	//	break;
+	//case NotOnWall:
+	//	ss << "no wall \n";
+	//	break;
+	//case OnWallRight:
+	//	ss << "wall right \n";
+	//	break;
+	//default:
+	//	break;
+	//}
 
-	switch(yState)
-	{
-		case OnCeiling:
-			ss << "on ceiling \n";
-			break;
-		case InAir:
-			ss << "in air \n";
-			break;
-		case OnGround:
-			ss << "on ground \n";
-			break;
-		default:
-			break;
-	}
+	//switch(yState)
+	//{
+	//	case OnCeiling:
+	//		ss << "on ceiling \n";
+	//		break;
+	//	case InAir:
+	//		ss << "in air \n";
+	//		break;
+	//	case OnGround:
+	//		ss << "on ground \n";
+	//		break;
+	//	default:
+	//		break;
+	//}
 
-	switch (movementState)
-	{
-		case MovementState_TryGrabLadder:
-			ss << "grabbing ladder \n";
-			break;
-		case MovementState_OnLadder:
-			ss << "on ladder \n";
-			break;
-		case MovementState_TryGrabLedge:
-			ss << "grabbing ledge \n";
-			break;
-		case MovementState_OnLedge:
-			ss << "on ledge \n";
-			break;
-		case MovementState_TryDrop:
-			ss << "try drop \n";
-			break;
-		case MovementState_Dropped:
-			ss << "dropped \n";
-			break;
-		case MovementState_InLiquid:
-			ss << "in liquid \n";
-			break;
-		default:
-			break;
-	}
+	//switch (movementState)
+	//{
+	//	case MovementState_TryGrabLadder:
+	//		ss << "grabbing ladder \n";
+	//		break;
+	//	case MovementState_OnLadder:
+	//		ss << "on ladder \n";
+	//		break;
+	//	case MovementState_TryGrabLedge:
+	//		ss << "grabbing ledge \n";
+	//		break;
+	//	case MovementState_OnLedge:
+	//		ss << "on ledge \n";
+	//		break;
+	//	case MovementState_TryDrop:
+	//		ss << "try drop \n";
+	//		break;
+	//	case MovementState_Dropped:
+	//		ss << "dropped \n";
+	//		break;
+	//	case MovementState_InLiquid:
+	//		ss << "in liquid \n";
+	//		break;
+	//	default:
+	//		break;
+	//}
 
-	if (jumpKeyHeld)
-	{
-		ss << "jump pressed \n";
-	}
+	//if (jumpKeyHeld)
+	//{
+	//	ss << "jump pressed \n";
+	//}
+
+	ss << "Gold: " << goldCoins << "\n";
+	ss << "AvailableSpace: " << backpack->GetAvailableSpace() << "\n";
 
 	debugText.setString(ss.str());
 	debugText.setPosition(position);

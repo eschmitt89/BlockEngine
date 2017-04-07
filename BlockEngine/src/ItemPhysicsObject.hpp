@@ -19,6 +19,8 @@ public:
     virtual ~ItemPhysicsObject();
 	virtual ObjectType GetObjectType() { return ObjectType_Item; }
     
+	Item* GetItem();
+
 protected:
 	Item* item;
 };

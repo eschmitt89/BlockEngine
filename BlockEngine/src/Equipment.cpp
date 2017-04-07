@@ -9,6 +9,15 @@ Equipment::Equipment(EquipmentType equipmentType, EquipmentRarity equipmentRarit
 	this->level = level;
 }
 
+Equipment::Equipment(const Equipment & equipment)
+	:Item(equipment.itemType, equipment.texture)
+{
+	this->equipmentType = equipment.equipmentType;
+	this->equipmentRarity = equipment.equipmentRarity;
+	this->equipmentStats = equipment.equipmentStats;
+	this->level = equipment.level;
+}
+
 ////////////////////////////////////////////////////////////////////////
 
 Equipment::~Equipment()

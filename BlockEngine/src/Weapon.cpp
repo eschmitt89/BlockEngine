@@ -11,6 +11,17 @@ Weapon::Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, 
 
 ////////////////////////////////////////////////////////////////////////
 
+Weapon::Weapon(const Weapon & weapon)
+	:Equipment(weapon.equipmentType, weapon.equipmentRarity, weapon.equipmentStats, weapon.level, weapon.texture)
+{
+	this->weaponType = weapon.weaponType;
+	this->weaponSlot = weapon.weaponSlot;
+	this->speed = weapon.speed;
+	this->damage = weapon.damage;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 Weapon::~Weapon()
 {
 

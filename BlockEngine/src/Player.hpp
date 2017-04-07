@@ -13,6 +13,7 @@
 #include "KeyBindings.hpp"
 #include "MovementAxis.hpp"
 #include "MovementState.hpp"
+#include "ItemCollection.hpp"
 
 using namespace std;
 
@@ -47,6 +48,8 @@ private:
 	void UpdateDebugText();
 
 	int goldCoins;
+
+	ItemCollection* backpack;
 };
 
 #endif /* Player_hpp */

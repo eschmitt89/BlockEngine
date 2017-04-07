@@ -15,6 +15,7 @@ class Weapon : public Equipment
 {
 public:
 	Weapon(WeaponType weaponType, WeaponSlot weaponSlot, WeaponSpeed speed, EquipmentRarity equipmentRarity, EquipmentStats equipmentStats, int level, int damage, const sf::Texture* texture);
+	Weapon(const Weapon& weapon);
     virtual ~Weapon();
 
 protected:
