@@ -10,24 +10,10 @@ public:
 	LootGenerator();
     virtual ~LootGenerator();
 
-	/*Item* Generate(int level);
-	Armor* GenerateArmor(int levelWeapon
-	* GenerateWeapon(int level);
-	Item* GeneratePotion(int level);
-	Item* GenerateScroll(int level);
-	Item* GenerateGem(int level);*/
+	
 
 private:
-	//DropRateCollection<ItemType> randomItemType;
-	//DropRateCollection<EquipmentType> randomEquipmentType;
-
-	//ArmorGenerator armorGenerator;
-	//WeaponGenerator weaponGenerator;
-	//PotionGenerator potionGenerator;
-	//ScrollGenerator scrollGenerator;
-	//GemGenerator gemGenerator;
-
-	//Equipment* GenerateEquipment(int level);
+	ItemGenerator itemGenerator;
 };
 
 #endif /* LootGenerator_hpp */

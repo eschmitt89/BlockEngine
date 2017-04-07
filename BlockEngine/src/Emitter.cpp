@@ -16,6 +16,7 @@ Emitter::Emitter(Particle* particle, sf::Vector2f position, sf::Vector2f size, f
 	this->particle = particle;
 	particlesPerMinute = 10000;
 	spawnTimer = 0;
+	mass = 100;
 }
 
 ////////////////////////////////////////////////////////////////////////

@@ -43,6 +43,7 @@ private:
 	map<BlockType, sf::RectangleShape> blockTextures;
 	sf::Vector2i dimensions;
 	sf::Vector2f blockSize;
+	sf::Vector2f size;
 
 	void LoadBlockTextures();
 	sf::RectangleShape LoadBlockTexture(string textureName);

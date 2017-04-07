@@ -39,9 +39,6 @@
     <Filter Include="Source Files\Physics Manager">
       <UniqueIdentifier>{b1d57b47-65d7-4dfc-89fa-596c33080b22}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Player">
-      <UniqueIdentifier>{f73dd760-c664-485a-bb00-ce5c95dfe2da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Event Manager">
       <UniqueIdentifier>{55dd62e8-aaf8-4c6c-b555-800e5391c286}</UniqueIdentifier>
     </Filter>
@@ -50,15 +47,6 @@
     </Filter>
     <Filter Include="Source Files\Objects">
       <UniqueIdentifier>{427c7532-0351-4282-b2f6-3db42ff2f7cd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Objects\Physics Objects">
-      <UniqueIdentifier>{794e695c-2527-4693-ae1a-eb46d2d86af6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Objects\Physics Objects\Particles">
-      <UniqueIdentifier>{ebbbf3f3-4e24-4213-a1ba-e970b86bf6e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Objects\Physics Objects\Items">
-      <UniqueIdentifier>{55fffc8a-4dac-419b-8c80-f85315c8770b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Loot">
       <UniqueIdentifier>{f7698b30-90b5-4381-ac7f-30bf86f5fa66}</UniqueIdentifier>
@@ -86,6 +74,21 @@
     </Filter>
     <Filter Include="Source Files\Loot\Currency">
       <UniqueIdentifier>{b173629d-6529-48ea-add0-dfba47950b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Character">
+      <UniqueIdentifier>{688e9451-0a88-427c-9aa2-e9abc7ce9231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Character\Player">
+      <UniqueIdentifier>{f73dd760-c664-485a-bb00-ce5c95dfe2da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Items">
+      <UniqueIdentifier>{55fffc8a-4dac-419b-8c80-f85315c8770b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Particles">
+      <UniqueIdentifier>{ebbbf3f3-4e24-4213-a1ba-e970b86bf6e1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Character\Enemies">
+      <UniqueIdentifier>{0931b10b-4802-4385-8085-0622ed3668c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -129,19 +132,16 @@
       <Filter>Source Files\Grid</Filter>
     </ClInclude>
     <ClInclude Include="src\Player.hpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Character\Player</Filter>
     </ClInclude>
     <ClInclude Include="src\EventManager.hpp">
       <Filter>Source Files\Event Manager</Filter>
     </ClInclude>
-    <ClInclude Include="src\MovementAxis.hpp">
-      <Filter>Source Files\Player</Filter>
-    </ClInclude>
     <ClInclude Include="src\KeyBindings.hpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Character\Player</Filter>
     </ClInclude>
     <ClInclude Include="src\MovementState.hpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Character\Player</Filter>
     </ClInclude>
     <ClInclude Include="src\BlockNeighbors.hpp">
       <Filter>Source Files\Grid</Filter>
@@ -156,13 +156,13 @@
       <Filter>Source Files\Grid Generator</Filter>
     </ClInclude>
     <ClInclude Include="src\Particle.hpp">
-      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
+      <Filter>Source Files\Objects\Particles</Filter>
     </ClInclude>
     <ClInclude Include="src\TransitionParticle.hpp">
-      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
+      <Filter>Source Files\Objects\Particles</Filter>
     </ClInclude>
     <ClInclude Include="src\Emitter.hpp">
-      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
+      <Filter>Source Files\Objects\Particles</Filter>
     </ClInclude>
     <ClInclude Include="src\Item.hpp">
       <Filter>Source Files\Loot\Items</Filter>
@@ -236,9 +236,6 @@
     <ClInclude Include="src\ObjectType.hpp">
       <Filter>Source Files\Objects</Filter>
     </ClInclude>
-    <ClInclude Include="src\ItemPhysicsObject.hpp">
-      <Filter>Source Files\Objects\Physics Objects\Items</Filter>
-    </ClInclude>
     <ClInclude Include="src\PhysicsObject.hpp">
       <Filter>Source Files\Physics Manager</Filter>
     </ClInclude>
@@ -260,8 +257,20 @@
     <ClInclude Include="src\EquipmentQuality.hpp">
       <Filter>Source Files\Loot\Items\Equipment</Filter>
     </ClInclude>
+    <ClInclude Include="src\Character.hpp">
+      <Filter>Source Files\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MovementAxis.hpp">
+      <Filter>Source Files\Character</Filter>
+    </ClInclude>
     <ClInclude Include="src\EquipmentCollection.hpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemPhysicsObject.hpp">
+      <Filter>Source Files\Objects\Items</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Enemy.hpp">
+      <Filter>Source Files\Character\Enemies</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -299,13 +308,10 @@
       <Filter>Source Files\Grid</Filter>
     </ClCompile>
     <ClCompile Include="src\Player.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Character\Player</Filter>
     </ClCompile>
     <ClCompile Include="src\EventManager.cpp">
       <Filter>Source Files\Event Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="src\MovementAxis.cpp">
-      <Filter>Source Files\Player</Filter>
     </ClCompile>
     <ClCompile Include="src\BlockNeighbors.cpp">
       <Filter>Source Files\Grid</Filter>
@@ -320,13 +326,13 @@
       <Filter>Source Files\Grid Generator</Filter>
     </ClCompile>
     <ClCompile Include="src\Particle.cpp">
-      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
+      <Filter>Source Files\Objects\Particles</Filter>
     </ClCompile>
     <ClCompile Include="src\TransitionParticle.cpp">
-      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
+      <Filter>Source Files\Objects\Particles</Filter>
     </ClCompile>
     <ClCompile Include="src\Emitter.cpp">
-      <Filter>Source Files\Objects\Physics Objects\Particles</Filter>
+      <Filter>Source Files\Objects\Particles</Filter>
     </ClCompile>
     <ClCompile Include="src\Item.cpp">
       <Filter>Source Files\Loot\Items</Filter>
@@ -373,9 +379,6 @@
     <ClCompile Include="src\Object.cpp">
       <Filter>Source Files\Objects</Filter>
     </ClCompile>
-    <ClCompile Include="src\ItemPhysicsObject.cpp">
-      <Filter>Source Files\Objects\Physics Objects\Items</Filter>
-    </ClCompile>
     <ClCompile Include="src\PhysicsObject.cpp">
       <Filter>Source Files\Physics Manager</Filter>
     </ClCompile>
@@ -388,8 +391,20 @@
     <ClCompile Include="src\ItemCollection.cpp">
       <Filter>Source Files\Loot\Items</Filter>
     </ClCompile>
+    <ClCompile Include="src\Character.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MovementAxis.cpp">
+      <Filter>Source Files\Character</Filter>
+    </ClCompile>
     <ClCompile Include="src\EquipmentCollection.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Loot\Items\Equipment</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemPhysicsObject.cpp">
+      <Filter>Source Files\Objects\Items</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Enemy.cpp">
+      <Filter>Source Files\Character\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

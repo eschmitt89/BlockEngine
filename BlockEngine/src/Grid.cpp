@@ -6,6 +6,7 @@ Grid::Grid(int columns, int rows, int blockWidth, int blockHeight)
 {
 	dimensions = sf::Vector2i(columns, rows);
 	blockSize = sf::Vector2f(blockWidth, blockHeight);
+	size = sf::Vector2f(columns * blockWidth, rows * blockHeight);
 
 	for (int column = 0; column < dimensions.x; column++)
 	{
@@ -116,7 +117,7 @@ sf::Vector2f Grid::GetBlockPosition(int column, int row)
 
 sf::Vector2i Grid::GetBlockIndex(sf::Vector2f position)
 {
-	return sf::Vector2i(position.x / blockSize.x, position.y / blockSize.y);
+	return sf::Vector2i(Clamp(0, position.x, size.x) / blockSize.x, Clamp(0, position.y, size.y) / blockSize.y);
 }
 
 ////////////////////////////////////////////////////////////////////////

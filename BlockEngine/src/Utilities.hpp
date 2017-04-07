@@ -72,6 +72,21 @@ float inline AbsoluteDistance(sf::Vector2f position1, sf::Vector2f position2)
 
 ////////////////////////////////////////////////////////////////////////
 
+inline float Clamp(float min, float value, float max)
+{
+	if (value < min)
+	{
+		return min;
+	}
+	if (value > max)
+	{
+		return max;
+	}
+	return value;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 int inline Random(int min, int max)
 {
 	if (max < min)

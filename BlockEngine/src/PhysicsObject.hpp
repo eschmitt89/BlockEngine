@@ -36,6 +36,9 @@ public:
 
 	void SetExpired(bool expired);
 
+	virtual void ResolveBlockCollisionX(vector<vector<Block>> blocks, float dt);
+	virtual void ResolveBlockCollisionY(vector<vector<Block>> blocks, float dt);
+
 	virtual void ResolveBlockCollisionX(Block block, float dt);
 	virtual void ResolveBlockCollisionY(Block block, float dt);
 	virtual void CollideWith(PhysicsObject* physicsObject);

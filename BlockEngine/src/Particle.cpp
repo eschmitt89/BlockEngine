@@ -16,6 +16,8 @@ Particle::Particle(const sf::Texture* texture, sf::Color color, sf::Vector2f pos
 	this->remainingDuration = duration;
 
 	velocity = sf::Vector2f(Random(-100, 100), Random(-100, 100));
+
+	mass = 1;
 }
 
 ////////////////////////////////////////////////////////////////////////

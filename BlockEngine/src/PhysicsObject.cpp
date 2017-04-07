@@ -102,6 +102,20 @@ void PhysicsObject::SetExpired(bool expired)
 
 ////////////////////////////////////////////////////////////////////////
 
+void PhysicsObject::ResolveBlockCollisionX(vector<vector<Block>> blocks, float dt)
+{
+	
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void PhysicsObject::ResolveBlockCollisionY(vector<vector<Block>> blocks, float dt)
+{
+
+}
+
+////////////////////////////////////////////////////////////////////////
+
 void PhysicsObject::ResolveBlockCollisionX(Block block, float dt)
 {
 	if (velocity.x < 0)
