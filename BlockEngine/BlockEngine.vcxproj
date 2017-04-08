@@ -180,6 +180,9 @@
     <ClInclude Include="src\BlockType.hpp" />
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Character.hpp" />
+    <ClInclude Include="src\Clickable.hpp" />
+    <ClInclude Include="src\MouseState.hpp" />
+    <ClInclude Include="src\CoinGenerator.hpp" />
     <ClInclude Include="src\Emitter.hpp" />
     <ClInclude Include="src\Enemy.hpp" />
     <ClInclude Include="src\Equipment.hpp" />
@@ -191,7 +194,7 @@
     <ClInclude Include="src\EquipmentType.hpp" />
     <ClInclude Include="src\Gem.hpp" />
     <ClInclude Include="src\GemGenerator.hpp" />
-    <ClInclude Include="src\GoldCoin.hpp" />
+    <ClInclude Include="src\Coin.hpp" />
     <ClInclude Include="src\GridGenerator.hpp" />
     <ClInclude Include="src\GridRoom.hpp" />
     <ClInclude Include="src\EventManager.hpp" />
@@ -203,7 +206,6 @@
     <ClInclude Include="src\ItemPhysicsObject.hpp" />
     <ClInclude Include="src\ItemType.hpp" />
     <ClInclude Include="src\KeyBindings.hpp" />
-    <ClInclude Include="src\LootGenerator.hpp" />
     <ClInclude Include="src\MovementAxis.hpp" />
     <ClInclude Include="src\GridNode.hpp" />
     <ClInclude Include="src\Object.hpp" />
@@ -241,6 +243,8 @@
     <ClCompile Include="src\BlockNeighbors.cpp" />
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Character.cpp" />
+    <ClCompile Include="src\Clickable.cpp" />
+    <ClCompile Include="src\CoinGenerator.cpp" />
     <ClCompile Include="src\Emitter.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\Equipment.cpp" />
@@ -248,7 +252,7 @@
     <ClCompile Include="src\EquipmentGenerator.cpp" />
     <ClCompile Include="src\Gem.cpp" />
     <ClCompile Include="src\GemGenerator.cpp" />
-    <ClCompile Include="src\GoldCoin.cpp" />
+    <ClCompile Include="src\Coin.cpp" />
     <ClCompile Include="src\GridGenerator.cpp" />
     <ClCompile Include="src\GridRoom.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
@@ -258,7 +262,6 @@
     <ClCompile Include="src\ItemCollection.cpp" />
     <ClCompile Include="src\ItemGenerator.cpp" />
     <ClCompile Include="src\ItemPhysicsObject.cpp" />
-    <ClCompile Include="src\LootGenerator.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MovementAxis.cpp" />
     <ClCompile Include="src\GridNode.cpp" />

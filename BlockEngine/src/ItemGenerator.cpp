@@ -39,11 +39,11 @@ Item * ItemGenerator::Generate(int level)
 	case ItemType_Equipment:
 		return GenerateEquipment(level);
 	case ItemType_Potion:
-		return GeneratePotion(level);
+		//return GeneratePotion(level);
 	case ItemType_Scroll:
-		return GenerateScroll(level);
+		//return GenerateScroll(level);
 	case ItemType_Gem:
-		return GenerateGem(level);
+		//return GenerateGem(level);
 	default:
 		return GenerateEquipment(level);
 	}
@@ -60,7 +60,7 @@ Equipment * ItemGenerator::GenerateEquipment(int level)
 	case EquipmentType_Armor:
 		return GenerateArmor(level);
 	case EquipmentType_Weapon:
-		return GenerateWeapon(level);
+		//return GenerateWeapon(level);
 	default:
 		return GenerateArmor(level);
 	}
@@ -82,23 +82,60 @@ Weapon * ItemGenerator::GenerateWeapon(int level)
 
 ////////////////////////////////////////////////////////////////////////
 
-Item * ItemGenerator::GeneratePotion(int level)
+Potion * ItemGenerator::GeneratePotion(int level)
 {
 	return potionGenerator.Generate(level);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-Item * ItemGenerator::GenerateScroll(int level)
+Scroll * ItemGenerator::GenerateScroll(int level)
 {
 	return scrollGenerator.Generate(level);
 }
 
 ////////////////////////////////////////////////////////////////////////
 
-Item * ItemGenerator::GenerateGem(int level)
+Gem * ItemGenerator::GenerateGem(int level)
 {
 	return gemGenerator.Generate(level);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+Coin * ItemGenerator::GenerateCoin(int value)
+{
+	return coinGenerator.Generate(value);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+PhysicsObject * ItemGenerator::Generate(int level, sf::Vector2f position)
+{
+	return new ItemPhysicsObject(Generate(level), position);
+}
+
+////////////////////////////////////////////////////////////////////////
+
+vector<PhysicsObject*> ItemGenerator::GenerateLoot(int level, sf::Vector2f position)
+{
+	vector<PhysicsObject*> loot;
+
+	int numberOfCoins = Random(1, ((level / (float)EQUIPMENT_MAX_LEVEL) * MAX_COINS) + 1);
+
+	for (int i = 0; i < numberOfCoins; i++)
+	{
+		//loot.push_back(new ItemPhysicsObject(GenerateCoin(COIN_VALUE), position));
+	}
+
+	int numberOfItems = Random(2, 4);
+
+	for (int i = 0; i < numberOfItems; i++)
+	{
+		loot.push_back(Generate(level, position));
+	}
+
+	return loot;
 }
 
 ////////////////////////////////////////////////////////////////////////

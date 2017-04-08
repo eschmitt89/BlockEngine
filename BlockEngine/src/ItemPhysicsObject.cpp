@@ -8,11 +8,16 @@
 
 #include "ItemPhysicsObject.hpp"
 
-ItemPhysicsObject::ItemPhysicsObject(Item* item, sf::Vector2f position, sf::Vector2f size)
-	:PhysicsObject(item->GetTexture(), position, size)
+ItemPhysicsObject::ItemPhysicsObject(Item* item, sf::Vector2f position)
+	:PhysicsObject(item->GetTexture(), position, sf::Vector2f())
 {
 	this->item = item;
-	velocity = sf::Vector2f(Random(-100, 100), Random(-100, 100));
+	if (item->GetTexture())
+	{
+		SetSize((sf::Vector2f)item->GetTexture()->getSize());
+	}
+
+	velocity = sf::Vector2f(Random(-100, 100), Random(-200, -100));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -20,6 +25,13 @@ ItemPhysicsObject::ItemPhysicsObject(Item* item, sf::Vector2f position, sf::Vect
 ItemPhysicsObject::~ItemPhysicsObject()
 {
 	delete item;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+ItemType ItemPhysicsObject::GetItemType()
+{
+	return item->GetItemType();
 }
 
 ////////////////////////////////////////////////////////////////////////

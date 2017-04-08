@@ -11,7 +11,7 @@
 
 struct EquipmentStats
 {
-	EquipmentStats() { EquipmentStats(0, 0, 0, 0, 0); }
+	EquipmentStats() : EquipmentStats(0, 0, 0, 0, 0) { }
 	EquipmentStats(int health, int armor, int crit, int dodge, int power)
 	{
 		this->health = health;
@@ -22,11 +22,11 @@ struct EquipmentStats
 	}
 	void operator += (const EquipmentStats & equipmentStats)
 	{
-		this->health = equipmentStats.health;
-		this->armor = equipmentStats.armor;
-		this->crit = equipmentStats.crit;
-		this->dodge = equipmentStats.dodge;
-		this->power = equipmentStats.power;
+		this->health += equipmentStats.health;
+		this->armor += equipmentStats.armor;
+		this->crit += equipmentStats.crit;
+		this->dodge += equipmentStats.dodge;
+		this->power += equipmentStats.power;
 	}
 
 	int health;

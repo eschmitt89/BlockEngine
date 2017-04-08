@@ -35,7 +35,7 @@ PlatformBlock.png
 redX
 redX.png
 
-goldCoin
+coin
 goldCoin.png
 
 armor_head_common_1

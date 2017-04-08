@@ -13,7 +13,7 @@
 #include "TransitionParticle.hpp"
 #include "Emitter.hpp"
 #include "ItemGenerator.hpp"
-#include "GoldCoin.hpp"
+#include "Coin.hpp"
 #include "ItemPhysicsObject.hpp"
 #include "Enemy.hpp"
 #include <sstream>
@@ -99,25 +99,37 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::L))
 	{
-		//physicsManager->AddPhysicsObject(new GoldCoin(GetMousePosition(window), 1));
+		//physicsManager->AddPhysicsObject(new Coin(GetMousePosition(window), 1));
 		physicsManager->AddPhysicsObject(new Enemy(ResourceManager::GetInstance().GetTexture("whiteBlock"), GetMousePosition(window), sf::Vector2f(32, 32)));
 	}
 
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::M))
 	{
-		physicsManager->AddPhysicsObject(new ItemPhysicsObject(itemGenerator->Generate(currentItemLevel), GetMousePosition(window), sf::Vector2f(32, 32)));
+		physicsManager->AddPhysicsObjects(itemGenerator->GenerateLoot(currentItemLevel, GetMousePosition(window)));
 	}
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::RBracket))
 	{
-		currentItemLevel++;
+		currentItemLevel += 5;
 	}
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::LBracket))
 	{
-		currentItemLevel--;
+		currentItemLevel -= 5;;
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::O))
 	{
 		physicsManager->ClearPhyiscsObjects();
+	}
+	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::B))
+	{
+		
+	}
+	else if (EventManager::GetInstance().IsKeyHeld(sf::Keyboard::B))
+	{
+		
+	}
+	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::B))
+	{
+		physicsManager->AddPhysicsObject(itemGenerator->Generate(10, GetMousePosition(window)));
 	}
 
 	camera->HandleInput(window);

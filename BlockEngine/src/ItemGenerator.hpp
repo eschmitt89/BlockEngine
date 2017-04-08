@@ -1,11 +1,3 @@
-//
-//  ItemGenerator.hpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #ifndef ItemGenerator_hpp
 #define ItemGenerator_hpp
 
@@ -14,6 +6,8 @@
 #include "PotionGenerator.hpp"
 #include "ScrollGenerator.hpp"
 #include "GemGenerator.hpp"
+#include "CoinGenerator.hpp"
+#include "ItemPhysicsObject.hpp"
 
 class ItemGenerator
 {
@@ -24,9 +18,13 @@ public:
 	Item* Generate(int level);
 	Armor* GenerateArmor(int level);
 	Weapon* GenerateWeapon(int level);
-	Item* GeneratePotion(int level);
-	Item* GenerateScroll(int level);
-	Item* GenerateGem(int level);
+	Potion* GeneratePotion(int level);
+	Scroll* GenerateScroll(int level);
+	Gem* GenerateGem(int level);
+	Coin* GenerateCoin(int value);
+
+	PhysicsObject* Generate(int level, sf::Vector2f position);
+	vector<PhysicsObject*> GenerateLoot(int level, sf::Vector2f position);
 
 private:
 	DropRateCollection<ItemType> randomItemType;
@@ -37,6 +35,7 @@ private:
 	PotionGenerator potionGenerator;
 	ScrollGenerator scrollGenerator;
 	GemGenerator gemGenerator;
+	CoinGenerator coinGenerator;
 
 	Equipment* GenerateEquipment(int level);
 };

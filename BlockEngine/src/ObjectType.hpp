@@ -14,7 +14,6 @@ enum ObjectType
 	ObjectType_Object,
 	ObjectType_PhysicsObject,
 	ObjectType_Item,
-	ObjectType_GoldCoin,
 	ObjectType_Character,
 	ObjectType_Attack,
 };

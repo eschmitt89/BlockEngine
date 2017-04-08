@@ -19,20 +19,26 @@ public:
 	void HandleEvent(sf::Event event);
 	void ClearEvents();
 
-	bool IsKeyJustPressed(sf::Keyboard::Key key);
 	bool IsKeyPressed(sf::Keyboard::Key key);
+	bool IsKeyHeld(sf::Keyboard::Key key);
 	bool IsKeyReleased(sf::Keyboard::Key key);
 
 	bool IsMouseButtonPressed(sf::Mouse::Button button);
+	bool IsMouseButtonHeld(sf::Mouse::Button button);
 	bool IsMouseButtonReleased(sf::Mouse::Button button);
     
 private:
 	EventManager() {};
 	EventManager(EventManager const &);
-	void operator = (EventManager const &);
+	void operator = (EventManager const &) { }
+
 
 	set<sf::Keyboard::Key> keysPressed;
+	set<sf::Keyboard::Key> keysHeld;
 	set<sf::Keyboard::Key> keysReleased;
+
+	set<sf::Mouse::Button> buttonsPressed;
+	set<sf::Mouse::Button> buttonsHeld;
 	set<sf::Mouse::Button> buttonsReleased;
 };
 

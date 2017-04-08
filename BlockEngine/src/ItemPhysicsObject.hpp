@@ -15,9 +15,11 @@
 class ItemPhysicsObject : public PhysicsObject
 {
 public:
-	ItemPhysicsObject(Item* item, sf::Vector2f position, sf::Vector2f size);
+	ItemPhysicsObject(Item* item, sf::Vector2f position);
     virtual ~ItemPhysicsObject();
 	virtual ObjectType GetObjectType() { return ObjectType_Item; }
+
+	ItemType GetItemType();
     
 	Item* GetItem();
 

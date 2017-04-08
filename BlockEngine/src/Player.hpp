@@ -37,7 +37,7 @@ private:
 	sf::Text debugText;
 	void UpdateDebugText();
 
-	int goldCoins;
+	int coins;
 	ItemCollection* backpack;
 	EquipmentCollection equipment;
 };

@@ -74,6 +74,13 @@ void PhysicsManager::AddPhysicsObject(PhysicsObject * physicsObject)
 
 ////////////////////////////////////////////////////////////////////////
 
+void PhysicsManager::AddPhysicsObjects(vector<PhysicsObject*> physicsObjects)
+{
+	this->physicsObjects.insert(this->physicsObjects.end(), physicsObjects.begin(), physicsObjects.end());
+}
+
+////////////////////////////////////////////////////////////////////////
+
 void PhysicsManager::ClearPhyiscsObjects()
 {
 	for (int i = 0; i < physicsObjects.size(); i++)

@@ -10,7 +10,7 @@ public:
     ~ItemCollection();
 
 	int GetAvailableSpace();
-	void InsertItem(Item * item);
+	void Insert(Item * item);
 
 private:
 	int capacity;

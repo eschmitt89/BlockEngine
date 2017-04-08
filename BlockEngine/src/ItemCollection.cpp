@@ -27,7 +27,7 @@ int ItemCollection::GetAvailableSpace()
 
 ////////////////////////////////////////////////////////////////////////
 
-void ItemCollection::InsertItem(Item * item)
+void ItemCollection::Insert(Item * item)
 {
 	if (availableSpace > 0)
 	{

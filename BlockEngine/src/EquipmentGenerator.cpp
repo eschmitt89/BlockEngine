@@ -22,7 +22,7 @@ EquipmentGenerator::~EquipmentGenerator()
 
 EquipmentStats EquipmentGenerator::GenerateEquipmentStats(int level, EquipmentQuality equipmentQuality)
 {
-	EquipmentStats equipmentStats = EquipmentStats(0, 0, 0, 0, 0);
+	EquipmentStats equipmentStats;
 
 	for (int i = 0; i < equipmentQuality; i++)
 	{
@@ -87,7 +87,8 @@ EquipmentQuality EquipmentGenerator::GenerateEquipmentQuality(int level)
 		equipmentQuality = EquipmentQuality_Common;
 	}
 
-	return equipmentQuality;
+	return EquipmentQuality_Artifact;
+	//return equipmentQuality;
 }
 
 ////////////////////////////////////////////////////////////////////////

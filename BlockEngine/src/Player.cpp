@@ -1,5 +1,5 @@
 #include "Player.hpp"
-#include "GoldCoin.hpp"
+#include "Coin.hpp"
 #include "EventManager.hpp"
 #include "ResourceManager.hpp"
 #include "ItemPhysicsObject.hpp"
@@ -23,7 +23,7 @@ Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f s
 	debugText.setFillColor(sf::Color::Red);
 	debugText.setOrigin(sf::Vector2f(-30, 30));
 
-	goldCoins = 0;
+	coins = 0;
 
 	backpack = new ItemCollection(50);
 }
@@ -60,7 +60,7 @@ void Player::Update(float dt)
 
 void Player::HandleInput(const sf::RenderWindow & window)
 {
-	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveLeft))
+	if (EventManager::GetInstance().IsKeyHeld(KeyBindings::MoveLeft))
 	{
 		if (movementState != MovementState_OnLadder && movementState != MovementState_OnLedge)
 		{
@@ -71,7 +71,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 			movementState = MovementState_TryGrabLedge;
 		}
 	}
-	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
+	if (EventManager::GetInstance().IsKeyHeld(KeyBindings::MoveRight))
 	{
 		if (movementState != MovementState_OnLadder && movementState != MovementState_OnLedge)
 		{
@@ -82,7 +82,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 			movementState = MovementState_TryGrabLedge;
 		}
 	}
-	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveLeft) && EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
+	if (EventManager::GetInstance().IsKeyHeld(KeyBindings::MoveLeft) && EventManager::GetInstance().IsKeyHeld(KeyBindings::MoveRight))
 	{
 		movementAxis.x = XAxis_None;
 
@@ -91,7 +91,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 			movementState = MovementState_None;
 		}
 	}
-	if (!EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveLeft) && !EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveRight))
+	if (!EventManager::GetInstance().IsKeyHeld(KeyBindings::MoveLeft) && !EventManager::GetInstance().IsKeyHeld(KeyBindings::MoveRight))
 	{
 		movementAxis.x = XAxis_None;
 
@@ -100,7 +100,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 			movementState = MovementState_None;
 		}
 	}
-	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveUp))
+	if (EventManager::GetInstance().IsKeyHeld(KeyBindings::MoveUp))
 	{
 		if (movementState == MovementState_None || movementState == MovementState_TryGrabLedge)
 		{
@@ -122,7 +122,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 			movementAxis.y = YAxis_None;
 		}
 	}
-	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveDown))
+	if (EventManager::GetInstance().IsKeyHeld(KeyBindings::MoveDown))
 	{
 		if (movementState == MovementState_OnLadder || movementState == MovementState_InLiquid)
 		{
@@ -140,11 +140,11 @@ void Player::HandleInput(const sf::RenderWindow & window)
 			movementState = MovementState_None;
 		}
 	}
-	if (EventManager::GetInstance().IsKeyPressed(KeyBindings::Jump))
+	if (EventManager::GetInstance().IsKeyHeld(KeyBindings::Jump))
 	{
 		if (yState == OnGround)
 		{
-			if (EventManager::GetInstance().IsKeyPressed(KeyBindings::MoveDown))
+			if (EventManager::GetInstance().IsKeyHeld(KeyBindings::MoveDown))
 			{
 				if (movementState != MovementState_Dropped)
 				{
@@ -292,18 +292,30 @@ void Player::CollideWith(PhysicsObject * physicsObject)
 
 	if (physicsObject->GetObjectType() == ObjectType_Item)
 	{
-		if (backpack->GetAvailableSpace() > 0)
+		ItemPhysicsObject* itemPhysicsObject = (ItemPhysicsObject*)physicsObject;
+
+		if (itemPhysicsObject->GetItemType() == ItemType_Coin)
 		{
-			ItemPhysicsObject* itemPhysicsObject = (ItemPhysicsObject*)physicsObject;
-			backpack->InsertItem(new Item(*itemPhysicsObject->GetItem()));
+			Coin* coin = (Coin*)itemPhysicsObject->GetItem();
+			coins += coin->GetValue();
 			itemPhysicsObject->SetExpired(true);
 		}
-	}
-	else if (physicsObject->GetObjectType() == ObjectType_GoldCoin)
-	{
-		GoldCoin* goldCoin = (GoldCoin*)physicsObject;
-		goldCoins += goldCoin->GetValue();
-		goldCoin->SetExpired(true);
+		else 
+		{
+			Item* item = itemPhysicsObject->GetItem();
+
+			if (item->GetItemType() == ItemType_Equipment)
+			{
+				Equipment* equipment = (Equipment*)item;
+				this->equipment.Equip(equipment);
+			}
+
+			if (backpack->GetAvailableSpace() > 0)
+			{
+				//backpack->Insert(item);
+				itemPhysicsObject->SetExpired(true);
+			}
+		}
 	}
 }
 
@@ -388,10 +400,30 @@ void Player::UpdateDebugText()
 	//{
 	//	ss << "jump pressed \n";
 	//}
+	EquipmentStats stats = equipment.GetEquipmentStats();
 
-	ss << "Health: " << health << "\n";
-	ss << "Gold: " << goldCoins << "\n";
+	ss << "Health: " << stats.health + health << "\n";
+	ss << "Armor: " << stats.armor << "\n";
+	ss << "Crit: " << stats.crit / 100.f << "\n";
+	ss << "Dodge: " << stats.dodge / 100.f << "\n";
+	ss << "Power: " << stats.power << "\n";
+	ss << "Gold: " << coins << "\n";
 	ss << "AvailableSpace: " << backpack->GetAvailableSpace() << "\n";
+
+	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::B))
+	{
+		ss << "pressed\n";
+	}
+	else if (EventManager::GetInstance().IsKeyHeld(sf::Keyboard::B))
+	{
+		ss << "Held\n";
+	}
+	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::B))
+	{
+		ss << "Released\n";
+	}
+
+	
 
 	debugText.setString(ss.str());
 	debugText.setPosition(position);

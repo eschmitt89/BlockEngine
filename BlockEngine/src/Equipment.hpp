@@ -18,6 +18,8 @@ public:
 	EquipmentQuality GetEquipmentQuality();
 	EquipmentStats GetEquipmentStats();
 
+	int GetLevel();
+
 protected:
 	EquipmentType equipmentType;
 	EquipmentQuality equipmentQuality;

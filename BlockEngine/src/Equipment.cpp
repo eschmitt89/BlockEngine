@@ -9,6 +9,8 @@ Equipment::Equipment(EquipmentType equipmentType, EquipmentQuality equipmentQual
 	this->level = level;
 }
 
+////////////////////////////////////////////////////////////////////////
+
 Equipment::Equipment(const Equipment & equipment)
 	:Item(equipment.itemType, equipment.texture)
 {
@@ -44,6 +46,11 @@ EquipmentQuality Equipment::GetEquipmentQuality()
 EquipmentStats Equipment::GetEquipmentStats()
 {
 	return equipmentStats;
+}
+
+int Equipment::GetLevel()
+{
+	return level;
 }
 
 ////////////////////////////////////////////////////////////////////////

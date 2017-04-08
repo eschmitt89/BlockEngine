@@ -1,5 +1,5 @@
 #include "Character.hpp"
-#include "GoldCoin.hpp"
+#include "Coin.hpp"
 #include "EventManager.hpp"
 #include "ItemPhysicsObject.hpp"
 #include "Utilities.hpp"
