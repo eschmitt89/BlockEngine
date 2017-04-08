@@ -93,6 +93,9 @@
     <Filter Include="Source Files\User Interface">
       <UniqueIdentifier>{43e0f8bd-fdee-4c0a-96a9-62fee299d9a3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Abstract Classes">
+      <UniqueIdentifier>{0612ba08-54c6-4656-839b-f985aaf0a03d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\AbstractScreen.hpp">
@@ -283,6 +286,15 @@
     </ClInclude>
     <ClInclude Include="src\MouseState.hpp">
       <Filter>Source Files\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Draws.hpp">
+      <Filter>Source Files\Abstract Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\HandlesInput.hpp">
+      <Filter>Source Files\Abstract Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Updates.hpp">
+      <Filter>Source Files\Abstract Classes</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

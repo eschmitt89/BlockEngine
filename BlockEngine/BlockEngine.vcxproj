@@ -181,6 +181,8 @@
     <ClInclude Include="src\Camera.hpp" />
     <ClInclude Include="src\Character.hpp" />
     <ClInclude Include="src\Clickable.hpp" />
+    <ClInclude Include="src\Draws.hpp" />
+    <ClInclude Include="src\HandlesInput.hpp" />
     <ClInclude Include="src\MouseState.hpp" />
     <ClInclude Include="src\CoinGenerator.hpp" />
     <ClInclude Include="src\Emitter.hpp" />
@@ -225,6 +227,7 @@
     <ClInclude Include="src\Scroll.hpp" />
     <ClInclude Include="src\ScrollGenerator.hpp" />
     <ClInclude Include="src\TransitionParticle.hpp" />
+    <ClInclude Include="src\Updates.hpp" />
     <ClInclude Include="src\Utilities.hpp" />
     <ClInclude Include="src\Weapon.hpp" />
     <ClInclude Include="src\WeaponGenerator.hpp" />

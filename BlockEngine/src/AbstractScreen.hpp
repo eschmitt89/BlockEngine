@@ -9,7 +9,9 @@
 #ifndef AbstractScreen_hpp
 #define AbstractScreen_hpp
 
-#include <SFML/Graphics.hpp>
+#include "Updates.hpp"
+#include "HandlesInput.hpp"
+#include "Draws.hpp"
 
 using namespace std;
 

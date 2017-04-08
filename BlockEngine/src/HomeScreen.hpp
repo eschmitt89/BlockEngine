@@ -15,6 +15,7 @@
 #include "Player.hpp"
 #include "PhysicsManager.hpp"
 #include "ItemGenerator.hpp"
+#include "Clickable.hpp"
 
 class HomeScreen : public AbstractScreen
 {
@@ -40,6 +41,8 @@ private:
 	int currentItemLevel;
 
 	string GetFpsString(float dt);
+
+	Clickable * clickable;
 };
 
 #endif /* HomeScreen_hpp */

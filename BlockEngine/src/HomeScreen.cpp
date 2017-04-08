@@ -30,6 +30,8 @@ HomeScreen::HomeScreen()
 
 	fpsText = sf::Text("", *ResourceManager::GetInstance().GetFont("font"));
 	fpsText.setFillColor(sf::Color::Red);
+
+	clickable = new Clickable(sf::Vector2f(300, 100), sf::Vector2f(50, 50));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -135,6 +137,8 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	camera->HandleInput(window);
 
 	player->HandleInput(window);
+
+	clickable->HandleInput(window);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -153,6 +157,8 @@ void HomeScreen::Update(float dt)
 	//camera->SetCenter(player->GetCenter());
 
 	fpsText.setString(GetFpsString(dt));
+
+	clickable->Update(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -171,8 +177,11 @@ void HomeScreen::Draw(sf::RenderWindow &window)
 	grid->Draw(window, camera);
 	physicsManager->Draw(window);
 
+	clickable->Draw(window);
+
 	window.setView(window.getDefaultView());
 	window.draw(fpsText);
+	
 	window.setView(camera->GetView());
 }
 

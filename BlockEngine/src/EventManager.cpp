@@ -23,7 +23,7 @@ void EventManager::HandleEvent(sf::Event event)
 			keysHeld.erase(event.key.code);
 			break;
 		case sf::Event::MouseButtonPressed:
-			if (keysHeld.find(event.key.code) == keysHeld.end())
+			if (buttonsHeld.find(event.mouseButton.button) == buttonsHeld.end())
 			{
 				buttonsPressed.insert(event.mouseButton.button);
 			}
@@ -44,6 +44,7 @@ void EventManager::ClearEvents()
 {
 	keysPressed.clear();
 	keysReleased.clear();
+	buttonsPressed.clear();
 	buttonsReleased.clear();
 }
 
@@ -72,14 +73,14 @@ bool EventManager::IsKeyReleased(sf::Keyboard::Key key)
 
 bool EventManager::IsMouseButtonPressed(sf::Mouse::Button button)
 {
-	return sf::Mouse::isButtonPressed(button);
+	return buttonsPressed.find(button) != buttonsPressed.end();
 }
 
 ////////////////////////////////////////////////////////////////////////
 
 bool EventManager::IsMouseButtonHeld(sf::Mouse::Button button)
 {
-	return false;
+	return buttonsHeld.find(button) != buttonsHeld.end();
 }
 
 ////////////////////////////////////////////////////////////////////////

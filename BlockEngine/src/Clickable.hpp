@@ -16,9 +16,17 @@ public:
 	void HandleInput(const sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
 
+	virtual void LeftClick();
+	virtual void RightClick();
+
 private:
 	sf::RectangleShape hitBox;
 	MouseState mouseState;
+
+	bool mouseHover;
+	bool mouseLeftPressedInside;
+	bool mouseRightPressedInside;
+
 };
 
 #endif /* Clickable_hpp */
