@@ -2,7 +2,9 @@
 #define Clickable_hpp
 
 #include <SFML/Graphics.hpp>
+#include "EventManager.hpp"
 #include "MouseState.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
@@ -16,8 +18,14 @@ public:
 	void HandleInput(const sf::RenderWindow& window);
 	void Draw(sf::RenderWindow& window);
 
+protected:
+	virtual void LeftPressed();
+	virtual void RightPressed();
+	virtual void MiddlePressed();
+
 	virtual void LeftClick();
 	virtual void RightClick();
+	virtual void MiddleClick();
 
 private:
 	sf::RectangleShape hitBox;
@@ -26,7 +34,7 @@ private:
 	bool mouseHover;
 	bool mouseLeftPressedInside;
 	bool mouseRightPressedInside;
-
+	bool mouseMiddlePressedInside;
 };
 
 #endif /* Clickable_hpp */

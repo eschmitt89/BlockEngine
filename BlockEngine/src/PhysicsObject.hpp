@@ -19,6 +19,7 @@ class PhysicsObject : public Object
 public:
 	PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size);
 	PhysicsObject(sf::Vector2f position, sf::Vector2f size) : PhysicsObject(nullptr, position, size) { }
+	PhysicsObject(const sf::Texture* texture, sf::Vector2f position) : PhysicsObject(texture, position, (sf::Vector2f)texture->getSize()) { }
     virtual ~PhysicsObject();
 	virtual ObjectType GetObjectType() { return ObjectType_PhysicsObject; }
 

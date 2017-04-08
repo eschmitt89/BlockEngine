@@ -38,7 +38,7 @@ private:
 	void UpdateDebugText();
 
 	int coins;
-	ItemCollection* backpack;
+	ItemCollection* inventory;
 	EquipmentCollection equipment;
 };
 

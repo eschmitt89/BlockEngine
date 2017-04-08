@@ -182,9 +182,10 @@
     <ClInclude Include="src\Character.hpp" />
     <ClInclude Include="src\Clickable.hpp" />
     <ClInclude Include="src\Draws.hpp" />
+    <ClInclude Include="src\GridView.hpp" />
     <ClInclude Include="src\HandlesInput.hpp" />
+    <ClInclude Include="src\ItemTooltip.hpp" />
     <ClInclude Include="src\MouseState.hpp" />
-    <ClInclude Include="src\CoinGenerator.hpp" />
     <ClInclude Include="src\Emitter.hpp" />
     <ClInclude Include="src\Enemy.hpp" />
     <ClInclude Include="src\Equipment.hpp" />
@@ -247,7 +248,6 @@
     <ClCompile Include="src\Camera.cpp" />
     <ClCompile Include="src\Character.cpp" />
     <ClCompile Include="src\Clickable.cpp" />
-    <ClCompile Include="src\CoinGenerator.cpp" />
     <ClCompile Include="src\Emitter.cpp" />
     <ClCompile Include="src\Enemy.cpp" />
     <ClCompile Include="src\Equipment.cpp" />
@@ -260,11 +260,13 @@
     <ClCompile Include="src\GridRoom.cpp" />
     <ClCompile Include="src\EventManager.cpp" />
     <ClCompile Include="src\Grid.cpp" />
+    <ClCompile Include="src\GridView.cpp" />
     <ClCompile Include="src\HomeScreen.cpp" />
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\ItemCollection.cpp" />
     <ClCompile Include="src\ItemGenerator.cpp" />
     <ClCompile Include="src\ItemPhysicsObject.cpp" />
+    <ClCompile Include="src\ItemTooltip.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\MovementAxis.cpp" />
     <ClCompile Include="src\GridNode.cpp" />

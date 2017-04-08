@@ -87,14 +87,14 @@
     <Filter Include="Source Files\Items\Gems">
       <UniqueIdentifier>{5afc8f09-2695-45de-ad3c-11dd240aeb16}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Items\Currency">
-      <UniqueIdentifier>{b173629d-6529-48ea-add0-dfba47950b5e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\User Interface">
       <UniqueIdentifier>{43e0f8bd-fdee-4c0a-96a9-62fee299d9a3}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Abstract Classes">
       <UniqueIdentifier>{0612ba08-54c6-4656-839b-f985aaf0a03d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Objects\Currency">
+      <UniqueIdentifier>{b173629d-6529-48ea-add0-dfba47950b5e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -276,10 +276,7 @@
       <Filter>Source Files\Objects\Attacks</Filter>
     </ClInclude>
     <ClInclude Include="src\Coin.hpp">
-      <Filter>Source Files\Items\Currency</Filter>
-    </ClInclude>
-    <ClInclude Include="src\CoinGenerator.hpp">
-      <Filter>Source Files\Items\Currency</Filter>
+      <Filter>Source Files\Objects\Currency</Filter>
     </ClInclude>
     <ClInclude Include="src\Clickable.hpp">
       <Filter>Source Files\User Interface</Filter>
@@ -295,6 +292,12 @@
     </ClInclude>
     <ClInclude Include="src\Updates.hpp">
       <Filter>Source Files\Abstract Classes</Filter>
+    </ClInclude>
+    <ClInclude Include="src\GridView.hpp">
+      <Filter>Source Files\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemTooltip.hpp">
+      <Filter>Source Files\User Interface</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -428,12 +431,15 @@
       <Filter>Source Files\Objects\Attacks</Filter>
     </ClCompile>
     <ClCompile Include="src\Coin.cpp">
-      <Filter>Source Files\Items\Currency</Filter>
-    </ClCompile>
-    <ClCompile Include="src\CoinGenerator.cpp">
-      <Filter>Source Files\Items\Currency</Filter>
+      <Filter>Source Files\Objects\Currency</Filter>
     </ClCompile>
     <ClCompile Include="src\Clickable.cpp">
+      <Filter>Source Files\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\GridView.cpp">
+      <Filter>Source Files\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemTooltip.cpp">
       <Filter>Source Files\User Interface</Filter>
     </ClCompile>
   </ItemGroup>

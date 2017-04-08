@@ -103,13 +103,6 @@ Gem * ItemGenerator::GenerateGem(int level)
 
 ////////////////////////////////////////////////////////////////////////
 
-Coin * ItemGenerator::GenerateCoin(int value)
-{
-	return coinGenerator.Generate(value);
-}
-
-////////////////////////////////////////////////////////////////////////
-
 PhysicsObject * ItemGenerator::Generate(int level, sf::Vector2f position)
 {
 	return new ItemPhysicsObject(Generate(level), position);
@@ -121,18 +114,18 @@ vector<PhysicsObject*> ItemGenerator::GenerateLoot(int level, sf::Vector2f posit
 {
 	vector<PhysicsObject*> loot;
 
-	int numberOfCoins = Random(1, ((level / (float)EQUIPMENT_MAX_LEVEL) * MAX_COINS) + 1);
+	int numberOfCoins = Random(1, ((level / (float)EQUIPMENT_MAX_LEVEL) * 100) + 1);
 
 	for (int i = 0; i < numberOfCoins; i++)
 	{
-		//loot.push_back(new ItemPhysicsObject(GenerateCoin(COIN_VALUE), position));
+		loot.push_back(new Coin(position, 1));
 	}
 
 	int numberOfItems = Random(2, 4);
 
 	for (int i = 0; i < numberOfItems; i++)
 	{
-		loot.push_back(Generate(level, position));
+		//loot.push_back(Generate(level, position));
 	}
 
 	return loot;

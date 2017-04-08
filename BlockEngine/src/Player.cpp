@@ -25,7 +25,7 @@ Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f s
 
 	coins = 0;
 
-	backpack = new ItemCollection(50);
+	inventory = new ItemCollection(50);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -292,30 +292,17 @@ void Player::CollideWith(PhysicsObject * physicsObject)
 
 	if (physicsObject->GetObjectType() == ObjectType_Item)
 	{
-		ItemPhysicsObject* itemPhysicsObject = (ItemPhysicsObject*)physicsObject;
-
-		if (itemPhysicsObject->GetItemType() == ItemType_Coin)
+		if (inventory->GetAvailableSpace() > 0)
 		{
-			Coin* coin = (Coin*)itemPhysicsObject->GetItem();
-			coins += coin->GetValue();
-			itemPhysicsObject->SetExpired(true);
+			inventory->Insert(new Item(*((ItemPhysicsObject*)physicsObject)->GetItem()));
+			physicsObject->SetExpired(true);
 		}
-		else 
-		{
-			Item* item = itemPhysicsObject->GetItem();
-
-			if (item->GetItemType() == ItemType_Equipment)
-			{
-				Equipment* equipment = (Equipment*)item;
-				this->equipment.Equip(equipment);
-			}
-
-			if (backpack->GetAvailableSpace() > 0)
-			{
-				//backpack->Insert(item);
-				itemPhysicsObject->SetExpired(true);
-			}
-		}
+	}
+	else if (physicsObject->GetObjectType() == ObjectType_Coin)
+	{
+		Coin* coin = (Coin*)physicsObject;
+		coins += coin->GetValue();
+		physicsObject->SetExpired(true);
 	}
 }
 
@@ -408,7 +395,7 @@ void Player::UpdateDebugText()
 	ss << "Dodge: " << stats.dodge / 100.f << "\n";
 	ss << "Power: " << stats.power << "\n";
 	ss << "Gold: " << coins << "\n";
-	ss << "AvailableSpace: " << backpack->GetAvailableSpace() << "\n";
+	ss << "AvailableSpace: " << inventory->GetAvailableSpace() << "\n";
 
 	if (EventManager::GetInstance().IsKeyPressed(sf::Keyboard::B))
 	{

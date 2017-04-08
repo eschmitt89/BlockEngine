@@ -14,8 +14,7 @@ enum ItemType
 	ItemType_Equipment,
 	ItemType_Potion,
 	ItemType_Scroll,
-	ItemType_Gem,
-	ItemType_Coin
+	ItemType_Gem
 };
 
 #endif /* ItemType_hpp */

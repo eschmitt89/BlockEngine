@@ -6,8 +6,8 @@
 #include "PotionGenerator.hpp"
 #include "ScrollGenerator.hpp"
 #include "GemGenerator.hpp"
-#include "CoinGenerator.hpp"
 #include "ItemPhysicsObject.hpp"
+#include "Coin.hpp"
 
 class ItemGenerator
 {
@@ -21,7 +21,6 @@ public:
 	Potion* GeneratePotion(int level);
 	Scroll* GenerateScroll(int level);
 	Gem* GenerateGem(int level);
-	Coin* GenerateCoin(int value);
 
 	PhysicsObject* Generate(int level, sf::Vector2f position);
 	vector<PhysicsObject*> GenerateLoot(int level, sf::Vector2f position);
@@ -35,7 +34,6 @@ private:
 	PotionGenerator potionGenerator;
 	ScrollGenerator scrollGenerator;
 	GemGenerator gemGenerator;
-	CoinGenerator coinGenerator;
 
 	Equipment* GenerateEquipment(int level);
 };

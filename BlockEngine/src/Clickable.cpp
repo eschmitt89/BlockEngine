@@ -1,7 +1,4 @@
 #include "Clickable.hpp"
-#include "EventManager.hpp"
-#include "Utilities.hpp"
-
 
 Clickable::Clickable(sf::Vector2f position, sf::Vector2f size)
 {
@@ -25,33 +22,31 @@ Clickable::~Clickable()
 
 void Clickable::Update(float dt)
 {
-	//mouseState = MouseState_Default;
+	mouseState = MouseState_Default;
 
-	//if (mouseHover)
-	//{
-	//	mouseState = MouseState_Hover;
-
-	//	if (mouseLeftPressedInside || mouseRightPressedInside)
-	//	{
-	//		mouseState = MouseState_Pressed;
-	//	}
-	//}
-
-	if (mouseState == MouseState_Default)
+	if (mouseHover)
 	{
+		mouseState = MouseState_Hover;
+
+		if (mouseLeftPressedInside || mouseRightPressedInside || mouseMiddlePressedInside)
+		{
+			mouseState = MouseState_Pressed;
+		}
+	}
+
+	switch (mouseState)
+	{
+	case MouseState_Default:
 		hitBox.setFillColor(sf::Color::Red);
-	}
-	if (mouseState == MouseState_Hover)
-	{
+		break;
+	case MouseState_Hover:
 		hitBox.setFillColor(sf::Color::Blue);
-	}
-	if (mouseState == MouseState_Pressed)
-	{
+		break;
+	case MouseState_Pressed:
 		hitBox.setFillColor(sf::Color::Green);
-	}
-	if (mouseState == MouseState_Released)
-	{
-		hitBox.setFillColor(sf::Color::Magenta);
+		break;
+	default:
+		break;
 	}
 }
 
@@ -61,12 +56,11 @@ void Clickable::HandleInput(const sf::RenderWindow & window)
 {
 	mouseHover = Intersect(GetMousePosition(window), sf::Vector2f(1, 1), hitBox.getPosition(), hitBox.getSize());
 
-	mouseState = mouseHover ? MouseState_Hover : MouseState_Default;
-
 	if (EventManager::GetInstance().IsMouseButtonPressed(sf::Mouse::Left))
 	{
-		if (mouseHover)
+		if (mouseHover && !mouseRightPressedInside && !mouseMiddlePressedInside)
 		{
+			LeftPressed();
 			mouseLeftPressedInside = true;
 		}
 	}
@@ -75,15 +69,15 @@ void Clickable::HandleInput(const sf::RenderWindow & window)
 		if (mouseHover && mouseLeftPressedInside)
 		{
 			LeftClick();
-			mouseState = MouseState_Released;
 		}
 		mouseLeftPressedInside = false;
 	}
 
 	if (EventManager::GetInstance().IsMouseButtonPressed(sf::Mouse::Right))
 	{
-		if (mouseHover)
+		if (mouseHover && !mouseLeftPressedInside && !mouseMiddlePressedInside)
 		{
+			RightPressed();
 			mouseRightPressedInside = true;
 		}
 	}
@@ -92,14 +86,25 @@ void Clickable::HandleInput(const sf::RenderWindow & window)
 		if (mouseHover && mouseRightPressedInside)
 		{
 			RightClick();
-			mouseState = MouseState_Released;
 		}
 		mouseRightPressedInside = false;
 	}
 
-	if (mouseLeftPressedInside || mouseRightPressedInside)
+	if (EventManager::GetInstance().IsMouseButtonPressed(sf::Mouse::Middle))
 	{
-		mouseState = MouseState_Pressed;
+		if (mouseHover && !mouseLeftPressedInside && !mouseRightPressedInside)
+		{
+			MiddlePressed();
+			mouseMiddlePressedInside = true;
+		}
+	}
+	if (EventManager::GetInstance().IsMouseButtonReleased(sf::Mouse::Middle))
+	{
+		if (mouseHover && mouseMiddlePressedInside)
+		{
+			MiddleClick();
+		}
+		mouseMiddlePressedInside = false;
 	}
 }
 
@@ -112,6 +117,27 @@ void Clickable::Draw(sf::RenderWindow & window)
 
 ////////////////////////////////////////////////////////////////////////
 
+void Clickable::LeftPressed()
+{
+
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Clickable::RightPressed()
+{
+
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Clickable::MiddlePressed()
+{
+
+}
+
+////////////////////////////////////////////////////////////////////////
+
 void Clickable::LeftClick()
 {
 
@@ -120,6 +146,13 @@ void Clickable::LeftClick()
 ////////////////////////////////////////////////////////////////////////
 
 void Clickable::RightClick()
+{
+
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Clickable::MiddleClick()
 {
 
 }
