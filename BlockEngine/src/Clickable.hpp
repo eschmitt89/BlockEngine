@@ -19,15 +19,6 @@ public:
 	void Draw(sf::RenderWindow& window);
 
 protected:
-	virtual void LeftPressed();
-	virtual void RightPressed();
-	virtual void MiddlePressed();
-
-	virtual void LeftClick();
-	virtual void RightClick();
-	virtual void MiddleClick();
-
-private:
 	sf::RectangleShape hitBox;
 	MouseState mouseState;
 
@@ -35,6 +26,14 @@ private:
 	bool mouseLeftPressedInside;
 	bool mouseRightPressedInside;
 	bool mouseMiddlePressedInside;
+
+	virtual void LeftPressed();
+	virtual void RightPressed();
+	virtual void MiddlePressed();
+
+	virtual void LeftClick(sf::Vector2f mousePosition);
+	virtual void RightClick();
+	virtual void MiddleClick();
 };
 
 #endif /* Clickable_hpp */

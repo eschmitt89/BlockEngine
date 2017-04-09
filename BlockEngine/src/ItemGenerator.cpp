@@ -39,11 +39,11 @@ Item * ItemGenerator::Generate(int level)
 	case ItemType_Equipment:
 		return GenerateEquipment(level);
 	case ItemType_Potion:
-		//return GeneratePotion(level);
+		return GeneratePotion(level);
 	case ItemType_Scroll:
-		//return GenerateScroll(level);
+		return GenerateScroll(level);
 	case ItemType_Gem:
-		//return GenerateGem(level);
+		return GenerateGem(level);
 	default:
 		return GenerateEquipment(level);
 	}
@@ -121,11 +121,11 @@ vector<PhysicsObject*> ItemGenerator::GenerateLoot(int level, sf::Vector2f posit
 		loot.push_back(new Coin(position, 1));
 	}
 
-	int numberOfItems = Random(2, 4);
+	int numberOfItems = Random(0, 3);
 
 	for (int i = 0; i < numberOfItems; i++)
 	{
-		//loot.push_back(Generate(level, position));
+		loot.push_back(Generate(level, position));
 	}
 
 	return loot;

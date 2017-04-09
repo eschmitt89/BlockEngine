@@ -56,31 +56,45 @@ void Clickable::HandleInput(const sf::RenderWindow & window)
 {
 	mouseHover = Intersect(GetMousePosition(window), sf::Vector2f(1, 1), hitBox.getPosition(), hitBox.getSize());
 
-	if (EventManager::GetInstance().IsMouseButtonPressed(sf::Mouse::Left))
+	if (mouseHover)
 	{
-		if (mouseHover && !mouseRightPressedInside && !mouseMiddlePressedInside)
+		if (EventManager::GetInstance().IsMouseButtonPressed(sf::Mouse::Left))
 		{
-			LeftPressed();
-			mouseLeftPressedInside = true;
+			if (!mouseRightPressedInside && !mouseMiddlePressedInside)
+			{
+				LeftPressed();
+				mouseLeftPressedInside = true;
+			}
+		}
+
+		if (EventManager::GetInstance().IsMouseButtonPressed(sf::Mouse::Right))
+		{
+			if (!mouseLeftPressedInside && !mouseMiddlePressedInside)
+			{
+				RightPressed();
+				mouseRightPressedInside = true;
+			}
+		}
+
+		if (EventManager::GetInstance().IsMouseButtonPressed(sf::Mouse::Middle))
+		{
+			if (!mouseLeftPressedInside && !mouseRightPressedInside)
+			{
+				MiddlePressed();
+				mouseMiddlePressedInside = true;
+			}
 		}
 	}
+	
 	if (EventManager::GetInstance().IsMouseButtonReleased(sf::Mouse::Left))
 	{
 		if (mouseHover && mouseLeftPressedInside)
 		{
-			LeftClick();
+			LeftClick(GetMousePosition(window));
 		}
 		mouseLeftPressedInside = false;
 	}
-
-	if (EventManager::GetInstance().IsMouseButtonPressed(sf::Mouse::Right))
-	{
-		if (mouseHover && !mouseLeftPressedInside && !mouseMiddlePressedInside)
-		{
-			RightPressed();
-			mouseRightPressedInside = true;
-		}
-	}
+	
 	if (EventManager::GetInstance().IsMouseButtonReleased(sf::Mouse::Right))
 	{
 		if (mouseHover && mouseRightPressedInside)
@@ -89,15 +103,7 @@ void Clickable::HandleInput(const sf::RenderWindow & window)
 		}
 		mouseRightPressedInside = false;
 	}
-
-	if (EventManager::GetInstance().IsMouseButtonPressed(sf::Mouse::Middle))
-	{
-		if (mouseHover && !mouseLeftPressedInside && !mouseRightPressedInside)
-		{
-			MiddlePressed();
-			mouseMiddlePressedInside = true;
-		}
-	}
+	
 	if (EventManager::GetInstance().IsMouseButtonReleased(sf::Mouse::Middle))
 	{
 		if (mouseHover && mouseMiddlePressedInside)
@@ -138,7 +144,7 @@ void Clickable::MiddlePressed()
 
 ////////////////////////////////////////////////////////////////////////
 
-void Clickable::LeftClick()
+void Clickable::LeftClick(sf::Vector2f mousePosition)
 {
 
 }

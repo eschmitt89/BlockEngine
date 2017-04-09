@@ -1,0 +1,16 @@
+#include "ItemObject.hpp"
+
+ItemObject::ItemObject(Item * item, sf::Vector2f position, sf::Vector2f size)
+	:Object(item->GetTexture(), position, size)
+{
+	this->item = item;
+}
+
+////////////////////////////////////////////////////////////////////////
+
+ItemObject::~ItemObject()
+{
+}
+
+////////////////////////////////////////////////////////////////////////
+

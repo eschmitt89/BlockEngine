@@ -16,6 +16,7 @@
 #include "PhysicsManager.hpp"
 #include "ItemGenerator.hpp"
 #include "Clickable.hpp"
+#include "InventoryView.hpp"
 
 class HomeScreen : public AbstractScreen
 {
@@ -43,6 +44,7 @@ private:
 	string GetFpsString(float dt);
 
 	Clickable * clickable;
+	InventoryView* inventoryView;
 };
 
 #endif /* HomeScreen_hpp */

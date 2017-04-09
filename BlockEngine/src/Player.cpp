@@ -25,7 +25,7 @@ Player::Player(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f s
 
 	coins = 0;
 
-	inventory = new ItemCollection(50);
+	inventory = new ItemCollection(49);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -294,7 +294,7 @@ void Player::CollideWith(PhysicsObject * physicsObject)
 	{
 		if (inventory->GetAvailableSpace() > 0)
 		{
-			inventory->Insert(new Item(*((ItemPhysicsObject*)physicsObject)->GetItem()));
+			inventory->Insert(((ItemPhysicsObject*)physicsObject)->GetItem());
 			physicsObject->SetExpired(true);
 		}
 	}
@@ -304,6 +304,13 @@ void Player::CollideWith(PhysicsObject * physicsObject)
 		coins += coin->GetValue();
 		physicsObject->SetExpired(true);
 	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+ItemCollection * Player::GetInventory()
+{
+	return inventory;
 }
 
 ////////////////////////////////////////////////////////////////////////

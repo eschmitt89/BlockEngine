@@ -26,6 +26,8 @@ public:
 	void ResolveBlockCollisionY(Block block, float dt);
 	void CollideWith(PhysicsObject* physicsObject);
 
+	ItemCollection* GetInventory();
+
 private:
 	float climbSpeed;
 

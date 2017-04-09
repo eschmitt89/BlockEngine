@@ -184,6 +184,8 @@
     <ClInclude Include="src\Draws.hpp" />
     <ClInclude Include="src\GridView.hpp" />
     <ClInclude Include="src\HandlesInput.hpp" />
+    <ClInclude Include="src\InventoryView.hpp" />
+    <ClInclude Include="src\ItemObject.hpp" />
     <ClInclude Include="src\ItemTooltip.hpp" />
     <ClInclude Include="src\MouseState.hpp" />
     <ClInclude Include="src\Emitter.hpp" />
@@ -262,9 +264,11 @@
     <ClCompile Include="src\Grid.cpp" />
     <ClCompile Include="src\GridView.cpp" />
     <ClCompile Include="src\HomeScreen.cpp" />
+    <ClCompile Include="src\InventoryView.cpp" />
     <ClCompile Include="src\Item.cpp" />
     <ClCompile Include="src\ItemCollection.cpp" />
     <ClCompile Include="src\ItemGenerator.cpp" />
+    <ClCompile Include="src\ItemObject.cpp" />
     <ClCompile Include="src\ItemPhysicsObject.cpp" />
     <ClCompile Include="src\ItemTooltip.cpp" />
     <ClCompile Include="src\main.cpp" />

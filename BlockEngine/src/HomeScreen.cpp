@@ -32,6 +32,7 @@ HomeScreen::HomeScreen()
 	fpsText.setFillColor(sf::Color::Red);
 
 	clickable = new Clickable(sf::Vector2f(300, 100), sf::Vector2f(50, 50));
+	inventoryView = new InventoryView(player->GetInventory(), sf::Vector2f(100, 100), sf::Vector2f(40,40), sf::Vector2f(3,3));
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -138,7 +139,9 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 
 	player->HandleInput(window);
 
-	clickable->HandleInput(window);
+	//clickable->HandleInput(window);
+
+	inventoryView->HandleInput(window);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -178,9 +181,11 @@ void HomeScreen::Draw(sf::RenderWindow &window)
 	physicsManager->Draw(window);
 
 	clickable->Draw(window);
+	inventoryView->Draw(window);
 
 	window.setView(window.getDefaultView());
 	window.draw(fpsText);
+	
 	
 	window.setView(camera->GetView());
 }

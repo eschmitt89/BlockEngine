@@ -20,6 +20,13 @@ ItemCollection::~ItemCollection()
 
 ////////////////////////////////////////////////////////////////////////
 
+int ItemCollection::GetCapacity()
+{
+	return capacity;
+}
+
+////////////////////////////////////////////////////////////////////////
+
 int ItemCollection::GetAvailableSpace()
 {
 	return availableSpace;
@@ -35,12 +42,30 @@ void ItemCollection::Insert(Item * item)
 		{
 			if (!items[i])
 			{
-				items[i] = item;
+				items[i] = new Item(*item);
 				availableSpace--;
 				return;
 			}
 		}
 	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void ItemCollection::Remove(int index)
+{
+	if (index >= 0 && index < items.size())
+	{
+		delete items[index];
+		items[index] = nullptr;
+	}
+}
+
+////////////////////////////////////////////////////////////////////////
+
+vector<Item*>* ItemCollection::GetItems()
+{
+	return &items;
 }
 
 ////////////////////////////////////////////////////////////////////////
