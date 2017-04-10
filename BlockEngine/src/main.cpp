@@ -7,7 +7,8 @@
 int main(int, char const**)
 {
     // Create the main window
-    sf::RenderWindow window(sf::VideoMode(1920, 1080), "BlockEngine");
+    sf::RenderWindow window(sf::VideoMode(960, 540), "BlockEngine");
+	window.setVerticalSyncEnabled(true);
 
     // Set the Icon
     sf::Image icon;

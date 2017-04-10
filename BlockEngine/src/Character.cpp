@@ -3,13 +3,13 @@
 #include "EventManager.hpp"
 #include "ItemPhysicsObject.hpp"
 #include "Utilities.hpp"
-#include <sstream>
 
 Character::Character(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size, int level, int health)
 	:PhysicsObject(texture, position, size)
 {
 	this->level = level;
-	this->health = health;
+	this->currentHealth = health;
+	this->totalHealth = health;
 
 	friction = sf::Vector2f(1, 0);
 	elasticity = 0;
@@ -17,6 +17,10 @@ Character::Character(const sf::Texture* texture, sf::Vector2f position, sf::Vect
 	jumpPower = 450;
 	movementSpeed = 150;
 	movementState = MovementState_None;
+
+	attacking = false;
+	attackSpeed = 1;
+	attackTimer = attackSpeed;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -24,6 +28,27 @@ Character::Character(const sf::Texture* texture, sf::Vector2f position, sf::Vect
 Character::~Character()
 {
     
+}
+
+////////////////////////////////////////////////////////////////////////
+
+void Character::Update(float dt)
+{
+	PhysicsObject::Update(dt);
+
+	if (attacking)
+	{
+		attackTimer -= dt;
+
+		if (attackTimer <= 0)
+		{
+			Spawn(new PhysicsObject(position, size));
+			Spawn(new Attack(ResourceManager::GetInstance().GetTexture("redX"), sf::Vector2f(position.x + size.x + 5, position.y), size, 50));
+			attackTimer = attackSpeed;
+		}
+	}
+
+	velocity.x = movementAxis.x * movementSpeed;
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -41,9 +66,9 @@ void Character::CollideWith(PhysicsObject * physicsObject)
 
 void Character::RecieveDamage(int damage)
 {
-	health -= damage;
+	currentHealth -= damage;
 
-	if (health <= 0)
+	if (currentHealth <= 0)
 	{
 		Die();
 	}
@@ -61,5 +86,10 @@ void Character::Jump()
 void Character::Die()
 {
 	expired = true;
+}
+
+float Character::GetHealthPercent()
+{
+	return currentHealth / totalHealth;
 }
 

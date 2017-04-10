@@ -39,7 +39,7 @@ Player::~Player()
 
 void Player::Update(float dt)
 {
-	PhysicsObject::Update(dt);
+	Character::Update(dt);
 
 	velocity.x = movementAxis.x * movementSpeed;
 
@@ -174,10 +174,8 @@ void Player::HandleInput(const sf::RenderWindow & window)
 			movementState = MovementState_None;
 		}
 	}
-	if (EventManager::GetInstance().IsKeyReleased(KeyBindings::Attack))
-	{
-		Spawn(new Attack(ResourceManager::GetInstance().GetTexture("redX"), sf::Vector2f(position.x + size.x + 5, position.y), size, 50));
-	}
+
+	attacking = EventManager::GetInstance().IsKeyHeld(KeyBindings::Attack);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -396,7 +394,7 @@ void Player::UpdateDebugText()
 	//}
 	EquipmentStats stats = equipment.GetEquipmentStats();
 
-	ss << "Health: " << stats.health + health << "\n";
+	ss << "Health: " << stats.health + currentHealth << "\n";
 	ss << "Armor: " << stats.armor << "\n";
 	ss << "Crit: " << stats.crit / 100.f << "\n";
 	ss << "Dodge: " << stats.dodge / 100.f << "\n";

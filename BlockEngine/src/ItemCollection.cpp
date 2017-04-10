@@ -58,6 +58,7 @@ void ItemCollection::Remove(int index)
 	{
 		delete items[index];
 		items[index] = nullptr;
+		availableSpace++;
 	}
 }
 

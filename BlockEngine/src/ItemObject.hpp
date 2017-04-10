@@ -12,6 +12,9 @@ public:
 	ItemObject(Item* item, sf::Vector2f position, sf::Vector2f size);
 	~ItemObject();
 
+	void SetItem(Item* item);
+	void SetPosition(sf::Vector2f position);
+
 protected:
 	Item* item;
 };

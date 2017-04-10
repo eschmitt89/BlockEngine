@@ -16,11 +16,18 @@ public:
     virtual ~Character();
 	virtual ObjectType GetObjectType() { return ObjectType_Character; }
 
+	virtual void Update(float dt);
+
 	virtual void CollideWith(PhysicsObject* physicsObject);
 
 protected:
 	int level;
-	int health;
+	int currentHealth;
+	int totalHealth;
+
+	bool attacking;
+	float attackSpeed;
+	float attackTimer;
 
 	float jumpPower;
 	float movementSpeed;
@@ -30,6 +37,8 @@ protected:
 	virtual void RecieveDamage(int damage);
 	virtual void Jump();
 	virtual void Die();
+
+	float GetHealthPercent();
 
 };
 

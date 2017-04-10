@@ -32,6 +32,7 @@ Grid::Grid(string fileName, int blockWidth, int blockHeight)
 
 	this->dimensions = (sf::Vector2i)gridImage.getSize();
 	this->blockSize = sf::Vector2f(blockWidth, blockHeight);
+	this->size = sf::Vector2f(dimensions.x * blockWidth, dimensions.y * blockHeight);
 
 	for (int column = 0; column < dimensions.x; column++)
 	{

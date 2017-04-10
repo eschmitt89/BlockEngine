@@ -21,6 +21,7 @@ protected:
 	void MiddleClick();
 
 private:
+	ItemObject* selectedItem;
 	ItemCollection* itemCollection;
 	sf::Vector2i itemCollectionDimensions;
 	sf::Vector2f iconDimensions;

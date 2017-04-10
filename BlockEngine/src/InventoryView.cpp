@@ -48,6 +48,11 @@ void InventoryView::Draw(sf::RenderWindow & window)
 			currentItem++;
 		}
 	}
+
+	if (selectedItem)
+	{
+		
+	}
 }
 
 ////////////////////////////////////////////////////////////////////////

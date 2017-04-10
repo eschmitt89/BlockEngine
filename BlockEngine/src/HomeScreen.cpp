@@ -21,8 +21,8 @@
 HomeScreen::HomeScreen() 
 {
 	GridGenerator gridGenerator;
-	grid = gridGenerator.Generate(12, 12, 20, 2, 4, 1, 3, 5, 32, 32);
-	camera = new Camera(sf::Vector2f(480,0), sf::Vector2f(1920,1080));
+	grid = new Grid("gridSave.png", 32, 32);// gridGenerator.Generate(12, 12, 20, 2, 4, 1, 3, 5, 32, 32);
+	camera = new Camera(sf::Vector2f(480,0), sf::Vector2f(960,540));
 	player = new Player(ResourceManager::GetInstance().GetTexture("player"), sf::Vector2f(100,100), sf::Vector2f(32, 32));
 	physicsManager = new PhysicsManager(grid);
 	physicsManager->AddPhysicsObject(player);
@@ -103,7 +103,9 @@ void HomeScreen::HandleInput(const sf::RenderWindow &window)
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::L))
 	{
 		//physicsManager->AddPhysicsObject(new Coin(GetMousePosition(window), 1));
-		physicsManager->AddPhysicsObject(new Enemy(ResourceManager::GetInstance().GetTexture("whiteBlock"), GetMousePosition(window), sf::Vector2f(32, 32)));
+		Enemy* enemy = new Enemy(ResourceManager::GetInstance().GetTexture("whiteBlock"), GetMousePosition(window), sf::Vector2f(32, 32), player);
+		enemyManager.AddEnemy(enemy);
+		physicsManager->AddPhysicsObject(enemy);
 	}
 
 	if (EventManager::GetInstance().IsKeyReleased(sf::Keyboard::M))
@@ -162,6 +164,8 @@ void HomeScreen::Update(float dt)
 	fpsText.setString(GetFpsString(dt));
 
 	clickable->Update(dt);
+
+	enemyManager.Update(dt);
 }
 
 ////////////////////////////////////////////////////////////////////////
@@ -180,8 +184,8 @@ void HomeScreen::Draw(sf::RenderWindow &window)
 	grid->Draw(window, camera);
 	physicsManager->Draw(window);
 
-	clickable->Draw(window);
-	inventoryView->Draw(window);
+	//clickable->Draw(window);
+	//inventoryView->Draw(window);
 
 	window.setView(window.getDefaultView());
 	window.draw(fpsText);

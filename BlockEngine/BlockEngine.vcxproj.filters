@@ -48,20 +48,11 @@
     <Filter Include="Source Files\Objects">
       <UniqueIdentifier>{427c7532-0351-4282-b2f6-3db42ff2f7cd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Character">
-      <UniqueIdentifier>{688e9451-0a88-427c-9aa2-e9abc7ce9231}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Character\Player">
-      <UniqueIdentifier>{f73dd760-c664-485a-bb00-ce5c95dfe2da}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Objects\Items">
       <UniqueIdentifier>{55fffc8a-4dac-419b-8c80-f85315c8770b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Objects\Particles">
       <UniqueIdentifier>{ebbbf3f3-4e24-4213-a1ba-e970b86bf6e1}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\Character\Enemies">
-      <UniqueIdentifier>{0931b10b-4802-4385-8085-0622ed3668c6}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\Objects\Attacks">
       <UniqueIdentifier>{4e7b0418-23ea-4b64-9f4d-31071d01cd35}</UniqueIdentifier>
@@ -95,6 +86,15 @@
     </Filter>
     <Filter Include="Source Files\Objects\Currency">
       <UniqueIdentifier>{b173629d-6529-48ea-add0-dfba47950b5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters">
+      <UniqueIdentifier>{688e9451-0a88-427c-9aa2-e9abc7ce9231}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\Player">
+      <UniqueIdentifier>{f73dd760-c664-485a-bb00-ce5c95dfe2da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Characters\Enemies">
+      <UniqueIdentifier>{0931b10b-4802-4385-8085-0622ed3668c6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,16 +138,16 @@
       <Filter>Source Files\Grid</Filter>
     </ClInclude>
     <ClInclude Include="src\Player.hpp">
-      <Filter>Source Files\Character\Player</Filter>
+      <Filter>Source Files\Characters\Player</Filter>
     </ClInclude>
     <ClInclude Include="src\EventManager.hpp">
       <Filter>Source Files\Event Manager</Filter>
     </ClInclude>
     <ClInclude Include="src\KeyBindings.hpp">
-      <Filter>Source Files\Character\Player</Filter>
+      <Filter>Source Files\Characters\Player</Filter>
     </ClInclude>
     <ClInclude Include="src\MovementState.hpp">
-      <Filter>Source Files\Character\Player</Filter>
+      <Filter>Source Files\Characters\Player</Filter>
     </ClInclude>
     <ClInclude Include="src\BlockNeighbors.hpp">
       <Filter>Source Files\Grid</Filter>
@@ -258,10 +258,10 @@
       <Filter>Source Files\Items\Equipment</Filter>
     </ClInclude>
     <ClInclude Include="src\Character.hpp">
-      <Filter>Source Files\Character</Filter>
+      <Filter>Source Files\Characters</Filter>
     </ClInclude>
     <ClInclude Include="src\MovementAxis.hpp">
-      <Filter>Source Files\Character</Filter>
+      <Filter>Source Files\Characters</Filter>
     </ClInclude>
     <ClInclude Include="src\EquipmentCollection.hpp">
       <Filter>Source Files\Items\Equipment</Filter>
@@ -270,7 +270,7 @@
       <Filter>Source Files\Objects\Items</Filter>
     </ClInclude>
     <ClInclude Include="src\Enemy.hpp">
-      <Filter>Source Files\Character\Enemies</Filter>
+      <Filter>Source Files\Characters\Enemies</Filter>
     </ClInclude>
     <ClInclude Include="src\Attack.hpp">
       <Filter>Source Files\Objects\Attacks</Filter>
@@ -304,6 +304,18 @@
     </ClInclude>
     <ClInclude Include="src\ItemObject.hpp">
       <Filter>Source Files\User Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemyState.hpp">
+      <Filter>Source Files\Characters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\EnemyManager.hpp">
+      <Filter>Source Files\Characters\Enemies</Filter>
+    </ClInclude>
+    <ClInclude Include="src\XAxis.hpp">
+      <Filter>Source Files\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="src\YAxis.hpp">
+      <Filter>Source Files\Characters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -341,7 +353,7 @@
       <Filter>Source Files\Grid</Filter>
     </ClCompile>
     <ClCompile Include="src\Player.cpp">
-      <Filter>Source Files\Character\Player</Filter>
+      <Filter>Source Files\Characters\Player</Filter>
     </ClCompile>
     <ClCompile Include="src\EventManager.cpp">
       <Filter>Source Files\Event Manager</Filter>
@@ -419,10 +431,10 @@
       <Filter>Source Files\Items</Filter>
     </ClCompile>
     <ClCompile Include="src\Character.cpp">
-      <Filter>Source Files\Character</Filter>
+      <Filter>Source Files\Characters</Filter>
     </ClCompile>
     <ClCompile Include="src\MovementAxis.cpp">
-      <Filter>Source Files\Character</Filter>
+      <Filter>Source Files\Characters</Filter>
     </ClCompile>
     <ClCompile Include="src\EquipmentCollection.cpp">
       <Filter>Source Files\Items\Equipment</Filter>
@@ -431,7 +443,7 @@
       <Filter>Source Files\Objects\Items</Filter>
     </ClCompile>
     <ClCompile Include="src\Enemy.cpp">
-      <Filter>Source Files\Character\Enemies</Filter>
+      <Filter>Source Files\Characters\Enemies</Filter>
     </ClCompile>
     <ClCompile Include="src\Attack.cpp">
       <Filter>Source Files\Objects\Attacks</Filter>
@@ -453,6 +465,9 @@
     </ClCompile>
     <ClCompile Include="src\ItemObject.cpp">
       <Filter>Source Files\User Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="src\EnemyManager.cpp">
+      <Filter>Source Files\Characters\Enemies</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

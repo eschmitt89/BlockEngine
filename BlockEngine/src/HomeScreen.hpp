@@ -17,6 +17,7 @@
 #include "ItemGenerator.hpp"
 #include "Clickable.hpp"
 #include "InventoryView.hpp"
+#include "EnemyManager.hpp"
 
 class HomeScreen : public AbstractScreen
 {
@@ -45,6 +46,8 @@ private:
 
 	Clickable * clickable;
 	InventoryView* inventoryView;
+
+	EnemyManager enemyManager;
 };
 
 #endif /* HomeScreen_hpp */
