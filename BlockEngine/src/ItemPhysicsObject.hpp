@@ -1,11 +1,3 @@
-//
-//  ItemPhysicsObject.hpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #ifndef ItemPhysicsObject_hpp
 #define ItemPhysicsObject_hpp
 

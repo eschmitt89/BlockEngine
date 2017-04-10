@@ -1,11 +1,3 @@
-//
-//  HomeScreen.cpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #include "HomeScreen.hpp"
 #include "EventManager.hpp"
 #include "GridGenerator.hpp"

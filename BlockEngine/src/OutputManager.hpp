@@ -1,11 +1,3 @@
-//
-//  OutputManager.hpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #ifndef OutputManager_hpp
 #define OutputManager_hpp
 

@@ -57,7 +57,7 @@ void Enemy::Update(float dt)
 			movementAxis.x = XAxis_None;
 		}
 
-		if (target->GetPosition().y < position.y - 64 && yState == OnGround)
+		if (target->GetPosition().y < position.y - 64 && yState == YState_OnGround)
 		{
 			Jump();
 		}
@@ -79,7 +79,7 @@ void Enemy::Update(float dt)
 		}
 	}
 
-	if ((xState == OnWallLeft || xState == OnWallRight) && yState == OnGround)
+	if ((xState == XState_OnWallLeft || xState == XState_OnWallRight) && yState == YState_OnGround)
 	{
 		Jump();
 	}

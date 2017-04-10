@@ -42,7 +42,6 @@ void Character::Update(float dt)
 
 		if (attackTimer <= 0)
 		{
-			Spawn(new PhysicsObject(position, size));
 			Spawn(new Attack(ResourceManager::GetInstance().GetTexture("redX"), sf::Vector2f(position.x + size.x + 5, position.y), size, 50));
 			attackTimer = attackSpeed;
 		}

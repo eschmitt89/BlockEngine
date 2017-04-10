@@ -48,7 +48,7 @@ void Player::Update(float dt)
 		velocity.y = movementAxis.y * movementSpeed;
 	}
 
-	if (movementState == MovementState_TryGrabLedge && yState != InAir)
+	if (movementState == MovementState_TryGrabLedge && yState != YState_InAir)
 	{
 		movementState = MovementState_None;
 	}
@@ -66,7 +66,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			movementAxis.x = XAxis_Left;
 		}
-		if (movementState == MovementState_None && yState == InAir)
+		if (movementState == MovementState_None && yState == YState_InAir)
 		{
 			movementState = MovementState_TryGrabLedge;
 		}
@@ -77,7 +77,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 		{
 			movementAxis.x = XAxis_Right;
 		}
-		if (movementState == MovementState_None && yState == InAir)
+		if (movementState == MovementState_None && yState == YState_InAir)
 		{
 			movementState = MovementState_TryGrabLedge;
 		}
@@ -142,7 +142,7 @@ void Player::HandleInput(const sf::RenderWindow & window)
 	}
 	if (EventManager::GetInstance().IsKeyHeld(KeyBindings::Jump))
 	{
-		if (yState == OnGround)
+		if (yState == YState_OnGround)
 		{
 			if (EventManager::GetInstance().IsKeyHeld(KeyBindings::MoveDown))
 			{

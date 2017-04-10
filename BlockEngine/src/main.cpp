@@ -8,7 +8,6 @@ int main(int, char const**)
 {
     // Create the main window
     sf::RenderWindow window(sf::VideoMode(960, 540), "BlockEngine");
-	window.setVerticalSyncEnabled(true);
 
     // Set the Icon
     sf::Image icon;
@@ -27,19 +26,6 @@ int main(int, char const**)
 	// Create time keeping variables
 	sf::Clock clock;
     sf::Time dt;
-
-	for (int i = 0; i < 1000; i++)
-	{
-		int x = Random(0, 100);
-		if (x == 0)
-		{
-			int y = 0;
-		}
-		else if (x == 100)
-		{
-			int y = 0;
-		}
-	}
 
     // Start the game loop
     while (window.isOpen())

@@ -1,11 +1,3 @@
-//
-//  ItemPhysicsObject.cpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #include "ItemPhysicsObject.hpp"
 
 ItemPhysicsObject::ItemPhysicsObject(Item* item, sf::Vector2f position)

@@ -1,11 +1,3 @@
-//
-//  PhysicsObject.cpp
-//  BlockEngine
-//
-//  Created by Eric Schmitt on 3/2/17.
-//  Copyright © 2017 Eric Schmitt. All rights reserved.
-//
-
 #include "PhysicsObject.hpp"
 
 PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, sf::Vector2f size)
@@ -18,8 +10,8 @@ PhysicsObject::PhysicsObject(const sf::Texture* texture, sf::Vector2f position, 
 	elasticity = 0.5;
 	mass = 1;
 
-	xState = NotOnWall;
-	yState = InAir;
+	xState = XState_NotOnWall;
+	yState = YState_InAir;
 
 	collidesWithPhysicsObjects = true;
 	expired = false;
@@ -43,7 +35,7 @@ void PhysicsObject::Update(float dt)
 
 void PhysicsObject::UpdateX(float dt)
 {
-	xState = NotOnWall;
+	xState = XState_NotOnWall;
 
 	velocity.x += acceleration.x * dt;
 	position.x += velocity.x * dt;
@@ -53,7 +45,7 @@ void PhysicsObject::UpdateX(float dt)
 
 void PhysicsObject::UpdateY(float dt)
 {
-	yState = InAir;
+	yState = YState_InAir;
 
 	velocity.y += acceleration.y * dt;
 	position.y += velocity.y * dt;
@@ -128,12 +120,12 @@ void PhysicsObject::ResolveBlockCollisionX(Block block, float dt)
 {
 	if (velocity.x < 0)
 	{
-		xState = OnWallLeft;
+		xState = XState_OnWallLeft;
 		position.x = block.GetPosition().x + block.GetSize().x;
 	}
 	else
 	{
-		xState = OnWallRight;
+		xState = XState_OnWallRight;
 		position.x = block.GetPosition().x - size.x;
 	}
 
@@ -147,12 +139,12 @@ void PhysicsObject::ResolveBlockCollisionY(Block block, float dt)
 {
 	if (velocity.y < 0)
 	{
-		yState = OnCeiling;
+		yState = YState_OnCeiling;
 		position.y = block.GetPosition().y + block.GetSize().y;
 	}
 	else
 	{
-		yState = OnGround;
+		yState = YState_OnGround;
 		position.y = block.GetPosition().y - size.y;
 	}
 
